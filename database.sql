@@ -1,0 +1,126 @@
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS roles CASCADE;
+DROP TABLE IF EXISTS posts CASCADE;
+DROP TABLE IF EXISTS reports CASCADE;
+DROP TABLE IF EXISTS stars CASCADE;
+DROP TABLE if EXISTS comments CASCADE;
+DROP TABLE if EXISTS tags CASCADE;
+DROP TABLE if EXISTS user_tags CASCADE;
+DROP TABLE if EXISTS question_tags CASCADE;
+DROP TABLE if EXISTS badges CASCADE;
+DROP TABLE if EXISTS user_badges CASCADE;
+DROP TABLE if EXISTS notifications CASCADE;
+DROP TABLE if EXISTS new_answers CASCADE;
+DROP TABLE if EXISTS new_questions CASCADE;
+DROP TABLE if EXISTS new_comments CASCADE;
+DROP TABLE if EXISTS new_badges CASCADE;
+DROP TABLE if EXISTS new_stars CASCADE;
+
+CREATE TYPE post_type AS ENUM ('question', 'answer');
+CREATE TYPE user_role AS ENUM ('Moderator', 'Administrator');
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR,
+    email VARCHAR UNIQUE NOT NULL,
+    username VARCHAR UNIQUE NOT NULL,
+    password VARCHAR NOT NULL,
+    birthday DATE NOT NULL,
+    isDeleted BOOLEAN NOT NULL
+);
+
+CREATE TABLE roles (
+    userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE,
+    role user_role NOT NULL
+);
+
+CREATE TABLE posts (
+    id SERIAL PRIMARY KEY,
+    author VARCHAR NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE,
+    date DATE NOT NULL,
+    type post_type NOT NULL,
+    title VARCHAR NOT NULL CHECK (type = 'question'),
+    text VARCHAR NOT NULL,
+    isCorrect BOOLEAN NOT NULL CHECK (type = 'answer')
+);
+
+CREATE TABLE reports (
+
+);
+
+CREATE TABLE stars (
+    id SERIAL PRIMARY KEY,
+    postID INTEGER NOT NULL REFERENCES "posts" (id) ON UPDATE CASCADE,
+    userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE
+);
+
+CREATE TABLE comments (
+    id SERIAL PRIMARY KEY,
+    postID INTEGER NOT NULL REFERENCES "posts" (id) ON UPDATE CASCADE,
+    authorID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE,
+    text VARCHAR NOT NULL,
+    date DATE NOT NULL
+);
+
+CREATE TABLE tags (
+    id SERIAL PRIMARY KEY,
+    tagName VARCHAR UNIQUE NOT NULL
+);
+
+CREATE TABLE user_tags (
+    userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE,
+    tagID INTEGER NOT NULL REFERENCES "tags" (id) ON UPDATE CASCADE
+);
+
+CREATE TABLE question_tags (
+    postID INTEGER NOT NULL REFERENCES "post" (id) ON UPDATE CASCADE,
+    tagID INTEGER NOT NULL REFERENCES "tags" (id) ON UPDATE CASCADE
+);
+
+CREATE TABLE badges (
+    id SERIAL PRIMARY KEY,
+    badgeName VARCHAR UNIQUE NOT NULL
+);
+
+CREATE TABLE user_badges (
+    userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE,
+    badgeID INTEGER NOT NULL REFERENCES "badges" (id) ON UPDATE CASCADE
+);
+
+CREATE TABLE notifications (
+    id SERIAL PRIMARY KEY,
+    postID INTEGER NOT NULL REFERENCES "post" (id) ON UPDATE CASCADE,
+    userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE,
+    isRead BOOLEAN NOT NULL,
+    date DATE NOT NULL
+);
+
+CREATE TABLE new_answers (
+    notificationID INTEGER NOT NULL REFERENCES "notifications" (id) ON UPDATE CASCADE,
+    postID INTEGER NOT NULL REFERENCES "post" (id) ON UPDATE CASCADE,
+    text VARCHAR NOT NULL
+);
+
+CREATE TABLE new_questions (
+    notificationID INTEGER NOT NULL REFERENCES "notifications" (id) ON UPDATE CASCADE,
+    postID INTEGER NOT NULL REFERENCES "post" (id) ON UPDATE CASCADE,
+    text VARCHAR NOT NULL
+);
+
+CREATE TABLE new_comments (
+    notificationID INTEGER NOT NULL REFERENCES "notifications" (id) ON UPDATE CASCADE,
+    commentID INTEGER NOT NULL REFERENCES "comment" (id) ON UPDATE CASCADE,
+    text VARCHAR NOT NULL
+);
+
+CREATE TABLE new_badges (
+    notificationID INTEGER NOT NULL REFERENCES "notifications" (id) ON UPDATE CASCADE,
+    badgeID INTEGER NOT NULL REFERENCES "badges" (id) ON UPDATE CASCADE,
+    text VARCHAR NOT NULL
+);
+
+CREATE TABLE new_stars (
+    notificationID INTEGER NOT NULL REFERENCES "notifications" (id) ON UPDATE CASCADE,
+    starID INTEGER NOT NULL REFERENCES "stars" (id) ON UPDATE CASCADE,
+    text VARCHAR NOT NULL
+);
