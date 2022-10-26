@@ -46,12 +46,12 @@ CREATE TABLE roles (
 CREATE TABLE posts (
     id SERIAL PRIMARY KEY,
     userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE,
-    date DATE NOT NULL,
-    type post_type NOT NULL,
+    postDate DATE NOT NULL,
+    postType post_type NOT NULL,
     title VARCHAR NOT NULL CHECK (type = 'question'),
-    text VARCHAR NOT NULL,
+    postText VARCHAR NOT NULL,
     parentPost INTEGER REFERENCES "posts" (id) ON UPDATE CASCADE,
-    isCorrect BOOLEAN CHECK (type = 'answer')
+    isCorrect BOOLEAN NOT NULL CHECK (type = 'answer')
 );
 
 CREATE TABLE stars (
@@ -63,13 +63,13 @@ CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
     postID INTEGER NOT NULL REFERENCES "posts" (id) ON UPDATE CASCADE,
     userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE,
-    text VARCHAR NOT NULL,
+    commentText VARCHAR NOT NULL,
     date DATE NOT NULL
 );
 
 CREATE TABLE reports (
     id SERIAL PRIMARY KEY,
-    type report_type NOT NULL,
+    reportType report_type NOT NULL,
     userID INTEGER REFERENCES "users" (id) ON UPDATE CASCADE,
     postID INTEGER REFERENCES "posts" (id) ON UPDATE CASCADE,
     commentID INTEGER REFERENCES "comments" (id) ON UPDATE CASCADE
@@ -104,8 +104,8 @@ CREATE TABLE notifications (
     id SERIAL PRIMARY KEY,
     userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE,
     isRead BOOLEAN NOT NULL,
-    date DATE NOT NULL,
-    text VARCHAR NOT NULL
+    notificationDate DATE NOT NULL,
+    notificationText VARCHAR NOT NULL
 );
 
 CREATE TABLE new_answers (
@@ -142,7 +142,7 @@ DROP FUNCTION IF EXISTS add_question_notification() CASCADE;
 DROP FUNCTION IF EXISTS add_comment_notification() CASCADE;
 DROP FUNCTION IF EXISTS add_star_notification() CASCADE;
 
---answer notifications
+-- ANSWER NOTIFICATIONS
 CREATE FUNCTION add_answer_notification() RETURNS TRIGGER AS
 $BODY$
 BEGIN
@@ -154,7 +154,7 @@ BEGIN
             SELECT author FROM posts WHERE posts.id = parent_post.id
         ),
         inserted AS (
-            INSERT INTO notifications (userID, isRead, date, text)
+            INSERT INTO notifications (userID, isRead, notificationDate, notificationText)
             VALUES (notified_user.id, FALSE, CURRENT_TIMESTAMP, concat('You have a new answer on question ', (SELECT title FROM posts where NEW.parentPost = id), '!'))
             RETURNING id
         )
@@ -170,7 +170,7 @@ CREATE TRIGGER answer_trigger
     FOR EACH ROW
     EXECUTE PROCEDURE add_answer_notification();
 
---question tag notifications
+-- QUESTION TAG NOTIFICATIONS
 CREATE OR REPLACE FUNCTION add_question_notification() RETURNS TRIGGER AS
 $BODY$
 BEGIN
@@ -179,7 +179,7 @@ BEGIN
         WHERE NEW.tagID = user_tags.tagID
     ),
     inserted AS (
-        INSERT INTO notifications (userID, isRead, date, text)
+        INSERT INTO notifications (userID, isRead, notificationDate, notificationText)
         VALUES (notified_users.id, FALSE, CURRENT_TIMESTAMP, concat('There is a new question on a tag you follow: ', (SELECT title FROM posts where NEW.id = id), '!'))
         RETURNING id
     )
@@ -194,12 +194,12 @@ CREATE TRIGGER add_question_notification
     FOR EACH ROW
     EXECUTE PROCEDURE add_question_notification();
 
---comment notifications
+-- COMMENT NOTIFICATIONS
 CREATE OR REPLACE FUNCTION add_comment_notification() RETURNS TRIGGER AS
 $BODY$
 BEGIN
     WITH inserted AS (
-        INSERT INTO notifications (userID, isRead, date, text)
+        INSERT INTO notifications (userID, isRead, notificationDate, notificationText)
         VALUES (NEW.userID, FALSE, CURRENT_TIMESTAMP, concat('There is a new comment on one of your posts: ', (SELECT title FROM posts where NEW.postID = id), '!'))
         RETURNING id
     )
@@ -214,7 +214,7 @@ CREATE TRIGGER add_comment_notification
     FOR EACH ROW
     EXECUTE PROCEDURE add_comment_notification();
 
---star notifications
+-- STAR NOTIFICATIONS
 CREATE OR REPLACE FUNCTION add_star_notification() RETURNS TRIGGER AS
 $BODY$
 BEGIN
@@ -223,7 +223,7 @@ BEGIN
         WHERE NEW.postID = posts.id
     ),
     inserted AS (
-        INSERT INTO notifications (userID, isRead, date, text)
+        INSERT INTO notifications (userID, isRead, notificationDate, notificationText)
         VALUES (notified_user.id, FALSE, CURRENT_TIMESTAMP, concat('Congratulations!', (SELECT name FROM users WHERE NEW.userID = id) ,' liked your post: ', (SELECT title FROM posts where NEW.postID = id), '!'))
         RETURNING id
     )
@@ -238,26 +238,27 @@ CREATE TRIGGER add_star_notification
     FOR EACH ROW
     EXECUTE PROCEDURE add_star_notification();
 
+-- PERFORMANCE INDEXES
+
+-- TAGS
+CREATE INDEX search_tags ON tags USING hash(tagName);
+
 -- FTS INDEXES
 
 DROP INDEX IF EXISTS search_user;
--- DROP INDEX IF EXISTS search_question;
--- DROP INDEX IF EXISTS search_answer;
--- DROP INDEX IF EXISTS search_comment;
+DROP INDEX IF EXISTS search_post;
+DROP INDEX IF EXISTS search_comment;
 
+-- USER SEARCH
 ALTER TABLE users
 ADD COLUMN tsvectors TSVECTOR;
 
 CREATE FUNCTION user_search_update() RETURNS TRIGGER AS $$
 BEGIN
-    IF TG_OP = 'INSERT' THEN
-        NEW.tsvectors = ((setweight(to_tsvector('english', NEW.name), 'A')) || (setweight(to_tsvector('english', NEW.username), 'B')));
-    END IF;
-    IF TG_OP = 'UPDATE' THEN
-        IF ((NEW.name <> OLD.name) || (NEW.username <> OLD.username)) THEN
-            NEW.tsvectors = ((setweight(to_tsvector('english', NEW.name), 'A')) || (setweight(to_tsvector('english', NEW.username), 'B')));
-        END IF;
-    END IF;
+    NEW.tsvectors = (
+        (setweight(to_tsvector('english', NEW.name), 'A')) || 
+        (setweight(to_tsvector('english', NEW.username), 'B'))
+    );
     RETURN NEW;
 END $$
 LANGUAGE plpgsql;
@@ -269,7 +270,60 @@ CREATE TRIGGER user_search_update
 
 CREATE INDEX search_user ON users USING GIN (tsvectors);
 
+-- POST SEARCH
+ALTER TABLE posts
+ADD COLUMN tsvectors TSVECTOR;
 
--- INSERT INTO users VALUES (1, 'Margarida', 'mnps@example.com', 'mnps', 'lalala', TO_DATE('24/10/2001', 'DD/MM/YYYY'), FALSE);
--- INSERT INTO posts VALUES (1, 1, TO_DATE('24/10/2022', 'DD/MM/YYYY'), 'question', 'birthday', 'is it my birthday?');
--- INSERT INTO posts VALUES (2, 1, TO_DATE('24/10/2022', 'DD/MM/YYYY'), 'answer', 'yeps', 1, FALSE);
+CREATE FUNCTION post_search_update() RETURNS TRIGGER AS $$
+BEGIN
+    WITH username AS (
+        SELECT username FROM users
+        WHERE NEW.userID = users.id
+        LIMIT 1
+    )
+
+    IF (NEW.postType = 'question') THEN        
+        NEW.tsvectors = (
+            (setweight(to_tsvector('english', NEW.title), 'A')) ||
+            (setweight(to_tsvector('english', NEW.postText), 'A')) ||
+            (setweight(to_tsvector('english', username), 'B'))
+        );
+    END IF;
+    IF (NEW.postType = 'answer') THEN        
+        NEW.tsvectors = (
+            (setweight(to_tsvector('english', NEW.postText), 'A')) ||
+            (setweight(to_tsvector('english', username), 'B'))
+        );
+    END IF;
+    RETURN NEW;
+END $$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER post_search_update
+    BEFORE INSERT OR UPDATE ON posts
+    FOR EACH ROW
+    EXECUTE PROCEDURE post_search_update();
+
+CREATE INDEX search_post ON posts USING GIN (tsvectors);
+
+-- COMMENT SEARCH
+ALTER TABLE comments
+ADD COLUMN tsvectors TSVECTOR;
+
+CREATE FUNCTION comment_search_update() RETURNS TRIGGER AS $$
+BEGIN       
+    NEW.tsvectors = ((setweight(to_tsvector('english', NEW.commentText), 'A')));
+    RETURN NEW;
+END $$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER comment_search_update
+    BEFORE INSERT OR UPDATE ON comments
+    FOR EACH ROW
+    EXECUTE PROCEDURE comment_search_update();
+
+CREATE INDEX search_comment ON comments USING GIN (tsvectors);
+
+INSERT INTO users (name, email, username, password, birthday, isDeleted) VALUES ('Margarida', 'mnps@example.com', 'mnps', 'lalala', TO_DATE('24/10/2001', 'DD/MM/YYYY'), FALSE);
+INSERT INTO posts (userID, postDate, postType, title, postText) VALUES (1, TO_DATE('24/10/2022', 'DD/MM/YYYY'), 'question', 'birthday', 'is it my birthday?');
+INSERT INTO posts (userID, postDate, postType, postText, parentPost, isCorrect) VALUES (1, TO_DATE('24/10/2022', 'DD/MM/YYYY'), 'answer', 'yeps', 1, FALSE);
