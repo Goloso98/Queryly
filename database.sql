@@ -48,10 +48,10 @@ CREATE TABLE posts (
     userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE,
     postDate DATE NOT NULL,
     postType post_type NOT NULL,
-    title VARCHAR NOT NULL CHECK (type = 'question'),
+    title VARCHAR NOT NULL CHECK (postType = 'question'),
     postText VARCHAR NOT NULL,
     parentPost INTEGER REFERENCES "posts" (id) ON UPDATE CASCADE,
-    isCorrect BOOLEAN NOT NULL CHECK (type = 'answer')
+    isCorrect BOOLEAN NOT NULL CHECK (postType = 'answer')
 );
 
 CREATE TABLE stars (
@@ -146,7 +146,7 @@ DROP FUNCTION IF EXISTS add_star_notification() CASCADE;
 CREATE FUNCTION add_answer_notification() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-    IF NEW.type = 'answer' THEN
+    IF NEW.postType = 'answer' THEN
         WITH parent_post AS (
             SELECT parentPost FROM posts WHERE posts.id = NEW.id
         ),
