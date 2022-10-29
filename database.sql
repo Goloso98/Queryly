@@ -275,9 +275,8 @@ ALTER TABLE posts
 ADD COLUMN tsvectors TSVECTOR;
 
 CREATE FUNCTION post_search_update() RETURNS TRIGGER AS $$
+DECLARE usernameAux VARCHAR;
 BEGIN
-    DECLARE usernameAux VARCHAR;
-
     SELECT username INTO usernameAux FROM users
     WHERE NEW.userID = users.id;
 
@@ -322,6 +321,15 @@ CREATE TRIGGER comment_search_update
     EXECUTE PROCEDURE comment_search_update();
 
 CREATE INDEX search_comment ON comments USING GIN (tsvectors);
+
+--TRANSACTIONS
+
+BEGIN TRANSACTION;
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ ONLY;
+SELECT postDate, title, postText
+FROM posts
+ORDER BY posts.postDate
+END TRANSACTION;
 
 -- INSERT INTO users (name, email, username, password, birthday, isDeleted) VALUES ('Margarida', 'mnps@example.com', 'mnps', 'lalala', TO_DATE('24/10/2001', 'DD/MM/YYYY'), FALSE);
 -- INSERT INTO posts (userID, postDate, postType, title, postText) VALUES (1, TO_DATE('24/10/2022', 'DD/MM/YYYY'), 'question', 'birthday', 'is it my birthday?');
