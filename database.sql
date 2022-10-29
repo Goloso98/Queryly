@@ -276,23 +276,22 @@ ADD COLUMN tsvectors TSVECTOR;
 
 CREATE FUNCTION post_search_update() RETURNS TRIGGER AS $$
 BEGIN
-    WITH username AS (
-        SELECT username FROM users
-        WHERE NEW.userID = users.id
-        LIMIT 1
-    )
+    DECLARE usernameAux VARCHAR;
+
+    SELECT username INTO usernameAux FROM users
+    WHERE NEW.userID = users.id;
 
     IF (NEW.postType = 'question') THEN        
         NEW.tsvectors = (
             (setweight(to_tsvector('english', NEW.title), 'A')) ||
             (setweight(to_tsvector('english', NEW.postText), 'A')) ||
-            (setweight(to_tsvector('english', username), 'B'))
+            (setweight(to_tsvector('english', usernameAux), 'B'))
         );
     END IF;
     IF (NEW.postType = 'answer') THEN        
         NEW.tsvectors = (
             (setweight(to_tsvector('english', NEW.postText), 'A')) ||
-            (setweight(to_tsvector('english', username), 'B'))
+            (setweight(to_tsvector('english', usernameAux), 'B'))
         );
     END IF;
     RETURN NEW;
@@ -324,6 +323,6 @@ CREATE TRIGGER comment_search_update
 
 CREATE INDEX search_comment ON comments USING GIN (tsvectors);
 
-INSERT INTO users (name, email, username, password, birthday, isDeleted) VALUES ('Margarida', 'mnps@example.com', 'mnps', 'lalala', TO_DATE('24/10/2001', 'DD/MM/YYYY'), FALSE);
-INSERT INTO posts (userID, postDate, postType, title, postText) VALUES (1, TO_DATE('24/10/2022', 'DD/MM/YYYY'), 'question', 'birthday', 'is it my birthday?');
-INSERT INTO posts (userID, postDate, postType, postText, parentPost, isCorrect) VALUES (1, TO_DATE('24/10/2022', 'DD/MM/YYYY'), 'answer', 'yeps', 1, FALSE);
+-- INSERT INTO users (name, email, username, password, birthday, isDeleted) VALUES ('Margarida', 'mnps@example.com', 'mnps', 'lalala', TO_DATE('24/10/2001', 'DD/MM/YYYY'), FALSE);
+-- INSERT INTO posts (userID, postDate, postType, title, postText) VALUES (1, TO_DATE('24/10/2022', 'DD/MM/YYYY'), 'question', 'birthday', 'is it my birthday?');
+-- INSERT INTO posts (userID, postDate, postType, postText, parentPost, isCorrect) VALUES (1, TO_DATE('24/10/2022', 'DD/MM/YYYY'), 'answer', 'yeps', 1, FALSE);
