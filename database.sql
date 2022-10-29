@@ -30,17 +30,17 @@ CREATE TYPE report_type AS ENUM ('post', 'comment');
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    name VARCHAR,
+    "name" VARCHAR,
     email VARCHAR UNIQUE NOT NULL,
     username VARCHAR UNIQUE NOT NULL,
-    password VARCHAR NOT NULL,
+    "password" VARCHAR NOT NULL,
     birthday DATE NOT NULL,
     isDeleted BOOLEAN NOT NULL
 );
 
 CREATE TABLE roles (
     userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE,
-    role user_role NOT NULL
+    userRole user_role NOT NULL
 );
 
 CREATE TABLE posts (
@@ -64,7 +64,7 @@ CREATE TABLE comments (
     postID INTEGER NOT NULL REFERENCES "posts" (id) ON UPDATE CASCADE,
     userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE,
     commentText VARCHAR NOT NULL,
-    date DATE NOT NULL
+    commentDate DATE NOT NULL
 );
 
 CREATE TABLE reports (
@@ -100,12 +100,12 @@ CREATE TABLE user_badges (
     badgeID INTEGER NOT NULL REFERENCES "badges" (id) ON UPDATE CASCADE
 );
 
+-- text will be defined in laravel code
 CREATE TABLE notifications (
     id SERIAL PRIMARY KEY,
     userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE,
     isRead BOOLEAN NOT NULL,
-    notificationDate DATE NOT NULL,
-    notificationText VARCHAR NOT NULL
+    notificationDate DATE NOT NULL
 );
 
 CREATE TABLE new_answers (
@@ -116,8 +116,7 @@ CREATE TABLE new_answers (
 
 CREATE TABLE new_questions (
     notificationID INTEGER NOT NULL REFERENCES "notifications" (id) ON UPDATE CASCADE,
-    postID INTEGER NOT NULL REFERENCES "posts" (id) ON UPDATE CASCADE,
-    tagID INTEGER NOT NULL REFERENCES "tags" (id) ON UPDATE CASCADE
+    postID INTEGER NOT NULL REFERENCES "posts" (id) ON UPDATE CASCADE
 );
 
 CREATE TABLE new_comments (
@@ -138,9 +137,9 @@ CREATE TABLE new_stars (
 -- TRIGGERS
 
 DROP FUNCTION IF EXISTS add_answer_notification CASCADE;
-DROP FUNCTION IF EXISTS add_question_notification() CASCADE;
-DROP FUNCTION IF EXISTS add_comment_notification() CASCADE;
-DROP FUNCTION IF EXISTS add_star_notification() CASCADE;
+DROP FUNCTION IF EXISTS add_question_notification CASCADE;
+DROP FUNCTION IF EXISTS add_comment_notification CASCADE;
+DROP FUNCTION IF EXISTS add_star_notification CASCADE;
 
 -- ANSWER NOTIFICATIONS
 CREATE FUNCTION add_answer_notification() RETURNS TRIGGER AS
@@ -151,11 +150,11 @@ BEGIN
             SELECT parentPost FROM posts WHERE posts.id = NEW.id
         ),
         notified_user AS (
-            SELECT author FROM posts WHERE posts.id = parent_post.id
+            SELECT userID FROM posts WHERE posts.id = parent_post.id
         ),
         inserted AS (
-            INSERT INTO notifications (userID, isRead, notificationDate, notificationText)
-            VALUES (notified_user.id, FALSE, CURRENT_TIMESTAMP, concat('You have a new answer on question ', (SELECT title FROM posts where NEW.parentPost = id), '!'))
+            INSERT INTO notifications (userID, isRead, notificationDate)
+            VALUES (notified_user.id, FALSE, CURRENT_TIMESTAMP)
             RETURNING id
         )
         INSERT INTO new_answers SELECT inserted.id, NEW.id, NEW.parentPost FROM inserted;
@@ -179,8 +178,8 @@ BEGIN
         WHERE NEW.tagID = user_tags.tagID
     ),
     inserted AS (
-        INSERT INTO notifications (userID, isRead, notificationDate, notificationText)
-        VALUES (notified_users.id, FALSE, CURRENT_TIMESTAMP, concat('There is a new question on a tag you follow: ', (SELECT title FROM posts where NEW.id = id), '!'))
+        INSERT INTO notifications (userID, isRead, notificationDate)
+        VALUES (notified_users.id, FALSE, CURRENT_TIMESTAMP)
         RETURNING id
     )
     INSERT INTO new_questions SELECT inserted.id, NEW.id, NEW.tagID FROM inserted;
@@ -199,8 +198,8 @@ CREATE OR REPLACE FUNCTION add_comment_notification() RETURNS TRIGGER AS
 $BODY$
 BEGIN
     WITH inserted AS (
-        INSERT INTO notifications (userID, isRead, notificationDate, notificationText)
-        VALUES (NEW.userID, FALSE, CURRENT_TIMESTAMP, concat('There is a new comment on one of your posts: ', (SELECT title FROM posts where NEW.postID = id), '!'))
+        INSERT INTO notifications (userID, isRead, notificationDate)
+        VALUES (NEW.userID, FALSE, CURRENT_TIMESTAMP)
         RETURNING id
     )
     INSERT INTO new_comments SELECT inserted.id, NEW.badgeID FROM inserted;
@@ -219,12 +218,12 @@ CREATE OR REPLACE FUNCTION add_star_notification() RETURNS TRIGGER AS
 $BODY$
 BEGIN
     WITH notified_user AS (
-        SELECT author FROM posts
+        SELECT userID FROM posts
         WHERE NEW.postID = posts.id
     ),
     inserted AS (
-        INSERT INTO notifications (userID, isRead, notificationDate, notificationText)
-        VALUES (notified_user.id, FALSE, CURRENT_TIMESTAMP, concat('Congratulations!', (SELECT name FROM users WHERE NEW.userID = id) ,' liked your post: ', (SELECT title FROM posts where NEW.postID = id), '!'))
+        INSERT INTO notifications (userID, isRead, notificationDate)
+        VALUES (notified_user.id, FALSE, CURRENT_TIMESTAMP)
         RETURNING id
     )
     INSERT INTO new_stars SELECT inserted.id, NEW.postID FROM inserted;
@@ -323,14 +322,64 @@ CREATE TRIGGER comment_search_update
 CREATE INDEX search_comment ON comments USING GIN (tsvectors);
 
 --TRANSACTIONS
+DROP FUNCTION IF EXISTS show_own_questions(INTEGER) CASCADE;
+DROP FUNCTION IF EXISTS show_own_answers(INTEGER) CASCADE;
+DROP FUNCTION IF EXISTS show_own_comments(INTEGER) CASCADE;
+DROP FUNCTION IF EXISTS show_badges(INTEGER) CASCADE;
 
-BEGIN TRANSACTION;
-SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ ONLY;
-SELECT postDate, title, postText
-FROM posts
-ORDER BY posts.postDate
-END TRANSACTION;
+-- see my own questions
+CREATE OR REPLACE FUNCTION show_own_questions(ui INTEGER) RETURNS INTEGER AS $$
+    BEGIN
+        SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ ONLY;
+        SELECT posts.id, posts.id, posts.postDate, posts.title, posts.postText, COUNT(stars)
+        FROM posts
+        INNER JOIN users ON posts.userID = users.id
+        INNER JOIN stars ON posts.id = stars.postID
+        WHERE posts.postType = 'question' AND users.id = ui
+        ORDER BY posts.postDate;
+    END $$
+LANGUAGE plpgsql;
+
+-- see my own answers
+CREATE OR REPLACE FUNCTION show_own_answers(ui INTEGER) RETURNS INTEGER AS $$
+    BEGIN
+        SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ ONLY;
+        SELECT posts.id, posts.postDate, post.parentPost, posts.postText, COUNT(stars), posts.isCorrect
+        FROM posts
+        INNER JOIN users ON posts.userID = users.id
+        INNER JOIN stars ON posts.id = stars.postID
+        WHERE posts.postType = 'answer' AND users.id = ui
+        ORDER BY posts.postDate;
+    END $$
+LANGUAGE plpgsql;
+
+-- see my own comments
+CREATE OR REPLACE FUNCTION show_own_comments(ui INTEGER) RETURNS INTEGER AS $$
+    BEGIN
+        SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ ONLY;
+        SELECT comments.id, comments.commentDate, comments.commentText, comments.postID
+        FROM comments
+        INNER JOIN users ON comments.userID = users.id
+        WHERE users.id = ui
+        ORDER BY comments.commentDate;
+    END $$
+LANGUAGE plpgsql;
+
+-- see my own bagdes
+CREATE OR REPLACE FUNCTION show_badges(ui INTEGER) RETURNS INTEGER AS $$
+    BEGIN
+        SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ ONLY;
+        SELECT badges.*
+        FROM badges
+        INNER JOIN user_badges ON user_badges.badgeID = badge.id
+        WHERE user_badges.userID = ui
+        ORDER BY badges.id;
+    END $$
+LANGUAGE plpgsql;
+
+
+
 
 -- INSERT INTO users (name, email, username, password, birthday, isDeleted) VALUES ('Margarida', 'mnps@example.com', 'mnps', 'lalala', TO_DATE('24/10/2001', 'DD/MM/YYYY'), FALSE);
--- INSERT INTO posts (userID, postDate, postType, title, postText) VALUES (1, TO_DATE('24/10/2022', 'DD/MM/YYYY'), 'question', 'birthday', 'is it my birthday?');
+-- INSERT INTO posts (userID, postDate, postType, title, postText, isCorrect) VALUES (1, TO_DATE('24/10/2022', 'DD/MM/YYYY'), 'question', 'birthday', 'is it my birthday?', FALSE);
 -- INSERT INTO posts (userID, postDate, postType, postText, parentPost, isCorrect) VALUES (1, TO_DATE('24/10/2022', 'DD/MM/YYYY'), 'answer', 'yeps', 1, FALSE);
