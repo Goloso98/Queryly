@@ -1,5 +1,5 @@
 DROP SCHEMA IF EXISTS lbaw2294 CASCADE;
-CREATE SCHEMA lbaw2294 AUTHORIZATION postgres;
+CREATE SCHEMA lbaw2294;
 SET search_path TO lbaw2294;
 
 DROP TABLE IF EXISTS users CASCADE;
@@ -326,12 +326,16 @@ DROP FUNCTION IF EXISTS show_own_questions(INTEGER) CASCADE;
 DROP FUNCTION IF EXISTS show_own_answers(INTEGER) CASCADE;
 DROP FUNCTION IF EXISTS show_own_comments(INTEGER) CASCADE;
 DROP FUNCTION IF EXISTS show_badges(INTEGER) CASCADE;
+DROP FUNCTION IF EXISTS show_tags(INTEGER) CASCADE;
+DROP FUNCTION IF EXISTS show_top_questions(INTEGER) CASCADE;
+DROP FUNCTION IF EXISTS show_all_questions(INTEGER) CASCADE;
+
 
 -- see my own questions
 CREATE OR REPLACE FUNCTION show_own_questions(ui INTEGER) RETURNS INTEGER AS $$
     BEGIN
         SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ ONLY;
-        SELECT posts.id, posts.id, posts.postDate, posts.title, posts.postText, COUNT(stars)
+        SELECT posts.id, posts.postDate, posts.title, posts.postText, COUNT(stars)
         FROM posts
         INNER JOIN users ON posts.userID = users.id
         INNER JOIN stars ON posts.id = stars.postID
@@ -371,12 +375,50 @@ CREATE OR REPLACE FUNCTION show_badges(ui INTEGER) RETURNS INTEGER AS $$
         SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ ONLY;
         SELECT badges.*
         FROM badges
-        INNER JOIN user_badges ON user_badges.badgeID = badge.id
+        INNER JOIN user_badges ON user_badges.badgeID = badges.id
         WHERE user_badges.userID = ui
         ORDER BY badges.id;
     END $$
 LANGUAGE plpgsql;
 
+-- see own tags
+CREATE OR REPLACE FUNCTION show_tags(ui INTEGER) RETURNS INTEGER AS $$
+    BEGIN
+        SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ ONLY;
+        SELECT tags.*
+        FROM tags
+        INNER JOIN user_tags ON user_tags.tagID = tags.id
+        WHERE user_tags.userID = ui
+        ORDER BY tags.id;
+    END $$
+LANGUAGE plpgsql;
+
+-- see top questions (10 top questions on feed? or a page with 100 top questions)
+CREATE OR REPLACE FUNCTION show_top_questions() RETURNS INTEGER AS $$
+    BEGIN
+        SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ ONLY;
+        SELECT posts.id, posts.postDate, posts.title, posts.postText, COUNT(stars)
+        FROM posts
+        INNER JOIN users ON posts.userID = users.id
+        INNER JOIN stars ON posts.id = stars.postID
+        WHERE posts.postType = 'question'
+        ORDER BY COUNT(stars)
+        LIMIT 10;
+    END $$
+LANGUAGE plpgsql;
+
+-- see all questions
+CREATE OR REPLACE FUNCTION show_all_questions() RETURNS INTEGER AS $$
+    BEGIN
+        SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ ONLY;
+        SELECT posts.id, posts.postDate, posts.title, posts.postText, COUNT(stars)
+        FROM posts
+        INNER JOIN users ON posts.userID = users.id
+        INNER JOIN stars ON posts.id = stars.postID
+        WHERE posts.postType = 'question'
+        ORDER BY posts.postDate;
+    END $$
+LANGUAGE plpgsql;
 
 
 
