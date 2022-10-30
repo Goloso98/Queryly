@@ -46,7 +46,7 @@ CREATE TABLE roles (
 CREATE TABLE posts (
     id SERIAL PRIMARY KEY,
     userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE,
-    postDate DATE NOT NULL,
+    postDate DATE NOT NULL DEFAULT now(),
     postType post_type NOT NULL,
     title VARCHAR NOT NULL CHECK (postType = 'question'),
     postText VARCHAR NOT NULL,
