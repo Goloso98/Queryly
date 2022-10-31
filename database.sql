@@ -48,10 +48,12 @@ CREATE TABLE posts (
     userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE,
     postDate DATE NOT NULL DEFAULT now(),
     postType post_type NOT NULL,
-    title VARCHAR NOT NULL CHECK (postType = 'question'),
+    title VARCHAR,
     postText VARCHAR NOT NULL,
     parentPost INTEGER REFERENCES "posts" (id) ON UPDATE CASCADE,
-    isCorrect BOOLEAN NOT NULL CHECK (postType = 'answer') DEFAULT FALSE
+    isCorrect BOOLEAN DEFAULT FALSE,
+    CONSTRAINT post_title CHECK ((postType = 'question' AND title <> NULL) OR (postType = 'answer' AND title = NULL)),
+    CONSTRAINT correctness CHECK ((isCorrect = NULL AND postType = 'question') OR (isCorrect <> NULL AND postType = 'answer'))
 );
 
 CREATE TABLE stars (
@@ -144,20 +146,16 @@ DROP FUNCTION IF EXISTS add_star_notification CASCADE;
 -- ANSWER NOTIFICATIONS
 CREATE FUNCTION add_answer_notification() RETURNS TRIGGER AS
 $BODY$
+DECLARE parent_post INTEGER;
+DECLARE notified_user INTEGER;
 BEGIN
     IF NEW.postType = 'answer' THEN
-        WITH parent_post AS (
-            SELECT parentPost FROM posts WHERE posts.id = NEW.id
-        ),
-        notified_user AS (
-            SELECT userID FROM posts WHERE posts.id = parent_post.id
-        ),
-        inserted AS (
+        SELECT userID INTO notified_user FROM posts WHERE posts.id = NEW.parentPost;
+        WITH inserted AS (
             INSERT INTO notifications (userID, isRead, notificationDate)
-            VALUES (notified_user.id, FALSE, CURRENT_TIMESTAMP)
+            VALUES (notified_user, FALSE, CURRENT_TIMESTAMP)
             RETURNING id
-        )
-        INSERT INTO new_answers SELECT inserted.id, NEW.id, NEW.parentPost FROM inserted;
+        ) INSERT INTO new_answers SELECT inserted.id, NEW.id, NEW.parentPost FROM inserted;
     END IF;
     RETURN NEW;
 END;
@@ -165,31 +163,29 @@ $BODY$
 LANGUAGE plpgsql;
 
 CREATE TRIGGER answer_trigger
-    BEFORE INSERT OR UPDATE ON posts
+    AFTER INSERT OR UPDATE ON posts
     FOR EACH ROW
     EXECUTE PROCEDURE add_answer_notification();
 
 -- QUESTION TAG NOTIFICATIONS
 CREATE OR REPLACE FUNCTION add_question_notification() RETURNS TRIGGER AS
 $BODY$
+DECLARE notified_user INTEGER;
 BEGIN
-    WITH notified_users AS (
-        SELECT userID FROM user_tags
-        WHERE NEW.tagID = user_tags.tagID
-    ),
-    inserted AS (
+    SELECT userID INTO notified_user FROM user_tags WHERE NEW.tagID = user_tags.tagID;
+    WITH inserted AS (
         INSERT INTO notifications (userID, isRead, notificationDate)
-        VALUES (notified_users.id, FALSE, CURRENT_TIMESTAMP)
+        VALUES (notified_user, FALSE, CURRENT_TIMESTAMP)
         RETURNING id
     )
-    INSERT INTO new_questions SELECT inserted.id, NEW.id, NEW.tagID FROM inserted;
+    INSERT INTO new_questions SELECT inserted.id, NEW.postID FROM inserted;
     RETURN NEW;
 END;
 $BODY$
 LANGUAGE plpgsql;
 
 CREATE TRIGGER add_question_notification
-    BEFORE INSERT OR UPDATE ON question_tags
+    AFTER INSERT OR UPDATE ON question_tags
     FOR EACH ROW
     EXECUTE PROCEDURE add_question_notification();
 
@@ -202,28 +198,26 @@ BEGIN
         VALUES (NEW.userID, FALSE, CURRENT_TIMESTAMP)
         RETURNING id
     )
-    INSERT INTO new_comments SELECT inserted.id, NEW.badgeID FROM inserted;
+    INSERT INTO new_comments SELECT inserted.id, NEW.id FROM inserted;
     RETURN NEW;
 END;
 $BODY$
 LANGUAGE plpgsql;
 
 CREATE TRIGGER add_comment_notification
-    BEFORE INSERT OR UPDATE ON comments
+    AFTER INSERT OR UPDATE ON comments
     FOR EACH ROW
     EXECUTE PROCEDURE add_comment_notification();
 
 -- STAR NOTIFICATIONS
 CREATE OR REPLACE FUNCTION add_star_notification() RETURNS TRIGGER AS
 $BODY$
+DECLARE notified_user INTEGER;
 BEGIN
-    WITH notified_user AS (
-        SELECT userID FROM posts
-        WHERE NEW.postID = posts.id
-    ),
-    inserted AS (
+    SELECT userID INTO notified_user FROM posts WHERE NEW.postID = posts.id;
+    WITH inserted AS (
         INSERT INTO notifications (userID, isRead, notificationDate)
-        VALUES (notified_user.id, FALSE, CURRENT_TIMESTAMP)
+        VALUES (notified_user, FALSE, CURRENT_TIMESTAMP)
         RETURNING id
     )
     INSERT INTO new_stars SELECT inserted.id, NEW.postID FROM inserted;
@@ -233,7 +227,7 @@ $BODY$
 LANGUAGE plpgsql;
 
 CREATE TRIGGER add_star_notification
-    BEFORE INSERT OR UPDATE ON stars
+    AFTER INSERT OR UPDATE ON stars
     FOR EACH ROW
     EXECUTE PROCEDURE add_star_notification();
 
@@ -321,7 +315,7 @@ CREATE TRIGGER comment_search_update
 
 CREATE INDEX search_comment ON comments USING GIN (tsvectors);
 
---TRANSACTIONS
+-- TRANSACTIONS
 DROP FUNCTION IF EXISTS show_own_questions(INTEGER) CASCADE;
 DROP FUNCTION IF EXISTS show_own_answers(INTEGER) CASCADE;
 DROP FUNCTION IF EXISTS show_own_comments(INTEGER) CASCADE;
@@ -329,12 +323,12 @@ DROP FUNCTION IF EXISTS show_badges(INTEGER) CASCADE;
 DROP FUNCTION IF EXISTS show_tags(INTEGER) CASCADE;
 DROP FUNCTION IF EXISTS show_top_questions(INTEGER) CASCADE;
 DROP FUNCTION IF EXISTS show_all_questions(INTEGER) CASCADE;
-DROP FUNCTION IF EXISTS insert_question() CASCADE;
-DROP FUNCTION IF EXISTS insert_answer() CASCADE;
-DROP FUNCTION IF EXISTS insert_comment() CASCADE;
+DROP FUNCTION IF EXISTS insert_question(INTEGER, VARCHAR, VARCHAR, post_type) CASCADE;
+DROP FUNCTION IF EXISTS insert_answer(INTEGER, VARCHAR, INTEGER, BOOLEAN, post_type) CASCADE;
+DROP FUNCTION IF EXISTS insert_comment(INTEGER, INTEGER, VARCHAR) CASCADE;
 
 
--- see my own questions
+-- SEE OWN QUESTIONS
 CREATE OR REPLACE FUNCTION show_own_questions(ui INTEGER) RETURNS INTEGER AS $$
     BEGIN
         SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ ONLY;
@@ -347,7 +341,7 @@ CREATE OR REPLACE FUNCTION show_own_questions(ui INTEGER) RETURNS INTEGER AS $$
     END $$
 LANGUAGE plpgsql;
 
--- see my own answers
+-- SEE OWN ANSWERS
 CREATE OR REPLACE FUNCTION show_own_answers(ui INTEGER) RETURNS INTEGER AS $$
     BEGIN
         SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ ONLY;
@@ -360,7 +354,7 @@ CREATE OR REPLACE FUNCTION show_own_answers(ui INTEGER) RETURNS INTEGER AS $$
     END $$
 LANGUAGE plpgsql;
 
--- see my own comments
+-- SEE OWN COMMENTS
 CREATE OR REPLACE FUNCTION show_own_comments(ui INTEGER) RETURNS INTEGER AS $$
     BEGIN
         SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ ONLY;
@@ -372,7 +366,7 @@ CREATE OR REPLACE FUNCTION show_own_comments(ui INTEGER) RETURNS INTEGER AS $$
     END $$
 LANGUAGE plpgsql;
 
--- see my own bagdes
+-- SEE OWN BADGES
 CREATE OR REPLACE FUNCTION show_badges(ui INTEGER) RETURNS INTEGER AS $$
     BEGIN
         SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ ONLY;
@@ -384,7 +378,7 @@ CREATE OR REPLACE FUNCTION show_badges(ui INTEGER) RETURNS INTEGER AS $$
     END $$
 LANGUAGE plpgsql;
 
--- see own tags
+-- SEE OWN TAGS
 CREATE OR REPLACE FUNCTION show_tags(ui INTEGER) RETURNS INTEGER AS $$
     BEGIN
         SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ ONLY;
@@ -396,7 +390,7 @@ CREATE OR REPLACE FUNCTION show_tags(ui INTEGER) RETURNS INTEGER AS $$
     END $$
 LANGUAGE plpgsql;
 
--- see top questions (10 top questions on feed? or a page with 100 top questions)
+-- SEE TOP QUESTIONS
 CREATE OR REPLACE FUNCTION show_top_questions() RETURNS INTEGER AS $$
     BEGIN
         SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ ONLY;
@@ -406,11 +400,11 @@ CREATE OR REPLACE FUNCTION show_top_questions() RETURNS INTEGER AS $$
         INNER JOIN stars ON posts.id = stars.postID
         WHERE posts.postType = 'question'
         ORDER BY COUNT(stars)
-        LIMIT 10;
+        LIMIT 50;
     END $$
 LANGUAGE plpgsql;
 
--- see all questions
+-- SEE ALL QUESTIONS
 CREATE OR REPLACE FUNCTION show_all_questions() RETURNS INTEGER AS $$
     BEGIN
         SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ ONLY;
@@ -423,35 +417,33 @@ CREATE OR REPLACE FUNCTION show_all_questions() RETURNS INTEGER AS $$
     END $$
 LANGUAGE plpgsql;
 
--- insert a question
-CREATE OR REPLACE FUNCTION insert_question() RETURNS INTEGER AS $$
+-- INSERT A QUESTION
+CREATE OR REPLACE FUNCTION insert_question(ui INTEGER, ptitle VARCHAR, ptext VARCHAR, ptype post_type) RETURNS INTEGER AS $$
     BEGIN
         SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
-        IF ($postType = 'question') THEN
+        IF (pType = 'question') THEN
           INSERT INTO posts (userID, title, postText)
-          VALUES ($userID, $title, $postText)
+          VALUES (ui, ptitle, ptext);
+        END IF;
     END $$
 LANGUAGE plpgsql;
 
--- insert an answer
-CREATE OR REPLACE FUNCTION insert_answer() RETURNS INTEGER AS $$
+-- INSERT AN ANSWER
+CREATE OR REPLACE FUNCTION insert_answer(ui INTEGER, ptext VARCHAR, pparent INTEGER, correct BOOLEAN, ptype post_type) RETURNS INTEGER AS $$
     BEGIN
         SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
-        IF ($postType = 'answer') THEN
+        IF (ptype = 'answer') THEN
           INSERT INTO posts (userID, postText, parentPost, isCorrect)
-          VALUES ($userID, $postText, $parentPost, $isCorrect)
+          VALUES (ui, ptext, pparent, correct);
+        END IF;
     END $$
 LANGUAGE plpgsql;
 
--- insert a comment
-CREATE OR REPLACE FUNCTION insert_comment() RETURNS INTEGER AS $$
+-- INSERT A COMMENT
+CREATE OR REPLACE FUNCTION insert_comment(pi INTEGER, ui INTEGER, ctext VARCHAR) RETURNS INTEGER AS $$
     BEGIN
         SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
-        INSERT INTO comments (postId, userID, commentText)
-        VALUES ($postId, $userID, $commentText)
+        INSERT INTO comments (postID, userID, commentText)
+        VALUES (pi, ui, ctext);
     END $$
 LANGUAGE plpgsql;
-
--- INSERT INTO users (name, email, username, password, birthday, isDeleted) VALUES ('Margarida', 'mnps@example.com', 'mnps', 'lalala', TO_DATE('24/10/2001', 'DD/MM/YYYY'), FALSE);
--- INSERT INTO posts (userID, postDate, postType, title, postText, isCorrect) VALUES (1, TO_DATE('24/10/2022', 'DD/MM/YYYY'), 'question', 'birthday', 'is it my birthday?', FALSE);
--- INSERT INTO posts (userID, postDate, postType, postText, parentPost, isCorrect) VALUES (1, TO_DATE('24/10/2022', 'DD/MM/YYYY'), 'answer', 'yeps', 1, FALSE);
