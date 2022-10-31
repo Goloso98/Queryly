@@ -451,3 +451,7 @@ CREATE OR REPLACE FUNCTION insert_comment() RETURNS INTEGER AS $$
         VALUES ($postId, $userID, $commentText)
     END $$
 LANGUAGE plpgsql;
+
+-- INSERT INTO users (name, email, username, password, birthday, isDeleted) VALUES ('Margarida', 'mnps@example.com', 'mnps', 'lalala', TO_DATE('24/10/2001', 'DD/MM/YYYY'), FALSE);
+-- INSERT INTO posts (userID, postDate, postType, title, postText, isCorrect) VALUES (1, TO_DATE('24/10/2022', 'DD/MM/YYYY'), 'question', 'birthday', 'is it my birthday?', FALSE);
+-- INSERT INTO posts (userID, postDate, postType, postText, parentPost, isCorrect) VALUES (1, TO_DATE('24/10/2022', 'DD/MM/YYYY'), 'answer', 'yeps', 1, FALSE);
