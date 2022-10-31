@@ -35,7 +35,7 @@ CREATE TABLE users (
     username VARCHAR UNIQUE NOT NULL,
     "password" VARCHAR NOT NULL,
     birthday DATE NOT NULL,
-    isDeleted BOOLEAN NOT NULL
+    isDeleted BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE roles (
@@ -46,12 +46,12 @@ CREATE TABLE roles (
 CREATE TABLE posts (
     id SERIAL PRIMARY KEY,
     userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE,
-    postDate DATE NOT NULL,
+    postDate DATE NOT NULL DEFAULT now(),
     postType post_type NOT NULL,
     title VARCHAR NOT NULL CHECK (postType = 'question'),
     postText VARCHAR NOT NULL,
     parentPost INTEGER REFERENCES "posts" (id) ON UPDATE CASCADE,
-    isCorrect BOOLEAN NOT NULL CHECK (postType = 'answer')
+    isCorrect BOOLEAN NOT NULL CHECK (postType = 'answer') DEFAULT FALSE
 );
 
 CREATE TABLE stars (
@@ -64,7 +64,7 @@ CREATE TABLE comments (
     postID INTEGER NOT NULL REFERENCES "posts" (id) ON UPDATE CASCADE,
     userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE,
     commentText VARCHAR NOT NULL,
-    commentDate DATE NOT NULL
+    commentDate DATE NOT NULL DEFAULT now()
 );
 
 CREATE TABLE reports (
@@ -329,6 +329,9 @@ DROP FUNCTION IF EXISTS show_badges(INTEGER) CASCADE;
 DROP FUNCTION IF EXISTS show_tags(INTEGER) CASCADE;
 DROP FUNCTION IF EXISTS show_top_questions(INTEGER) CASCADE;
 DROP FUNCTION IF EXISTS show_all_questions(INTEGER) CASCADE;
+DROP FUNCTION IF EXISTS insert_question() CASCADE;
+DROP FUNCTION IF EXISTS insert_answer() CASCADE;
+DROP FUNCTION IF EXISTS insert_comment() CASCADE;
 
 
 -- see my own questions
@@ -420,8 +423,31 @@ CREATE OR REPLACE FUNCTION show_all_questions() RETURNS INTEGER AS $$
     END $$
 LANGUAGE plpgsql;
 
+-- insert a question
+CREATE OR REPLACE FUNCTION insert_question() RETURNS INTEGER AS $$
+    BEGIN
+        SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+        IF ($postType = 'question') THEN
+          INSERT INTO posts (userID, title, postText)
+          VALUES ($userID, $title, $postText)
+    END $$
+LANGUAGE plpgsql;
 
+-- insert an answer
+CREATE OR REPLACE FUNCTION insert_answer() RETURNS INTEGER AS $$
+    BEGIN
+        SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+        IF ($postType = 'answer') THEN
+          INSERT INTO posts (userID, postText, parentPost, isCorrect)
+          VALUES ($userID, $postText, $parentPost, $isCorrect)
+    END $$
+LANGUAGE plpgsql;
 
--- INSERT INTO users (name, email, username, password, birthday, isDeleted) VALUES ('Margarida', 'mnps@example.com', 'mnps', 'lalala', TO_DATE('24/10/2001', 'DD/MM/YYYY'), FALSE);
--- INSERT INTO posts (userID, postDate, postType, title, postText, isCorrect) VALUES (1, TO_DATE('24/10/2022', 'DD/MM/YYYY'), 'question', 'birthday', 'is it my birthday?', FALSE);
--- INSERT INTO posts (userID, postDate, postType, postText, parentPost, isCorrect) VALUES (1, TO_DATE('24/10/2022', 'DD/MM/YYYY'), 'answer', 'yeps', 1, FALSE);
+-- insert a comment
+CREATE OR REPLACE FUNCTION insert_comment() RETURNS INTEGER AS $$
+    BEGIN
+        SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+        INSERT INTO comments (postId, userID, commentText)
+        VALUES ($postId, $userID, $commentText)
+    END $$
+LANGUAGE plpgsql;
