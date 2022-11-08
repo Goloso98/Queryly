@@ -1,0 +1,94 @@
+openapi: 3.0.0
+
+info:
+  version: '1.0'
+  title: LBAW Queryly Web API
+  description: Web resources specification for Queryly
+
+servers:
+  url: http://lbaw2294.lbaw-prod.fe.up.pt
+  descripion: "Production Server"
+
+externalDocs:
+  description: Find more information here
+  url: https://git.fe.up.pt/lbaw/lbaw2223/lbaw2294/-/wikis/home
+
+tags:
+  - name: 'M01: Authentication'
+  - name: 'M02: Individual Profile'
+  - name: 'M03: Posts'
+  - name: 'M04: Comments'
+  - name: 'M06: User Administration'
+  - name: 'M07: Post Administration'
+  - name: 'M08: Comment Administration'
+  - name: 'M09: Statis Pages'
+
+/sign-in:
+  get:
+    operationId: R101
+    summary: 'R101: Sign In Form'
+    desciption: 'Provide sign in form. Access: PUB'
+    tags:
+      - 'M01: Authentication'
+    responses:
+      '200':
+        description: 'Ok. Show Sign-In UI'
+  post:
+    operationId: R102
+    summary: 'R102: Sign In Action'
+    description: ' Process the sign in form submission. Access: PUB'
+    tags:
+      - 'M01: Authentication'
+    requestBody:
+      required: true
+      content:
+        application/x-www-form-urlencoded: 
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+            required:
+              - email
+              - password
+    responses:
+      '302':
+        description: 'Redirect after processing sign in credentials'
+        headers:
+          Location:
+            schema:
+              type: string
+            examples:
+              302Success:
+                description: 'Credentials match a pair in the database, sign in successful, redirect to user page'
+                value: /users/{id}
+              302Error:
+                description: 'Credentials do not match a pair in the database, sign in unsuccessful, redirect to sign in form'
+                value: /sign-in
+
+/sign-out:
+  post:
+    operationId: R103
+    summary: 'R103: Sign Out Action'
+    description: ' Sign out action. Access: USR, ADM, MOD'
+    tags:
+      - 'M01: Authentication'
+    responses:
+      '302':
+        description: 'Redirect after sign out'
+        headers:
+          Location:
+            schema:
+              type: string
+            examples:
+              302Success:
+                description: 'User signing out, redirect to home page'
+                value: /
+
+/register:
+  get:
+    operationId: R104
+    summary: 'R104: Register Form'
+    description: ''
