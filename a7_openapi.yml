@@ -21,7 +21,7 @@ tags:
   - name: 'M06: User Administration'
   - name: 'M07: Post Administration'
   - name: 'M08: Comment Administration'
-  - name: 'M09: Statis Pages'
+  - name: 'M09: Static Pages'
 
 /sign-in:
   get:
@@ -63,10 +63,10 @@ tags:
             examples:
               302Success:
                 description: 'Credentials match a pair in the database, sign in successful, redirect to user page'
-                value: /users/{id}
+                value: '/users/{id}'
               302Error:
                 description: 'Credentials do not match a pair in the database, sign in unsuccessful, redirect to sign in form'
-                value: /sign-in
+                value: '/sign-in'
 
 /sign-out:
   post:
@@ -85,10 +85,145 @@ tags:
             examples:
               302Success:
                 description: 'User signing out, redirect to home page'
-                value: /
+                value: '/'
 
 /register:
   get:
     operationId: R104
     summary: 'R104: Register Form'
-    description: ''
+    description: 'Provide registration form. Access: PUB'
+    tags:
+      - 'M01: Authentication'
+    responses:
+      '200':
+        description: 'Ok. Show Sign Up UI'
+  post:
+    operationId: R106
+    summary: 'R105: Register Action'
+    description: 'Processes the regestration form. Access: PUB'
+    tags:
+      - 'M01: Authentication'
+    requestBody:
+      required: true
+      content:
+        application/x-www-form-urlencoded:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              email:
+                type: string
+              username:
+                type: string
+              password:
+                type: string
+              birthday:
+                type: string
+                format: date
+                description: 'Birthday of user'
+                example: '30-01-2022'
+            required:
+              - name
+              - email
+              - username
+              - password
+              - birthday
+    responses:
+      '302':
+        description: 'Redirect after processing new user information'
+        headers:
+          Location:
+            schema:
+              type: string
+            examples:
+              302Success:
+                description: 'Successful authentication. Redirect to user page.'
+                value: '/users/{id}'
+              302Error:
+                description: 'Failed to process new information. Redirect to sign-up form'
+                value: '/register'
+
+/users/{id}:
+  get:
+    operationId: R201
+    summary: 'R201: View user profile'
+    description: 'Show the individual user profile. Access: USR'
+    tags:
+      - 'M02: Individual Profile'
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+    responses:
+      '200':
+        description: 'Ok. Show user profile UI'
+
+/posts/{id}:
+  get:
+    operationId: R301
+    summary: 'R301: View post'
+    description: 'Show the post. Access: USR'
+    tags:
+      - 'M03: Posts'
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+    responses:
+      '200':
+        description: 'Ok. Show post UI'
+
+/comments/{id}:
+  get:
+    operationId: R401
+    summary: 'R401: View comment'
+    description: 'Show the comment. Access: USR'
+    tags:
+      - 'M04: Comments'
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+    responses:
+      '200':
+        description: 'Ok. Show comment UI'
+
+/about:
+  get:
+    operationId: R901
+    summary: 'R901: View about page'
+    description: 'Show the about page. Access: PUB'
+    tags:
+      - 'M09: Static Pages'
+    responses:
+      '200':
+        description: 'Ok. Show about UI'
+
+/contacts:
+  get:
+    operationId: R902
+    summary: 'R902: View contacts page'
+    description: 'Show the contacts page. Access: PUB'
+    tags:
+      - 'M09: Static Pages'
+    responses:
+      '200':
+        description: 'Ok. Show contacts UI'
+
+/faq:
+  get:
+    operationId: R903
+    summary: 'R903: View faq page'
+    description: 'Show the faq page. Access: PUB'
+    tags:
+      - 'M09: Static Pages'
+    responses:
+      '200':
+        description: 'Ok. Show faq UI'
