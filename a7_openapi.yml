@@ -138,7 +138,7 @@ tags:
               type: string
             examples:
               302Success:
-                description: 'Successful authentication. Redirect to user page.'
+                description: 'Successful registration and authentication. Redirect to user page.'
                 value: '/users/{id}'
               302Error:
                 description: 'Failed to process new information. Redirect to sign-up form'
