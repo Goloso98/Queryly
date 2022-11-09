@@ -6,7 +6,7 @@ info:
   description: Web resources specification for Queryly
 
 servers:
-  url: http://lbaw2294.lbaw-prod.fe.up.pt
+ - url: http://lbaw2294.lbaw-prod.fe.up.pt
   descripion: "Production Server"
 
 externalDocs:
@@ -177,6 +177,61 @@ tags:
     responses:
       '200':
         description: 'Ok. Show post UI'
+
+/api/star/{userId}/{postId}:
+  get:
+    operationId: R302
+      summary: 'R302: Show star'
+      description: 'Show if star is active in a post. Access: USR'
+      tags:
+        - 'M03: Posts'
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: postId
+          schema:
+            type: integer
+          required: true
+  
+  put:
+    operationId: R303
+    summary: 'R303: Like a post API'
+    description: 'Put star in a post. Access: USR'
+    tags:
+      - 'M03: Posts'
+    parameters:
+      - in: path
+        name: userId
+        schema:
+          type: integer
+        required: true
+      - in: path
+        name: postId
+        schema:
+          type: integer
+        required: true
+
+  delete:
+    operationId: R304
+    summary: 'R304: Unlike a post API'
+    description: 'Delete star in a post. Access: USR'
+    tags:
+      - 'M03: Posts'
+    parameters:
+      - in: path
+        name: userId
+        schema:
+          type: integer
+        required: true
+      - in: path
+        name: postId
+        schema:
+          type: integer
+        required: true
 
 /comments/{id}:
   get:
