@@ -2,6 +2,7 @@ version: '3'
 services:
 
   laravel:
+    container_name: laravel
     build:
       context: .
       dockerfile: Dockerfile
@@ -15,6 +16,7 @@ services:
       - .:/app
 
   postgres:
+    container_name: postgres
     image: postgres:11
     restart: always
     environment:
@@ -24,6 +26,7 @@ services:
       - "5432:5432"
 
   pgadmin:
+    container_name: pgadmin
     image: dpage/pgadmin4:6
     environment:
       PGADMIN_DEFAULT_EMAIL: postgres@lbaw.com

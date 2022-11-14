@@ -43,5 +43,5 @@ RUN apt-get update \
 
 EXPOSE 8000
 WORKDIR /app
-RUN useradd -r -u $USERID appuser
+RUN useradd -r -m -u $USERID appuser
 USER appuser
