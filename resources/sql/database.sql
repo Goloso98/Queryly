@@ -447,3 +447,15 @@ CREATE OR REPLACE FUNCTION insert_comment(pi INTEGER, ui INTEGER, ctext VARCHAR)
         VALUES (pi, ui, ctext);
     END $$
 LANGUAGE plpgsql;
+
+-- POPULATION
+
+INSERT INTO users VALUES (
+  DEFAULT,
+  'John Doe',
+  'admin@example.com',
+  'johndoe',
+  '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+  '2003-02-26 09:06:47',
+  FALSE
+); -- Password is 1234. Generated using Hash::make('1234')

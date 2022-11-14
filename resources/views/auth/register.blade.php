@@ -12,6 +12,22 @@
       </span>
     @endif
 
+    <label for="name">Username</label>
+    <input id="name" type="text" name="username" value="{{ old('username') }}" required autofocus>
+    @if ($errors->has('username'))
+      <span class="error">
+          {{ $errors->first('username') }}
+      </span>
+    @endif
+
+    <label for="name">Birthday</label>
+    <input id="name" type="date" name="birthday" required autofocus>
+    @if ($errors->has('birthday'))
+      <span class="error">
+          {{ $errors->first('birthday') }}
+      </span>
+    @endif
+
     <label for="email">E-Mail Address</label>
     <input id="email" type="email" name="email" value="{{ old('email') }}" required>
     @if ($errors->has('email'))
