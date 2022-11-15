@@ -12,16 +12,16 @@
       </span>
     @endif
 
-    <label for="name">Username</label>
-    <input id="name" type="text" name="username" value="{{ old('username') }}" required autofocus>
+    <label for="username">Username</label>
+    <input id="username" type="text" name="username" value="{{ old('username') }}" required autofocus>
     @if ($errors->has('username'))
       <span class="error">
           {{ $errors->first('username') }}
       </span>
     @endif
 
-    <label for="name">Birthday</label>
-    <input id="name" type="date" name="birthday" required autofocus>
+    <label for="birthday">Birthday</label>
+    <input id="birthday" type="date" name="birthday" required autofocus>
     @if ($errors->has('birthday'))
       <span class="error">
           {{ $errors->first('birthday') }}

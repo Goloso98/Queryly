@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
-@section('title', $card->name)
+@section('title', $user->name)
 
 @section('content')
-  @include('partials.card', ['card' => $card])
+  @include('partials.useredit', ['user' => $user])
 @endsection
+

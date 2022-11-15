@@ -22,4 +22,32 @@ class UserController extends Controller
       $this->authorize('show', $user);
       return view('pages.user', ['user' => $user]);
     }
+
+    public function showHome()
+    {
+      return view('layouts.app');
+    }
+
+    public function showEditForm($id){
+      $user = User::find($id);
+      $this->authorize('show', $user);
+      return view('pages.profile', ['user' => $user]);
+    }
+
+    public function update($id){
+      $user = User::find($id);
+      $this->validate(request(), [
+        'username' => 'unique:users',
+        'email' => 'email|unique:users',
+      ]);
+
+      $user->name = request('name');
+      $user->username = request('username');
+      $user->email = request('email');
+      $user->password = bcrypt(request('password'));
+
+      $user->save();
+
+      return back();
+    }
 }

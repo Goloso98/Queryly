@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasFactory;
 
     // Don't add create and update timestamps in database.
     public $timestamps  = false;
@@ -18,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'username', 'password', 'birthday',
+        'name', 'email', 'password', 'username', 'birthday',
     ];
 
     /**
@@ -27,7 +28,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password',
+        'password', 'remember_token',
     ];
 
     
@@ -66,12 +67,5 @@ class User extends Authenticatable
      */
     public function badges() {
         return $this->hasMany('App\Models\Badge');
-    }
-
-    /**
-     * The cards this user owns.
-     */
-    public function cards() {
-      return $this->hasMany('App\Models\Card');
     }
 }
