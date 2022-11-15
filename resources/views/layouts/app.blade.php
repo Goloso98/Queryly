@@ -26,7 +26,7 @@
         <h1><a href="{{ url('/cards') }}">Queryly</a></h1>
         @if (Auth::check())
         <a class="button" href="{{ url('/logout') }}"> Logout </a>
-        <span><a class="button" href="{{ url('/logout') }}"> {{ Auth::user()->name }} </a></span>
+        <span><a class="button" href="/users/{{ Auth::user()->id }}"> {{ Auth::user()->name }} </a></span>
         @endif
       </header>
       <section id="content">
