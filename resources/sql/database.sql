@@ -34,6 +34,7 @@ CREATE TABLE users (
     email VARCHAR UNIQUE NOT NULL,
     username VARCHAR UNIQUE NOT NULL,
     "password" VARCHAR NOT NULL,
+    remember_token VARCHAR,
     birthday DATE NOT NULL,
     isDeleted BOOLEAN NOT NULL DEFAULT FALSE
 );
@@ -249,7 +250,7 @@ ADD COLUMN tsvectors TSVECTOR;
 CREATE FUNCTION user_search_update() RETURNS TRIGGER AS $$
 BEGIN
     NEW.tsvectors = (
-        (setweight(to_tsvector('english', NEW.name), 'A')) || 
+        (setweight(to_tsvector('english', NEW.name), 'A')) ||
         (setweight(to_tsvector('english', NEW.username), 'B'))
     );
     RETURN NEW;
@@ -273,14 +274,14 @@ BEGIN
     SELECT username INTO usernameAux FROM users
     WHERE NEW.userID = users.id;
 
-    IF (NEW.postType = 'question') THEN        
+    IF (NEW.postType = 'question') THEN
         NEW.tsvectors = (
             (setweight(to_tsvector('english', NEW.title), 'A')) ||
             (setweight(to_tsvector('english', NEW.postText), 'A')) ||
             (setweight(to_tsvector('english', usernameAux), 'B'))
         );
     END IF;
-    IF (NEW.postType = 'answer') THEN        
+    IF (NEW.postType = 'answer') THEN
         NEW.tsvectors = (
             (setweight(to_tsvector('english', NEW.postText), 'A')) ||
             (setweight(to_tsvector('english', usernameAux), 'B'))
@@ -302,7 +303,7 @@ ALTER TABLE comments
 ADD COLUMN tsvectors TSVECTOR;
 
 CREATE FUNCTION comment_search_update() RETURNS TRIGGER AS $$
-BEGIN       
+BEGIN
     NEW.tsvectors = ((setweight(to_tsvector('english', NEW.commentText), 'A')));
     RETURN NEW;
 END $$
