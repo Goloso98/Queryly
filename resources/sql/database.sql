@@ -459,3 +459,28 @@ INSERT INTO users VALUES (
   '2003-02-26 09:06:47',
   FALSE
 ); -- Password is 1234. Generated using Hash::make('1234')
+
+--post 1
+INSERT INTO posts (userID, postType, title, postText) VALUES (
+    1,
+    'question',
+    'suspendisse accumsan tortor quis turpis sed ante vivamus tortor duis mattis',
+    'integer tincidunt ante vel ipsum praesent blandit lacinia erat vestibulum sed magna at nunc commodo placerat praesent blandit nam nulla integer pede justo lacinia eget tincidunt'
+);
+
+--post 2
+INSERT INTO posts (userID, postType, title, postText) VALUES (
+    1,
+    'question',
+    'Title test',
+    'integer tincidunt ante vel ipsum praesent blandit lacinia erat vestibulum sed magna at nunc commodo placerat praesent blandit nam nulla integer pede justo lacinia eget tincidunt'
+);
+
+--post 3
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (
+    1,
+    'answer',
+    'convallis nulla neque libero convallis eget eleifend luctus ultricies eu nibh quisque id justo sit amet sapien dignissim vestibulum vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae nulla dapibus dolor vel est donec odio justo sollicitudin ut suscipit a feugiat et',
+    1,
+    FALSE
+);

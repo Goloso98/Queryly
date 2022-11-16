@@ -16,4 +16,8 @@ class UserPolicy
       // Only an account owner can see it
       return true;
     }
+
+    public function update(User $user){
+      return true;
+    }
 }

@@ -15,9 +15,14 @@ Route::get('/', 'Auth\LoginController@home');
 Route::get('homepage', 'UserController@showHome');
 
 //Users
-Route::get('users/{id}', 'UserController@show');
+Route::get('users/{id}', 'UserController@show')->name('users.profile');
 Route::get('users/{id}/edit',  'UserController@showEditForm')->name('editUser');
-Route::patch('users/{id}/edit',  'UserController@update');
+Route::patch('users/{id}/edit',  'UserController@update')->name('users.update');
+Route::get('users/{id}/questions', 'PostController@showUserQuestions')->name('users.questions');
+Route::get('users/{id}/answers', 'PostController@showUserAnswers')->name('users.answers');
+
+//Posts
+
 
 // API
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 use App\Models\User;
 
@@ -30,21 +31,20 @@ class UserController extends Controller
 
     public function showEditForm($id){
       $user = User::find($id);
-      $this->authorize('show', $user);
+      $this->authorize('update', $user);
       return view('pages.profile', ['user' => $user]);
     }
 
-    public function update($id){
+    public function update(Request $request, $id){
+      
       $user = User::find($id);
-      $this->validate(request(), [
-        'username' => 'unique:users',
-        'email' => 'email|unique:users',
-      ]);
-
-      $user->name = request('name');
-      $user->username = request('username');
-      $user->email = request('email');
-      $user->password = bcrypt(request('password'));
+     
+      if($request->input('name')!=$user->name) $user->name = $request->input('name');
+      if($request->input('username')!=$user->username) $user->username = $request->input('username');
+      if($request->input('email')!=$user->email) $user->email = $request->input('email');
+      if($request->input('password')!=NULL){
+        $user->password = bcrypt($request->input('password'));
+      }
 
       $user->save();
 

@@ -6,7 +6,7 @@
     <input type="text" name="name"  value="{{ $user->name }}" />
     <p></p>
     <label>Username</label> <br>
-    <input type="text" name="name"  value="{{ $user->username }}" />
+    <input type="text" name="username"  value="{{ $user->username }}" />
     <p></p>
     <label>E-mail</label> <br>
     <input type="email" name="email"  value="{{ $user->email }}" />
@@ -17,5 +17,5 @@
     <label>Confirm Password</label> <br>
     <input type="password" name="password_confirmation" />
     <p></p>
-    <a class="btn" aria-current="page" href="/users/{{ $user->id }}/edit"> Submit </a>
+    <input type="submit" value="Submit">
 </form>
