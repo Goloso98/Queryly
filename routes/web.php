@@ -25,7 +25,7 @@ Route::get('users/{id}/answers', 'PostController@showUserAnswers')->name('users.
 
 
 // API
-
+Route::delete('api/answers/{answer_id}', 'PostController@delete');
 
 // Authentication
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

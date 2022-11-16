@@ -14,9 +14,9 @@ function addEventListeners() {
     deleter.addEventListener('click', sendDeleteItemRequest);
   });
 
-  let cardDeleters = document.querySelectorAll('article.card header a.delete');
-  [].forEach.call(cardDeleters, function(deleter) {
-    deleter.addEventListener('click', sendDeleteCardRequest);
+  let answerDeleters = document.querySelectorAll('article.answer header a.delete');
+  [].forEach.call(answerDeleters, function(deleter) {
+    deleter.addEventListener('click', sendDeleteAnswerRequest);
   });
 
   let cardCreator = document.querySelector('article.card form.new_card');
@@ -65,10 +65,10 @@ function sendCreateItemRequest(event) {
   event.preventDefault();
 }
 
-function sendDeleteCardRequest(event) {
+function sendDeleteAnswerRequest(event) {
   let id = this.closest('article').getAttribute('data-id');
 
-  sendAjaxRequest('delete', '/api/cards/' + id, null, cardDeletedHandler);
+  sendAjaxRequest('delete', '/api/answers/' + id, null, answerDeletedHandler);
 }
 
 function sendCreateCardRequest(event) {
@@ -110,10 +110,10 @@ function itemDeletedHandler() {
   element.remove();
 }
 
-function cardDeletedHandler() {
+function answerDeletedHandler() {
   if (this.status != 200) window.location = '/';
-  let card = JSON.parse(this.responseText);
-  let article = document.querySelector('article.card[data-id="'+ card.id + '"]');
+  let answer = JSON.parse(this.responseText);
+  let article = document.querySelector('article.answer[data-id="'+ answer.id + '"]');
   article.remove();
 }
 

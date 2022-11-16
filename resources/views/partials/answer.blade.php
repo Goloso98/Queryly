@@ -1,6 +1,9 @@
-<div style="background-color:blue; color:white;">
-    <h3>Answer to: {{ $answer->parentpost}} </h3>
+<article class="answer" data-id="{{ $answer->id }}">
+    <header>
+        <h3>Answer to: {{ $answer->parentpost}} </h3>
+        <a href="#" class="delete">Delete</a>
+    </header>
     <p> {{ $answer->posttext }} </p>
     <p> {{ $answer->postdate }} </p>
-</div>
-<p></p>
+    <p></p>
+</article>

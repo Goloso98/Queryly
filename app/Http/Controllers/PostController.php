@@ -53,5 +53,17 @@ class PostController extends Controller
       return view('pages.useranswers', ['user' => $user, 'answers' => $answers]);
     }
 
+    public function delete(Request $request, $id)
+    {
+      return($post);
+      $post = Post::find($id);
+
+      //$this->authorize('delete', $post);
+      $post->delete();
+
+      return $post;
+    }
+
+
 }
 
