@@ -1,284 +1,317 @@
 openapi: 3.0.0
 
 info:
-  version: '1.0'
-  title: LBAW Queryly Web API
-  description: Web resources specification for Queryly
+ version: '1.0'
+ title: 'Queryly Web API'
+ description: 'Web Resources Specification (A7) for Queryly'
 
 servers:
- - url: http://lbaw2294.lbaw-prod.fe.up.pt
-  descripion: "Production Server"
+- url: http://lbaw2294.lbaw.fe.up.pt/
+  description: Production server
 
 externalDocs:
-  description: Find more information here
-  url: https://git.fe.up.pt/lbaw/lbaw2223/lbaw2294/-/wikis/home
+ description: Find more info here.
+ url: https://git.fe.up.pt/lbaw/lbaw2223/lbaw2294/-/wikis/home
 
 tags:
-  - name: 'M01: Authentication'
-  - name: 'M02: Individual Profile'
-  - name: 'M03: Posts'
-  - name: 'M04: Comments'
-  - name: 'M06: User Administration'
-  - name: 'M07: Post Administration'
-  - name: 'M08: Comment Administration'
-  - name: 'M09: Static Pages'
+ - name: 'M01: Authentication'
+ - name: 'M02: Individual Profile'
+ - name: 'M03: Posts'
+ - name: 'M04: Comments'
+ - name: 'M05: User Administration'
+ - name: 'M06: Post Administration'
+ - name: 'M07: Comment Administration'
+ - name: 'M08: Static Pages'
 
-/sign-in:
-  get:
-    operationId: R101
-    summary: 'R101: Sign In Form'
-    desciption: 'Provide sign in form. Access: PUB'
-    tags:
-      - 'M01: Authentication'
-    responses:
-      '200':
-        description: 'Ok. Show Sign-In UI'
-  post:
-    operationId: R102
-    summary: 'R102: Sign In Action'
-    description: ' Process the sign in form submission. Access: PUB'
-    tags:
-      - 'M01: Authentication'
-    requestBody:
-      required: true
-      content:
-        application/x-www-form-urlencoded: 
-          schema:
-            type: object
-            properties:
-              email:
-                type: string
-              password:
-                type: string
-            required:
-              - email
-              - password
-    responses:
-      '302':
-        description: 'Redirect after processing sign in credentials'
-        headers:
-          Location:
-            schema:
-              type: string
-            examples:
-              302Success:
-                description: 'Credentials match a pair in the database, sign in successful, redirect to user page'
-                value: '/users/{id}'
-              302Error:
-                description: 'Credentials do not match a pair in the database, sign in unsuccessful, redirect to sign in form'
-                value: '/sign-in'
+paths:
+ /login:
+   get:
+     operationId: R101
+     summary: 'R101: Login Form'
+     description: 'Provide login form. Access: PUB'
+     tags:
+       - 'M01: Authentication'
+     responses:
+       '200':
+         description: 'Ok. Show Log-in UI'
+   post:
+     operationId: R102
+     summary: 'R102: Login Action'
+     description: 'Processes the login form submission. Access: PUB'
+     tags:
+       - 'M01: Authentication'
 
-/sign-out:
-  post:
-    operationId: R103
-    summary: 'R103: Sign Out Action'
-    description: ' Sign out action. Access: USR, ADM, MOD'
-    tags:
-      - 'M01: Authentication'
-    responses:
-      '302':
-        description: 'Redirect after sign out'
-        headers:
-          Location:
-            schema:
-              type: string
-            examples:
-              302Success:
-                description: 'User signing out, redirect to home page'
-                value: '/'
+     requestBody:
+       required: true
+       content:
+         application/x-www-form-urlencoded:
+           schema:
+             type: object
+             properties:
+               email:          # <!--- form field name
+                 type: string
+               password:    # <!--- form field name
+                 type: string
+             required:
+                  - email
+                  - password
 
-/register:
-  get:
-    operationId: R104
-    summary: 'R104: Register Form'
-    description: 'Provide registration form. Access: PUB'
-    tags:
-      - 'M01: Authentication'
-    responses:
-      '200':
-        description: 'Ok. Show Sign Up UI'
-  post:
-    operationId: R106
-    summary: 'R105: Register Action'
-    description: 'Processes the regestration form. Access: PUB'
-    tags:
-      - 'M01: Authentication'
-    requestBody:
-      required: true
-      content:
-        application/x-www-form-urlencoded:
-          schema:
-            type: object
-            properties:
-              name:
-                type: string
-              email:
-                type: string
-              username:
-                type: string
-              password:
-                type: string
-              birthday:
-                type: string
-                format: date
-                description: 'Birthday of user'
-                example: '30-01-2022'
-            required:
-              - name
-              - email
-              - username
-              - password
-              - birthday
-    responses:
-      '302':
-        description: 'Redirect after processing new user information'
-        headers:
-          Location:
-            schema:
-              type: string
-            examples:
-              302Success:
-                description: 'Successful registration and authentication. Redirect to user page.'
-                value: '/users/{id}'
-              302Error:
-                description: 'Failed to process new information. Redirect to sign-up form'
-                value: '/register'
+     responses:
+       '302':
+         description: 'Redirect after processing the login credentials.'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'Successful authentication. Redirect to user profile.'
+                 value: '/users/{id}'
+               302Error:
+                 description: 'Failed authentication. Redirect to login form.'
+                 value: '/login'
 
-/users/{id}:
-  get:
-    operationId: R201
-    summary: 'R201: View user profile'
-    description: 'Show the individual user profile. Access: USR'
-    tags:
-      - 'M02: Individual Profile'
-    parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        required: true
-    responses:
-      '200':
-        description: 'Ok. Show user profile UI'
+ /logout:
 
-/posts/{id}:
-  get:
-    operationId: R301
-    summary: 'R301: View post'
-    description: 'Show the post. Access: USR'
-    tags:
-      - 'M03: Posts'
-    parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        required: true
-    responses:
-      '200':
-        description: 'Ok. Show post UI'
+   post:
+     operationId: R103
+     summary: 'R103: Logout Action'
+     description: 'Logout the current authenticated user. Access: USR, ADM'
+     tags:
+       - 'M01: Authentication'
+     responses:
+       '302':
+         description: 'Redirect after processing logout.'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'Successful logout. Redirect to login form.'
+                 value: '/'
 
-/api/star/{userId}/{postId}:
-  get:
-    operationId: R302
-      summary: 'R302: Show star'
-      description: 'Show if star is active in a post. Access: USR'
-      tags:
-        - 'M03: Posts'
-      parameters:
-        - in: path
-          name: userId
-          schema:
-            type: integer
-          required: true
-        - in: path
-          name: postId
-          schema:
-            type: integer
-          required: true
+ /register:
+   get:
+     operationId: R104
+     summary: 'R104: Register Form'
+     description: 'Provide new user registration form. Access: PUB'
+     tags:
+       - 'M01: Authentication'
+     responses:
+       '200':
+         description: 'Ok. Show Sign-Up UI'
+
+   post:
+     operationId: R105
+     summary: 'R105: Register Action'
+     description: 'Processes the new user registration form submission. Access: PUB'
+     tags:
+       - 'M01: Authentication'
+
+     requestBody:
+       required: true
+       content:
+         application/x-www-form-urlencoded:
+           schema:
+             type: object
+             properties:
+               name:
+                 type: string
+               email:
+                 type: string
+               username:
+                 type: string
+               password:
+                 type: string
+               birthday:
+                 type: string
+                 format: date
+                 description: 'Birthday of user'
+                 example: '30-01-2022'
+             required:
+                - name
+                - email
+                - username
+                - password
+                - birthday
+
+     responses:
+       '302':
+         description: 'Redirect after processing the new user information.'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'Successful authentication. Redirect to user profile.'
+                 value: '/users/{id}'
+               302Failure:
+                 description: 'Failed authentication. Redirect to login form.'
+                 value: '/register'
+
+ /users/{id}:
+   get:
+     operationId: R201
+     summary: 'R201: View user profile'
+     description: 'Show the individual user profile. Access: USR'
+     tags:
+       - 'M02: Individual Profile'
+
+     parameters:
+       - in: path
+         name: id
+         schema:
+           type: integer
+         required: true
+
+     responses:
+       '200':
+         description: 'Ok. Show User Profile UI'
+         
+ /posts/{id}:
+   get:
+     operationId: R301
+     summary: 'R301: View post'
+     description: 'Show the post. Access: USR'
+     tags:
+       - 'M03: Posts'
+
+     parameters:
+       - in: path
+         name: id
+         schema:
+           type: integer
+         required: true
+
+     responses:
+       '200':
+         description: 'Ok. Show Post UI'
+         
+ /api/star/{userId}/{postId}:
+   get:
+     operationId: R302
+     summary: 'R302: Show star'
+     description: 'Show if star is active in a post. Access: USR'
+     tags:
+       - 'M03: Posts'
+
+     parameters:
+       - in: path
+         name: userId
+         schema:
+           type: integer
+         required: true
+       - in: path
+         name: postId
+         schema:
+           type: integer
+         required: true
+     
+     responses:
+       '200':
+         description: 'Ok. Show Post UI'
+         
+   put:
+     operationId: R303
+     summary: 'R303: Like a post API'
+     description: 'Put a star in a post. Access: USR'
+     tags:
+       - 'M03: Posts'
+
+     parameters:
+       - in: path
+         name: userId
+         schema:
+           type: integer
+         required: true
+       - in: path
+         name: postId
+         schema:
+           type: integer
+         required: true
+         
+     responses:
+       '302':
+         description: 'Ok. Show Post UI'
+         
+   delete:
+     operationId: R304
+     summary: 'R304: Unlike a post API'
+     description: 'Delete star in a post. Access: USR'
+     tags:
+       - 'M03: Posts'
+
+     parameters:
+       - in: path
+         name: userId
+         schema:
+           type: integer
+         required: true
+       - in: path
+         name: postId
+         schema:
+           type: integer
+         required: true
+         
+     responses:
+       '302':
+         description: 'Ok. Show Post UI'
+
+         
+ /comments/{id}:
+   get:
+     operationId: R401
+     summary: 'R401: View comment'
+     description: 'Show the comment. Access: USR'
+     tags:
+       - 'M04: Comments'
+
+     parameters:
+       - in: path
+         name: id
+         schema:
+           type: integer
+         required: true
+
+     responses:
+       '200':
+         description: 'Ok. Show Comment UI'
+         
+ /about:
+   get:
+     operationId: R801
+     summary: 'R801: View about page'
+     description: 'Show the about page. Access: PUB'
+     tags:
+       - 'M08: Static Pages'
+       
+     responses:
+       '200':
+         description: 'Ok. Show About UI'
+
+ /contacts:
+   get:
+     operationId: R802
+     summary: 'R802: View contacts page'
+     description: 'Show the contacts page. Access: PUB'
+     tags:
+       - 'M08: Static Pages'
+       
+     responses:
+       '200':
+         description: 'Ok. Show Contacts UI'
   
-  put:
-    operationId: R303
-    summary: 'R303: Like a post API'
-    description: 'Put star in a post. Access: USR'
-    tags:
-      - 'M03: Posts'
-    parameters:
-      - in: path
-        name: userId
-        schema:
-          type: integer
-        required: true
-      - in: path
-        name: postId
-        schema:
-          type: integer
-        required: true
-
-  delete:
-    operationId: R304
-    summary: 'R304: Unlike a post API'
-    description: 'Delete star in a post. Access: USR'
-    tags:
-      - 'M03: Posts'
-    parameters:
-      - in: path
-        name: userId
-        schema:
-          type: integer
-        required: true
-      - in: path
-        name: postId
-        schema:
-          type: integer
-        required: true
-
-/comments/{id}:
-  get:
-    operationId: R401
-    summary: 'R401: View comment'
-    description: 'Show the comment. Access: USR'
-    tags:
-      - 'M04: Comments'
-    parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        required: true
-    responses:
-      '200':
-        description: 'Ok. Show comment UI'
-
-/about:
-  get:
-    operationId: R901
-    summary: 'R901: View about page'
-    description: 'Show the about page. Access: PUB'
-    tags:
-      - 'M09: Static Pages'
-    responses:
-      '200':
-        description: 'Ok. Show about UI'
-
-/contacts:
-  get:
-    operationId: R902
-    summary: 'R902: View contacts page'
-    description: 'Show the contacts page. Access: PUB'
-    tags:
-      - 'M09: Static Pages'
-    responses:
-      '200':
-        description: 'Ok. Show contacts UI'
-
-/faq:
-  get:
-    operationId: R903
-    summary: 'R903: View faq page'
-    description: 'Show the faq page. Access: PUB'
-    tags:
-      - 'M09: Static Pages'
-    responses:
-      '200':
-        description: 'Ok. Show faq UI'
+ /faq:
+   get:
+     operationId: R803
+     summary: 'R803: View faqs page'
+     description: 'Show the faws page. Access: PUB'
+     tags:
+       - 'M08: Static Pages'
+       
+     responses:
+       '200':
+         description: 'Ok. Show FAQs UI'
+  
