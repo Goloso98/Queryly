@@ -19,7 +19,7 @@
       </li>
       <br>
       <li class="nav-item">
-        <a class="btn" aria-current="page" href="#"> Delete Account </a>
+        <a class="btn" aria-current="page" href="#"> Delete My Account </a>
       </li>
   </ul>
 </div>
