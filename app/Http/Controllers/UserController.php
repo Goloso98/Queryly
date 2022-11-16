@@ -48,6 +48,8 @@ class UserController extends Controller
 
       $user->save();
 
-      return back();
+      $id=$user->id;
+
+      return redirect()->route('users.profile',['id'=>$id]);
     }
 }
