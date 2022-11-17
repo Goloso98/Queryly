@@ -34,6 +34,7 @@ CREATE TABLE users (
     email VARCHAR UNIQUE NOT NULL,
     username VARCHAR UNIQUE NOT NULL,
     "password" VARCHAR NOT NULL,
+    remember_token VARCHAR,
     birthday DATE NOT NULL,
     isDeleted BOOLEAN NOT NULL DEFAULT FALSE
 );
@@ -52,8 +53,8 @@ CREATE TABLE posts (
     postText VARCHAR NOT NULL,
     parentPost INTEGER REFERENCES "posts" (id) ON UPDATE CASCADE ON DELETE CASCADE,
     isCorrect BOOLEAN DEFAULT FALSE,
-    CONSTRAINT post_title CHECK ((postType = 'question' AND title <> NULL) OR (postType = 'answer' AND title = NULL)),
-    CONSTRAINT correctness CHECK ((isCorrect = NULL AND postType = 'question') OR (isCorrect <> NULL AND postType = 'answer'))
+    CONSTRAINT post_title CHECK ((postType = 'question' AND title IS NOT NULL) OR (postType = 'answer' AND title IS NULL)),
+    CONSTRAINT correctness CHECK ((isCorrect IS NULL AND postType = 'question') OR (isCorrect IS NOT NULL AND postType = 'answer'))
 );
 
 CREATE TABLE stars (
@@ -146,7 +147,6 @@ DROP FUNCTION IF EXISTS add_star_notification CASCADE;
 -- ANSWER NOTIFICATIONS
 CREATE FUNCTION add_answer_notification() RETURNS TRIGGER AS
 $BODY$
-DECLARE parent_post INTEGER;
 DECLARE notified_user INTEGER;
 BEGIN
     IF NEW.postType = 'answer' THEN
@@ -249,7 +249,7 @@ ADD COLUMN tsvectors TSVECTOR;
 CREATE FUNCTION user_search_update() RETURNS TRIGGER AS $$
 BEGIN
     NEW.tsvectors = (
-        (setweight(to_tsvector('english', NEW.name), 'A')) || 
+        (setweight(to_tsvector('english', NEW.name), 'A')) ||
         (setweight(to_tsvector('english', NEW.username), 'B'))
     );
     RETURN NEW;
@@ -273,14 +273,14 @@ BEGIN
     SELECT username INTO usernameAux FROM users
     WHERE NEW.userID = users.id;
 
-    IF (NEW.postType = 'question') THEN        
+    IF (NEW.postType = 'question') THEN
         NEW.tsvectors = (
             (setweight(to_tsvector('english', NEW.title), 'A')) ||
             (setweight(to_tsvector('english', NEW.postText), 'A')) ||
             (setweight(to_tsvector('english', usernameAux), 'B'))
         );
     END IF;
-    IF (NEW.postType = 'answer') THEN        
+    IF (NEW.postType = 'answer') THEN
         NEW.tsvectors = (
             (setweight(to_tsvector('english', NEW.postText), 'A')) ||
             (setweight(to_tsvector('english', usernameAux), 'B'))
@@ -302,7 +302,7 @@ ALTER TABLE comments
 ADD COLUMN tsvectors TSVECTOR;
 
 CREATE FUNCTION comment_search_update() RETURNS TRIGGER AS $$
-BEGIN       
+BEGIN
     NEW.tsvectors = ((setweight(to_tsvector('english', NEW.commentText), 'A')));
     RETURN NEW;
 END $$
@@ -345,7 +345,7 @@ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION show_own_answers(ui INTEGER) RETURNS INTEGER AS $$
     BEGIN
         SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ ONLY;
-        SELECT posts.id, posts.postDate, post.parentPost, posts.postText, COUNT(stars), posts.isCorrect
+        SELECT posts.id, posts.postDate, posts.parentPost, posts.postText, COUNT(stars), posts.isCorrect
         FROM posts
         INNER JOIN users ON posts.userID = users.id
         INNER JOIN stars ON posts.id = stars.postID

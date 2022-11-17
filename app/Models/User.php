@@ -73,4 +73,11 @@ class User extends Authenticatable
     public function badges() {
         return $this->hasMany('App\Models\Badge');
     }
+
+//    /**
+//     * The cards this user owns.
+//     */
+//     public function cards() {
+//      return $this->hasMany('App\Models\Card');
+//    }
 }
