@@ -19,7 +19,12 @@ class PostController extends Controller
      */
     public function show($id)
     {
-
+      $post = Post::find($id);
+      if($post->posttype == 'question') {
+        return view('pages.questionpage', ['question' => $post]);
+      } else {
+        //return view('pages.answer', ['post' => $post]); TO DO
+      }
     }
 
    /**
@@ -75,7 +80,11 @@ class PostController extends Controller
       $title = $request->input('title');
       $postText = $request->input('postText');
       $data = array('userid' => $userID, 'posttype' => 'question', 'title' => $title, 'posttext' => $postText );
-      DB::table('posts')->insert($data);
+      $postID = DB::table('posts')->insertGetId($data);
+
+      $question = Post::find($postID);
+
+      return view('pages.question', ['question' => $question]);
     }
 
 

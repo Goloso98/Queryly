@@ -24,6 +24,7 @@ Route::get('users/{id}/answers', 'PostController@showUserAnswers')->name('users.
 //Posts
 Route::get('posts/new', 'PostController@showAddQuestionForm')->name('addQuestion');
 Route::post('posts/new', 'PostController@postQuestion')->name('posts.addQuestion');
+Route::get('posts/{id}', 'PostController@show')->name('posts.postPage'); //tem de ficar no fim
 
 // API
 Route::delete('api/posts/{id}', 'PostController@delete');
