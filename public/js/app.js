@@ -19,6 +19,11 @@ function addEventListeners() {
     deleter.addEventListener('click', sendDeletePostRequest);
   });
 
+  let userDeleters = document.querySelectorAll('article.userbuttons a.delete');
+  [].forEach.call(userDeleters, function(deleter) {
+    deleter.addEventListener('click', sendDeleteUserRequest);
+  });
+
   let cardCreator = document.querySelector('article.card form.new_card');
   if (cardCreator != null)
     cardCreator.addEventListener('submit', sendCreateCardRequest);
@@ -67,10 +72,14 @@ function sendCreateItemRequest(event) {
 
 function sendDeletePostRequest(event) {
   let id = this.closest('article').getAttribute('data-id');
-  //alert(id);
   event.preventDefault();
   sendAjaxRequest('delete', '/api/posts/' + id, null, postDeletedHandler);
-  
+}
+
+function sendDeleteUserRequest(event) {
+  let id = this.closest('article').getAttribute('data-id');
+  event.preventDefault();
+  sendAjaxRequest('delete', '/api/users/' + id, null, userDeletedHandler);
 }
 
 function sendCreateCardRequest(event) {
@@ -115,6 +124,14 @@ function itemDeletedHandler() {
 function postDeletedHandler() {
   let post = JSON.parse(this.responseText);
   let article = document.querySelector('article.post[data-id="'+ post.id + '"]');
+  article.remove();
+  
+}
+
+function userDeletedHandler() {
+  if (this.status == 200) window.location = '/logout';
+  let user = JSON.parse(this.responseText);
+  let article = document.querySelector('article.userbuttons[data-id="'+ user.id + '"]');
   article.remove();
 }
 

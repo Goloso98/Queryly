@@ -38,6 +38,7 @@ class UserController extends Controller
     public function update(Request $request, $id){
       
       $user = User::find($id);
+      $this->authorize('update', $user);
      
       if($request->input('name')!=$user->name) $user->name = $request->input('name');
       if($request->input('username')!=$user->username) $user->username = $request->input('username');
@@ -51,5 +52,13 @@ class UserController extends Controller
       $id=$user->id;
 
       return redirect()->route('users.profile',['id'=>$id]);
+    }
+
+    public function delete(Request $request, $id)
+    {
+      $user = User::find($id);
+      $this->authorize('delete', $user);
+      $user->delete();
+      return $user;
     }
 }
