@@ -8,7 +8,10 @@
   <a class="btn" aria-current="page" href="#"> See Followed Tags </a>
   <a class="btn" aria-current="page" href="#"> My Badges </a>
   <a class="btn" aria-current="page" href="{{ route('editUser', $user->id) }}"> Edit </a>
-  <a class="delete" href="#"> Delete My Account </a>
+
+  @if (Auth::user() == $user)
+    <a class="delete" href="#"> Delete My Account </a>
+  @endif
 
   <div style="width:10px; height:30px; float:left;"></div>
 
