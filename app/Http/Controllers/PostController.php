@@ -63,6 +63,21 @@ class PostController extends Controller
       return $post;
     }
 
+    public function showAddQuestionForm()
+    {
+      if (!Auth::check()) return redirect('/login'); 
+      return view('pages.postquestion');
+    }
+
+    protected function postQuestion(Request $request)
+    {
+      $userID = Auth::id();
+      $title = $request->input('title');
+      $postText = $request->input('postText');
+      $data = array('userid' => $userID, 'posttype' => 'question', 'title' => $title, 'posttext' => $postText );
+      DB::table('posts')->insert($data);
+    }
+
 
 }
 
