@@ -1,4 +1,4 @@
-<article class="question" data-id="{{ $question->id }}">
+<article class="post" data-id="{{ $question->id }}">
 <header>
     <h3>Title: {{ $question->title }} </h3>
     <a href="#" class="delete">Delete</a>

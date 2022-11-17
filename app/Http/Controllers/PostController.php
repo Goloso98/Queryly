@@ -55,9 +55,8 @@ class PostController extends Controller
 
     public function delete(Request $request, $id)
     {
-      return($post);
       $post = Post::find($id);
-
+      
       //$this->authorize('delete', $post);
       $post->delete();
 

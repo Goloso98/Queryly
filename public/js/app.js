@@ -14,9 +14,9 @@ function addEventListeners() {
     deleter.addEventListener('click', sendDeleteItemRequest);
   });
 
-  let answerDeleters = document.querySelectorAll('article.answer header a.delete');
-  [].forEach.call(answerDeleters, function(deleter) {
-    deleter.addEventListener('click', sendDeleteAnswerRequest);
+  let postDeleters = document.querySelectorAll('article.post header a.delete');
+  [].forEach.call(postDeleters, function(deleter) {
+    deleter.addEventListener('click', sendDeletePostRequest);
   });
 
   let cardCreator = document.querySelector('article.card form.new_card');
@@ -65,10 +65,12 @@ function sendCreateItemRequest(event) {
   event.preventDefault();
 }
 
-function sendDeleteAnswerRequest(event) {
+function sendDeletePostRequest(event) {
   let id = this.closest('article').getAttribute('data-id');
-
-  sendAjaxRequest('delete', '/api/answers/' + id, null, answerDeletedHandler);
+  //alert(id);
+  event.preventDefault();
+  sendAjaxRequest('delete', '/api/posts/' + id, null, postDeletedHandler);
+  
 }
 
 function sendCreateCardRequest(event) {
@@ -110,10 +112,9 @@ function itemDeletedHandler() {
   element.remove();
 }
 
-function answerDeletedHandler() {
-  if (this.status != 200) window.location = '/';
-  let answer = JSON.parse(this.responseText);
-  let article = document.querySelector('article.answer[data-id="'+ answer.id + '"]');
+function postDeletedHandler() {
+  let post = JSON.parse(this.responseText);
+  let article = document.querySelector('article.post[data-id="'+ post.id + '"]');
   article.remove();
 }
 
