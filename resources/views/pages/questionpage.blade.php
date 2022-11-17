@@ -9,10 +9,10 @@
     </header>
     <p> {{ $question->posttext }} </p>
     <p> {{ $question->postdate }} </p>
-    <p> Arranjar forma de ver o nome do user {{ $question->userid }}</p>
+    <p> Autor: {{ $question->user()->first()->username }}</p>
     </article>
     <p></p>
     <header>
-        <h2>Answers: </h2>
+        <h3>Answers: </h3>
     </header>
 @endsection

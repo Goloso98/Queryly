@@ -80,7 +80,7 @@ class PostController extends Controller
 
       $question = Post::find($postID);
 
-      return view('pages.question', ['question' => $question]);
+      return view('pages.questionpage', ['question' => $question]);
     }
 
 
