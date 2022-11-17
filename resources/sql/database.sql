@@ -34,7 +34,7 @@ CREATE TABLE users (
     email VARCHAR UNIQUE NOT NULL,
     username VARCHAR UNIQUE NOT NULL,
     "password" VARCHAR NOT NULL,
-    remember_token VARCHAR,
+    remember_token BOOLEAN NOT NULL DEFAULT FALSE,
     birthday DATE NOT NULL,
     isDeleted BOOLEAN NOT NULL DEFAULT FALSE
 );
@@ -54,7 +54,7 @@ CREATE TABLE posts (
     parentPost INTEGER REFERENCES "posts" (id) ON UPDATE CASCADE ON DELETE CASCADE,
     isCorrect BOOLEAN,
     CONSTRAINT post_title CHECK ((postType = 'question' AND title IS NOT NULL) OR (postType = 'answer' AND title IS NULL)),
-    CONSTRAINT correctness CHECK ((isCorrect IS NULL AND postType = 'question') OR (isCorrect IS NOT NULL AND postType = 'answer'))
+    CONSTRAINT correctness CHECK ((postType = 'question' AND isCorrect IS NULL) OR (postType = 'answer' AND isCorrect IS NOT NULL))
 );
 
 CREATE TABLE stars (
@@ -456,6 +456,17 @@ INSERT INTO users(name, email, username, password, birthday) VALUES (
   'johndoe',
   '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
   '2003-02-26 09:06:47'
+); -- Password is 1234. Generated using Hash::make('1234')
+
+INSERT INTO users VALUES (
+  DEFAULT,
+  'Margarida Santos',
+  'guida@example.com',
+  'guidinha',
+  '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+  FALSE,
+  '2001-10-14 17:25:47',
+  FALSE
 ); -- Password is 1234. Generated using Hash::make('1234')
 
 --post 1

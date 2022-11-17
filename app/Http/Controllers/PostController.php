@@ -36,7 +36,6 @@ class PostController extends Controller
     {
       if (!Auth::check()) return redirect('/login');
       $user = User::find($userID);
-      //$this->authorize('list', Post::class);
       $allposts = $user->posts()->orderBy('id')->get();
       $questions=[];
       for($i=0; $i<count($allposts); $i++){
@@ -49,7 +48,6 @@ class PostController extends Controller
     {
       if (!Auth::check()) return redirect('/login');
       $user = User::find($userID);
-      //$this->authorize('list', Post::class);
       $allposts = $user->posts()->orderBy('id')->get();
       $answers=[];
       for($i=0; $i<count($allposts); $i++){
@@ -61,10 +59,8 @@ class PostController extends Controller
     public function delete(Request $request, $id)
     {
       $post = Post::find($id);
-      
       //$this->authorize('delete', $post);
       $post->delete();
-
       return $post;
     }
 
