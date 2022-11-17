@@ -52,7 +52,7 @@ CREATE TABLE posts (
     title VARCHAR,
     postText VARCHAR NOT NULL,
     parentPost INTEGER REFERENCES "posts" (id) ON UPDATE CASCADE ON DELETE CASCADE,
-    isCorrect BOOLEAN DEFAULT FALSE,
+    isCorrect BOOLEAN,
     CONSTRAINT post_title CHECK ((postType = 'question' AND title IS NOT NULL) OR (postType = 'answer' AND title IS NULL)),
     CONSTRAINT correctness CHECK ((isCorrect IS NULL AND postType = 'question') OR (isCorrect IS NOT NULL AND postType = 'answer'))
 );
@@ -450,14 +450,12 @@ LANGUAGE plpgsql;
 
 -- POPULATION
 
-INSERT INTO users VALUES (
-  DEFAULT,
+INSERT INTO users(name, email, username, password, birthday) VALUES (
   'John Doe',
   'admin@example.com',
   'johndoe',
   '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
-  '2003-02-26 09:06:47',
-  FALSE
+  '2003-02-26 09:06:47'
 ); -- Password is 1234. Generated using Hash::make('1234')
 
 --post 1
