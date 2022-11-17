@@ -20,8 +20,9 @@ class PostController extends Controller
     public function show($id)
     {
       $post = Post::find($id);
+      $user = Auth::user();
       if($post->posttype == 'question') {
-        return view('pages.questionpage', ['question' => $post]);
+        return view('pages.questionpage', ['user' => $user, 'question' => $post]);
       } else {
         //return view('pages.answer', ['post' => $post]); TO DO
       }
@@ -79,8 +80,9 @@ class PostController extends Controller
       $postID = DB::table('posts')->insertGetId($data);
 
       $question = Post::find($postID);
+      $user = Auth::user();
 
-      return view('pages.questionpage', ['question' => $question]);
+      return view('pages.questionpage', ['user' => $user, 'question' => $question]);
     }
 
 

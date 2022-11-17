@@ -26,7 +26,15 @@ class UserController extends Controller
 
     public function showHome()
     {
-      return view('layouts.app');
+      $allposts = DB::table('posts')->get();
+      $questions=[];
+      for($i=0; $i<count($allposts); $i++){
+        if($allposts[$i]->posttype == 'question') array_push($questions, $allposts[$i]);
+      }
+
+      $user = Auth::user();
+
+      return view('pages.homepage', ['users' => $user, 'questions' => $questions]);
     }
 
     public function showEditForm($id){

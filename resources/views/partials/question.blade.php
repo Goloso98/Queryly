@@ -2,7 +2,9 @@
 <header>
     <h3>Title: {{ $question->title }}</h3>
     <a href="/posts/{{ $question->id }}">See Post</a>
-    <a href="#" class="delete">Delete</a>
+    @if (Auth::id() == $question->userid)
+        <a href="#" class="delete">Delete Question</a>
+    @endif
 </header>
 <p> {{ $question->posttext }} </p>
 <p> {{ $question->postdate }} </p>
