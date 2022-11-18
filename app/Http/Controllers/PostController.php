@@ -59,6 +59,32 @@ class PostController extends Controller
       return $post;
     }
 
+    public function showEditForm($id){
+      $post = Post::find($id);
+      //$this->authorize('update', $question);
+      return view('pages.editpost', ['post' => $post]);
+    }
+
+    public function update(Request $request, $id){
+      
+      $post = Post::find($id);
+      //$this->authorize('update', $post);
+
+      /* $request->validate([
+        'title' => 'required',
+        'posttext' => 'required',
+      ]); */
+
+      if($post->posttype == 'question' && $request->input('title')!=$post->title) $post->title = $request->input('title');
+      if($request->input('posttext')!=$post->posttext) $post->posttext = $request->input('posttext');
+
+      $post->save();
+
+      //temporary before merging with post_question branch
+      $id=$post->userid;
+
+      return redirect()->route('users.profile',['id'=>$id]);
+    }
 
 }
 

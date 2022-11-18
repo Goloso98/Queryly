@@ -22,7 +22,8 @@ Route::get('users/{id}/questions', 'PostController@showUserQuestions')->name('us
 Route::get('users/{id}/answers', 'PostController@showUserAnswers')->name('users.answers');
 
 //Posts
-
+Route::get('posts/{id}/edit',  'PostController@showEditForm')->name('posts.edit');
+Route::patch('posts/{id}/edit',  'PostController@update')->name('posts.update');
 
 // API
 Route::delete('api/posts/{id}', 'PostController@delete');
