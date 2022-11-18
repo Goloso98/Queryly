@@ -21,6 +21,6 @@ class UserPolicy
     }
 
     public function delete(Post $post){
-      if(Auth::user()->id == $post->userid) return true;
+      return true;
     }
 }

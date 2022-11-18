@@ -60,7 +60,7 @@ class PostController extends Controller
     public function delete(Request $request, $id)
     {
       $post = Post::find($id);
-      //$this->authorize('delete', $post);
+      $this->authorize('delete', $post);
       $post->delete();
       return $post;
     }
@@ -94,7 +94,7 @@ class PostController extends Controller
     public function update(Request $request, $id){
       
       $post = Post::find($id);
-      //$this->authorize('update', $post);
+      $this->authorize('update', $post);
 
       /* $request->validate([
         'title' => 'required',
@@ -107,9 +107,9 @@ class PostController extends Controller
       $post->save();
 
       //temporary before merging with post_question branch
-      $id=$post->userid;
+      $id=$post->id;
 
-      return redirect()->route('users.profile',['id'=>$id]);
+      return redirect()->route('posts.postPage',['id'=>$id]);
     }
 
 }
