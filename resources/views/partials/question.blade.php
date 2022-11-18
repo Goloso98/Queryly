@@ -4,6 +4,7 @@
     <a href="/posts/{{ $question->id }}">See Post</a>
     @if (Auth::id() == $question->userid)
         <a href="#" class="delete">Delete Question</a>
+        <a class="btn" aria-current="page" href="{{  route('posts.edit', $question->id)  }}">Edit</a>
     @endif
 </header>
 <p> {{ $question->posttext }} </p>

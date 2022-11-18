@@ -24,6 +24,8 @@ Route::get('users/{id}/answers', 'PostController@showUserAnswers')->name('users.
 //Posts
 Route::get('posts/new', 'PostController@showAddQuestionForm')->name('addQuestion');
 Route::post('posts/new', 'PostController@postQuestion')->name('posts.addQuestion');
+Route::get('posts/{id}/edit',  'PostController@showEditForm')->name('posts.edit');
+Route::patch('posts/{id}/edit',  'PostController@update')->name('posts.update');
 Route::get('posts/{id}', 'PostController@show')->name('posts.postPage'); //tem de ficar no fim
 
 // API
