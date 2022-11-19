@@ -11,7 +11,7 @@
     <input id="postText" type="text" name="postText" value="{{ old('postText') }}" required autofocus>
 
     <button type="submit">
-      Add
+      Ask
     </button>
 </form>
 @endsection

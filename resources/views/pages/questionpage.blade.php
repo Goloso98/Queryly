@@ -1,3 +1,5 @@
+@inject('post', 'App\Http\Controllers\PostController')
+
 @extends('layouts.app')
 
 @section('title', $question->title)
@@ -17,5 +19,7 @@
     <p></p>
     <header>
         <h3>Answers: </h3>
+        <a class="btn" aria-current="page" href="{{ route('posts.addAnswer') }}?question={{$question->id}}"> Post Answer </a>
+        <p></p>
     </header>
 @endsection

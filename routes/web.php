@@ -22,8 +22,10 @@ Route::get('users/{id}/questions', 'PostController@showUserQuestions')->name('us
 Route::get('users/{id}/answers', 'PostController@showUserAnswers')->name('users.answers');
 
 //Posts
-Route::get('posts/new', 'PostController@showAddQuestionForm')->name('addQuestion');
-Route::post('posts/new', 'PostController@postQuestion')->name('posts.addQuestion');
+Route::get('posts/questions/new', 'PostController@showAddQuestionForm')->name('addQuestion');
+Route::post('posts/questions/new', 'PostController@postQuestion')->name('posts.addQuestion');
+Route::get('posts/answers/new', 'PostController@showAddAnswerForm')->name('addAnswer');
+Route::post('posts/answers/new', 'PostController@postAnswer')->name('posts.addAnswer');
 Route::get('posts/{id}', 'PostController@show')->name('posts.postPage'); //tem de ficar no fim
 
 // API
