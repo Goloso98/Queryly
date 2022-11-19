@@ -48,12 +48,12 @@ class UserController extends Controller
       $user = User::find($id);
       $this->authorize('update', $user);
 
-      /* $request->validate([
+      $validate = $request->validate([
         'name' => 'required',
-        'username' => 'required|unique:users',
-        'email' => 'required|unique:users',
-        'password' => 'required|min:4',
-      ]); */
+        'username' => 'required|unique:users,username,'.$id,
+        'email' => 'required|unique:users,email,'.$id,
+        'password' => 'nullable|min:4',
+      ]);
 
       if($request->input('name')!=$user->name) $user->name = $request->input('name');
       if($request->input('username')!=$user->username) $user->username = $request->input('username');

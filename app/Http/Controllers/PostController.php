@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 use App\Models\Post;
 use App\Models\User;
@@ -87,7 +88,6 @@ class PostController extends Controller
 
     public function showEditForm($id){
       $post = Post::find($id);
-      //$this->authorize('update', $question);
       return view('pages.editpost', ['post' => $post]);
     }
 
@@ -96,17 +96,16 @@ class PostController extends Controller
       $post = Post::find($id);
       $this->authorize('update', $post);
 
-      /* $request->validate([
-        'title' => 'required',
+      $validate = $request->validate([
+        'title' => 'required|max:255',
         'posttext' => 'required',
-      ]); */
+      ]);
 
       if($post->posttype == 'question' && $request->input('title')!=$post->title) $post->title = $request->input('title');
       if($request->input('posttext')!=$post->posttext) $post->posttext = $request->input('posttext');
 
       $post->save();
 
-      //temporary before merging with post_question branch
       $id=$post->id;
 
       return redirect()->route('posts.postPage',['id'=>$id]);
