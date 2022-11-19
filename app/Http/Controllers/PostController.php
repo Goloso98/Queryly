@@ -142,7 +142,7 @@ class PostController extends Controller
       $users = User::all()->except(Auth::id());
       $posts = $posts->get();
 
-      return view('pages.homepage', ['searchfor' => $searchfor, 'questions' => $posts, 'users' => $users], compact('posts'));
+      return view('pages.search', ['searchfor' => $searchfor, 'questions' => $posts, 'users' => $users], compact('posts'));
     }
 
 }
