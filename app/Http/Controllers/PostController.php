@@ -86,6 +86,28 @@ class PostController extends Controller
       return view('pages.questionpage', ['user' => $user, 'question' => $question]);
     }
 
+    public function showAddAnswerForm(Request $request)
+    {
+      if (!Auth::check()) return redirect('/login');
+      $postParent = $request->input('question');
+      return view('pages.postanswer', ['postParent' => $postParent]);
+    }
+
+    protected function postAnswer(Request $request)
+    {
+      $userID = Auth::id();
+      $postText = $request->input('postText');
+      $parentPost = $request->input('parentPost');
+      $data = array('userid' => $userID, 'posttype' => 'answer', 'posttext' => $postText, 'parentpost' => $parentPost, 'iscorrect' => 'false');
+      $postID = DB::table('posts')->insertGetId($data);
+
+      $question = Post::find($parentPost);
+      $answer = Post::find($postID);
+      $user = Auth::user();
+
+      return view('pages.questionpage', ['user' => $user, 'question' => $question]);
+    }
+
     public function showEditForm($id){
       $post = Post::find($id);
       return view('pages.editpost', ['post' => $post]);

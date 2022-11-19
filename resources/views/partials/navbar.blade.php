@@ -11,7 +11,7 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto mb-2 mb-sm-0">
                 <li class="nav-item">
-                    <a class="btn btn-outline-light" aria-current="page" href="/posts/new">Post Question</a>
+                    <a class="btn btn-outline-light" aria-current="page" href="/posts/questions/new">Post Question</a>
                 </li>
             </ul>
         @if (Auth::check())

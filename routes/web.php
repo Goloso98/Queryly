@@ -22,8 +22,10 @@ Route::get('users/{id}/questions', 'PostController@showUserQuestions')->name('us
 Route::get('users/{id}/answers', 'PostController@showUserAnswers')->name('users.answers');
 
 //Posts
-Route::get('posts/new', 'PostController@showAddQuestionForm')->name('addQuestion');
-Route::post('posts/new', 'PostController@postQuestion')->name('posts.addQuestion');
+Route::get('posts/questions/new', 'PostController@showAddQuestionForm')->name('addQuestion');
+Route::post('posts/questions/new', 'PostController@postQuestion')->name('posts.addQuestion');
+Route::get('posts/answers/new', 'PostController@showAddAnswerForm')->name('addAnswer');
+Route::post('posts/answers/new', 'PostController@postAnswer')->name('posts.addAnswer');
 Route::get('posts/{id}/edit',  'PostController@showEditForm')->name('posts.edit');
 Route::patch('posts/{id}/edit',  'PostController@update')->name('posts.update');
 Route::post('homepage', 'PostController@search')->name('exactMatchSearch');
