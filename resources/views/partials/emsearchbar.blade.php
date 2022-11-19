@@ -2,7 +2,7 @@
     {{ csrf_field() }}
     <input type="text" placeholder="Search" name="search" id="search" value="{{ request()->input('search') }}">
     <p></p>
-    <input type="text" placeholder="Tags" name="tags" id="tags" value="{{ request()->input('tags') }}">
+    <!-- <input type="text" placeholder="Tags" name="tags" id="tags" value="{{ request()->input('tags') }}"> -->
     <p></p>
     <div class = "dropdown">
         <select id = "orderby" name = "orderby">
