@@ -4,7 +4,16 @@
     @include('partials.emsearchbar')
     <p></p>
     <ul>
-        @each('partials.question', $questions, 'question')
+        @if($searchfor == 'Questions')
+            @each('partials.question', $questions, 'question')
+        @endif
+        @if($searchfor == 'Users')
+            @each('partials.userforhome', $users, 'user')
+        @endif
+        @if($searchfor == 'Both')
+            @each('partials.question', $questions, 'question')
+            @each('partials.userforhome', $users, 'user')
+        @endif
     </ul>
 
 @endsection

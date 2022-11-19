@@ -113,20 +113,36 @@ class PostController extends Controller
 
     public function search(Request $request)
     {
-      error_log('in search function');
       $request->validate([
-            'input' => 'required',
+            'search' => 'nullable',
+            'tags' => 'nullable',
+            'orderby' => 'required',
+            'searchfor' => 'required',
       ]);
-      $title = $request->input('input');
-      $posts = Post::where('title','LIKE',"%$title%");
-
-      if($request->has('input2')){
-        $posttext = $request->input('input2');
-        $posts = $posts->where('posttext', 'LIKE', "%$posttext%");
+      if($request->has('search')){
+        $title = $request->input('search');
+        $posttext = $request->input('search');
+        $posts = Post::where('title','ILIKE',"%$title%");
+        $posts = $posts->where('posttext','ILIKE',"%$posttext%");
       }
+
+      if($request->has('tags')){
+        $tag = $request->input('tags');
+        //$posts = $posts->where('posttext', 'LIKE', "%$tag%");
+      }
+
+      $order = $request->input('orderby');
+      $searchfor = $request->input('searchfor');
+
+      if($order == 'Newest'){
+        $posts = $posts->orderBy('postdate', 'DESC');
+      } else if ($order == 'Oldest'){
+        $posts = $posts->orderBy('postdate', 'ASC');
+      }
+      $users = User::all()->except(Auth::id());
       $posts = $posts->get();
-      //return $posts;
-      return view('pages.homepage', compact('posts'));
+
+      return view('pages.homepage', ['searchfor' => $searchfor, 'questions' => $posts, 'users' => $users], compact('posts'));
     }
 
 }

@@ -18,6 +18,7 @@
     <input type="password" name="password_confirmation" />
     <p></p>
     <input type="submit" value="Submit">
+    <p></p>
 
     @if ($errors->any())
     <div class="alert alert-danger">
