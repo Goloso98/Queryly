@@ -111,5 +111,23 @@ class PostController extends Controller
       return redirect()->route('posts.postPage',['id'=>$id]);
     }
 
+    public function search(Request $request)
+    {
+      error_log('in search function');
+      $request->validate([
+            'input' => 'required',
+      ]);
+      $title = $request->input('input');
+      $posts = Post::where('title','LIKE',"%$title%");
+
+      if($request->has('input2')){
+        $posttext = $request->input('input2');
+        $posts = $posts->where('posttext', 'LIKE', "%$posttext%");
+      }
+      $posts = $posts->get();
+      //return $posts;
+      return view('pages.homepage', compact('posts'));
+    }
+
 }
 
