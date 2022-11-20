@@ -12,7 +12,7 @@
 */
 // Home
 Route::get('/', 'Auth\LoginController@home');
-Route::get('homepage', 'UserController@showHome');
+Route::get('homepage', 'UserController@showHome')->name('homepage');
 
 //Users
 Route::get('users/{id}', 'UserController@show')->name('users.profile');
