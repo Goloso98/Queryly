@@ -3,6 +3,7 @@
     <h2><a href="/users/{{ $user->id }}">{{ $user->name }}</a></h2>
     <p>&#64;{{ $user->username }}</p>
     <p>e-mail: {{ $user->email }}</p>
+    <p>Age: {{$age}}</p>
   </header>
 
   <!-- <a class="btn" aria-current="page" href="#"> See Followed Tags </a> -->

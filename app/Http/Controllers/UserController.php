@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 use App\Models\User;
 
@@ -21,7 +22,8 @@ class UserController extends Controller
     {
       $user = User::find($id);
       $this->authorize('show', $user);
-      return view('pages.user', ['user' => $user]);
+      $age = Carbon::parse($user->birthday)->diff(Carbon::now())->y;
+      return view('pages.user', ['user' => $user, 'age' => $age]);
     }
 
     public function showHome()
@@ -34,7 +36,7 @@ class UserController extends Controller
 
       $user = Auth::user();
 
-      return view('pages.homepage', ['users' => $user, 'questions' => $questions]);
+      return view('pages.homepage', ['user' => $user, 'questions' => $questions]);
     }
 
     public function showEditForm($id){
