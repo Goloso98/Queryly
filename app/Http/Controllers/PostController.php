@@ -140,13 +140,12 @@ class PostController extends Controller
       if($request->has('search')){
         $title = $request->input('search');
         $posttext = $request->input('search');
-        $posts = Post::where('title','ILIKE',"%$title%");
-        $posts = $posts->where('posttext','ILIKE',"%$posttext%");
+        $posts = Post::where('title','ILIKE',"$title");
+        //$posts = $posts->where('posttext','ILIKE',"%$posttext%");
       }
 
       if($request->has('tags')){
         $tag = $request->input('tags');
-        //$posts = $posts->where('posttext', 'LIKE', "%$tag%");
       }
 
       $order = $request->input('orderby');
