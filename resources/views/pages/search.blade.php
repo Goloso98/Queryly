@@ -5,13 +5,17 @@
     <p></p>
     <ul>
         @if($searchfor == 'Questions')
-            @each('partials.question', $questions, 'question')
+            @foreach($questions as $question)
+                @include('partials.question', ['showUser' => TRUE])
+            @endforeach
         @endif
         @if($searchfor == 'Users')
             @each('partials.userforhome', $users, 'user')
         @endif
         @if($searchfor == 'Both')
-            @each('partials.question', $questions, 'question')
+            @foreach($questions as $question)
+                @include('partials.question', ['showUser' => TRUE])
+            @endforeach
             @each('partials.userforhome', $users, 'user')
         @endif
     </ul>
