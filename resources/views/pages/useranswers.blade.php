@@ -4,7 +4,9 @@
 
 @section('content')
 <ul>
-  @each('partials.answer', $answers, 'answer')
+  @foreach($answers as $answer)
+    @include('partials.answer', ['showTitle' => TRUE])
+  @endforeach
 </ul>
 
 @endsection

@@ -12,28 +12,18 @@ use App\Models\User;
 
 class PostController extends Controller
 {
-    /**
-     * Shows the card for a given id.
-     *
-     * @param  int  $id
-     * @return Response
-     */
+
+    //homepage
     public function show($id)
     {
       $post = Post::find($id);
       $user = Auth::user();
-      if($post->posttype == 'question') {
+      if($post->posttype == 'question')
         return view('pages.questionpage', ['user' => $user, 'question' => $post]);
-      } else {
-        //return view('pages.answer', ['post' => $post]); TO DO
-      }
     }
 
-   /**
-     * Shows all cards.
-     *
-     * @return Response
-     */
+    //Own user questions and answers
+
     public function showUserQuestions($userID)
     {
       if (!Auth::check()) return redirect('/login');
@@ -58,6 +48,7 @@ class PostController extends Controller
       return view('pages.useranswers', ['user' => $user, 'answers' => $answers]);
     }
 
+    //Delete post
     public function delete(Request $request, $id)
     {
       $post = Post::find($id);
@@ -66,6 +57,7 @@ class PostController extends Controller
       return $post;
     }
 
+    //Add question
     public function showAddQuestionForm()
     {
       if (!Auth::check()) return redirect('/login'); 
@@ -86,6 +78,7 @@ class PostController extends Controller
       return view('pages.questionpage', ['user' => $user, 'question' => $question]);
     }
 
+    //Add answer
     public function showAddAnswerForm(Request $request)
     {
       if (!Auth::check()) return redirect('/login');
@@ -108,6 +101,7 @@ class PostController extends Controller
       return view('pages.questionpage', ['user' => $user, 'question' => $question]);
     }
 
+    //Edit post
     public function showEditForm($id){
       $post = Post::find($id);
       return view('pages.editpost', ['post' => $post]);
@@ -133,6 +127,8 @@ class PostController extends Controller
       return redirect()->route('posts.postPage',['id'=>$id]);
     }
 
+
+    //Exact Match Search
     public function search(Request $request)
     {
       $request->validate([
@@ -165,6 +161,16 @@ class PostController extends Controller
       $posts = $posts->get();
 
       return view('pages.search', ['searchfor' => $searchfor, 'questions' => $posts, 'users' => $users], compact('posts'));
+    }
+
+    //Show Post's Answers
+    public static function showAnswers($postParent) {
+      $allposts = Post::all();
+      $answers=[];
+      for($i=0; $i<count($allposts); $i++){
+        if($allposts[$i]->posttype == 'answer' && $allposts[$i]->parentpost == $postParent) array_push($answers, $allposts[$i]);
+      }
+      return $answers;
     }
 
 }
