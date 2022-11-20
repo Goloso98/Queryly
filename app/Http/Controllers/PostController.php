@@ -17,9 +17,8 @@ class PostController extends Controller
     public function show($id)
     {
       $post = Post::find($id);
-      $user = Auth::user();
       if($post->posttype == 'question')
-        return view('pages.questionpage', ['user' => $user, 'question' => $post]);
+        return view('pages.questionpage', ['question' => $post]);
     }
 
     //Own user questions and answers
@@ -103,6 +102,7 @@ class PostController extends Controller
 
     //Edit post
     public function showEditForm($id){
+      if (!Auth::check()) return redirect('/login');
       $post = Post::find($id);
       return view('pages.editpost', ['post' => $post]);
     }
@@ -157,7 +157,7 @@ class PostController extends Controller
       } else if ($order == 'Oldest'){
         $posts = $posts->orderBy('postdate', 'ASC');
       }
-      $users = User::all()->except(Auth::id());
+      $users = User::all();
       $posts = $posts->get();
 
       return view('pages.search', ['searchfor' => $searchfor, 'questions' => $posts, 'users' => $users], compact('posts'));

@@ -34,9 +34,7 @@ class UserController extends Controller
         if($allposts[$i]->posttype == 'question') array_push($questions, $allposts[$i]);
       }
 
-      $user = Auth::user();
-
-      return view('pages.homepage', ['user' => $user, 'questions' => $questions]);
+      return view('pages.homepage', ['questions' => $questions]);
     }
 
     public function showEditForm($id){

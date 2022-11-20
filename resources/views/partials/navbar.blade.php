@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-primary p-3 mb-3">
     <div class="acontainer-fluid">
-        <a href="/" class="navbar-brand" href="{{ url('/') }}">
+        <a href="homepage" class="navbar-brand">
             <img src="{{ URL::asset('logo.png') }}" alt="{{ config('app.name', 'Laravel') }}!" style="width:42px;height:42px;">
         </a>
     </div>
