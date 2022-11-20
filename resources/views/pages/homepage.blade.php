@@ -4,7 +4,9 @@
     @include('partials.emsearchbar')
     <p></p>
     <ul>
-        @each('partials.question', $questions, 'question')
+        @foreach($questions as $question)
+            @include('partials.question', ['showUser' => TRUE])
+        @endforeach
     </ul>
 
 @endsection

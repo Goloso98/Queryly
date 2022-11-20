@@ -8,6 +8,9 @@
     @endif
 </header>
 <p> {{ $question->posttext }} </p>
+@if($showUser)
+    <p> <a class="btn" aria-current="page" href="{{route('users.profile', $question->userid)}}">&#64;{{$question->userid}}</a></p>
+@endif
 <p> {{ $question->postdate }} </p>
 </article>
 <p></p>

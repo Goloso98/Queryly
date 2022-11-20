@@ -15,7 +15,7 @@
     </header>
     <p> {{ $question->posttext }} </p>
     <p> {{ $question->postdate }} </p>
-    <p> {{ $question->user()->first()->username }}</p>
+    <p> <a class="btn" aria-current="page" href="{{route('users.profile', $question->userid)}}">&#64;{{ $question->user()->first()->username }}</a></p>
     </article>
     <p></p>
     <header>

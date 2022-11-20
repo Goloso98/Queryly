@@ -12,7 +12,9 @@
         @endif
     </header>
     <p> {{ $answer->posttext }} </p>
-    <p> {{ $answer->user()->first()->username }}</p>
+    @if(!$showTitle)
+    <p> <a class="btn" aria-current="page" href="{{route('users.profile', $answer->userid)}}">&#64;{{ $answer->user()->first()->username }}</a></p>
+    @endif
     <p> {{ $answer->postdate }} </p>
     <p></p>
 </article>
