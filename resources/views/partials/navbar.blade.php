@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-primary p-3 mb-3">
     <div class="acontainer-fluid">
         <a href="/" class="navbar-brand" href="{{ url('/') }}">
-            <img src="/public/logo.png" alt="{{ config('app.name', 'Laravel') }}!" style="width:42px;height:42px;">
+            <img src="{{ URL::asset('logo.png') }}" alt="{{ config('app.name', 'Laravel') }}!" style="width:42px;height:42px;">
         </a>
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
