@@ -24,7 +24,7 @@ class UserController extends Controller
     public function show($id)
     {
       $user = User::find($id);
-      $this->authorize('show', $user);
+      //$this->authorize('show', $user);
       $age = Carbon::parse($user->birthday)->diff(Carbon::now())->y;
       return view('pages.user', ['user' => $user, 'age' => $age]);
     }
