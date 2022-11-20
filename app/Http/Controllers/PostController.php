@@ -25,7 +25,6 @@ class PostController extends Controller
 
     public function showUserQuestions($userID)
     {
-      if (!Auth::check()) return redirect('/login');
       $user = User::find($userID);
       $allposts = $user->posts()->orderBy('id')->get();
       $questions=[];
@@ -37,7 +36,6 @@ class PostController extends Controller
 
     public function showUserAnswers($userID)
     {
-      if (!Auth::check()) return redirect('/login');
       $user = User::find($userID);
       $allposts = $user->posts()->orderBy('id')->get();
       $answers=[];
