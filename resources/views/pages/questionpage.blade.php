@@ -18,8 +18,16 @@
     </article>
     <p></p>
     <header>
-        <h3>Answers: </h3>
+        @php
+            $answers = app\Http\Controllers\PostController::showAnswers($question->id);
+        @endphp
+        <h3>Answers: ({{count($answers)}})</h3>
         <a class="btn" aria-current="page" href="{{ route('posts.addAnswer') }}?question={{$question->id}}"> Post Answer </a>
-        <p></p>
     </header>
+    <ul>
+        @foreach($answers as $answer)
+            @include('partials.answer', ['showTitle' => FALSE])
+        @endforeach
+    </ul>
+    
 @endsection
