@@ -451,12 +451,17 @@ LANGUAGE plpgsql;
 -- POPULATION
 
 INSERT INTO users(name, email, username, password, birthday) VALUES (
-  'John Doe',
-  'admin@example.com',
-  'johndoe',
-  '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
-  '2003-02-26 09:06:47'
+    'John Doe',
+    'admin@example.com',
+    'johndoe',
+    '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+    '2003-02-26 09:06:47'
 ); -- Password is 1234. Generated using Hash::make('1234')
+
+INSERT INTO roles(userID, userRole) VALUES (
+    1,
+    'Administrator'
+);
 
 INSERT INTO users (name, email, username, password, birthday) VALUES ('Isacco Pyott', 'ipyott0@telegraph.co.uk', 'ipyott0', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '2017-09-03 08:02:38');
 INSERT INTO users (name, email, username, password, birthday) VALUES ('Brad Surby', 'bsurby1@nydailynews.com', 'bsurby1', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '2009-06-28 07:43:14');
