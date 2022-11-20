@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 
 use App\Models\User;
+use App\Models\Role;
 
 class UserController extends Controller
 {
@@ -18,6 +19,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return Response
      */
+
+    //Show User Account
     public function show($id)
     {
       $user = User::find($id);
@@ -26,6 +29,7 @@ class UserController extends Controller
       return view('pages.user', ['user' => $user, 'age' => $age]);
     }
 
+    //Show Homepage
     public function showHome()
     {
       $allposts = DB::table('posts')->get();
@@ -37,6 +41,7 @@ class UserController extends Controller
       return view('pages.homepage', ['questions' => $questions]);
     }
 
+    //Edit Account
     public function showEditForm($id){
       $user = User::find($id);
       $this->authorize('update', $user);
@@ -69,10 +74,19 @@ class UserController extends Controller
       return redirect()->route('users.profile',['id'=>$id]);
     }
 
+    //Delete Account
     public function delete(Request $request, $id)
     {
       $user = User::find($id);
       $user->delete();
       return $user;
+    }
+
+    //Show User Role
+    public static function showRole()
+    {
+      $userID = Auth::id();
+      $role = DB::table('roles')->first()->userrole;
+      return $role;
     }
 }

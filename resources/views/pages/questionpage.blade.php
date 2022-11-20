@@ -1,4 +1,5 @@
 @inject('post', 'App\Http\Controllers\PostController')
+@inject('user', 'App\Http\Controllers\UserController')
 
 @extends('layouts.app')
 
@@ -8,10 +9,16 @@
     <article class="post" data-id="{{ $question->id }}">
     <header>
         <h2>Title: {{ $question->title }} </h2>
+        @php
+            $role = app\Http\Controllers\UserController::showRole();
+        @endphp
+        @if ($role == 'Administrator' && Auth::id() != $question->userid)
+            <a class="delete" href="#"> Delete Question </a>
+        @endif
         @if (Auth::id() == $question->userid)
             <a class="delete" href="#"> Delete Question </a>
             <a class="btn" aria-current="page" href="{{  route('posts.edit', $question->id)  }}">Edit</a>
-        @endif
+            @endif
     </header>
     <p> {{ $question->posttext }} </p>
     <p> {{ $question->postdate }} </p>
