@@ -10,6 +10,7 @@
         <h2>Title: {{ $question->title }} </h2>
         @if (Auth::id() == $question->userid)
             <a class="delete" href="#"> Delete Question </a>
+            <a class="btn" aria-current="page" href="{{  route('posts.edit', $question->id)  }}">Edit</a>
         @endif
     </header>
     <p> {{ $question->posttext }} </p>

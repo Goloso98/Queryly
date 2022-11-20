@@ -5,8 +5,8 @@
     <p>e-mail: {{ $user->email }}</p>
   </header>
 
-  <a class="btn" aria-current="page" href="#"> See Followed Tags </a>
-  <a class="btn" aria-current="page" href="#"> My Badges </a>
+  <!-- <a class="btn" aria-current="page" href="#"> See Followed Tags </a> -->
+  <!-- <a class="btn" aria-current="page" href="#"> My Badges </a> -->
   <a class="btn" aria-current="page" href="{{ route('editUser', $user->id) }}"> Edit </a>
 
   @if (Auth::user() == $user)
