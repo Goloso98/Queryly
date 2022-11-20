@@ -86,7 +86,7 @@ class UserController extends Controller
     public static function showRole()
     {
       $userID = Auth::id();
-      $role = DB::table('roles')->first()->userrole;
+      $role = DB::table('roles')->where('userid', $userID)->value('userrole');
       return $role;
     }
 }
