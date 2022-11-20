@@ -9,7 +9,10 @@
 </header>
 <p> {{ $question->posttext }} </p>
 @if($showUser)
-    <p> <a class="btn" aria-current="page" href="{{route('users.profile', $question->userid)}}">&#64;{{$question->userid}}</a></p>
+    @php
+        $username = DB::table('users')->find($question->userid)->username;
+    @endphp
+    <p> <a class="btn" aria-current="page" href="{{route('users.profile', $question->userid)}}">&#64;{{$username}}</a></p>
 @endif
 <p> {{ $question->postdate }} </p>
 </article>
