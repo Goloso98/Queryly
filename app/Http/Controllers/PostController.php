@@ -106,7 +106,6 @@ class PostController extends Controller
     }
 
     public function update(Request $request, $id){
-      
       $post = Post::find($id);
       $this->authorize('update', $post);
 
@@ -127,7 +126,6 @@ class PostController extends Controller
       return redirect()->route('posts.postPage', ['id'=>$post->parentpost]);
     }
 
-    //Exact Match Search
     public function search(Request $request)
     {
       $request->validate([
@@ -188,5 +186,40 @@ class PostController extends Controller
       return $answers;
     }
 
-}
+    //Show Top Questions
+    public function showTopQuestions(){
+      // $allposts = DB::table('posts')->get();
+      // $questions=[];
+      // for($i=0; $i<count($allposts); $i++){
+      //   if($allposts[$i]->posttype == 'question') array_push($questions, $allposts[$i]);
+      // }
 
+      // $stars = [];
+      // for($i=0; $i<count($questions); $i++){
+      //   $stars[$i] = DB::table('stars')->where('postid', $questions[$i]->id)->count();
+      // }
+
+      // $questionStars = [];
+      // for($i=0; $i<count($questions); $i++){
+      //   $temp = array($stars[$i], $questions[$i]->id);
+      //   array_push($questionStars, $temp);
+      // }
+
+      // arsort($questionStars);
+
+      // $orderQuestions = [];
+      // for($i=0; $i<count($questionStars); $i++){
+      //   $orderQuestions[$i] = $questionStars[$i]->last();
+      // }
+      $orderQuestionsRaw = DB::select(DB::raw("select s.postid, count(s.userid) nstar from stars s group by s.postid
+      order by nstar desc;")); //DB::raw("select s.postid, count(s.userid) nstar from stars s group by s.postid order by nstar desc;")->get();
+
+      $getQuestions = array();
+      foreach ($orderQuestionsRaw as $postid) {
+        array_push($getQuestions, $postid->postid);
+      }
+      $orderQuestions = Post::findMany($getQuestions);
+      return view('pages.topquestions', ['questionStars'=>$orderQuestions]);
+    }
+
+}
