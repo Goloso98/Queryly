@@ -106,12 +106,12 @@ class PostController extends Controller
     }
 
     public function update(Request $request, $id){
-      
+      dd($request);
       $post = Post::find($id);
       $this->authorize('update', $post);
 
       $validate = $request->validate([
-        'title' => 'required|max:255',
+        'title' => 'nullable|max:255',
         'posttext' => 'required',
       ]);
 
@@ -122,10 +122,11 @@ class PostController extends Controller
 
       $id=$post->id;
 
-      return redirect()->route('posts.postPage',['id'=>$id]);
+      if($post->posttype == 'question')
+        return redirect()->route('posts.postPage',['id'=>$id]);
+      return redirect()->route('posts.postPage', ['id'=>$post->parentpost]);
     }
 
-    //Exact Match Search
     public function search(Request $request)
     {
       $request->validate([

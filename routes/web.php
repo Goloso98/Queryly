@@ -31,9 +31,6 @@ Route::get('posts/{id}/edit',  'PostController@showEditForm')->name('posts.edit'
 Route::patch('posts/{id}/edit',  'PostController@update')->name('posts.update');
 Route::post('homepage', 'PostController@search')->name('exactMatchSearch');
 
-//test
-
-
 // API
 Route::delete('api/posts/{id}', 'PostController@delete');
 Route::delete('api/users/{id}', 'UserController@delete');
