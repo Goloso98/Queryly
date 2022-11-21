@@ -111,7 +111,7 @@ class PostController extends Controller
       $this->authorize('update', $post);
 
       $validate = $request->validate([
-        'title' => 'required|max:255',
+        'title' => 'nullable|max:255',
         'posttext' => 'required',
       ]);
 
@@ -122,7 +122,9 @@ class PostController extends Controller
 
       $id=$post->id;
 
-      return redirect()->route('posts.postPage',['id'=>$id]);
+      if($post->posttype == 'question')
+        return redirect()->route('posts.postPage',['id'=>$id]);
+      return redirect()->route('posts.postPage', ['id'=>$post->parentpost]);
     }
 
     //Exact Match Search
