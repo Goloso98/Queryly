@@ -172,5 +172,33 @@ class PostController extends Controller
       return $answers;
     }
 
-}
+    //Show Top Questions
+    public function showTopQuestions(){
+      $allposts = DB::table('posts')->get();
+      $questions=[];
+      for($i=0; $i<count($allposts); $i++){
+        if($allposts[$i]->posttype == 'question') array_push($questions, $allposts[$i]);
+      }
 
+      $stars = [];
+      for($i=0; $i<count($questions); $i++){
+        $stars[$i] = DB::table('stars')->where('postid', $questions[$i]->id)->count();
+      }
+
+      $questionStars = [];
+      for($i=0; $i<count($questions); $i++){
+        $temp = array($stars[$i], $questions[$i]->id);
+        array_push($questionStars, $temp);
+      }
+
+      arsort($questionStars);
+
+      $orderQuestions = [];
+      for($i=0; $i<count($questionStars); $i++){
+        $orderQuestions[$i] = $questionStars[$i]->last();
+      }
+
+      return view('pages.topquestions', ['questionStars'=>$orderQuestions]);
+    }
+
+}
