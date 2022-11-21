@@ -155,7 +155,7 @@ paths:
    get:
      operationId: R201
      summary: 'R201: View user profile'
-     description: 'Show the individual user profile. Access: USR'
+     description: 'Show the individual user profile. Access: PUB'
      tags:
        - 'M02: Individual Profile'
 
@@ -169,12 +169,105 @@ paths:
      responses:
        '200':
          description: 'Ok. Show User Profile UI'
+
+ /users/{id}/edit:
+   get:
+     operationId: R202
+     summary: 'R202: Show edit user form'
+     description: 'Show the individual user profile editing page. Access: USR'
+     tags:
+       - 'M02: Individual Profile'
+
+     parameters:
+       - in: path
+         name: id
+         schema:
+           type: integer
+         required: true
+
+     responses:
+       '200':
+         description: 'Ok. Show User Profile Edit UI'
+   patch:
+    operationId: R203
+    summary: 'R203: Process show edit user form'
+    description: 'Process the individual user profile editing information. Access: USR'
+    tags:
+      - 'M02: Individual Profile'
+    parameters:
+       - in: path
+         name: id
+         schema:
+           type: integer
+         required: true
+    responses:
+      '302':
+        description: 'Redirect after processing the edit information back to the user page.'
+        headers:
+          Location:
+            schema:
+              type: string
+
+ /users/{id}/questions:
+   get:
+     operationId: R204
+     summary: 'R204: View user own questions'
+     description: 'Show the individual user questions. Access: PUB'
+     tags:
+       - 'M02: Individual Profile'
+
+     parameters:
+       - in: path
+         name: id
+         schema:
+           type: integer
+         required: true
+
+     responses:
+       '200':
+         description: 'Ok. Show User Questions UI'
+         
+ /users/{id}/answers:
+   get:
+     operationId: R205
+     summary: 'R205: View user own answers'
+     description: 'Show the individual user answers. Access: PUB'
+     tags:
+       - 'M02: Individual Profile'
+
+     parameters:
+       - in: path
+         name: id
+         schema:
+           type: integer
+         required: true
+
+     responses:
+       '200':
+         description: 'Ok. Show User Answers UI'
+
+ /api/users/{id}:
+  delete:
+    operationId: R206
+    summary: 'R206: Delete User Account'
+    description: 'Delete the account. Access: USR'
+    tags:
+      - 'M02: Individual Profile'
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+    responses:
+      '302':
+        description: 'Ok. Show login UI'
          
  /posts/{id}:
    get:
      operationId: R301
      summary: 'R301: View post'
-     description: 'Show the post. Access: USR'
+     description: 'Show the post. Access: PUB'
      tags:
        - 'M03: Posts'
 
@@ -188,11 +281,224 @@ paths:
      responses:
        '200':
          description: 'Ok. Show Post UI'
+  
+ /posts/questions/new:
+   get:
+    operationId: R302
+    summary: 'R302: Add Question Form'
+    description: 'Provide new question form. Access: USR'
+    tags:
+      - 'M03: Posts'
+
+    parameters:
+      - in: path
+        name: userId
+        schema:
+          type: integer
+        required: true
+    
+    responses:
+       '200':
+         description: 'Ok. Show Add Question UI'
+    
+   post:
+    operationId: R303
+    summary: 'R303: Add Question Action'
+    description: 'Processes the new question form submission. Access: USR'
+    tags:
+      - 'M03: Posts'
+
+    requestBody:
+      required: true
+      content:
+        application/x-www-form-urlencoded:
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+              postText:
+                type: string
+            required:
+               - title
+               - postText
+
+    responses:
+      '302':
+        description: 'Redirect after processing the new question information.'
+        headers:
+          Location:
+            schema:
+              type: string
+
+ /posts/answers/new:
+   get:
+    operationId: R304
+    summary: 'R304: Add Answer Form'
+    description: 'Provide new answer form. Access: USR'
+    tags:
+      - 'M03: Posts'
+
+    parameters:
+      - in: path
+        name: userId
+        schema:
+          type: integer
+        required: true
+      - in: path
+        name: postId
+        schema:
+          type: integer
+        required: true
+    
+    responses:
+       '200':
+         description: 'Ok. Show Add Answer UI'
+    
+   post:
+    operationId: R305
+    summary: 'R305: Add Answer Action'
+    description: 'Processes the new answer form submission. Access: USR'
+    tags:
+      - 'M03: Posts'
+
+    requestBody:
+      required: true
+      content:
+        application/x-www-form-urlencoded:
+          schema:
+            type: object
+            properties:
+              postText:
+                type: string
+            required:
+               - postText
+
+    responses:
+      '302':
+        description: 'Redirect after processing the new answer information.'
+        headers:
+          Location:
+            schema:
+              type: string
+ 
+ /posts/{id}/edit:
+   get:
+    operationId: R306
+    summary: 'R306: Edit Post Form'
+    description: 'Provide edit post form. Access: USR'
+    tags:
+      - 'M03: Posts'
+
+    parameters:
+      - in: query
+        name: title
+        schema:
+          type: integer
+        required: false
+      - in: query
+        name: postText
+        schema:
+          type: integer
+        required: false
+    
+    responses:
+       '200':
+         description: 'Ok. Show Edit Post UI'
+
+   patch:
+    operationId: R307
+    summary: 'R307: Edit Post Action'
+    description: 'Provide edit post form. Access: USR'
+    tags:
+      - 'M03: Posts'
+    
+    parameters:
+      - in: query
+        name: postText
+        schema:
+          type: integer
+        required: false
+    
+    responses:
+      '302':
+        description: 'Redirect after processing edit post information.'
+        headers:
+          Location:
+            schema:
+              type: string
+
+
+ /homepage:
+  get:
+    operationId: R308
+    summary: 'R308: Show homepage'
+    description: 'Show all posts indiscriminately. Access: USR'
+    tags:
+      - 'M03: Posts'
+    responses:
+       '200':
+         description: 'Ok. Show HomePage UI'
+  post:
+    operationId: R309
+    summary: 'R309: Show search results'
+    description: 'Processes the search and displays the results. Access: USR'
+    tags:
+      - 'M03: Posts'
+    requestBody:
+      required: true
+      content:
+        application/x-www-form-urlencoded:
+          schema:
+            type: object
+            properties:
+              search:
+                type: string
+              tags:
+                type: string
+              searchfor:
+                type: string
+              orderby:
+                type: string
+            required:
+               - searchfor
+               - orderby
+    responses:
+      '302':
+        description: 'Redirect after processing the search.'
+        headers:
+          Location:
+            schema:
+              type: string
+              
+ /api/posts/{id}:
+   delete:
+     operationId: R310
+     summary: 'R310: Delete a post API'
+     description: 'Delete a post. Access: USR'
+     tags:
+       - 'M03: Posts'
+
+     parameters:
+       - in: path
+         name: userId
+         schema:
+           type: integer
+         required: true
+       - in: path
+         name: postId
+         schema:
+           type: integer
+         required: true
          
+     responses:
+       '302':
+         description: 'Ok. Show Post UI'
+
  /api/star/{userId}/{postId}:
    get:
-     operationId: R302
-     summary: 'R302: Show star'
+     operationId: R311
+     summary: 'R311: Show star'
      description: 'Show if star is active in a post. Access: USR'
      tags:
        - 'M03: Posts'
@@ -214,8 +520,8 @@ paths:
          description: 'Ok. Show Post UI'
          
    put:
-     operationId: R303
-     summary: 'R303: Like a post API'
+     operationId: R312
+     summary: 'R312: Like a post API'
      description: 'Put a star in a post. Access: USR'
      tags:
        - 'M03: Posts'
@@ -237,8 +543,8 @@ paths:
          description: 'Ok. Show Post UI'
          
    delete:
-     operationId: R304
-     summary: 'R304: Unlike a post API'
+     operationId: R313
+     summary: 'R313: Unlike a post API'
      description: 'Delete star in a post. Access: USR'
      tags:
        - 'M03: Posts'
