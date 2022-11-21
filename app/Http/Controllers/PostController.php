@@ -106,7 +106,6 @@ class PostController extends Controller
     }
 
     public function update(Request $request, $id){
-      dd($request);
       $post = Post::find($id);
       $this->authorize('update', $post);
 
