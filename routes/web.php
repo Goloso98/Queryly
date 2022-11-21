@@ -29,7 +29,6 @@ Route::get('posts/answers/new', 'PostController@showAddAnswerForm')->name('addAn
 Route::post('posts/answers/new', 'PostController@postAnswer')->name('posts.addAnswer');
 Route::get('posts/{id}/edit',  'PostController@showEditForm')->name('posts.edit');
 Route::patch('posts/{id}/edit',  'PostController@update')->name('posts.update');
-Route::post('homepage/fts', 'PostController@fts')->name('teste');
 Route::post('homepage', 'PostController@search')->name('exactMatchSearch');
 
 //test
