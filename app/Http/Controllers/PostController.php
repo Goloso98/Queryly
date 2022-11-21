@@ -125,6 +125,34 @@ class PostController extends Controller
       return redirect()->route('posts.postPage',['id'=>$id]);
     }
 
+    //Full-Text Search
+    public function fts(Request $request){
+      $request->validate([
+        'search1' => 'nullable',
+        'tags' => 'nullable',
+        'orderby' => 'required',
+        'searchfor' => 'required',
+      ]);
+
+      if($request->has('search1')){
+        $title = $request->input('search1');
+        $posttext = $request->input('search1');
+      
+        $statement = 'tsvectors @@ plainto_tsquery(\'english\',\''.$title.'\')';
+        $posts = Post::whereRaw($statement);
+        $posts = $posts->get();
+      } else {
+        $posts = Post::get();
+      }
+
+      $searchfor = 'Questions';
+      $users = User::all();
+
+      error_log($posts);
+
+      return view('pages.search', ['searchfor' => $searchfor, 'questions' => $posts, 'users' => $users], compact('posts'));
+    }
+
 
     //Exact Match Search
     public function search(Request $request)
@@ -135,15 +163,32 @@ class PostController extends Controller
             'orderby' => 'required',
             'searchfor' => 'required',
       ]);
+
       if($request->has('search')){
         $title = $request->input('search');
         $posttext = $request->input('search');
-        $posts = Post::where('title','ILIKE',"$title");
-        //$posts = $posts->where('posttext','ILIKE',"%$posttext%");
+      
+        $statement = 'tsvectors @@ plainto_tsquery(\'english\',\''.$title.'\')';
+        $posts = Post::whereRaw($statement);
+      } else {
+        $posts = Post::get();
       }
+
+/*       if($request->has('search')){
+        $title = $request->input('search');
+        $posts = Post::where('title','ILIKE',"$title"); 
+      }
+*/
 
       if($request->has('tags')){
         $tag = $request->input('tags');
+        //$tags = Tag::where('tagname', 'ILIKE', "$tag");
+        //$tagsid -> get ids
+        //$relationships = Question_Tag::where('tagid','ILIKE',"$tagids");
+        /* for($i = 0; $i < $ralationships.length(); $i++){
+          $postid = $relationships -> get post ids
+          $posts->where('id', 'LIKE', $postid);
+        } */
       }
 
       $order = $request->input('orderby');
