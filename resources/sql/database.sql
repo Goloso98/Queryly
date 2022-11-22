@@ -34,37 +34,38 @@ CREATE TABLE users (
     email VARCHAR UNIQUE NOT NULL,
     username VARCHAR UNIQUE NOT NULL,
     "password" VARCHAR NOT NULL,
+    remember_token VARCHAR NOT NULL DEFAULT FALSE,
     birthday DATE NOT NULL,
     isDeleted BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE roles (
-    userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE,
+    userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE ON DELETE CASCADE,
     userRole user_role NOT NULL
 );
 
 CREATE TABLE posts (
     id SERIAL PRIMARY KEY,
-    userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE,
+    userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE ON DELETE CASCADE,
     postDate DATE NOT NULL DEFAULT now(),
     postType post_type NOT NULL,
     title VARCHAR,
     postText VARCHAR NOT NULL,
-    parentPost INTEGER REFERENCES "posts" (id) ON UPDATE CASCADE,
-    isCorrect BOOLEAN DEFAULT FALSE,
-    CONSTRAINT post_title CHECK ((postType = 'question' AND title <> NULL) OR (postType = 'answer' AND title = NULL)),
-    CONSTRAINT correctness CHECK ((isCorrect = NULL AND postType = 'question') OR (isCorrect <> NULL AND postType = 'answer'))
+    parentPost INTEGER REFERENCES "posts" (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    isCorrect BOOLEAN,
+    CONSTRAINT post_title CHECK ((postType = 'question' AND title IS NOT NULL) OR (postType = 'answer' AND title IS NULL)),
+    CONSTRAINT correctness CHECK ((postType = 'question' AND isCorrect IS NULL) OR (postType = 'answer' AND isCorrect IS NOT NULL))
 );
 
 CREATE TABLE stars (
-    postID INTEGER NOT NULL REFERENCES "posts" (id) ON UPDATE CASCADE,
-    userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE
+    postID INTEGER NOT NULL REFERENCES "posts" (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
-    postID INTEGER NOT NULL REFERENCES "posts" (id) ON UPDATE CASCADE,
-    userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE,
+    postID INTEGER NOT NULL REFERENCES "posts" (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE ON DELETE CASCADE,
     commentText VARCHAR NOT NULL,
     commentDate DATE NOT NULL DEFAULT now()
 );
@@ -72,9 +73,9 @@ CREATE TABLE comments (
 CREATE TABLE reports (
     id SERIAL PRIMARY KEY,
     reportType report_type NOT NULL,
-    userID INTEGER REFERENCES "users" (id) ON UPDATE CASCADE,
-    postID INTEGER REFERENCES "posts" (id) ON UPDATE CASCADE,
-    commentID INTEGER REFERENCES "comments" (id) ON UPDATE CASCADE
+    userID INTEGER REFERENCES "users" (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    postID INTEGER REFERENCES "posts" (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    commentID INTEGER REFERENCES "comments" (id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE tags (
@@ -83,13 +84,13 @@ CREATE TABLE tags (
 );
 
 CREATE TABLE user_tags (
-    userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE,
-    tagID INTEGER NOT NULL REFERENCES "tags" (id) ON UPDATE CASCADE
+    userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    tagID INTEGER NOT NULL REFERENCES "tags" (id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE question_tags (
-    postID INTEGER NOT NULL REFERENCES "posts" (id) ON UPDATE CASCADE,
-    tagID INTEGER NOT NULL REFERENCES "tags" (id) ON UPDATE CASCADE
+    postID INTEGER NOT NULL REFERENCES "posts" (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    tagID INTEGER NOT NULL REFERENCES "tags" (id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE badges (
@@ -98,42 +99,42 @@ CREATE TABLE badges (
 );
 
 CREATE TABLE user_badges (
-    userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE,
-    badgeID INTEGER NOT NULL REFERENCES "badges" (id) ON UPDATE CASCADE
+    userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    badgeID INTEGER NOT NULL REFERENCES "badges" (id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- text will be defined in laravel code
 CREATE TABLE notifications (
     id SERIAL PRIMARY KEY,
-    userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE,
+    userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE ON DELETE CASCADE,
     isRead BOOLEAN NOT NULL,
     notificationDate DATE NOT NULL
 );
 
 CREATE TABLE new_answers (
-    notificationID INTEGER NOT NULL REFERENCES "notifications" (id) ON UPDATE CASCADE,
-    postID INTEGER NOT NULL REFERENCES "posts" (id) ON UPDATE CASCADE,
-    questionID INTEGER NOT NULL REFERENCES "posts" (id) ON UPDATE CASCADE
+    notificationID INTEGER NOT NULL REFERENCES "notifications" (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    postID INTEGER NOT NULL REFERENCES "posts" (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    questionID INTEGER NOT NULL REFERENCES "posts" (id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE new_questions (
-    notificationID INTEGER NOT NULL REFERENCES "notifications" (id) ON UPDATE CASCADE,
-    postID INTEGER NOT NULL REFERENCES "posts" (id) ON UPDATE CASCADE
+    notificationID INTEGER NOT NULL REFERENCES "notifications" (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    postID INTEGER NOT NULL REFERENCES "posts" (id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE new_comments (
-    notificationID INTEGER NOT NULL REFERENCES "notifications" (id) ON UPDATE CASCADE,
-    commentID INTEGER NOT NULL REFERENCES "comments" (id) ON UPDATE CASCADE
+    notificationID INTEGER NOT NULL REFERENCES "notifications" (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    commentID INTEGER NOT NULL REFERENCES "comments" (id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE new_badges (
-    notificationID INTEGER NOT NULL REFERENCES "notifications" (id) ON UPDATE CASCADE,
-    badgeID INTEGER NOT NULL REFERENCES "badges" (id) ON UPDATE CASCADE
+    notificationID INTEGER NOT NULL REFERENCES "notifications" (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    badgeID INTEGER NOT NULL REFERENCES "badges" (id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE new_stars (
-    notificationID INTEGER NOT NULL REFERENCES "notifications" (id) ON UPDATE CASCADE,
-    postID INTEGER NOT NULL REFERENCES "posts" (id) ON UPDATE CASCADE
+    notificationID INTEGER NOT NULL REFERENCES "notifications" (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    postID INTEGER NOT NULL REFERENCES "posts" (id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- TRIGGERS
@@ -146,7 +147,6 @@ DROP FUNCTION IF EXISTS add_star_notification CASCADE;
 -- ANSWER NOTIFICATIONS
 CREATE FUNCTION add_answer_notification() RETURNS TRIGGER AS
 $BODY$
-DECLARE parent_post INTEGER;
 DECLARE notified_user INTEGER;
 BEGIN
     IF NEW.postType = 'answer' THEN
@@ -249,7 +249,7 @@ ADD COLUMN tsvectors TSVECTOR;
 CREATE FUNCTION user_search_update() RETURNS TRIGGER AS $$
 BEGIN
     NEW.tsvectors = (
-        (setweight(to_tsvector('english', NEW.name), 'A')) || 
+        (setweight(to_tsvector('english', NEW.name), 'A')) ||
         (setweight(to_tsvector('english', NEW.username), 'B'))
     );
     RETURN NEW;
@@ -273,14 +273,14 @@ BEGIN
     SELECT username INTO usernameAux FROM users
     WHERE NEW.userID = users.id;
 
-    IF (NEW.postType = 'question') THEN        
+    IF (NEW.postType = 'question') THEN
         NEW.tsvectors = (
             (setweight(to_tsvector('english', NEW.title), 'A')) ||
             (setweight(to_tsvector('english', NEW.postText), 'A')) ||
             (setweight(to_tsvector('english', usernameAux), 'B'))
         );
     END IF;
-    IF (NEW.postType = 'answer') THEN        
+    IF (NEW.postType = 'answer') THEN
         NEW.tsvectors = (
             (setweight(to_tsvector('english', NEW.postText), 'A')) ||
             (setweight(to_tsvector('english', usernameAux), 'B'))
@@ -302,7 +302,7 @@ ALTER TABLE comments
 ADD COLUMN tsvectors TSVECTOR;
 
 CREATE FUNCTION comment_search_update() RETURNS TRIGGER AS $$
-BEGIN       
+BEGIN
     NEW.tsvectors = ((setweight(to_tsvector('english', NEW.commentText), 'A')));
     RETURN NEW;
 END $$
@@ -345,7 +345,7 @@ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION show_own_answers(ui INTEGER) RETURNS INTEGER AS $$
     BEGIN
         SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ ONLY;
-        SELECT posts.id, posts.postDate, post.parentPost, posts.postText, COUNT(stars), posts.isCorrect
+        SELECT posts.id, posts.postDate, posts.parentPost, posts.postText, COUNT(stars), posts.isCorrect
         FROM posts
         INNER JOIN users ON posts.userID = users.id
         INNER JOIN stars ON posts.id = stars.postID
@@ -447,3 +447,55 @@ CREATE OR REPLACE FUNCTION insert_comment(pi INTEGER, ui INTEGER, ctext VARCHAR)
         VALUES (pi, ui, ctext);
     END $$
 LANGUAGE plpgsql;
+
+-- POPULATION
+
+INSERT INTO users(name, email, username, password, birthday) VALUES (
+    'John Doe',
+    'admin@example.com',
+    'johndoe',
+    '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+    '2003-02-26 09:06:47'
+); -- Password is 1234. Generated using Hash::make('1234')
+
+INSERT INTO roles(userID, userRole) VALUES (
+    1,
+    'Administrator'
+);
+
+INSERT INTO users (name, email, username, password, birthday) VALUES ('Isacco Pyott', 'ipyott0@telegraph.co.uk', 'ipyott0', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '2017-09-03 08:02:38');
+INSERT INTO users (name, email, username, password, birthday) VALUES ('Brad Surby', 'bsurby1@nydailynews.com', 'bsurby1', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '2009-06-28 07:43:14');
+INSERT INTO users (name, email, username, password, birthday) VALUES ('Chrissie Leif', 'cleif2@marriott.com', 'cleif2', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '2017-04-22 21:40:55');
+INSERT INTO users (name, email, username, password, birthday) VALUES ('Pete Weston', 'pweston3@noaa.gov', 'pweston3', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '2017-06-22 19:02:26');
+INSERT INTO users (name, email, username, password, birthday) VALUES ('Kennie Remon', 'kremon4@cbsnews.com', 'kremon4', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '2013-02-07 04:56:07');
+INSERT INTO users (name, email, username, password, birthday) VALUES ('Charlene Blazynski', 'cblazynski5@accuweather.com', 'cblazynski5', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '2008-05-04 18:11:19');
+INSERT INTO users (name, email, username, password, birthday) VALUES ('Annabal Chaffey', 'achaffey6@unesco.org', 'achaffey6', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '2001-08-27 15:13:28');
+INSERT INTO users (name, email, username, password, birthday) VALUES ('Julie Swainston', 'jswainston7@webnode.com', 'jswainston7', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '2013-03-19 16:49:16');
+INSERT INTO users (name, email, username, password, birthday) VALUES ('Omar Bangs', 'obangs8@nsw.gov.au', 'obangs8', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '2012-04-11 10:44:55');
+INSERT INTO users (name, email, username, password, birthday) VALUES ('Lauraine Bushell', 'lbushell9@gravatar.com', 'lbushell9', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '2003-02-26 09:06:47');
+
+--questions
+INSERT INTO posts (userID, postType, title, postText) VALUES (1, 'question', 'Dialogue', 'How do you write dialogue?'); 
+INSERT INTO posts (userID, postType, title, postText) VALUES (5, 'question', 'Rabbits', 'How many types of rabbit are there?');
+INSERT INTO posts (userID, postType, title, postText) VALUES (10, 'question', 'Latin', 'How do you write the verb to be in latin?');
+INSERT INTO posts (userID, postType, title, postText) VALUES (6, 'question', 'Photography', 'Are there any good places to take photos in Porto?');
+INSERT INTO posts (userID, postType, title, postText) VALUES (5, 'question', 'Day of independence', 'When is the portuguese day of independence?');
+INSERT INTO posts (userID, postType, title, postText) VALUES (7, 'question', 'Colombian arepas', 'I cannot seem to make arepas right any time. The cheese always overflows! Does anyone know what I am doing wrong?');
+INSERT INTO posts (userID, postType, title, postText) VALUES (8, 'question', 'Importing in javascript', 'How do you import another document in a javascript file?');
+INSERT INTO posts (userID, postType, title, postText) VALUES (8, 'question', 'Rabbits of the world', 'lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque at nulla suspendisse potenti cras in purus eu magna vulputate luctus cum sociis natoque penatibus et magnis dis parturient montes');
+INSERT INTO posts (userID, postType, title, postText) VALUES (7, 'question', 'eleifend pede libero quis orci nullam molestie nibh in lectus', 'lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque at nulla suspendisse potenti cras in purus eu magna vulputate luctus cum sociis natoque penatibus et magnis dis parturient montes');
+INSERT INTO posts (userID, postType, title, postText) VALUES (10, 'question', 'eleifend pede libero quis orci nullam molestie nibh in lectus', 'lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque at nulla suspendisse potenti cras in purus eu magna vulputate luctus cum sociis natoque penatibus et magnis dis parturient montes');
+INSERT INTO posts (userID, postType, title, postText) VALUES (3, 'question', 'eleifend pede libero quis orci nullam molestie nibh in lectus', 'lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque at nulla suspendisse potenti cras in purus eu magna vulputate luctus cum sociis natoque penatibus et magnis dis parturient montes');
+INSERT INTO posts (userID, postDate, postType, title, postText) VALUES (1, '2022-11-20', 'question', 'Ordering Test', 'Ordering Test text');
+
+-- answers
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (2, 'answer', 'convallis nulla neque libero convallis eget eleifend luctus ultricies eu nibh quisque id justo sit amet sapien dignissim vestibulum vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae nulla dapibus dolor vel est donec odio justo sollicitudin ut suscipit a feugiat et', 8, FALSE);
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (7, 'answer', 'pulvinar sed nisl nunc rhoncus dui vel sem sed sagittis nam congue risus semper porta volutpat quam pede lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque at nulla suspendisse potenti cras in purus eu magna vulputate luctus cum', 8, FALSE);
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (1, 'answer', 'Use the keyword import, followed by the name of your class inside curly brackets, them write from "file". Like this: import { className } from "file". ', 7, FALSE);
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (7, 'answer', 'You write it using quotes.', 1, TRUE);
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (6, 'answer', 'quam sollicitudin vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praesent blandit lacinia erat vestibulum sed magna at nunc commodo placerat praesent blandit nam nulla integer pede justo lacinia eget tincidunt eget tempus vel pede morbi porttitor lorem id', 10, FALSE);
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (8, 'answer', 'sum, es, est, sumus, estis, sant', 3, FALSE);
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (7, 'answer', 'lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque at nulla suspendisse potenti cras in purus eu magna vulputate luctus cum sociis natoque penatibus et magnis dis parturient montes', 9, FALSE);
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (7, 'answer', 'dolor morbi vel lectus in quam fringilla rhoncus mauris enim leo rhoncus sed vestibulum sit amet cursus id turpis integer aliquet massa id lobortis convallis tortor risus dapibus augue vel accumsan tellus nisi eu orci mauris lacinia sapien quis libero nullam sit amet turpis elementum', 1, FALSE);
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (9, 'answer', 'It is on the 1st of december', 5, TRUE);
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (5, 'answer', 'I think you use the keyword import.', 7, FALSE);

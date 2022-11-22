@@ -14,9 +14,14 @@ function addEventListeners() {
     deleter.addEventListener('click', sendDeleteItemRequest);
   });
 
-  let cardDeleters = document.querySelectorAll('article.card header a.delete');
-  [].forEach.call(cardDeleters, function(deleter) {
-    deleter.addEventListener('click', sendDeleteCardRequest);
+  let postDeleters = document.querySelectorAll('article.post header a.delete');
+  [].forEach.call(postDeleters, function(deleter) {
+    deleter.addEventListener('click', sendDeletePostRequest);
+  });
+
+  let userDeleters = document.querySelectorAll('article.userbuttons a.delete');
+  [].forEach.call(userDeleters, function(deleter) {
+    deleter.addEventListener('click', sendDeleteUserRequest);
   });
 
   let cardCreator = document.querySelector('article.card form.new_card');
@@ -65,10 +70,16 @@ function sendCreateItemRequest(event) {
   event.preventDefault();
 }
 
-function sendDeleteCardRequest(event) {
+function sendDeletePostRequest(event) {
   let id = this.closest('article').getAttribute('data-id');
+  event.preventDefault();
+  sendAjaxRequest('delete', '/api/posts/' + id, null, postDeletedHandler);
+}
 
-  sendAjaxRequest('delete', '/api/cards/' + id, null, cardDeletedHandler);
+function sendDeleteUserRequest(event) {
+  let id = this.closest('article').getAttribute('data-id');
+  event.preventDefault();
+  sendAjaxRequest('delete', '/api/users/' + id, null, userDeletedHandler);
 }
 
 function sendCreateCardRequest(event) {
@@ -110,10 +121,17 @@ function itemDeletedHandler() {
   element.remove();
 }
 
-function cardDeletedHandler() {
-  if (this.status != 200) window.location = '/';
-  let card = JSON.parse(this.responseText);
-  let article = document.querySelector('article.card[data-id="'+ card.id + '"]');
+function postDeletedHandler() {
+  let post = JSON.parse(this.responseText);
+  let article = document.querySelector('article.post[data-id="'+ post.id + '"]');
+  article.remove();
+  
+}
+
+function userDeletedHandler() {
+  if (this.status == 200) window.location = '/logout';
+  let user = JSON.parse(this.responseText);
+  let article = document.querySelector('article.userbuttons[data-id="'+ user.id + '"]');
   article.remove();
 }
 

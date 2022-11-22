@@ -4,15 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Item extends Model
+class Role extends Model
 {
   // Don't add create and update timestamps in database.
   public $timestamps  = false;
 
   /**
-   * The card this item belongs to.
+   * The user that has a role
    */
-  public function card() {
-    return $this->belongsTo('App\Models\Card');
+  public function user() {
+    return $this->belongsTo('App\Models\User');
   }
+
+    /**
+   * The role
+   */
 }
