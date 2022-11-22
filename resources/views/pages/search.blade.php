@@ -2,20 +2,14 @@
 
 @section('content')
     @include('partials.emsearchbar')
-    <p></p>
+    
     <ul>
-        @if($searchfor == 'Questions')
+        @if($searchfor == 'questions')
             @foreach($questions as $question)
                 @include('partials.question', ['showUser' => TRUE])
             @endforeach
         @endif
-        @if($searchfor == 'Users')
-            @each('partials.userforhome', $users, 'user')
-        @endif
-        @if($searchfor == 'Both')
-            @foreach($questions as $question)
-                @include('partials.question', ['showUser' => TRUE])
-            @endforeach
+        @if($searchfor == 'users')
             @each('partials.userforhome', $users, 'user')
         @endif
     </ul>

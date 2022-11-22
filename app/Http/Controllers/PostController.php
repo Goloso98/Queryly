@@ -57,7 +57,7 @@ class PostController extends Controller
     //Add question
     public function showAddQuestionForm()
     {
-      if (!Auth::check()) return redirect('/login'); 
+      if (!Auth::check()) return redirect('/login');
       return view('pages.postquestion');
     }
 
@@ -106,7 +106,6 @@ class PostController extends Controller
     }
 
     public function update(Request $request, $id){
-      dd($request);
       $post = Post::find($id);
       $this->authorize('update', $post);
 
@@ -136,19 +135,26 @@ class PostController extends Controller
             'searchfor' => 'required',
       ]);
 
+      $order = $request->input('orderby');
+      $searchfor = $request->input('searchfor');
+
       if($request->has('search')){
         $title = $request->input('search');
-        $posttext = $request->input('search');
-      
-        $statement = 'tsvectors @@ plainto_tsquery(\'english\',\''.$title.'\')';
-        $posts = Post::whereRaw($statement);
+        $statement1 = 'tsvectors @@ plainto_tsquery(\'english\',\''.$title.'\')';
+        $posts = Post::whereRaw($statement1);
+
+        $name = $request->input('search');
+        $statement2 = 'tsvectors @@ plainto_tsquery(\'english\',\''.$name.'\')';
+        $users = User::whereRaw($statement2);
       } else {
-        $posts = Post::get();
+        //here because code gets angry otherwise
+        $posts = Post::all();
+        $users = User::all();
       }
 
 /*      if($request->has('search')){
         $title = $request->input('search');
-        $posts = Post::where('title','ILIKE',"$title"); 
+        $posts = Post::where('title','ILIKE',"$title");
       }
 */
 
@@ -163,16 +169,14 @@ class PostController extends Controller
         } */
       }
 
-      $order = $request->input('orderby');
-      $searchfor = $request->input('searchfor');
-
       if($order == 'Newest'){
         $posts = $posts->orderBy('postdate', 'DESC');
       } else if ($order == 'Oldest'){
         $posts = $posts->orderBy('postdate', 'ASC');
       }
-      $users = User::all();
+
       $posts = $posts->get();
+      $users = $users->get();
 
       return view('pages.search', ['searchfor' => $searchfor, 'questions' => $posts, 'users' => $users], compact('posts'));
     }
@@ -187,5 +191,28 @@ class PostController extends Controller
       return $answers;
     }
 
-}
+    //Show Top Questions
+    public function showTopQuestions(){
+      $limit = 5;
+      $postData = DB::select(
+        //DB::raw("select p.*, count(s.userId) nstars from posts p, stars s where p.id = s.postId group by (p.id) order by (nstars) desc limit 5"));
+        DB::raw("select p.*, count(s.userId) nstars
+          from posts p, stars s
+          where p.id = s.postId and p.posttype = 'question'
+          group by (p.id)
+          order by nstars desc
+          limit ".$limit));
+      $postModels = Post::hydrate($postData);
+      //dd($postData);
+      $countleft = $limit - count($postModels);
+      if ($countleft) {
+        $arrSelected = $postModels->pluck('id')->all();
 
+        $postLeft = Post::where('posttype', '=', 'question')->whereNotIn('id', $arrSelected)->orderBy('id')->limit($countleft)->get();
+        $postModels->push($postLeft->all());
+      }
+      //dd($postModels->flatten());
+      return view('pages.topquestions', ['questionStars'=>$postModels->flatten()]);
+    }
+
+}
