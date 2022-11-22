@@ -174,7 +174,7 @@ paths:
    get:
      operationId: R202
      summary: 'R202: Show edit user form'
-     description: 'Show the individual user profile editing page. Access: USR'
+     description: 'Show the individual user profile editing page. Access: OWR'
      tags:
        - 'M02: Individual Profile'
 
@@ -191,7 +191,7 @@ paths:
    patch:
     operationId: R203
     summary: 'R203: Process show edit user form'
-    description: 'Process the individual user profile editing information. Access: USR'
+    description: 'Process the individual user profile editing information. Access: OWR'
     tags:
       - 'M02: Individual Profile'
     parameters:
@@ -250,7 +250,7 @@ paths:
   delete:
     operationId: R206
     summary: 'R206: Delete User Account'
-    description: 'Delete the account. Access: USR'
+    description: 'Delete the account. Access: USR, ADM'
     tags:
       - 'M02: Individual Profile'
     parameters:
@@ -386,7 +386,7 @@ paths:
    get:
     operationId: R306
     summary: 'R306: Edit Post Form'
-    description: 'Provide edit post form. Access: USR'
+    description: 'Provide edit post form. Access: OWR'
     tags:
       - 'M03: Posts'
 
@@ -409,7 +409,7 @@ paths:
    patch:
     operationId: R307
     summary: 'R307: Edit Post Action'
-    description: 'Provide edit post form. Access: USR'
+    description: 'Provide edit post form. Access: OWR'
     tags:
       - 'M03: Posts'
     
@@ -433,7 +433,7 @@ paths:
   get:
     operationId: R308
     summary: 'R308: Show homepage'
-    description: 'Show all posts indiscriminately. Access: USR'
+    description: 'Show all posts indiscriminately. Access: PUB'
     tags:
       - 'M03: Posts'
     responses:
@@ -442,7 +442,7 @@ paths:
   post:
     operationId: R309
     summary: 'R309: Show search results'
-    description: 'Processes the search and displays the results. Access: USR'
+    description: 'Processes the search and displays the results. Access: PUB'
     tags:
       - 'M03: Posts'
     requestBody:
@@ -475,7 +475,7 @@ paths:
    delete:
      operationId: R310
      summary: 'R310: Delete a post API'
-     description: 'Delete a post. Access: USR'
+     description: 'Delete a post. Access: OWR, ADM'
      tags:
        - 'M03: Posts'
 
@@ -570,7 +570,7 @@ paths:
    get:
      operationId: R401
      summary: 'R401: View comment'
-     description: 'Show the comment. Access: USR'
+     description: 'Show the comment. Access: PUB'
      tags:
        - 'M04: Comments'
 
@@ -613,11 +613,10 @@ paths:
    get:
      operationId: R803
      summary: 'R803: View faqs page'
-     description: 'Show the faws page. Access: PUB'
+     description: 'Show the faqs page. Access: PUB'
      tags:
        - 'M08: Static Pages'
        
      responses:
        '200':
          description: 'Ok. Show FAQs UI'
-  
