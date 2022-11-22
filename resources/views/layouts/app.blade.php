@@ -27,7 +27,7 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-            <x-breadcrumb />
+            <!-- <x-breadcrumb /> -->
             @yield('content')
         </div>
         <div class="col-md-3"></div>
@@ -36,4 +36,5 @@
 @include('partials.footer')
 <script src="{{ URL::asset('js/app.js') }}"></script>
 </body>
+<!-- v3 -->
 </html>

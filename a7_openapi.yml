@@ -6,7 +6,7 @@ info:
  description: 'Web Resources Specification (A7) for Queryly'
 
 servers:
-- url: http://lbaw2294.lbaw.fe.up.pt/
+- url: https://lbaw2294.lbaw.fe.up.pt/
   description: Production server
 
 externalDocs:
@@ -174,7 +174,7 @@ paths:
    get:
      operationId: R202
      summary: 'R202: Show edit user form'
-     description: 'Show the individual user profile editing page. Access: USR'
+     description: 'Show the individual user profile editing page. Access: OWR'
      tags:
        - 'M02: Individual Profile'
 
@@ -191,7 +191,7 @@ paths:
    patch:
     operationId: R203
     summary: 'R203: Process show edit user form'
-    description: 'Process the individual user profile editing information. Access: USR'
+    description: 'Process the individual user profile editing information. Access: OWR'
     tags:
       - 'M02: Individual Profile'
     parameters:
