@@ -135,14 +135,21 @@ class PostController extends Controller
             'searchfor' => 'required',
       ]);
 
+      $order = $request->input('orderby');
+      $searchfor = $request->input('searchfor');
+
       if($request->has('search')){
         $title = $request->input('search');
-        $posttext = $request->input('search');
-      
-        $statement = 'tsvectors @@ plainto_tsquery(\'english\',\''.$title.'\')';
-        $posts = Post::whereRaw($statement);
+        $statement1 = 'tsvectors @@ plainto_tsquery(\'english\',\''.$title.'\')';
+        $posts = Post::whereRaw($statement1);
+
+        $name = $request->input('search');
+        $statement2 = 'tsvectors @@ plainto_tsquery(\'english\',\''.$name.'\')';
+        $users = User::whereRaw($statement2);
       } else {
-        $posts = Post::get();
+        //here because code gets angry otherwise
+        $posts = Post::all();
+        $users = User::all();
       }
 
 /*      if($request->has('search')){
@@ -162,16 +169,14 @@ class PostController extends Controller
         } */
       }
 
-      $order = $request->input('orderby');
-      $searchfor = $request->input('searchfor');
-
       if($order == 'Newest'){
         $posts = $posts->orderBy('postdate', 'DESC');
       } else if ($order == 'Oldest'){
         $posts = $posts->orderBy('postdate', 'ASC');
       }
-      $users = User::all();
+      
       $posts = $posts->get();
+      $users = $users->get();
 
       return view('pages.search', ['searchfor' => $searchfor, 'questions' => $posts, 'users' => $users], compact('posts'));
     }
