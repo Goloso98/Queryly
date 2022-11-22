@@ -57,7 +57,7 @@ class PostController extends Controller
     //Add question
     public function showAddQuestionForm()
     {
-      if (!Auth::check()) return redirect('/login'); 
+      if (!Auth::check()) return redirect('/login');
       return view('pages.postquestion');
     }
 
@@ -154,7 +154,7 @@ class PostController extends Controller
 
 /*      if($request->has('search')){
         $title = $request->input('search');
-        $posts = Post::where('title','ILIKE',"$title"); 
+        $posts = Post::where('title','ILIKE',"$title");
       }
 */
 
@@ -174,7 +174,7 @@ class PostController extends Controller
       } else if ($order == 'Oldest'){
         $posts = $posts->orderBy('postdate', 'ASC');
       }
-      
+
       $posts = $posts->get();
       $users = $users->get();
 
@@ -193,38 +193,26 @@ class PostController extends Controller
 
     //Show Top Questions
     public function showTopQuestions(){
-      // $allposts = DB::table('posts')->get();
-      // $questions=[];
-      // for($i=0; $i<count($allposts); $i++){
-      //   if($allposts[$i]->posttype == 'question') array_push($questions, $allposts[$i]);
-      // }
+      $limit = 5;
+      $postData = DB::select(
+        //DB::raw("select p.*, count(s.userId) nstars from posts p, stars s where p.id = s.postId group by (p.id) order by (nstars) desc limit 5"));
+        DB::raw("select p.*, count(s.userId) nstars
+          from posts p, stars s
+          where p.id = s.postId and p.posttype = 'question'
+          group by (p.id)
+          order by nstars desc
+          limit ".$limit));
+      $postModels = Post::hydrate($postData);
+      //dd($postData);
+      $countleft = $limit - count($postModels);
+      if ($countleft) {
+        $arrSelected = $postModels->pluck('id')->all();
 
-      // $stars = [];
-      // for($i=0; $i<count($questions); $i++){
-      //   $stars[$i] = DB::table('stars')->where('postid', $questions[$i]->id)->count();
-      // }
-
-      // $questionStars = [];
-      // for($i=0; $i<count($questions); $i++){
-      //   $temp = array($stars[$i], $questions[$i]->id);
-      //   array_push($questionStars, $temp);
-      // }
-
-      // arsort($questionStars);
-
-      // $orderQuestions = [];
-      // for($i=0; $i<count($questionStars); $i++){
-      //   $orderQuestions[$i] = $questionStars[$i]->last();
-      // }
-      $orderQuestionsRaw = DB::select(DB::raw("select s.postid, count(s.userid) nstar from stars s group by s.postid
-      order by nstar desc;")); //DB::raw("select s.postid, count(s.userid) nstar from stars s group by s.postid order by nstar desc;")->get();
-
-      $getQuestions = array();
-      foreach ($orderQuestionsRaw as $postid) {
-        array_push($getQuestions, $postid->postid);
+        $postLeft = Post::where('posttype', '=', 'question')->whereNotIn('id', $arrSelected)->orderBy('id')->limit($countleft)->get();
+        $postModels->push($postLeft->all());
       }
-      $orderQuestions = Post::findMany($getQuestions);
-      return view('pages.topquestions', ['questionStars'=>$orderQuestions]);
+      //dd($postModels->flatten());
+      return view('pages.topquestions', ['questionStars'=>$postModels->flatten()]);
     }
 
 }
