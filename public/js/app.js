@@ -125,7 +125,7 @@ function postDeletedHandler() {
   let post = JSON.parse(this.responseText);
   let article = document.querySelector('article.post[data-id="'+ post.id + '"]');
   article.remove();
-  
+
 }
 
 function userDeletedHandler() {
@@ -195,4 +195,4 @@ function createItem(item) {
   return new_item;
 }
 
-addEventListeners();
+window.onload = addEventListeners;

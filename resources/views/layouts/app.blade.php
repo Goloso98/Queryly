@@ -14,11 +14,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="{{ URL::asset('js/app.js') }}" defer></script>
 
-    <script type="text/javascript">
-        // Fix for Firefox autofocus CSS bug
-        // See: http://stackoverflow.com/questions/18943276/html-5-autofocus-messes-up-css-loading/18945951#18945951
-    </script>
     @yield('scripts')
 </head>
 <body>
@@ -34,7 +31,6 @@
     </div>
 </div>
 @include('partials.footer')
-<script src="{{ URL::asset('js/app.js') }}"></script>
 </body>
 <!-- v3 -->
 </html>
