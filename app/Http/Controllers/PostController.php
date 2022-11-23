@@ -140,12 +140,12 @@ class PostController extends Controller
 
       if($request->has('search')){
         $title = $request->input('search');
-        $statement1 = 'tsvectors @@ plainto_tsquery(\'english\',\''.$title.'\')';
-        $posts = Post::whereRaw($statement1);
+        $statement1 = 'tsvectors @@ plainto_tsquery(\'english\',\'?\')';
+        $posts = Post::whereRaw($statement1, [$title]);
 
         $name = $request->input('search');
-        $statement2 = 'tsvectors @@ plainto_tsquery(\'english\',\''.$name.'\')';
-        $users = User::whereRaw($statement2);
+        $statement2 = 'tsvectors @@ plainto_tsquery(\'english\',\'?\')';
+        $users = User::whereRaw($statement2, [$name]);
       } else {
         //here because code gets angry otherwise
         $posts = Post::all();
