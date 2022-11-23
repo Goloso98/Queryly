@@ -15,6 +15,7 @@ class Breadcrumb extends Component
      */
     public function __construct()
     {
+        return;
         $path = $_SERVER['PATH_INFO'];
         $path_exploded = explode('/', $path);
         // $better_path = array_slice($path_exploded, 1);
@@ -29,6 +30,7 @@ class Breadcrumb extends Component
      */
     public function render()
     {
+        return "";
         return view('components.breadcrumb');
     }
 }
