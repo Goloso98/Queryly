@@ -3,53 +3,78 @@
 @section('content')
 <form method="POST" action="{{ route('register') }}">
     {{ csrf_field() }}
+    <p></p>
+    <h2 class="text-center">Create Your Account!</h2>
+    <p></p>
+    <div class="input-group mb-3">
+      <span class="input-group-text">Name</span>
+      <div class="form-floating">
+        <input id="name" type="text" name="name" class="form-control" placeholder="Username">
+        @if ($errors->has('name'))
+          <span class="error">
+            {{ $errors->first('name') }}
+          </span>
+        @endif
+      </div>
+    </div>
+    <div class="input-group mb-3">
+      <span class="input-group-text">Username</span>
+      <div class="form-floating">
+        <input id="username" type="text" name="username" class="form-control" placeholder="Username">
+        @if ($errors->has('username'))
+          <span class="error">
+            {{ $errors->first('username') }}
+          </span>
+        @endif
+      </div>
+    </div>
+    <div class="input-group mb-3">
+      <span class="input-group-text">Email</span>
+      <div class="form-floating">
+        <input id="email" type="text" name="email" class="form-control" placeholder="Email">
+        @if ($errors->has('email'))
+          <span class="error">
+            {{ $errors->first('email') }}
+          </span>
+        @endif
+      </div>
+    </div>
 
-    <label for="name">Name</label>
-    <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus>
-    @if ($errors->has('name'))
-      <span class="error">
-          {{ $errors->first('name') }}
-      </span>
-    @endif
+    <div class="text-center">
+      <label for="birthday">Birthday</label>
+      <input id="birthday" type="date" name="birthday" required autofocus>
+      @if ($errors->has('birthday'))
+        <span class="error">
+            {{ $errors->first('birthday') }}
+        </span>
+      @endif
+      <p></p>
+    </div>
 
-    <label for="username">Username</label>
-    <input id="username" type="text" name="username" value="{{ old('username') }}" required autofocus>
-    @if ($errors->has('username'))
-      <span class="error">
-          {{ $errors->first('username') }}
-      </span>
-    @endif
+    <div class="input-group mb-3">
+      <span class="input-group-text">Password</span>
+      <div class="form-floating">
+        <input id="password" type="password" name="password" class="form-control" placeholder="Password" required>
+        @if ($errors->has('password'))
+          <span class="error">
+            {{ $errors->first('password') }}
+          </span>
+        @endif
+      </div>
 
-    <label for="birthday">Birthday</label>
-    <input id="birthday" type="date" name="birthday" required autofocus>
-    @if ($errors->has('birthday'))
-      <span class="error">
-          {{ $errors->first('birthday') }}
-      </span>
-    @endif
+      <span class="input-group-text">Confirm Password</span>
+      <div class="form-floating">
+        <input id="password-confirm" type="password" name="password_confirmation" class="form-control" placeholder="Password" required>
+      </div>
+    </div>
 
-    <label for="email">E-Mail Address</label>
-    <input id="email" type="email" name="email" value="{{ old('email') }}" required>
-    @if ($errors->has('email'))
-      <span class="error">
-          {{ $errors->first('email') }}
-      </span>
-    @endif
-
-    <label for="password">Password</label>
-    <input id="password" type="password" name="password" required>
-    @if ($errors->has('password'))
-      <span class="error">
-          {{ $errors->first('password') }}
-      </span>
-    @endif
-
-    <label for="password-confirm">Confirm Password</label>
-    <input id="password-confirm" type="password" name="password_confirmation" required>
-
-    <button type="submit">
-      Register
-    </button>
-    <a class="button button-outline" href="{{ route('login') }}">Login</a>
+    <div class="text-center">
+      <button type="submit">
+        Register
+      </button>
+      <p></p>
+      <a class="button button-outline" href="{{ route('login') }}">Login</a>
+    </div>
 </form>
+<p></p>
 @endsection
