@@ -6,6 +6,7 @@
     <p></p>
     <h2 class="text-center">Create Your Account!</h2>
     <p></p>
+    <hr>
     <div class="input-group mb-3">
       <span class="input-group-text">Name</span>
       <div class="form-floating">
