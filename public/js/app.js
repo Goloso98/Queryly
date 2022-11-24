@@ -14,7 +14,7 @@ function addEventListeners() {
     deleter.addEventListener('click', sendDeleteItemRequest);
   });
 
-  let postDeleters = document.querySelectorAll('article.post header a.delete');
+  let postDeleters = document.querySelectorAll('article.post a.delete');
   [].forEach.call(postDeleters, function(deleter) {
     deleter.addEventListener('click', sendDeletePostRequest);
   });
