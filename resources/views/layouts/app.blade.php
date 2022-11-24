@@ -15,22 +15,29 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/js/bootstrap.bundle.min.js" defer></script>
     <script src="{{ URL::asset('js/app.js') }}" defer></script>
-
-    @yield('scripts')
 </head>
 <body>
-@include('partials.navbar')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-            <!-- <x-breadcrumb /> -->
-            @yield('content')
-        </div>
-        <div class="col-md-3"></div>
+<div class="bg-primary position-sticky">
+    <div class="container">
+        @include('partials.navbar')
     </div>
 </div>
-@include('partials.footer')
+<div class="container">
+    <!-- <x-breadcrumb /> -->
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            @yield('content')
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div>
+<div class="bg-info">
+    <div class="container">
+        @include('partials.footer')
+    </div>
+</div>
+
 </body>
 <!-- v3 -->
 </html>
