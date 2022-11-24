@@ -60,26 +60,6 @@
     </div>
   @endif
 
-
-  <!-- @if (Auth::check() && Auth::user() == $user)
-  <a class="delete" href="#"> Delete My Account </a>
-  <a class="btn" aria-current="page" href="{{ route('editUser', $user->id) }}"> Edit </a>
-  @else
-    @if($role == 'Administrator')
-    <a class="delete" href="#"> Delete Account </a>
-    @endif
-    <div style="width:250px; height:30px; float:left;">
-      <a class="btn" aria-current="page" href="{{ route('users.questions', $user->id) }}"> See questions </a>
-    </div>
-
-    <div style="width:10px; height:30px; float:left;"></div>
-
-    <div style="width:250px; height:30px; float:left;">
-      <a class="btn" aria-current="page" href="{{ route('users.answers', $user->id) }}"> See answers </a>
-    </div>
-  @endif -->
-
-
 </article>
 
 
