@@ -8,27 +8,23 @@
     <p></p>
     <hr>
     <div class="input-group mb-3">
-      <span class="input-group-text">Email</span>
-      <div class="form-floating">
-        <input id="email" type="text" name="email" class="form-control" placeholder="Email">
+        <span class="input-group-text">Email</span>
+        <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" name="email">
         @if ($errors->has('email'))
           <span class="error">
             {{ $errors->first('email') }}
           </span>
         @endif
-      </div>
     </div>
 
     <div class="input-group mb-3">
       <span class="input-group-text">Password</span>
-      <div class="form-floating">
-        <input id="password" type="password" name="password" class="form-control" placeholder="Password" required>
+      <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" name="password">
         @if ($errors->has('password'))
           <span class="error">
             {{ $errors->first('password') }}
           </span>
         @endif
-      </div>
     </div>
 
     <div class="text-center">

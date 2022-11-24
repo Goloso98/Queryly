@@ -3,15 +3,23 @@
 @section('content')
 <form method="POST" action="{{ route('addQuestion') }}">
     {{ csrf_field() }}
+    <h3>Post your question</h3>
+    <br>
+    <div class="mb-3">
+      <h4>Title</h4>
+      <textarea name="title" id="title" class="form-control" rows="2"></textarea>
+    </div>
+    <div class="mb-3">
+      <h5>Text</h5>
+      <textarea name="postText" id="postText" class="form-control" rows="8"></textarea>
+    </div>
 
-    <label for="title">Title</label>
-    <input id="title" type="text" name="title" value="{{ old('title') }}" required autofocus>
-
-    <label for="postText">Write your Question</label>
-    <input id="postText" type="text" name="postText" value="{{ old('postText') }}" required autofocus>
-
-    <button type="submit">
-      Ask
-    </button>
+    <div class="text-center">
+      <button type="submit">
+        Ask
+      </button>
+      <p><a href="#" onclick="history.back()">Cancel</a></p>
+    </div>
+    <br>
 </form>
 @endsection

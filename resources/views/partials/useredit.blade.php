@@ -25,7 +25,7 @@
         </div>
         <br>
         <input type="submit" value="Save Changes">
-        <p><a href="{{route('users.profile', $user->id)}}">Cancel</a></p>
+        <p><a href="#" onclick="history.back()">Cancel</a></p>
         <br>
     </div>
 

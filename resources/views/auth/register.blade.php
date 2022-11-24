@@ -9,36 +9,30 @@
     <hr>
     <div class="input-group mb-3">
       <span class="input-group-text">Name</span>
-      <div class="form-floating">
         <input id="name" type="text" name="name" class="form-control" placeholder="Username">
         @if ($errors->has('name'))
           <span class="error">
             {{ $errors->first('name') }}
           </span>
         @endif
-      </div>
     </div>
     <div class="input-group mb-3">
       <span class="input-group-text">Username</span>
-      <div class="form-floating">
         <input id="username" type="text" name="username" class="form-control" placeholder="Username">
         @if ($errors->has('username'))
           <span class="error">
             {{ $errors->first('username') }}
           </span>
         @endif
-      </div>
     </div>
     <div class="input-group mb-3">
       <span class="input-group-text">Email</span>
-      <div class="form-floating">
         <input id="email" type="text" name="email" class="form-control" placeholder="Email">
         @if ($errors->has('email'))
           <span class="error">
             {{ $errors->first('email') }}
           </span>
         @endif
-      </div>
     </div>
 
     <div class="text-center">
@@ -54,19 +48,15 @@
 
     <div class="input-group mb-3">
       <span class="input-group-text">Password</span>
-      <div class="form-floating">
         <input id="password" type="password" name="password" class="form-control" placeholder="Password" required>
         @if ($errors->has('password'))
           <span class="error">
             {{ $errors->first('password') }}
           </span>
         @endif
-      </div>
 
       <span class="input-group-text">Confirm Password</span>
-      <div class="form-floating">
         <input id="password-confirm" type="password" name="password_confirmation" class="form-control" placeholder="Password" required>
-      </div>
     </div>
 
     <div class="text-center">
