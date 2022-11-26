@@ -462,6 +462,10 @@ INSERT INTO roles(userID, userRole) VALUES (
     1,
     'Administrator'
 );
+INSERT INTO roles(userID, userRole) VALUES (
+    1,
+    'Moderator'
+);
 
 INSERT INTO users (name, email, username, password, birthday) VALUES ('Isacco Pyott', 'ipyott0@telegraph.co.uk', 'ipyott0', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '2017-09-03 08:02:38');
 INSERT INTO users (name, email, username, password, birthday) VALUES ('Brad Surby', 'bsurby1@nydailynews.com', 'bsurby1', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '2009-06-28 07:43:14');

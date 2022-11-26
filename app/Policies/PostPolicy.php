@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Role;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +22,9 @@ class PostPolicy
     }
 
     public function delete(User $user, Post $post){
-      return (Auth::user()->id == $post->userid);
+      $user_id = Auth::id();
+      $roles = Auth::user()->roles()->get()->pluck('userrole')->contains('Administrator');
+
+      return (Auth::user()->id == $post->userid || $roles);
     }
 }

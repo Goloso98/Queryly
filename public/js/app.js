@@ -14,7 +14,7 @@ function addEventListeners() {
     deleter.addEventListener('click', sendDeleteItemRequest);
   });
 
-  let postDeleters = document.querySelectorAll('article.post a.delete');
+  let postDeleters = document.querySelectorAll('article.post div.card div.card-body a.delete');
   [].forEach.call(postDeleters, function(deleter) {
     deleter.addEventListener('click', sendDeletePostRequest);
   });
@@ -125,7 +125,6 @@ function postDeletedHandler() {
   let post = JSON.parse(this.responseText);
   let article = document.querySelector('article.post[data-id="'+ post.id + '"]');
   article.remove();
-
 }
 
 function userDeletedHandler() {

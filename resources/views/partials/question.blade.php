@@ -11,9 +11,18 @@
             @endphp
             <a class="btn" aria-current="page" href="{{route('users.profile', $question->userid)}}">&#64;{{$username}}</a>
             @endif
+            @php
+                $role = app\Http\Controllers\UserController::showRole();
+            @endphp
+            @if ($role == 'Administrator' && Auth::id() != $question->userid)
+            {{-- @can ('Post.delete', $question) --}}
+                <p></p>
+                <a class="delete" href="#"> Delete Question </a>
+            {{-- @endcan --}}
+            @endif
             @if (Auth::id() == $question->userid)
             <p></p>
-                <a href="#" class="delete">Delete Question</a>
+                <a href="#" class="delete">Delete My Question</a>
                 <a class="btn" aria-current="page" href="{{  route('posts.edit', $question->id)  }}">Edit</a>
             @endif
         </div>

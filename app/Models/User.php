@@ -40,7 +40,7 @@ class User extends Authenticatable
      * The posts this user owns.
      */
     public function roles(){
-        return $this->hasOne('App\Models\Role');
+        return $this->hasMany('App\Models\Role', 'userid');
     }
 
     /**
@@ -74,10 +74,4 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Badge');
     }
 
-//    /**
-//     * The cards this user owns.
-//     */
-//     public function cards() {
-//      return $this->hasMany('App\Models\Card');
-//    }
 }
