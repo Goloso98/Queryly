@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 
+use App\Models\Post;
 use App\Models\User;
 use App\Models\Role;
 
@@ -32,12 +33,9 @@ class UserController extends Controller
     //Show Homepage
     public function showHome()
     {
-      $allposts = DB::table('posts')->get();
-      $questions=[];
-      for($i=0; $i<count($allposts); $i++){
-        if($allposts[$i]->posttype == 'question') array_push($questions, $allposts[$i]);
-      }
-
+      $questions = Post::where('posttype', 'question')->get();
+      /* print_r($questions);
+      die(); */
       return view('pages.homepage', ['questions' => $questions]);
     }
 

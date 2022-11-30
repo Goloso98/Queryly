@@ -503,3 +503,7 @@ INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (7,
 INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (7, 'answer', 'dolor morbi vel lectus in quam fringilla rhoncus mauris enim leo rhoncus sed vestibulum sit amet cursus id turpis integer aliquet massa id lobortis convallis tortor risus dapibus augue vel accumsan tellus nisi eu orci mauris lacinia sapien quis libero nullam sit amet turpis elementum', 1, FALSE);
 INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (9, 'answer', 'It is on the 1st of december', 5, TRUE);
 INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (5, 'answer', 'I think you use the keyword import.', 7, FALSE);
+
+-- comments
+INSERT INTO comments (postID, userID, commentText) VALUES (1,1,'It has been solved');
+INSERT INTO comments (postID, userID, commentText) VALUES (15,1,'Thank you!');

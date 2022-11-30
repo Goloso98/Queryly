@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Comment;
 
 class PostController extends Controller
 {
@@ -27,23 +28,24 @@ class PostController extends Controller
     public function showUserQuestions($userID)
     {
       $user = User::find($userID);
-      $allposts = $user->posts()->orderBy('id')->get();
-      $questions=[];
-      for($i=0; $i<count($allposts); $i++){
-        if($allposts[$i]->posttype == 'question') array_push($questions, $allposts[$i]);
-      }
+      $questions = Post::where('posttype', 'question');
+      $questions = $questions->where('userid', $userID)->get();
       return view('pages.userquestions', ['user' => $user, 'questions' => $questions]);
     }
 
     public function showUserAnswers($userID)
     {
       $user = User::find($userID);
-      $allposts = $user->posts()->orderBy('id')->get();
-      $answers=[];
-      for($i=0; $i<count($allposts); $i++){
-        if($allposts[$i]->posttype == 'answer') array_push($answers, $allposts[$i]);
-      }
+      $answers = Post::where('posttype', 'answer');
+      $answers = $answers->where('userid', $userID)->get();
       return view('pages.useranswers', ['user' => $user, 'answers' => $answers]);
+    }
+
+    //Comments to a post
+    public function showComments($id){
+      $post = Post::find($id);
+      $comments = Comment::where('postid', $id)->get();
+      return view('pages.postcomments', ['post' => $post, 'comments' => $comments]);
     }
 
     //Delete post

@@ -11,16 +11,13 @@
         <div class="card">
             <div class="card-body">
                 <h2 class="card-title">Title: {{ $question->title }}</h2>
-                @php
-                    $role = app\Http\Controllers\UserController::showRole();
-                @endphp
-                @if ($role == 'Administrator' && Auth::id() != $question->userid)
+                <p><a href="{{route('posts.comments', $question->id)}}">Comments</a></p>
+                @can('delete', $question)
                     <a class="delete" href="#"> Delete Question </a>
-                @endif
-                @if (Auth::id() == $question->userid)
-                    <a class="delete" href="#"> Delete My Question </a>
+                @endcan
+                @can('update', $question)
                     <a class="btn" aria-current="page" href="{{  route('posts.edit', $question->id)  }}">Edit</a>
-                @endif
+                @endcan
                 <p class="card-text">{{ $question->posttext }}</p>
                 {{ $question->postdate }}
                 <a class="btn" aria-current="page" href="{{route('users.profile', $question->userid)}}">&#64;{{ $question->user()->first()->username }}</a>
