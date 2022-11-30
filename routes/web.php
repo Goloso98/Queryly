@@ -34,10 +34,13 @@ Route::get('posts/top', 'PostController@showTopQuestions')->name('posts.top');
 Route::get('posts/{id}', 'PostController@show')->name('posts.postPage'); //tem de ficar no fim
 
 //Comments
+Route::get('comments/{commentid}/edit', 'CommentController@showEditForm')->name('comments.edit');
+Route::patch('comments/{commentid}/edit', 'CommentController@update')->name('comment.update');
 
 // API
 Route::delete('api/posts/{id}', 'PostController@delete');
 Route::delete('api/users/{id}', 'UserController@delete');
+Route::delete('api/comments/{id}', 'CommentController@delete');
 
 // Authentication
 

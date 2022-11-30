@@ -15,7 +15,37 @@ use App\Models\Role;
 class CommentController extends Controller
 {
     public function show($id){
-        //$post = Post::find($id);
 
+    }
+
+    public function showEditForm($id){
+        if (!Auth::check()) return redirect('/login');
+        $comment = Comment::find($id);
+        return view('pages.editcomment', ['comment' => $comment]);
+    }
+
+    public function update(Request $request, $id){
+        $comment = Comment::find($id);
+
+        $this->authorize('update', $comment);
+  
+        $validate = $request->validate([
+          'commenttext' => 'required|max:500',
+        ]);
+        if($request->input('commenttext')!=$comment->commenttext) $comment->commenttext = $request->input('commenttext');
+  
+        $comment->save();
+
+        return redirect()->route('posts.comments', ['id'=>$comment->postid]);
+        
+    }
+
+    //Delete comment
+    public function delete(Request $request, $id)
+    {
+        $comment = Comment::find($id);
+        $this->authorize('delete', $comment);
+        $comment->delete();
+        return $comment;
     }
 }

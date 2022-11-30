@@ -19,6 +19,11 @@ function addEventListeners() {
     deleter.addEventListener('click', sendDeletePostRequest);
   });
 
+  let commentDeleters = document.querySelectorAll('article.comment div.card div.card-body a.delete');
+  [].forEach.call(commentDeleters, function(deleter) {
+    deleter.addEventListener('click', sendDeleteCommentRequest);
+  });
+
   let userDeleters = document.querySelectorAll('article.userbuttons a.delete');
   [].forEach.call(userDeleters, function(deleter) {
     deleter.addEventListener('click', sendDeleteUserRequest);
@@ -76,6 +81,12 @@ function sendDeletePostRequest(event) {
   sendAjaxRequest('delete', '/api/posts/' + id, null, postDeletedHandler);
 }
 
+function sendDeleteCommentRequest(event) {
+  let id = this.closest('article').getAttribute('data-id');
+  event.preventDefault();
+  sendAjaxRequest('delete', '/api/comments/' + id, null, commentDeletedHandler);
+}
+
 function sendDeleteUserRequest(event) {
   let id = this.closest('article').getAttribute('data-id');
   event.preventDefault();
@@ -124,6 +135,12 @@ function itemDeletedHandler() {
 function postDeletedHandler() {
   let post = JSON.parse(this.responseText);
   let article = document.querySelector('article.post[data-id="'+ post.id + '"]');
+  article.remove();
+}
+
+function commentDeletedHandler() {
+  let comment = JSON.parse(this.responseText);
+  let article = document.querySelector('article.comment[data-id="'+ comment.id + '"]');
   article.remove();
 }
 
