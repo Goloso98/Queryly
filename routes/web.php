@@ -21,6 +21,13 @@ Route::patch('users/{id}/edit',  'UserController@update')->name('users.update');
 Route::get('users/{id}/questions', 'PostController@showUserQuestions')->name('users.questions');
 Route::get('users/{id}/answers', 'PostController@showUserAnswers')->name('users.answers');
 
+
+//Comments
+Route::get('posts/{postid}/comments/new', 'CommentController@showCreateForm')->name('addComment');
+Route::post('posts/{postid}/comments/new', 'CommentController@postComment')->name('comments.addComment');
+Route::get('comments/{commentid}/edit', 'CommentController@showEditForm')->name('comments.edit');
+Route::patch('comments/{commentid}/edit', 'CommentController@update')->name('comment.update');
+
 //Posts
 Route::get('posts/questions/new', 'PostController@showAddQuestionForm')->name('addQuestion');
 Route::post('posts/questions/new', 'PostController@postQuestion')->name('posts.addQuestion');
@@ -33,9 +40,7 @@ Route::post('homepage', 'PostController@search')->name('exactMatchSearch');
 Route::get('posts/top', 'PostController@showTopQuestions')->name('posts.top');
 Route::get('posts/{id}', 'PostController@show')->name('posts.postPage'); //tem de ficar no fim
 
-//Comments
-Route::get('comments/{commentid}/edit', 'CommentController@showEditForm')->name('comments.edit');
-Route::patch('comments/{commentid}/edit', 'CommentController@update')->name('comment.update');
+
 
 // API
 Route::delete('api/posts/{id}', 'PostController@delete');

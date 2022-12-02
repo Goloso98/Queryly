@@ -11,7 +11,11 @@
         <div class="card">
             <div class="card-body">
                 <h2 class="card-title">Title: {{ $question->title }}</h2>
-                <p><a href="{{route('posts.comments', $question->id)}}">Comments</a></p>
+                <p>
+                    <a href="{{route('posts.comments', $question->id)}}">Comments</a>
+                    <a href="{{route('addComment', $question->id)}}">Comment Question</a>
+                </p>
+
                 @can('delete', $question)
                     <a class="delete" href="#"> Delete Question </a>
                 @endcan

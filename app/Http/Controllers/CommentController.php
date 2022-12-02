@@ -18,6 +18,32 @@ class CommentController extends Controller
 
     }
 
+    public function showCreateForm($id){
+        if (!Auth::check()) return redirect('/login');
+        $post = Post::find($id);
+        return view('pages.postcomment', ['post' => $post, 'showUser' => TRUE, 'showTitle' => TRUE]);
+    }
+
+    public function postComment(Request $request, $id){
+        
+        $user = Auth::user();
+        $post = Post::find($id);
+
+        $validate = $request->validate([
+            'commenttext' => 'required|max:500',
+        ]);
+
+        $commentText = $request->input('commenttext');
+
+        $data = array('userid' => $user->id, 'postid' => $id, 'commenttext' => $commentText);
+
+        $postID = DB::table('comments')->insertGetId($data);
+        
+        if($post->posttype == 'question') return view('pages.questionpage', ['user' => $user, 'question' => $post]);
+        if($post->posttype == 'answer') return view('pages.questionpage', ['user' => $user, 'question' => Post::find($post->parentpost)]);
+    }
+
+    //edit comments
     public function showEditForm($id){
         if (!Auth::check()) return redirect('/login');
         $comment = Comment::find($id);

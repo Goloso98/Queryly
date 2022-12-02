@@ -23,6 +23,8 @@
             @can('update', $answer)
                 <a class="btn" aria-current="page" href="{{  route('posts.edit', $answer->id)  }}">Edit</a>
             @endcan
+            <a href="{{route('posts.comments', $answer->id)}}">Comments</a>
+            <a href="{{route('addComment', $answer->id)}}">Comment Answer</a>
         </div>
     </div>
 </article>
