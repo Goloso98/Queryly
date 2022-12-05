@@ -40,17 +40,19 @@ Route::post('homepage', 'PostController@search')->name('exactMatchSearch');
 Route::get('posts/top', 'PostController@showTopQuestions')->name('posts.top');
 Route::get('posts/{id}', 'PostController@show')->name('posts.postPage'); //tem de ficar no fim
 
-
-
 // API
 Route::delete('api/posts/{id}', 'PostController@delete');
 Route::delete('api/users/{id}', 'UserController@delete');
 Route::delete('api/comments/{id}', 'CommentController@delete');
 
 // Authentication
-
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('register', 'Auth\RegisterController@register');
+
+//Static
+Route::view('aboutus', 'pages.about')->name('about');
+Route::view('contacts', 'pages.contacts')->name('contacts');
+Route::view('faq', 'pages.faq')->name('faq');

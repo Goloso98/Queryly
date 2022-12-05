@@ -27,9 +27,9 @@
                 }
             @endphp
             @if($userStar)
-                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>  {{ count($stars) }}
             @else
-                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>  {{ count($stars) }}
             @endif
             
         </div>

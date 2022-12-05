@@ -74,4 +74,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Badge');
     }
 
+    /**
+     * The stars this user has left
+     */
+    public function stars() {
+        return $this->hasMany('App\Models\Star', 'userid');
+    }
+
 }

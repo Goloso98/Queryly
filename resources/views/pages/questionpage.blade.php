@@ -25,6 +25,19 @@
                 <p class="card-text">{{ $question->posttext }}</p>
                 {{ $question->postdate }}
                 <a class="btn" aria-current="page" href="{{route('users.profile', $question->userid)}}">&#64;{{ $question->user()->first()->username }}</a>
+                <br>
+                @php
+                    $stars = DB::table('stars')->where('postid', $question->id)->get();
+                    $userStar = false;
+                    for($i = 0; $i < count($stars); $i++){
+                        if($stars[$i]->userid === Auth::id()) $userStar = true;
+                    }
+                @endphp
+                @if($userStar)
+                    <i class="fa-solid fa-star"></i>  {{ count($stars) }}
+                @else
+                    <i class="fa-regular fa-star"></i>  {{ count($stars) }}
+                @endif
             </div>
         </div>
     </article>

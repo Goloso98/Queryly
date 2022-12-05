@@ -217,5 +217,14 @@ class PostController extends Controller
       //dd($postModels->flatten());
       return view('pages.topquestions', ['questionStars'=>$postModels->flatten()]);
     }
-
+    
+    /*
+    function star(){
+      DB::table('stars')->insert(['postid' => $answer->id, 'userid' => Auth()::id]);
+    }
+    function unstar(){
+        $star = DB::table('stars')->where('postid', $answer->id)->where('userid', Auth()::id)->get();
+        $star->delete();
+    }
+    */
 }
