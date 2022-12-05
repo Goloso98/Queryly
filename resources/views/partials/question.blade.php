@@ -18,6 +18,20 @@
             @can('delete', $question)
                 <a class="delete" href="#"> Delete Question </a>
             @endcan
+            <br>
+            @php
+                $stars = DB::table('stars')->where('postid', $question->id)->get();
+                $userStar = false;
+                for($i = 0; $i < count($stars); $i++){
+                    if($stars[$i]->userid === Auth::id()) $userStar = true;
+                }
+            @endphp
+            @if($userStar)
+                <i class="fa-solid fa-star"></i>
+            @else
+                <i class="fa-regular fa-star"></i>
+            @endif
+            
         </div>
     </div>
 </article>
