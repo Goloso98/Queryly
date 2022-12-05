@@ -39,8 +39,8 @@ class CommentController extends Controller
 
         $postID = DB::table('comments')->insertGetId($data);
         
-        if($post->posttype == 'question') return view('pages.questionpage', ['user' => $user, 'question' => $post]);
-        if($post->posttype == 'answer') return view('pages.questionpage', ['user' => $user, 'question' => Post::find($post->parentpost)]);
+        if($post->posttype == 'question') return redirect()->route('posts.postPage', ['id' => $post->id]);
+        if($post->posttype == 'answer') return redirect()->route('posts.postPage', ['question' => Post::find($post->parentpost)]);
     }
 
     //edit comments
@@ -61,7 +61,7 @@ class CommentController extends Controller
         if($request->input('commenttext')!=$comment->commenttext) $comment->commenttext = $request->input('commenttext');
   
         $comment->save();
-
+        
         return redirect()->route('posts.comments', ['id'=>$comment->postid]);
         
     }
@@ -74,4 +74,9 @@ class CommentController extends Controller
         $comment->delete();
         return $comment;
     }
+
+    public static function showComments($postid) {
+        $comments = Comment::where('postid', '=', $postid)->get();
+        return $comments;
+      }
 }

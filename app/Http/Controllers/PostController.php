@@ -75,7 +75,7 @@ class PostController extends Controller
       $question = Post::find($postID);
       $user = Auth::user();
 
-      return view('pages.questionpage', ['user' => $user, 'question' => $question]);
+      return redirect()->route('posts.postPage', ['id' => $postID]);
     }
 
     //Add answer

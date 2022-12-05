@@ -23,8 +23,27 @@
             @can('update', $answer)
                 <a class="btn" aria-current="page" href="{{  route('posts.edit', $answer->id)  }}">Edit</a>
             @endcan
-            <a href="{{route('posts.comments', $answer->id)}}">Comments</a>
-            <a href="{{route('addComment', $answer->id)}}">Comment Answer</a>
+            <a class="btn" aria-current="page" href="{{route('addComment', $answer->id)}}">Add Comment</a>
+            <p></p>
+            @php
+                $answerComments = app\Http\Controllers\CommentController::showComments($answer->id);
+            @endphp
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                            Show Comments ({{count($answerComments)}})
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            @foreach($answerComments as $comment)
+                                @include('partials.comment')
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </article>

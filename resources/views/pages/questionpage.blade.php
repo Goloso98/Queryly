@@ -1,5 +1,6 @@
 @inject('post', 'App\Http\Controllers\PostController')
 @inject('user', 'App\Http\Controllers\UserController')
+@inject('comment', 'App\Http\Controllers\CommentController')
 
 @extends('layouts.app')
 
@@ -11,11 +12,6 @@
         <div class="card">
             <div class="card-body">
                 <h2 class="card-title">Title: {{ $question->title }}</h2>
-                <p>
-                    <a href="{{route('posts.comments', $question->id)}}">Comments</a>
-                    <a href="{{route('addComment', $question->id)}}">Comment Question</a>
-                </p>
-
                 @can('delete', $question)
                     <a class="delete" href="#"> Delete Question </a>
                 @endcan
@@ -25,6 +21,28 @@
                 <p class="card-text">{{ $question->posttext }}</p>
                 {{ $question->postdate }}
                 <a class="btn" aria-current="page" href="{{route('users.profile', $question->userid)}}">&#64;{{ $question->user()->first()->username }}</a>
+            </div>
+        </div>
+        @php
+            $questionComments = app\Http\Controllers\CommentController::showComments($question->id);
+        @endphp
+        <p></p>
+        <h5>Comments: ({{count($questionComments)}})</h5>
+        <a class="btn" aria-current="page" href="{{route('addComment', $question->id)}}">Add Comment</a>
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Show Comments
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        @foreach($questionComments as $comment)
+                            @include('partials.comment')
+                        @endforeach
+                    </div>
+                </div>
             </div>
         </div>
     </article>

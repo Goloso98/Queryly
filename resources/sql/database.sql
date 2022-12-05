@@ -507,3 +507,4 @@ INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (5,
 -- comments
 INSERT INTO comments (postID, userID, commentText) VALUES (1,1,'It has been solved');
 INSERT INTO comments (postID, userID, commentText) VALUES (15,1,'Thank you!');
+INSERT INTO comments(postID, userID, commentText) VALUES (3, 1, 'teste');

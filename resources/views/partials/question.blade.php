@@ -4,7 +4,6 @@
             <h3 class="card-title">{{ $question->title }}</h3>
             <p>
                 <a href="{{route('posts.postPage', $question->id)}}">See Post</a>
-                <a href="{{route('posts.comments', $question->id)}}">Comments</a>
             </p>
             <p class="card-text">{{ $question->posttext }}</p>
             {{ $question->postdate }}
