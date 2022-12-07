@@ -45,6 +45,9 @@ Route::delete('api/posts/{id}', 'PostController@delete');
 Route::delete('api/users/{id}', 'UserController@delete');
 Route::delete('api/comments/{id}', 'CommentController@delete');
 Route::put('api/star/{userid}/{postid}', 'StarController@create');
+Route::delete('api/star/{userid}/{postid}', 'StarController@delete');
+Route::put('api/posts/{id}/correct', 'PostController@correctness');
+
 
 // Authentication
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

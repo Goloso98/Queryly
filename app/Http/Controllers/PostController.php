@@ -214,17 +214,21 @@ class PostController extends Controller
         $postLeft = Post::where('posttype', '=', 'question')->whereNotIn('id', $arrSelected)->orderBy('id')->limit($countleft)->get();
         $postModels->push($postLeft->all());
       }
-      //dd($postModels->flatten());
       return view('pages.topquestions', ['questionStars'=>$postModels->flatten()]);
     }
-    
-    /*
-    function star(){
-      DB::table('stars')->insert(['postid' => $answer->id, 'userid' => Auth()::id]);
+
+    public function correctness($postid){
+      $userid = Auth::id();
+      $post = Post::find($postid);
+      error_log($post->iscorrect);
+      $this->authorize('markcorrect', $post);
+      if($post->iscorrect){
+        $post->iscorrect = false;
+      } else {
+        $post->iscorrect = true;
+      }
+
+      $post->save();
+      return;
     }
-    function unstar(){
-        $star = DB::table('stars')->where('postid', $answer->id)->where('userid', Auth()::id)->get();
-        $star->delete();
-    }
-    */
 }

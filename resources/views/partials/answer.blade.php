@@ -30,9 +30,9 @@
             $correct = $answer->iscorrect;
             @endphp
             @if( $correct )
-                <i class="fa-solid fa-circle-check"></i>
+                <i class="fa-solid fa-circle-check check"></i>
             @else
-                <i class="fa-regular fa-circle-check"></i>
+                <i class="fa-regular fa-circle-check check"></i>
             @endif
 
             @php

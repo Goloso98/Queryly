@@ -38,6 +38,11 @@ function addEventListeners() {
     creator.addEventListener('click', sendCreateStarRequest);
   });
 
+  let checkCreator = document.getElementsByClassName('check');
+  [].forEach.call(checkCreator, function(creator) {
+    creator.addEventListener('click', sendCreateCheckRequest);
+  });
+
 }
 
 function encodeForAjax(data) {
@@ -85,7 +90,18 @@ function sendCreateStarRequest(event){
   let postid = this.closest('article').getAttribute('data-id');
   let userid = this.closest('article').getAttribute('user-id');
   event.preventDefault();
-  sendAjaxRequest('put', '/api/star/' + userid + '/' + postid, null, ()=>{return starAddedHandler(this)});
+  if(this.classList.contains('fa-regular')){
+    sendAjaxRequest('put', '/api/star/' + userid + '/' + postid, null, ()=>{return starAddedHandler(this)});
+  } else {
+    sendAjaxRequest('delete', '/api/star/' + userid + '/' + postid, null, ()=>{return starAddedHandler(this)});
+  }
+  
+}
+
+function sendCreateCheckRequest(event){
+  let postid = this.closest('article').getAttribute('data-id');
+  event.preventDefault();
+  sendAjaxRequest('put', '/api/posts/' + postid + '/correct', null, ()=>{return checkAddedHandler(this)});
 }
 
 function sendDeletePostRequest(event) {
@@ -149,6 +165,18 @@ function starAddedHandler(creator){
     creator.classList.remove('fa-solid');
     creator.classList.add('fa-regular');
     creator.innerText = parseInt(creator.innerText) - 1;
+  }
+}
+
+function checkAddedHandler(creator){
+  //if (this.status != 200) window.reload();
+
+  if(creator.classList.contains('fa-regular')){
+    creator.classList.remove('fa-regular');
+    creator.classList.add('fa-solid');
+  } else if (creator.classList.contains('fa-solid')){
+    creator.classList.remove('fa-solid');
+    creator.classList.add('fa-regular');
   }
 }
 

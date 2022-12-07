@@ -16,8 +16,20 @@ class StarController extends Controller
 {
     public function create($postid){
         $userid = Auth::id();
-        DB::table('stars')->insert(['postid' => $postid, 'userid' => $userid]);;
+
+        if (Auth::check()){
+            DB::table('stars')->insert(['postid' => $postid, 'userid' => $userid]);
+        }
         return;
+    }
+
+    public function delete($postid){
+        $userid = Auth::id();
+        $star = Star::where('userid', $userid)->where('postid', $postid)->get();
+        $stardelete = Star::find($star[0]->id);
+        $this->authorize('unlikeaction', $stardelete);
+        $stardelete->delete();
+        return $stardelete;
     }
 
 }
