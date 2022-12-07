@@ -15,12 +15,12 @@
         @if (($post->posttype) == 'question')
             <div class="mb-3">
                 <h4>Title</h4>
-                <textarea name="title" id="title" class="form-control" rows="2"></textarea>
+                <textarea name="title" id="title" class="form-control" rows="2">{{$post->title}}</textarea>
             </div>
         @endif
         <div class="mb-3">
             <h5>Text</h5>
-            <textarea name="postText" id="postText" class="form-control" rows="8"></textarea>
+            <textarea name="postText" id="postText" class="form-control" rows="8">{{$post->posttext}}</textarea>
         </div>
 
         <div class="text-center">

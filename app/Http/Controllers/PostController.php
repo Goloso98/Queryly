@@ -113,11 +113,11 @@ class PostController extends Controller
 
       $validate = $request->validate([
         'title' => 'nullable|max:255',
-        'posttext' => 'required',
+        'postText' => 'required',
       ]);
 
       if($post->posttype == 'question' && $request->input('title')!=$post->title) $post->title = $request->input('title');
-      if($request->input('posttext')!=$post->posttext) $post->posttext = $request->input('posttext');
+      if($request->input('postText')!=$post->posttext) $post->posttext = $request->input('postText');
 
       $post->save();
 

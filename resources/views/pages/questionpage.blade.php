@@ -27,8 +27,10 @@
             $questionComments = app\Http\Controllers\CommentController::showComments($question->id);
         @endphp
         <p></p>
-        <h5>Comments: ({{count($questionComments)}})</h5>
-        <a class="btn" aria-current="page" href="{{route('addComment', $question->id)}}">Add Comment</a>
+        <div class="flex-header">
+            <h5>Comments: ({{count($questionComments)}})</h5>
+            <a class="btn" aria-current="page" href="{{route('addComment', $question->id)}}">Add Comment</a>
+        </div>
         <div class="accordion" id="accordionExample">
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
@@ -51,8 +53,10 @@
         @php
             $answers = app\Http\Controllers\PostController::showAnswers($question->id);
         @endphp
-        <h3>Answers: ({{count($answers)}})</h3>
-        <a class="btn" aria-current="page" href="{{ route('addAnswer') }}?question={{$question->id}}"> Post Answer </a>
+        <div class="flex-header">
+            <h3>Answers: ({{count($answers)}})</h3>
+            <a class="btn" aria-current="page" href="{{ route('addAnswer') }}?question={{$question->id}}"> Post Answer </a>
+        </div>
     </header>
     <p></p>
     <ul>
