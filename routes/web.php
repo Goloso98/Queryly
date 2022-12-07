@@ -44,6 +44,7 @@ Route::get('posts/{id}', 'PostController@show')->name('posts.postPage'); //tem d
 Route::delete('api/posts/{id}', 'PostController@delete');
 Route::delete('api/users/{id}', 'UserController@delete');
 Route::delete('api/comments/{id}', 'CommentController@delete');
+Route::put('api/star/{userid}/{postid}', 'StarController@create');
 
 // Authentication
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

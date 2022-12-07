@@ -7,7 +7,7 @@
 
 @section('content')
     <p></p>
-    <article class="post" data-id="{{ $question->id }}">
+    <article class="post" data-id="{{ $question->id }}" user-id="{{Auth::id()}}">
         <div class="card">
             <div class="card-body">
                 <h2 class="card-title">Title: {{ $question->title }}</h2>
@@ -34,13 +34,14 @@
                     }
                 @endphp
                 @if($userStar)
-                    <i class="fa-solid fa-star"></i>  {{ count($stars) }}
+                    <i class="fa-solid fa-star star">{{ count($stars) }}</i>
                 @else
-                    <i class="fa-regular fa-star"></i>  {{ count($stars) }}
+                    <i class="fa-regular fa-star star">{{ count($stars) }}</i>
                 @endif
             </div>
         </div>
     </article>
+
     <p></p>
     <header>
         @php

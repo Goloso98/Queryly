@@ -32,9 +32,13 @@ function addEventListeners() {
   let cardCreator = document.querySelector('article.card form.new_card');
   if (cardCreator != null)
     cardCreator.addEventListener('submit', sendCreateCardRequest);
+
+  let starCreator = document.getElementsByClassName('star');
+  [].forEach.call(starCreator, function(creator) {
+    creator.addEventListener('click', sendCreateStarRequest);
+  });
+
 }
-
-
 
 function encodeForAjax(data) {
   if (data == null) return null;
@@ -75,6 +79,13 @@ function sendCreateItemRequest(event) {
     sendAjaxRequest('put', '/api/cards/' + id, {description: description}, itemAddedHandler);
 
   event.preventDefault();
+}
+
+function sendCreateStarRequest(event){
+  let postid = this.closest('article').getAttribute('data-id');
+  let userid = this.closest('article').getAttribute('user-id');
+  event.preventDefault();
+  sendAjaxRequest('put', '/api/star/' + userid + '/' + postid, null, ()=>{return starAddedHandler(this)});
 }
 
 function sendDeletePostRequest(event) {
@@ -125,6 +136,20 @@ function itemAddedHandler() {
 
   // Reset the new item form
   form.querySelector('[type=text]').value="";
+}
+
+function starAddedHandler(creator){
+  //if (this.status != 200) window.reload();
+
+  if(creator.classList.contains('fa-regular')){
+    creator.classList.remove('fa-regular');
+    creator.classList.add('fa-solid');
+    creator.innerText = parseInt(creator.innerText) + 1;
+  } else if (creator.classList.contains('fa-solid')){
+    creator.classList.remove('fa-solid');
+    creator.classList.add('fa-regular');
+    creator.innerText = parseInt(creator.innerText) - 1;
+  }
 }
 
 function itemDeletedHandler() {

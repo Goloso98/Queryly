@@ -1,4 +1,4 @@
-<article class="post" data-id="{{ $question->id }}">
+<article class="post" data-id="{{ $question->id }}" user-id="{{ Auth::id() }}">
     <div class="card">
         <div class="card-body">
             <h3 class="card-title">{{ $question->title }}</h3>
@@ -27,11 +27,10 @@
                 }
             @endphp
             @if($userStar)
-                <i class="fa-solid fa-star"></i>  {{ count($stars) }}
+                <i class="fa-solid fa-star star">{{ count($stars) }}</i>  
             @else
-                <i class="fa-regular fa-star"></i>  {{ count($stars) }}
+                <i class="fa-regular fa-star star">{{ count($stars) }}</i>  
             @endif
-            
         </div>
     </div>
 </article>
