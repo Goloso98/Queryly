@@ -4,7 +4,7 @@
             <p class="card-text">{{ $comment->commenttext }}</p>
             {{ $comment->commentdate }}
             @php
-            $username = DB::table('users')->find($comment->userid)->username;
+                $username = DB::table('users')->find($comment->userid)->username;
             @endphp
             <a class="btn" aria-current="page" href="{{route('users.profile', $question->userid)}}">&#64;{{$username}}</a>
             <p></p>

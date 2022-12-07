@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<p></p>
+<h2 class="text-center">Post Your Question</h2>
+<p></p>
 <form method="POST" action="{{ route('addQuestion') }}">
     {{ csrf_field() }}
-    <h3>Post your question</h3>
     <br>
     <div class="mb-3">
       <h4>Title</h4>

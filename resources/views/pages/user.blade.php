@@ -14,9 +14,9 @@
       </div>
       <div class="col">
         <header>
-          <h2><a href="/users/{{ $user->id }}">{{ $user->name }}</a></h2>
+          <h2>{{ $user->name }}</h2>
           @if($role == 'Administrator' && Auth::user() == $user)
-            <p>({{$role}})</p>
+            <p class="role">({{$role}})</p>
           @endif
         </header>
         <p>&#64;{{ $user->username }}</p>

@@ -69,6 +69,10 @@
 .menu__item:hover {
   background-color: #CFD8DC;
 }
+.role {
+  font-size: 0.875rem;
+  color: grey;
+}
 
 #count-title {
   float: right;
