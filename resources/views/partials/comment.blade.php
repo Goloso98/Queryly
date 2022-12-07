@@ -12,7 +12,7 @@
                 <a class="btn" aria-current="page" href="{{  route('comments.edit', $comment->id)  }}">Edit</a>
             @endcan
             @can('delete', $comment)
-                <a class="delete" href="#"> Delete Comment </a>
+                <a class="delete" id="delete-comment" href="#"> Delete Comment </a>
             @endcan
         </div>
     </div>

@@ -12,6 +12,16 @@
                         <a class="btn" aria-current="page" href="{{  route('posts.edit', $answer->id)  }}">Edit</a>
                     @endcan
                 </p>
+                @else
+                <p>
+                    @can('delete', $answer)
+                    <a href="#" class="delete">Delete</a>
+                    @endcan
+                    @can('update', $answer)
+                    <a class="btn" aria-current="page" href="{{  route('posts.edit', $answer->id)  }}">Edit</a>
+                    @endcan
+                    <a class="btn" aria-current="page" href="{{route('addComment', $answer->id)}}">Add Comment</a>
+                </p>
             @endif
             <p class="card-text">{{ $answer->posttext }}</p>
             @if($showTitle)
@@ -23,8 +33,6 @@
             @endif
             <p></p>
             @if(!$showTitle)
-                <a class="btn" aria-current="page" href="{{route('addComment', $answer->id)}}">Add Comment</a>
-                <p></p>
                 @php
                     $answerComments = app\Http\Controllers\CommentController::showComments($answer->id);
                 @endphp

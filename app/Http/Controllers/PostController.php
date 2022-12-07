@@ -83,7 +83,8 @@ class PostController extends Controller
     {
       if (!Auth::check()) return redirect('/login');
       $postParent = $request->input('question');
-      return view('pages.postanswer', ['postParent' => $postParent]);
+      $post = Post::find($postParent);
+      return view('pages.postanswer', ['post' => $post]);
     }
 
     protected function postAnswer(Request $request)
