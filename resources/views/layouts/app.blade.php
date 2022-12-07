@@ -25,16 +25,7 @@
     </div>
     <div class="container">
       <div class="row">
-        <!-- <div class="col-1" style="width: 0%">
-            <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-                <p></p>
-                <a type="button" class="btn btn-outline-dark" href="{{ route('homepage') }}">Browse</a>
-                <a type="button" class="btn btn-outline-dark" href="{{ route('posts.top') }}">Top Questions</a>
-                <a type="button" class="btn btn-outline-dark" href="#">Users</a>
-                <a type="button" class="btn btn-outline-dark" href="#">Tags</a>
-            </div>
-        </div> -->
-        <div class="col" style="width: 0%>
+        <div class="col" style="width: 0%">
             <div class="container">
                 <!-- <x-breadcrumb /> -->
                 <div class="row">
@@ -48,11 +39,11 @@
         </div>
       </div>
     </div>
-<div class="bg-info">
-    <div class="container">
-        @include('partials.footer')
+    <div class="bg-info">
+        <div class="container">
+            @include('partials.footer')
+        </div>
     </div>
-</div>
 
 </body>
 <!-- v3 -->
