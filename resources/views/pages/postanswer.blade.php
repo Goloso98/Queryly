@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<form method="POST" action="{{ route('addAnswer') }}">
+<form method="POST" action="{{ route('posts.addAnswer') }}">
     {{ csrf_field() }}
+    <input type="hidden" name="parentPost" value="{{ $postParent }}">
     <h3>Post your answer</h3>
     <br>
     <div class="mb-3">

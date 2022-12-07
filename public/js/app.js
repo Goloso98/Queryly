@@ -212,3 +212,25 @@ function createItem(item) {
 }
 
 window.onload = addEventListeners;
+
+const textAreaElement = document.querySelector("#title");
+const characterCounterElement = document.querySelector("#the-count");
+const typedCharactersElement = document.querySelector("#current");
+const maximumTitleCharacters = 200;
+
+textAreaElement.addEventListener("input", (event) => {
+
+    const typedCharacters = textAreaElement.value.length;
+
+    if (typedCharacters > maximumTitleCharacters) {
+        return false;
+    }
+
+    typedCharactersElement.textContent = typedCharacters;
+
+    if (typedCharacters >= 100 && typedCharacters < 150) {
+        characterCounterElement.classList = "text-warning";
+    } else if (typedCharacters >= 150) {
+        characterCounterElement.classList = "text-danger";
+    }
+});

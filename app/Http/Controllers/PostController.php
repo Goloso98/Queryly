@@ -91,14 +91,13 @@ class PostController extends Controller
       $userID = Auth::id();
       $postText = $request->input('postText');
       $parentPost = $request->input('parentPost');
+      error_log($parentPost);
       $data = array('userid' => $userID, 'posttype' => 'answer', 'posttext' => $postText, 'parentpost' => $parentPost, 'iscorrect' => 'false');
       $postID = DB::table('posts')->insertGetId($data);
 
-      $question = Post::find($parentPost);
-      $answer = Post::find($postID);
       $user = Auth::user();
 
-      return view('pages.questionpage', ['user' => $user, 'question' => $question]);
+      return redirect()->route('posts.postPage', ['id' => $parentPost]);
     }
 
     //Edit post

@@ -7,7 +7,11 @@
     <br>
     <div class="mb-3">
       <h4>Title</h4>
-      <textarea name="title" id="title" class="form-control" rows="2"></textarea>
+      <textarea name="title" id="title" class="form-control" rows="2" maxlength="200"></textarea>
+      <div id="the-count">
+        <span id="current">0</span>
+        <span id="maximum">/ 200</span>
+      </div>
     </div>
     <div class="mb-3">
       <h5>Text</h5>

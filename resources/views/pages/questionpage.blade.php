@@ -32,11 +32,11 @@
         <div class="accordion" id="accordionExample">
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                         Show Comments
                     </button>
                 </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         @foreach($questionComments as $comment)
                             @include('partials.comment')
@@ -52,7 +52,7 @@
             $answers = app\Http\Controllers\PostController::showAnswers($question->id);
         @endphp
         <h3>Answers: ({{count($answers)}})</h3>
-        <a class="btn" aria-current="page" href="{{ route('posts.addAnswer') }}?question={{$question->id}}"> Post Answer </a>
+        <a class="btn" aria-current="page" href="{{ route('addAnswer') }}?question={{$question->id}}"> Post Answer </a>
     </header>
     <p></p>
     <ul>
