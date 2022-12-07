@@ -1,4 +1,4 @@
-<form action="{{ route('exactMatchSearch') }}" method="post">
+<form action="{{ route('exactMatchSearch') }}" method="post" class="searchbar">
     {{ csrf_field() }}
     <input type="text" placeholder="Search" name="search" id="search" value="{{ request()->input('search') }}">
     <br>

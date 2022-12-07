@@ -213,24 +213,49 @@ function createItem(item) {
 
 window.onload = addEventListeners;
 
-const textAreaElement = document.querySelector("#title");
-const characterCounterElement = document.querySelector("#the-count");
-const typedCharactersElement = document.querySelector("#current");
+const titleTextArea = document.querySelector("#title");
+const titleCounter = document.querySelector("#count-title");
+const titleTypedCharacters = document.querySelector("#current-title");
 const maximumTitleCharacters = 200;
 
-textAreaElement.addEventListener("input", (event) => {
+titleTextArea.addEventListener("input", (event) => {
 
-    const typedCharacters = textAreaElement.value.length;
+    const typedCharacters = titleTextArea.value.length;
 
     if (typedCharacters > maximumTitleCharacters) {
         return false;
     }
 
-    typedCharactersElement.textContent = typedCharacters;
+    titleTypedCharacters.textContent = typedCharacters;
 
     if (typedCharacters >= 100 && typedCharacters < 150) {
-        characterCounterElement.classList = "text-warning";
+      titleCounter.classList = "text-warning";
     } else if (typedCharacters >= 150) {
-        characterCounterElement.classList = "text-danger";
+       titleCounter.classList = "text-danger";
     }
 });
+
+const textTextArea = document.querySelector("#postText");
+const textCounter = document.querySelector("#count-text");
+const textTypedCharacters = document.querySelector("#current-text");
+const maximumTextCharacters = 1000;
+
+textTextArea.addEventListener("input", (event) => {
+
+    const typedCharacters = textTextArea.value.length;
+
+    if (typedCharacters > maximumTextCharacters) {
+      return false;
+    }
+
+    textTypedCharacters.textContent = typedCharacters;
+
+    if (typedCharacters >= 100 && typedCharacters < 150) {
+      textCounter.classList = "text-warning";
+    } else if (typedCharacters >= 150) {
+      textCounter.classList = "text-danger";
+    }
+});
+
+
+

@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/js/bootstrap.bundle.min.js" defer></script>
     <script src="{{ URL::asset('js/app.js') }}" defer></script>
 </head>
@@ -24,7 +25,7 @@
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-1" style="width: 0%">
+        <!-- <div class="col-1" style="width: 0%">
             <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
                 <p></p>
                 <a type="button" class="btn btn-outline-dark" href="{{ route('homepage') }}">Browse</a>
@@ -32,7 +33,7 @@
                 <a type="button" class="btn btn-outline-dark" href="#">Users</a>
                 <a type="button" class="btn btn-outline-dark" href="#">Tags</a>
             </div>
-        </div>
+        </div> -->
         <div class="col" style="width: 0%>
             <div class="container">
                 <!-- <x-breadcrumb /> -->
