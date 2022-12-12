@@ -26,8 +26,9 @@
             <a href="{{route('posts.comments', $answer->id)}}">Comments</a>
             <a href="{{route('addComment', $answer->id)}}">Comment Answer</a>
             <br>
+
             @php
-            $correct = $answer->iscorrect;
+                $correct = $answer->iscorrect;
             @endphp
             @if( $correct )
                 <i class="fa-solid fa-circle-check check"></i>
@@ -37,15 +38,21 @@
 
             @php
                 $stars = DB::table('stars')->where('postid', $answer->id)->get();
-                $userStar = false;
-                for($i = 0; $i < count($stars); $i++){
-                    if($stars[$i]->userid === Auth::id()) $userStar = true;
-                }
             @endphp
-            @if($userStar)
-                <i class="fa-solid fa-star star">{{ count($stars) }}</i>
+            @if(Auth::check())
+                @php
+                    $userStar = false;
+                    for($i = 0; $i < count($stars); $i++){
+                        if($stars[$i]->userid === Auth::id()) $userStar = true;
+                    }
+                @endphp
+                @if($userStar)
+                    <i class="fa-solid fa-star star">{{ count($stars) }}</i>  
+                @else
+                    <i class="fa-regular fa-star star">{{ count($stars) }}</i>  
+                @endif
             @else
-                <i class="fa-regular fa-star star">{{ count($stars) }}</i>
+               <i class="fa-regular fa-star">{{ count($stars) }}</i>
             @endif
         </div>
     </div>
