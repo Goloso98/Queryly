@@ -20,6 +20,7 @@ Route::get('users/{id}/edit',  'UserController@showEditForm')->name('editUser');
 Route::patch('users/{id}/edit',  'UserController@update')->name('users.update');
 Route::get('users/{id}/questions', 'PostController@showUserQuestions')->name('users.questions');
 Route::get('users/{id}/answers', 'PostController@showUserAnswers')->name('users.answers');
+Route::get('users/{id}/badges', 'UserController@showBadges')->name('users.badges');
 
 
 //Comments

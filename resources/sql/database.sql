@@ -511,3 +511,16 @@ INSERT INTO comments (postID, userID, commentText) VALUES (15,1,'Thank you!');
 
 --stars
 INSERT INTO stars (postID, userID) VALUES (1,2);
+
+--badges
+INSERT INTO badges (badgeName) VALUES ('Posted 5 questions');
+INSERT INTO badges (badgeName) VALUES ('Posted 10 questions');
+INSERT INTO badges (badgeName) VALUES ('Posted 15 questions');
+INSERT INTO badges (badgeName) VALUES ('Answered 5 questions');
+INSERT INTO badges (badgeName) VALUES ('Answered 10 questions');
+INSERT INTO badges (badgeName) VALUES ('Answered 15 questions');
+
+--user badge relationship
+INSERT INTO user_badges (userID, badgeID) VALUES (1,1);
+INSERT INTO user_badges (userID, badgeID) VALUES (1,2); 
+
