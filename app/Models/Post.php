@@ -38,6 +38,6 @@ class Post extends Model
    *  The tags attached to this post
    */
   public function tags() {
-    return $this->hasMany('App\Models\Tag');
+    return $this->belongsToMany(Tag::class, 'question_tags', 'postid', 'tagid');
   }
 }

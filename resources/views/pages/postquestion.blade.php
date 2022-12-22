@@ -13,6 +13,15 @@
       <h5>Text</h5>
       <textarea name="postText" id="postText" class="form-control" rows="8"></textarea>
     </div>
+    <div class="mb-3">
+        <h5>Tags</h5>
+          @foreach(App\Models\Tag::all() as $tag)
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="{{ $tag->tagname }}" id="{{ $tag->tagname }}" name="{{ $tag->tagname }}">
+              <label class="form-check-label" for="{{ $tag->tagname }}">{{ $tag->tagname }}</label>
+            </div>
+          @endforeach
+    </div>
 
     <div class="text-center">
       <button type="submit">

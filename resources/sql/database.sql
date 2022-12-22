@@ -522,5 +522,10 @@ INSERT INTO badges (badgeName) VALUES ('Answered 15 questions');
 
 --user badge relationship
 INSERT INTO user_badges (userID, badgeID) VALUES (1,1);
-INSERT INTO user_badges (userID, badgeID) VALUES (1,2); 
+INSERT INTO user_badges (userID, badgeID) VALUES (1,2);
+
+--tags
+INSERT INTO tags (tagName) VALUES ('code');
+INSERT INTO tags (tagName) VALUES ('cook');
+INSERT INTO tags (tagName) VALUES ('animals');
 

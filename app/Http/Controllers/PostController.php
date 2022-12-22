@@ -11,6 +11,8 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Comment;
+use App\Models\Tag;
+use App\Models\Question_Tag;
 
 class PostController extends Controller
 {
@@ -67,14 +69,18 @@ class PostController extends Controller
     protected function postQuestion(Request $request)
     {
       $userID = Auth::id();
+      $tags = Tag::all();
       $title = $request->input('title');
       $postText = $request->input('postText');
-      $data = array('userid' => $userID, 'posttype' => 'question', 'title' => $title, 'posttext' => $postText );
+      $data = array('userid' => $userID, 'posttype' => 'question', 'title' => $title, 'posttext' => $postText);
       $postID = DB::table('posts')->insertGetId($data);
-
       $question = Post::find($postID);
+      foreach($tags as $tag){
+        if($request->has($tag->tagname)){
+          Question_tag::insert(['postid' => $postID, 'tagid' => $tag->id]);
+        }
+      }
       $user = Auth::user();
-
       return view('pages.questionpage', ['user' => $user, 'question' => $question]);
     }
 
