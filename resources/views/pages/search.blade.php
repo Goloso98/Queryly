@@ -6,11 +6,12 @@
     <ul>
         @if($searchfor == 'questions')
             @foreach($questions as $question)
-                @include('partials.question', ['showUser' => TRUE])
+                @foreach($questionsTag as $questionT)
+                    @if($question->id === $questionT->id)
+                        @include('partials.question', ['showUser' => TRUE])~
+                    @endif
+                @endforeach
             @endforeach
-        @endif
-        @if($searchfor == 'users')
-            @each('partials.userforhome', $users, 'user')
         @endif
     </ul>
 

@@ -138,10 +138,10 @@ class PostController extends Controller
     public function search(Request $request)
     {
       $request->validate([
-            'search' => 'nullable',
-            'tags' => 'nullable',
-            'orderby' => 'required',
-            'searchfor' => 'required',
+        'search' => 'nullable',
+        'tag' => 'nullable',
+        'orderby' => 'required',
+        'searchfor' => 'required',
       ]);
 
       $order = $request->input('orderby');
@@ -149,34 +149,29 @@ class PostController extends Controller
 
       if($request->has('search')){
         $title = $request->input('search');
-        $statement1 = 'tsvectors @@ plainto_tsquery(\'english\',\'?\')';
-        $posts = Post::whereRaw($statement1, [$title]);
 
-        /* $name = $request->input('search');
-        $statement2 = 'tsvectors @@ plainto_tsquery(\'english\',\'?\')';
-        $users = User::whereRaw($statement2, [$name]); */
-        //dd($users);
+        $statement1 = 'tsvectors @@ plainto_tsquery(\'english\',\''.$title.'\')';
+        $posts = Post::whereRaw($statement1);
+
+        /* $statement1 = 'tsvectors @@ plainto_tsquery(\'english\',\'?\')';
+        $posts = Post::whereRaw($statement1, [$title]); */
       } else {
         //here because code gets angry otherwise
         $posts = Post::all();
-        //$users = User::all();
       }
 
-/*      if($request->has('search')){
+    /* if($request->has('search')){
         $title = $request->input('search');
         $posts = Post::where('title','ILIKE',"$title");
-      }
-*/
-
-      /* if($request->has('tag')){
-        $tag = $request->input('tag');
-        $tag = Tag::where('tagname', 'ILIKE', "$tag")->value($id);
-        $relationships = Question_Tag::where('tagid','ILIKE',"$tagids");
-        for($i = 0; $i < $relationships.length(); $i++){
-          $postid = $relationships -> get post ids
-          $posts->where('id', 'LIKE', $postid);
-        } 
       } */
+
+      if($request->has('tag')){
+        $tag = $request->input('tag');
+        $tagid = Tag::where('tagname', 'ILIKE', "$tag")->value('id');
+        //$relationships = Question_Tag::where('tagid','ILIKE',"$tag");
+        $tagforpost = Tag::find($tagid);
+        $postsTag = $tagforpost->posts;
+      }
 
       if($order == 'Newest'){
         $posts = $posts->orderBy('postdate', 'DESC');
@@ -184,10 +179,10 @@ class PostController extends Controller
         $posts = $posts->orderBy('postdate', 'ASC');
       }
 
-      if ($searchfor == 'questions') $posts = $posts->get();
-      if ($searchfor == 'users') $users = $users->get();
+      $posts = $posts->get();
 
-      return view('pages.search', ['searchfor' => $searchfor, 'questions' => $posts, 'users' => $users], compact('posts'));
+      return view('pages.search', ['searchfor' => $searchfor, 'questions' => $posts, 'questionsTag' => $postsTag], compact('posts'));
+
     }
 
     //Show Post's Answers
