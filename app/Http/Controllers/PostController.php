@@ -146,21 +146,20 @@ class PostController extends Controller
 
       $order = $request->input('orderby');
       $searchfor = $request->input('searchfor');
-      //dd($searchfor);
 
       if($request->has('search')){
         $title = $request->input('search');
         $statement1 = 'tsvectors @@ plainto_tsquery(\'english\',\'?\')';
         $posts = Post::whereRaw($statement1, [$title]);
 
-        $name = $request->input('search');
+        /* $name = $request->input('search');
         $statement2 = 'tsvectors @@ plainto_tsquery(\'english\',\'?\')';
-        $users = User::whereRaw($statement2, [$name]);
+        $users = User::whereRaw($statement2, [$name]); */
         //dd($users);
       } else {
         //here because code gets angry otherwise
         $posts = Post::all();
-        $users = User::all();
+        //$users = User::all();
       }
 
 /*      if($request->has('search')){
@@ -169,10 +168,9 @@ class PostController extends Controller
       }
 */
 
-      /* if($request->has('tags')){
-        $tag = $request->input('tags');
-        $tags = Tag::where('tagname', 'ILIKE', "$tag");
-        $tagsid -> get ids
+      /* if($request->has('tag')){
+        $tag = $request->input('tag');
+        $tag = Tag::where('tagname', 'ILIKE', "$tag")->value($id);
         $relationships = Question_Tag::where('tagid','ILIKE',"$tagids");
         for($i = 0; $i < $relationships.length(); $i++){
           $postid = $relationships -> get post ids

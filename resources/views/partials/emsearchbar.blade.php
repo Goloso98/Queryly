@@ -2,7 +2,15 @@
     {{ csrf_field() }}
     <input type="text" placeholder="Search" name="search" id="search" value="{{ request()->input('search') }}">
     <br>
-    <!-- <input type="text" placeholder="Tags" name="tags" id="tags" value="{{ request()->input('tags') }}"> -->
+    
+    <div class = "dropdown">
+        <select id = "tag" name = "tag">
+            @foreach(App\Models\Tag::all() as $tag)
+                <option value="{{ $tag->tagname }}">{{ $tag->tagname }}</option>
+            @endforeach
+        </select>
+    </div>
+    
     <br>
     <div class = "dropdown">
         <select id = "orderby" name = "orderby">

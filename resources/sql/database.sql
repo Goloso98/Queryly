@@ -529,3 +529,8 @@ INSERT INTO tags (tagName) VALUES ('code');
 INSERT INTO tags (tagName) VALUES ('cook');
 INSERT INTO tags (tagName) VALUES ('animals');
 
+--user tags
+INSERT INTO user_tags (userID, tagID) VALUES (1,1);
+INSERT INTO user_tags (userID, tagID) VALUES (1,2);
+INSERT INTO user_tags (userID, tagID) VALUES (1,3);
+
