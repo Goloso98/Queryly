@@ -7,9 +7,11 @@
 <h2 class="text-center">Your Answers</h2>
 <p></p>
 <ul>
-  @foreach($answers as $answer)
+  @forelse($answers as $answer)
     @include('partials.answer', ['showTitle' => TRUE])
-  @endforeach
+  @empty
+    <p class="info-message">You haven't posted any answers yet.</p>
+  @endforelse
 </ul>
 
 @endsection

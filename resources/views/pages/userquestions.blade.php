@@ -7,9 +7,11 @@
 <h2 class="text-center">Your Questions</h2>
 <p></p>
 <ul>
-  @foreach($questions as $question)
+  @forelse($questions as $question)
     @include('partials.question', ['showUser' => FALSE])
-  @endforeach
+  @empty
+    <p class="info-message">You haven't posted any questions yet.</p>
+  @endforelse
 </ul>
 
 @endsection
