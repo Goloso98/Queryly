@@ -1,5 +1,5 @@
 function addEventListeners() {
-  let postDeleters = document.querySelectorAll('article.post div.card div.card-body a.delete');
+  let postDeleters = document.querySelectorAll('#delete-post');
   [].forEach.call(postDeleters, function(deleter) {
     deleter.addEventListener('click', sendDeletePostRequest);
   });

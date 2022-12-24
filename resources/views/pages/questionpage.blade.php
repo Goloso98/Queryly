@@ -13,7 +13,7 @@
             <div class="card-body">
                 <h2 class="card-title">Title: {{ $question->title }}</h2>
                 @can('delete', $question)
-                    <a class="delete" href="#"> Delete Question </a>
+                    <a class="delete" id="delete-post" href="#"> Delete Question </a>
                 @endcan
                 @can('update', $question)
                     <a class="btn" aria-current="page" href="{{  route('posts.edit', $question->id)  }}">Edit</a>

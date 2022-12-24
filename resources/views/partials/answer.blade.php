@@ -6,7 +6,7 @@
                 <p>
                     <a href="{{route('posts.postPage', $answer->parentpost)}}">See Post</a>
                     @can('delete', $answer)
-                        <a href="#" class="delete">Delete</a>
+                        <a href="#" class="delete" id="delete-post">Delete</a>
                     @endcan
                     @can('update', $answer)
                         <a class="btn" aria-current="page" href="{{  route('posts.edit', $answer->id)  }}">Edit</a>
@@ -15,7 +15,7 @@
                 @else
                 <p>
                     @can('delete', $answer)
-                    <a href="#" class="delete">Delete</a>
+                    <a href="#" class="delete" id="delete-post">Delete</a>
                     @endcan
                     @can('update', $answer)
                     <a class="btn" aria-current="page" href="{{  route('posts.edit', $answer->id)  }}">Edit</a>
