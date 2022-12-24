@@ -15,13 +15,32 @@
         @if (($post->posttype) == 'question')
             <div class="mb-3">
                 <h4>Title</h4>
-                <textarea name="title" id="title" class="form-control" rows="2"></textarea>
+                <textarea name="title" id="title" class="form-control" rows="2">{{ $post->title }}</textarea>
             </div>
         @endif
         <div class="mb-3">
             <h5>Text</h5>
-            <textarea name="postText" id="postText" class="form-control" rows="8"></textarea>
+            <textarea name="posttext" id="posttext" class="form-control" rows="8">{{ $post->posttext }}</textarea>
         </div>
+        @if (($post->posttype) == 'question')
+            <div class="mb-3">
+                <h5>Tags</h5>
+                @foreach($post->tags as $tag)
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="{{ $tag->tagname }}" id="{{ $tag->tagname }}" name="{{ $tag->tagname }}" checked>
+                        <label class="form-check-label" for="{{ $tag->tagname }}">{{ $tag->tagname }}</label>
+                    </div>
+                @endforeach
+                @foreach(App\Models\Tag::all() as $tag)
+                    @if(!($post->tags->contains($tag->id)))
+                        <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="{{ $tag->tagname }}" id="{{ $tag->tagname }}" name="{{ $tag->tagname }}" >
+                        <label class="form-check-label" for="{{ $tag->tagname }}">{{ $tag->tagname }}</label>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+        @endif
 
         <div class="text-center">
             <button type="submit">

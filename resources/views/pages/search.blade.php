@@ -4,15 +4,11 @@
     @include('partials.emsearchbar')
     
     <ul>
-        @if($searchfor == 'questions')
-            @foreach($questions as $question)
-                @foreach($questionsTag as $questionT)
-                    @if($question->id === $questionT->id)
-                        @include('partials.question', ['showUser' => TRUE])~
-                    @endif
-                @endforeach
-            @endforeach
-        @endif
+        @forelse($questions as $question)
+            @include('partials.question', ['showUser' => TRUE])
+        @empty
+            <p>No results found</p>
+        @endforelse
     </ul>
 
 @endsection

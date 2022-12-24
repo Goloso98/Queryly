@@ -116,6 +116,7 @@ class PostController extends Controller
 
     public function update(Request $request, $id){
       $post = Post::find($id);
+      $tags = Tag::all();
       $this->authorize('update', $post);
 
       $validate = $request->validate([
@@ -125,6 +126,13 @@ class PostController extends Controller
 
       if($post->posttype == 'question' && $request->input('title')!=$post->title) $post->title = $request->input('title');
       if($request->input('posttext')!=$post->posttext) $post->posttext = $request->input('posttext');
+
+      Question_tag::where('postid', $id)->delete();
+      foreach($tags as $tag){
+        if($request->has($tag->tagname)){
+          Question_tag::insert(['postid' => $id, 'tagid' => $tag->id]);
+        }
+      }
 
       $post->save();
 
@@ -139,13 +147,11 @@ class PostController extends Controller
     {
       $request->validate([
         'search' => 'nullable',
-        'tag' => 'nullable',
+        'tag.*' => 'numeric',
         'orderby' => 'required',
-        'searchfor' => 'required',
       ]);
 
       $order = $request->input('orderby');
-      $searchfor = $request->input('searchfor');
 
       if($request->has('search')){
         $title = $request->input('search');
@@ -160,28 +166,23 @@ class PostController extends Controller
         $posts = Post::all();
       }
 
-    /* if($request->has('search')){
-        $title = $request->input('search');
-        $posts = Post::where('title','ILIKE',"$title");
-      } */
-
-      if($request->has('tag')){
-        $tag = $request->input('tag');
-        $tagid = Tag::where('tagname', 'ILIKE', "$tag")->value('id');
-        //$relationships = Question_Tag::where('tagid','ILIKE',"$tag");
-        $tagforpost = Tag::find($tagid);
-        $postsTag = $tagforpost->posts;
-      }
-
       if($order == 'Newest'){
         $posts = $posts->orderBy('postdate', 'DESC');
       } else if ($order == 'Oldest'){
         $posts = $posts->orderBy('postdate', 'ASC');
       }
+      
+      if($request->has('tag')){
+        $tags = $request->input('tag');
 
-      $posts = $posts->get();
+        $posts = $posts->get()->filter(function($post) use ($tags){
+          return ($post->tags->contains(function ($item) use ($tags){return in_array($item->id, $tags);}));
+        });
+      } else {
+        $posts = $posts->get();
+      }
 
-      return view('pages.search', ['searchfor' => $searchfor, 'questions' => $posts, 'questionsTag' => $postsTag], compact('posts'));
+      return view('pages.search', ['questions' => $posts], compact('posts'));
 
     }
 
