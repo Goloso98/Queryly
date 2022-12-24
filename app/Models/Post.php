@@ -24,7 +24,7 @@ class Post extends Model
    * The stars this post has
    */
   public function stars() {
-    return $this->hasMany('App\Models\Star');
+      return $this->hasMany('App\Models\Star', 'postid');
   }
 
   /**

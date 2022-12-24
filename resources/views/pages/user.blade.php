@@ -35,7 +35,7 @@
           </div>
           <div class="col">
             <p><a class="btn" aria-current="page" href="#"> See Followed Tags </a></p>
-            <p><a class="btn" aria-current="page" href="#"> My Badges </a></p>
+            <p><a class="btn" aria-current="page" href="{{ route('users.badges', $user->id) }}"> My Badges </a></p>
           </div>
         </div>
       </div>

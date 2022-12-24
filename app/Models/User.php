@@ -68,10 +68,17 @@ class User extends Authenticatable
     }
 
     /**
-     * The badges this user has earned.
+     * The stars this user has left
      */
+    public function stars() {
+        return $this->hasMany('App\Models\Star', 'userid');
+    }
+
+    /**
+    * The badges this user has earned.
+    */
     public function badges() {
-        return $this->hasMany('App\Models\Badge');
+        return $this->belongstomany(Badge::class, 'user_badges', 'userid', 'badgeid');
     }
 
 }

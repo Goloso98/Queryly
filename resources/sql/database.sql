@@ -58,6 +58,7 @@ CREATE TABLE posts (
 );
 
 CREATE TABLE stars (
+    id SERIAL PRIMARY KEY,
     postID INTEGER NOT NULL REFERENCES "posts" (id) ON UPDATE CASCADE ON DELETE CASCADE,
     userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE ON DELETE CASCADE
 );
@@ -507,4 +508,19 @@ INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (5,
 -- comments
 INSERT INTO comments (postID, userID, commentText) VALUES (1,1,'It has been solved');
 INSERT INTO comments (postID, userID, commentText) VALUES (15,1,'Thank you!');
-INSERT INTO comments(postID, userID, commentText) VALUES (3, 1, 'teste');
+
+--stars
+INSERT INTO stars (postID, userID) VALUES (1,2);
+
+--badges
+INSERT INTO badges (badgeName) VALUES ('Posted 5 questions');
+INSERT INTO badges (badgeName) VALUES ('Posted 10 questions');
+INSERT INTO badges (badgeName) VALUES ('Posted 15 questions');
+INSERT INTO badges (badgeName) VALUES ('Answered 5 questions');
+INSERT INTO badges (badgeName) VALUES ('Answered 10 questions');
+INSERT INTO badges (badgeName) VALUES ('Answered 15 questions');
+
+--user badge relationship
+INSERT INTO user_badges (userID, badgeID) VALUES (1,1);
+INSERT INTO user_badges (userID, badgeID) VALUES (1,2); 
+

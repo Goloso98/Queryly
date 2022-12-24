@@ -1,4 +1,4 @@
-<article class="post" data-id="{{ $answer->id }}">
+<article class="post" data-id="{{ $answer->id }}" user-id="{{Auth::id()}}">
     <div class="card">
         <div class="card-body">
             @if($showTitle)
@@ -44,7 +44,39 @@
                     </div>
                 </div>
             </div>
+            <br>
+
+            @php
+                $correct = $answer->iscorrect;
+            @endphp
+            @if( $correct )
+                <i class="fa-solid fa-circle-check check"></i>
+            @else
+                <i class="fa-regular fa-circle-check check"></i>
+            @endif
+
+            @php
+                $stars = DB::table('stars')->where('postid', $answer->id)->get();
+            @endphp
+            @if(Auth::check())
+                @php
+                    $userStar = false;
+                    for($i = 0; $i < count($stars); $i++){
+                        if($stars[$i]->userid === Auth::id()) $userStar = true;
+                    }
+                @endphp
+                @if($userStar)
+                    <i class="fa-solid fa-star star">{{ count($stars) }}</i>  
+                @else
+                    <i class="fa-regular fa-star star">{{ count($stars) }}</i>  
+                @endif
+            @else
+            <i class="fa-regular fa-star">{{ count($stars) }}</i>
+            @endif
         </div>
     </div>
 </article>
 <p></p>
+
+
+

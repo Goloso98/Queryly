@@ -1,4 +1,4 @@
-<article class="post" data-id="{{ $question->id }}">
+<article class="post" data-id="{{ $question->id }}" user-id="{{ Auth::id() }}">
     <div class="card">
         <div class="card-body">
             <h3 class="card-title">{{ $question->title }}</h3>
@@ -17,6 +17,25 @@
             @can('delete', $question)
                 <a class="delete" href="#"> Delete Question </a>
             @endcan
+            <br>
+            @php
+                $stars = DB::table('stars')->where('postid', $question->id)->get();
+            @endphp
+            @if(Auth::check())
+                @php
+                    $userStar = false;
+                    for($i = 0; $i < count($stars); $i++){
+                        if($stars[$i]->userid === Auth::id()) $userStar = true;
+                    }
+                @endphp
+                @if($userStar)
+                    <i class="fa-solid fa-star star">{{ count($stars) }}</i>  
+                @else
+                    <i class="fa-regular fa-star star">{{ count($stars) }}</i>  
+                @endif
+            @else
+               <i class="fa-regular fa-star">{{ count($stars) }}</i>
+            @endif
         </div>
     </div>
 </article>

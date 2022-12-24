@@ -29,4 +29,9 @@ class PostPolicy
 
       return (Auth::user()->id == $post->userid || $roles);
     }
+
+    public function markcorrect(User $user, Post $post){
+      $parent = Post::find($post->parentpost);
+      return (Auth::id() == $parent->userid);
+    }
 }

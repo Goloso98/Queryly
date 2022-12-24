@@ -11,6 +11,8 @@ use Carbon\Carbon;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\User_badge;
+use App\Models\Badge;
 
 class UserController extends Controller
 {
@@ -37,6 +39,11 @@ class UserController extends Controller
       /* print_r($questions);
       die(); */
       return view('pages.homepage', ['questions' => $questions]);
+    }
+
+    public function showBadges($id){
+      $user = User::find($id);
+      return view('pages.userbadges', ['user' => $user, 'badges' => $user->badges]);
     }
 
     //Edit Account

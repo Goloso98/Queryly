@@ -21,6 +21,7 @@ main > header span {
   margin: 1em;
   justify-self: center;
 }
+
 #cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
