@@ -3,11 +3,15 @@
 @section('title', $user->name)
 
 @section('content')
-<p></p>
+<br>
+<h2 class="text-center">Your Badges</h2>
+<br>
 <ul>
-  @foreach($badges as $badge)
+  @forelse($badges as $badge)
     @include('partials.badge')
-  @endforeach
+  @empty
+    <p class="info-message">You own any badge yet.</p>
+  @endforelse
 </ul>
 
 @endsection

@@ -83,7 +83,8 @@ class PostController extends Controller
     {
       if (!Auth::check()) return redirect('/login');
       $postParent = $request->input('question');
-      return view('pages.postanswer', ['postParent' => $postParent]);
+      $post = Post::find($postParent);
+      return view('pages.postanswer', ['post' => $post]);
     }
 
     protected function postAnswer(Request $request)
@@ -113,11 +114,11 @@ class PostController extends Controller
 
       $validate = $request->validate([
         'title' => 'nullable|max:255',
-        'posttext' => 'required',
+        'postText' => 'required',
       ]);
 
       if($post->posttype == 'question' && $request->input('title')!=$post->title) $post->title = $request->input('title');
-      if($request->input('posttext')!=$post->posttext) $post->posttext = $request->input('posttext');
+      if($request->input('postText')!=$post->posttext) $post->posttext = $request->input('postText');
 
       $post->save();
 

@@ -1,5 +1,18 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
     <div class="container-fluid">
+        <div class="hamburger-menu">
+            <input id="menu__toggle" type="checkbox" />
+            <label class="menu__btn" for="menu__toggle">
+                <span></span>
+            </label>
+
+            <ul class="menu__box">
+                <li><a class="menu__item" type="button" class="btn btn-outline-dark" href="{{ route('homepage') }}">Browse</a></li>
+                <li><a class="menu__item" type="button" class="btn btn-outline-dark" href="{{ route('posts.top') }}">Top Questions</a></li>
+                <li><a class="menu__item" type="button" class="btn btn-outline-dark" href="#">Users</a></li>
+                <li><a class="menu__item" type="button" class="btn btn-outline-dark" href="#">Tags</a></li>
+            </ul>
+        </div>
         <a href="{{ route('homepage')}}" class="navbar-brand">
             <img src="{{ URL::asset('logo.png') }}" alt="{{ config('app.name', 'Laravel') }}!"
                  style="width:42px;height:42px;">

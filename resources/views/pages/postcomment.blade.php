@@ -3,10 +3,13 @@
 @section('title', $post->title)
 
 @section('content')
+<br>
+<h2 class="text-center">Post Your Comment</h2>
+<br>
+
 <form method="POST" action="{{ route('addComment', $post->id) }}">
     {{ csrf_field() }}
     
-    <br>
     <div class="card">
         <div class="card-body">
             @if($post->posttype == 'question')

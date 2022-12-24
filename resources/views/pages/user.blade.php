@@ -7,16 +7,16 @@
     @php
       $role = app\Http\Controllers\UserController::showRole();
     @endphp
-    <p></p>
+    <br>
     <div>
       <div class="col">
         <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" class="rounded float-end" style="width: 20%" alt="description of myimage">
       </div>
       <div class="col">
         <header>
-          <h2><a href="/users/{{ $user->id }}">{{ $user->name }}</a></h2>
+          <h2>{{ $user->name }}</h2>
           @if($role == 'Administrator' && Auth::user() == $user)
-            <p>({{$role}})</p>
+            <p class="role">({{$role}})</p>
           @endif
         </header>
         <p>&#64;{{ $user->username }}</p>

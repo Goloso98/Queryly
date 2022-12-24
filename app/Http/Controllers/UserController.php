@@ -50,7 +50,7 @@ class UserController extends Controller
     public function showEditForm($id){
       $user = User::find($id);
       $this->authorize('update', $user);
-      return view('pages.profile', ['user' => $user]);
+      return view('pages.useredit', ['user' => $user]);
     }
 
     public function update(Request $request, $id){

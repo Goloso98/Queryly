@@ -1,9 +1,15 @@
+@extends('layouts.app')
+
+@section('title', $user->name)
+
+@section('content')
+
 <form method="post" action="{{ route('editUser', $user->id) }}">
     {{ csrf_field() }}
     {{ method_field('patch') }}
     <br>
     <div class="text-center">
-        <h3>Edit your profile</h3>
+        <h2>Edit your profile</h2>
         <br>
         <div class="input-group mb-3">
             <span class="input-group-text">Name</span>
@@ -39,3 +45,4 @@
     </div>
     @endif
 </form>
+@endsection
