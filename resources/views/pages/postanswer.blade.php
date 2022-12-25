@@ -23,7 +23,11 @@
     <input type="hidden" name="parentPost" value="{{ $post->id }}">
     <div class="mb-3">
       <h5>Text</h5>
-      <textarea name="postText" id="postText" class="form-control" rows="8"></textarea>
+      <textarea name="postText" id="postText" class="form-control" rows="8" maxlength="1000"></textarea>
+      <div id="count-postText">
+        <span id="current-postText">0</span>
+        <span id="maximum-postText">/ 1000</span>
+      </div>
     </div>
 
     <div class="text-center">

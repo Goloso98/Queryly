@@ -128,6 +128,72 @@ function userDeletedHandler() {
 
 window.onload = addEventListeners;
 
+const titleTextArea = document.querySelector("#postTitle");
+const titleCounter = document.querySelector("#count-postTitle");
+const titleTypedCharacters = document.querySelector("#current-postTitle");
+const maximumTitleCharacters = 200;
+
+titleTextArea?.addEventListener("input", (event) => {
+
+    const typedCharacters = titleTextArea.value.length;
+
+    if (typedCharacters > maximumTitleCharacters) {
+        return false;
+    }
+
+    titleTypedCharacters.textContent = typedCharacters;
+
+    if (typedCharacters >= 100 && typedCharacters < 150) {
+      titleCounter.classList = "text-warning";
+    } else if (typedCharacters >= 150) {
+       titleCounter.classList = "text-danger";
+    }
+});
+
+const textTextArea = document.querySelector("#postText");
+const textCounter = document.querySelector("#count-postText");
+const textTypedCharacters = document.querySelector("#current-postText");
+const maximumTextCharacters = 1000;
+
+textTextArea?.addEventListener("input", (event) => {
+
+    const typedCharacters = textTextArea.value.length;
+
+    if (typedCharacters > maximumTextCharacters) {
+      return false;
+    }
+
+    textTypedCharacters.textContent = typedCharacters;
+
+    if (typedCharacters >= 100 && typedCharacters < 150) {
+      textCounter.classList = "text-warning";
+    } else if (typedCharacters >= 150) {
+      textCounter.classList = "text-danger";
+    }
+});
+
+const commentTextArea = document.querySelector("#commentText");
+const commentCounter = document.querySelector("#count-commentText");
+const commentTypedCharacters = document.querySelector("#current-commentText");
+const maximumCommentCharacters = 250;
+
+commentTextArea?.addEventListener("input", (event) => {
+
+  const typedCharacters = commentTextArea.value.length;
+
+  if (typedCharacters > maximumCommentCharacters) {
+    return false;
+  }
+
+  commentTypedCharacters.textContent = typedCharacters;
+
+  if (typedCharacters >= 150 && typedCharacters < 200) {
+    commentCounter.classList = "text-warning";
+  } else if (typedCharacters >= 200) {
+    commentCounter.classList = "text-danger";
+  }
+});
+
 const passwordInput = document.querySelector("#password");
 const passwordMin = 6;
 const passwordMinSpan = document.querySelector("#password-min");
@@ -135,7 +201,7 @@ const passwordazSpan = document.querySelector("#password-az");
 const passwordAZSpan = document.querySelector("#password-AZ");
 const passwordDigitSpan = document.querySelector("#password-digit");
 
-passwordInput.addEventListener("input", (event) => {
+passwordInput?.addEventListener("input", (event) => {
   const typedCharacters = passwordInput.value.length;
   const str = passwordInput.value;
 
@@ -163,48 +229,4 @@ passwordInput.addEventListener("input", (event) => {
     passwordDigitSpan.classList = "";
   }
 
-});
-
-const titleTextArea = document.querySelector("#title");
-const titleCounter = document.querySelector("#count-title");
-const titleTypedCharacters = document.querySelector("#current-title");
-const maximumTitleCharacters = 200;
-
-titleTextArea.addEventListener("input", (event) => {
-
-    const typedCharacters = titleTextArea.value.length;
-
-    if (typedCharacters > maximumTitleCharacters) {
-        return false;
-    }
-
-    titleTypedCharacters.textContent = typedCharacters;
-
-    if (typedCharacters >= 100 && typedCharacters < 150) {
-      titleCounter.classList = "text-warning";
-    } else if (typedCharacters >= 150) {
-       titleCounter.classList = "text-danger";
-    }
-});
-
-const textTextArea = document.querySelector("#postText");
-const textCounter = document.querySelector("#count-text");
-const textTypedCharacters = document.querySelector("#current-text");
-const maximumTextCharacters = 1000;
-
-textTextArea.addEventListener("input", (event) => {
-
-    const typedCharacters = textTextArea.value.length;
-
-    if (typedCharacters > maximumTextCharacters) {
-      return false;
-    }
-
-    textTypedCharacters.textContent = typedCharacters;
-
-    if (typedCharacters >= 100 && typedCharacters < 150) {
-      textCounter.classList = "text-warning";
-    } else if (typedCharacters >= 150) {
-      textCounter.classList = "text-danger";
-    }
 });

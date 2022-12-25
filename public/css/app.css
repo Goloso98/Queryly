@@ -74,13 +74,20 @@
   color: grey;
 }
 
-#count-title {
+#count-postTitle {
   float: right;
   padding: 0.1rem 0 0 0;
   font-size: 0.875rem;
   color: grey;
 }
-#count-text {
+#count-postText {
+  float: right;
+  padding: 0.1rem 0 0 0;
+  font-size: 0.875rem;
+  color: grey;
+}
+
+#count-commentText {
   float: right;
   padding: 0.1rem 0 0 0;
   font-size: 0.875rem;

@@ -15,24 +15,23 @@
         @if (($post->posttype) == 'question')
             <div class="mb-3">
                 <h4>Title</h4>
+                @if ($errors->has('title'))
+                    <span class="error">
+                        {{ $errors->first('title') }}
+                    </span>
+                @endif
                 <textarea name="title" id="title" class="form-control" rows="2">{{$post->title}}</textarea>
             </div>
         @endif
         <div class="mb-3">
             <h5>Text</h5>
+            @if ($errors->has('postText'))
+                <span class="error">
+                    {{ $errors->first('postText') }}
+                </span>
+            @endif
             <textarea name="postText" id="postText" class="form-control" rows="8">{{$post->posttext}}</textarea>
         </div>
-
-        @if ($errors->any())
-        <div class="error">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <span>{{ $error }}</span>
-                    <br>
-                @endforeach
-            </ul>
-        </div>
-        @endif
 
         <div class="text-center">
             <button type="submit">

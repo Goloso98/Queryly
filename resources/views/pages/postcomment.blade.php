@@ -35,7 +35,11 @@
     <br>
     <div class="mb-3">
       <h5>Comment:</h5>
-      <textarea name="commenttext" id="commenttext" class="form-control" rows="8"></textarea>
+      <textarea name="commenttext" id="commentText" class="form-control" rows="8" maxlength="250"></textarea>
+      <div id="count-commentText">
+        <span id="current-commentText">0</span>
+        <span id="maximum-commentText">/ 250</span>
+      </div>
     </div>
 
     <div class="text-center">
