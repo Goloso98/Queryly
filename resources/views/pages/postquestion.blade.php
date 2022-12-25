@@ -13,7 +13,7 @@
           {{ $errors->first('title') }}
         </span>
       @endif
-      <textarea name="title" id="postTitle" class="form-control" rows="2" maxlength="200" required></textarea>
+      <textarea name="title" id="postTitle" class="form-control" rows="2" maxlength="200"></textarea>
       <div id="count-postTitle">
         <span id="current-postTitle">0</span>
         <span id="maximum-postTitle">/ 200</span>
@@ -26,7 +26,7 @@
           {{ $errors->first('postText') }}
         </span>
       @endif
-      <textarea name="postText" id="postText" class="form-control" rows="8" maxlength="1000" required></textarea>
+      <textarea name="postText" id="postText" class="form-control" rows="8" maxlength="1000"></textarea>
       <div id="count-postText">
         <span id="current-postText">0</span>
         <span id="maximum-postText">/ 1000</span>

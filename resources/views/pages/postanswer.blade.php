@@ -23,6 +23,11 @@
     <input type="hidden" name="parentPost" value="{{ $post->id }}">
     <div class="mb-3">
       <h5>Text</h5>
+      @if ($errors->has('postText'))
+        <span class="error">
+          {{ $errors->first('postText') }}
+        </span>
+      @endif
       <textarea name="postText" id="postText" class="form-control" rows="8" maxlength="1000"></textarea>
       <div id="count-postText">
         <span id="current-postText">0</span>
