@@ -8,8 +8,8 @@
     {{ csrf_field() }}
     {{ method_field('patch') }}
     <br>
-    <div class="text-center">
-        <h2>Edit your profile</h2>
+    <div>
+        <h2 class="text-center">Edit your profile</h2>
         <br>
         <div class="input-group mb-3">
             <span class="input-group-text">Name</span>
@@ -29,20 +29,22 @@
             <span class="input-group-text">Confirm Password</span>
             <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" name="password_confirmation">
         </div>
+        @if ($errors->any())
+            <div class="error">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <span>{{ $error }}</span>
+                        <br>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <br>
-        <input type="submit" value="Save Changes">
-        <p><a href="#" onclick="history.back()">Cancel</a></p>
+        <div class="text-center">
+            <input type="submit" value="Save Changes">
+            <p><a href="#" onclick="history.back()">Cancel</a></p>
+        </div>
         <br>
     </div>
-
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
 </form>
 @endsection

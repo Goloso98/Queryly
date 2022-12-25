@@ -23,6 +23,17 @@
             <textarea name="postText" id="postText" class="form-control" rows="8">{{$post->posttext}}</textarea>
         </div>
 
+        @if ($errors->any())
+        <div class="error">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <span>{{ $error }}</span>
+                    <br>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
         <div class="text-center">
             <button type="submit">
                 Save Changes
@@ -30,15 +41,5 @@
             <p><a href="#" onclick="history.back()">Cancel</a></p>
         </div>
         <br>
-
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
     </form>
 @endsection

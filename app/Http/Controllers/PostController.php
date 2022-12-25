@@ -113,8 +113,8 @@ class PostController extends Controller
       $this->authorize('update', $post);
 
       $validate = $request->validate([
-        'title' => 'nullable|max:255',
-        'postText' => 'required',
+        'title' => 'required|max:200',
+        'postText' => 'required|max:1000',
       ]);
 
       if($post->posttype == 'question' && $request->input('title')!=$post->title) $post->title = $request->input('title');

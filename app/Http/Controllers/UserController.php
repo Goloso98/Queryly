@@ -67,9 +67,9 @@ class UserController extends Controller
 
       $validate = $request->validate([
         'name' => 'required',
-        'username' => 'required|unique:users,username,'.$id,
+        'username' => 'required|unique:users,username|min:4|max:20'.$id,
         'email' => 'required|unique:users,email,'.$id,
-        'password' => 'nullable|min:4',
+        'password' => 'nullable|string|min:6|regex:/[a-z]/|confirmed',
       ]);
 
       if($request->input('name')!=$user->name) $user->name = $request->input('name');
