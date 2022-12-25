@@ -1,6 +1,14 @@
 <article class="post" data-id="{{ $comment->id }}">
     <div class="card">
         <div class="card-body">
+            <p>
+                @can('delete', $comment)
+                    <a class="delete" id="delete-comment" href="#"> Delete Comment </a>
+                @endcan
+                @can('update', $comment)
+                    <a class="btn" aria-current="page" href="{{  route('comments.edit', $comment->id)  }}">Edit</a>
+                @endcan
+            </p>
             <p class="card-text">{{ $comment->commenttext }}</p>
             {{ $comment->commentdate }}
             @php
@@ -8,12 +16,6 @@
             @endphp
             <a class="btn" aria-current="page" href="{{route('users.profile', $question->userid)}}">&#64;{{$username}}</a>
             <br>
-            @can('update', $comment)
-                <a class="btn" aria-current="page" href="{{  route('comments.edit', $comment->id)  }}">Edit</a>
-            @endcan
-            @can('delete', $comment)
-                <a class="delete" id="delete-comment" href="#"> Delete Comment </a>
-            @endcan
         </div>
     </div>
 </article>

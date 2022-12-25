@@ -20,8 +20,7 @@ class CommentPolicy
 
     public function update(User $user, Comment $comment){
       $user_id = Auth::id();
-      $roles = Auth::user()->roles()->get()->pluck('userrole')->contains('Administrator');
-      return (Auth::user()->id == $comment->userid || $roles);
+      return (Auth::user()->id == $comment->userid);
     }
 
     public function delete(User $user, Comment $comment){

@@ -62,7 +62,7 @@ class CommentController extends Controller
   
         $comment->save();
         
-        return redirect()->route('posts.comments', ['id'=>$comment->postid]);
+        return redirect()->route('posts.postPage', ['id'=>$comment->postid]);
         
     }
 

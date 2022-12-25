@@ -19,8 +19,7 @@ class PostPolicy
 
     public function update(User $user, Post $post){
       $user_id = Auth::id();
-      $roles = Auth::user()->roles()->get()->pluck('userrole')->contains('Administrator');
-      return (Auth::user()->id == $post->userid || $roles);
+      return (Auth::user()->id == $post->userid);
     }
 
     public function delete(User $user, Post $post){
