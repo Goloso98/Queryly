@@ -7,24 +7,24 @@
     <h2 class="text-center">Welcome Back!</h2>
     <p></p>
     <hr>
+    @if ($errors->has('email'))
+      <span class="error">
+        {{ $errors->first('email') }}
+      </span>
+    @endif
     <div class="input-group mb-3">
         <span class="input-group-text">Email</span>
         <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" name="email">
-        @if ($errors->has('email'))
-          <span class="error">
-            {{ $errors->first('email') }}
-          </span>
-        @endif
     </div>
 
+    @if ($errors->has('password'))
+      <span class="error">
+        {{ $errors->first('password') }}
+      </span>
+    @endif
     <div class="input-group mb-3">
       <span class="input-group-text">Password</span>
       <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" name="password">
-        @if ($errors->has('password'))
-          <span class="error">
-            {{ $errors->first('password') }}
-          </span>
-        @endif
     </div>
 
     <div class="text-center">

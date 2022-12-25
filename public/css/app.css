@@ -103,3 +103,15 @@
 .info-message {
   text-align: center;
 }
+
+.info {
+  padding: 0.1rem 0 0 0;
+  font-size: 0.775rem;
+  color: grey;
+}
+
+.error {
+  padding: 0.1rem 0 0 0;
+  font-size: 0.775rem;
+  color: red;
+}

@@ -128,6 +128,43 @@ function userDeletedHandler() {
 
 window.onload = addEventListeners;
 
+const passwordInput = document.querySelector("#password");
+const passwordMin = 6;
+const passwordMinSpan = document.querySelector("#password-min");
+const passwordazSpan = document.querySelector("#password-az");
+const passwordAZSpan = document.querySelector("#password-AZ");
+const passwordDigitSpan = document.querySelector("#password-digit");
+
+passwordInput.addEventListener("input", (event) => {
+  const typedCharacters = passwordInput.value.length;
+  const str = passwordInput.value;
+
+  if(typedCharacters >= passwordMin) {
+    passwordMinSpan.classList = "text-success";
+  } else {
+    passwordMinSpan.classList = "";
+  }
+
+  if(/[a-z]/.test(str)) {
+    passwordazSpan.classList = "text-success";
+  } else {
+    passwordazSpan.classList = "";
+  }
+
+  if(/[A-Z]/.test(str)) {
+    passwordAZSpan.classList = "text-success";
+  } else {
+    passwordAZSpan.classList = "";
+  }
+
+  if(/[0-9]/.test(str)) {
+    passwordDigitSpan.classList = "text-success";
+  } else {
+    passwordDigitSpan.classList = "";
+  }
+
+});
+
 const titleTextArea = document.querySelector("#title");
 const titleCounter = document.querySelector("#count-title");
 const titleTypedCharacters = document.querySelector("#current-title");
