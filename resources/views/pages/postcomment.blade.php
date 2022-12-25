@@ -35,6 +35,11 @@
     <br>
     <div class="mb-3">
       <h5>Comment:</h5>
+      @if ($errors->has('commenttext'))
+        <span class="error">
+          {{ $errors->first('commenttext') }}
+        </span>
+      @endif
       <textarea name="commenttext" id="commentText" class="form-control" rows="8" maxlength="250"></textarea>
       <div id="count-commentText">
         <span id="current-commentText">0</span>

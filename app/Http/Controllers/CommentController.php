@@ -56,8 +56,9 @@ class CommentController extends Controller
         $this->authorize('update', $comment);
   
         $validate = $request->validate([
-          'commenttext' => 'required|max:500',
+          'commenttext' => 'required|max:500'
         ]);
+
         if($request->input('commenttext')!=$comment->commenttext) $comment->commenttext = $request->input('commenttext');
   
         $comment->save();

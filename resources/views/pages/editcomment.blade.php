@@ -10,7 +10,19 @@
         <br>
         <div class="mb-3">
             <h5>Text</h5>
-            <textarea name="commenttext" id="commenttext" class="form-control" rows="8">{{ $comment->commenttext }}</textarea>
+            @if ($errors->has('commenttext'))
+                <span class="error">
+                    {{ $errors->first('commenttext') }}
+                </span>
+            @endif
+            <textarea name="commenttext" id="commentText" class="form-control" rows="8">{{ $comment->commenttext }}</textarea>
+            @php
+                $length = strlen($comment->commenttext);
+            @endphp
+            <div id="count-commentText">
+                <span id="current-commentText">{{ $length }}</span>
+                <span id="maximum-commentText">/ 250</span>
+            </div>
         </div>
 
         <div class="text-center">
@@ -20,15 +32,5 @@
             <p><a href="#" onclick="history.back()">Cancel</a></p>
         </div>
         <br>
-
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
     </form>
 @endsection
