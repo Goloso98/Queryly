@@ -6,7 +6,16 @@
                 <p>
                     <a href="{{route('posts.postPage', $answer->parentpost)}}">See Post</a>
                     @can('delete', $answer)
-                        <a href="#" class="delete" id="delete-post">Delete</a>
+                       <a href="#" class="delete" id="delete-post">Delete</a>
+                    @endcan
+                    @can('update', $answer)
+                        <a class="btn" aria-current="page" href="{{  route('posts.edit', $answer->id)  }}">Edit</a>
+                    @endcan
+                </p>
+            @else
+                <p>
+                    @can('delete', $answer)
+                       <a href="#" class="delete" id="delete-post">Delete</a>
                     @endcan
                     @can('update', $answer)
                         <a class="btn" aria-current="page" href="{{  route('posts.edit', $answer->id)  }}">Edit</a>
@@ -14,21 +23,20 @@
                 </p>
             @endif
             <p class="card-text">{{ $answer->posttext }}</p>
-            @if($showTitle)
-                <br>
-            @endif
             {{ $answer->postdate }}
             @if(!$showTitle)
                 <a class="btn" aria-current="page" href="{{route('users.profile', $answer->userid)}}">&#64;{{ $answer->user()->first()->username }}</a>
             @endif
             <br>
-            @php
-                $correct = $answer->iscorrect;
-            @endphp
-            @if( $correct )
-                <i class="fa-solid fa-circle-check check"></i>
-            @else
-                <i class="fa-regular fa-circle-check check"></i>
+            @if(!$showTitle)
+                @php
+                    $correct = $answer->iscorrect;
+                @endphp
+                @if( $correct )
+                    <i class="fa-solid fa-circle-check check"></i>
+                @else
+                    <i class="fa-regular fa-circle-check check"></i>
+                @endif
             @endif
 
             @php
