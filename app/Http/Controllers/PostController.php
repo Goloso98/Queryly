@@ -67,6 +67,12 @@ class PostController extends Controller
     protected function postQuestion(Request $request)
     {
       $userID = Auth::id();
+
+      $validate = $request->validate([
+        'title' => 'required|max:200',
+        'postText' => 'required|max:1000|',
+      ]);
+
       $title = $request->input('title');
       $postText = $request->input('postText');
       $data = array('userid' => $userID, 'posttype' => 'question', 'title' => $title, 'posttext' => $postText );
@@ -114,7 +120,7 @@ class PostController extends Controller
 
       $validate = $request->validate([
         'title' => 'required|max:200',
-        'postText' => 'required|max:1000',
+        'postText' => 'required|max:1000|regex:/[a-z]/',
       ]);
 
       if($post->posttype == 'question' && $request->input('title')!=$post->title) $post->title = $request->input('title');
