@@ -41,6 +41,13 @@ class UserController extends Controller
       return view('pages.homepage', ['questions' => $questions]);
     }
 
+    //Show All Users
+    public function showUsers()
+    {
+      $users = User::all();
+      return view('pages.userpage', ['users' => $users]);
+    }
+
     public function showBadges($id){
       $user = User::find($id);
       return view('pages.userbadges', ['user' => $user, 'badges' => $user->badges]);

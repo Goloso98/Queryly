@@ -9,7 +9,7 @@
             <ul class="menu__box">
                 <li><a class="menu__item" type="button" class="btn btn-outline-dark" href="{{ route('homepage') }}">Browse</a></li>
                 <li><a class="menu__item" type="button" class="btn btn-outline-dark" href="{{ route('posts.top') }}">Top Questions</a></li>
-                <li><a class="menu__item" type="button" class="btn btn-outline-dark" href="#">Users</a></li>
+                <li><a class="menu__item" type="button" class="btn btn-outline-dark" href="{{ route('users.page') }}">Users</a></li>
                 <li><a class="menu__item" type="button" class="btn btn-outline-dark" href="#">Tags</a></li>
             </ul>
         </div>
