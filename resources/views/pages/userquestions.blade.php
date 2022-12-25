@@ -4,10 +4,13 @@
 
 @section('content')
 <br>
+@php
+  $counter = DB::table('posts')->where('userid', $user->id)->where('posttype', 'question')->count();
+@endphp
 @if(Auth::id() == $user->id)
-  <h2 class="text-center">Your Questions</h2>
+  <h2 class="text-center">Your Questions ({{ $counter }})</h2>
 @else
-  <h2 class="text-center">{{ $user->username }}'s Questions</h2>
+  <h2 class="text-center">{{ $user->username }}'s Questions ({{ $counter }})</h2>
 @endif
 <br>
 <ul>
