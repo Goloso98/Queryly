@@ -12,7 +12,7 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\Comment;
 use App\Models\Tag;
-use App\Models\Question_Tag;
+use App\Models\Question_tag;
 
 class PostController extends Controller
 {
