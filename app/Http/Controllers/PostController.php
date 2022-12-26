@@ -174,6 +174,11 @@ class PostController extends Controller
         'orderby' => 'required',
       ]);
 
+      $userSearch = FALSE;
+      if($request->has('searchType') && $request->input('searchType') == 'user') {
+        $userSearch = TRUE;
+      }
+
       $order = $request->input('orderby');
 
       if($request->has('search')){
@@ -202,7 +207,7 @@ class PostController extends Controller
         $posts = $posts->get();
       }
 
-      return view('pages.search', ['posts' => $posts], compact('posts'));
+      return view('pages.search', ['posts' => $posts, 'users' => [], 'userSearch' => $userSearch], compact('posts'));
 
     }
 

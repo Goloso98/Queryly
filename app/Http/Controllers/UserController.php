@@ -98,6 +98,32 @@ class UserController extends Controller
       return $user;
     }
 
+    //Search Users
+    public function search(Request $request)
+    {
+      $request->validate([
+        'search' => 'required',
+      ]);
+
+      $userSearch = FALSE;
+      if($request->has('searchType') && $request->input('searchType') == 'user') {
+        $userSearch = TRUE;
+      }
+
+      if($request->has('search')){
+        $search_input = $request->input('search');
+
+        $statement1 = 'tsvectors @@ plainto_tsquery(\'english\',?)';
+        $users = User::whereRaw($statement1, [$search_input]);
+      } else {
+        //here because code gets angry otherwise
+        $users = User::all();
+      }
+      
+      return view('pages.search', ['posts' => [], 'users' => $users->get(), 'userSearch' => $userSearch], compact('users'));
+    }
+
+
     //Show User Role
     public static function showRole()
     {

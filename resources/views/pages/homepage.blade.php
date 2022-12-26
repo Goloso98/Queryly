@@ -4,11 +4,8 @@
     <br>
     <h2 class="text-center">Homepage</h2>
     <br>
-    <div class="row">
-        <div class="column" style="width: 50%">
-            @include('partials.emsearchbar')
-        </div>
-    </div>
+    @include('partials.searchbar', ['userSearch' => FALSE])
+    
     
     <br>
 

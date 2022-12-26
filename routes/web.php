@@ -23,6 +23,7 @@ Route::get('users/{id}/answers', 'PostController@showUserAnswers')->name('users.
 Route::get('users/{id}/badges', 'UserController@showBadges')->name('users.badges');
 Route::get('users/{id}/tags', 'UserController@showTags')->name('users.tags');
 Route::patch('users/{id}/tags', 'UserController@changeTags')->name('users.changeTags');
+Route::post('resultsUsers', 'UserController@search')->name('searchUser');
 
 Route::get('users', 'UserController@showUsers')->name('users.page');
 
@@ -41,7 +42,7 @@ Route::post('posts/answers/new', 'PostController@postAnswer')->name('posts.addAn
 Route::get('posts/{id}/edit',  'PostController@showEditForm')->name('posts.edit');
 Route::patch('posts/{id}/edit',  'PostController@update')->name('posts.update');
 Route::get('posts/{id}/comments', 'PostController@showComments')->name('posts.comments');
-Route::post('homepage', 'PostController@search')->name('exactMatchSearch');
+Route::post('resultsPosts', 'PostController@search')->name('searchPost');
 Route::get('posts/topquestions', 'PostController@showTopQuestions')->name('posts.top');
 Route::get('posts/{id}', 'PostController@show')->name('posts.postPage'); //tem de ficar no fim
 

@@ -4,17 +4,13 @@
     <br>
     <h2 class="text-center">Our Users</h2>
     <br>
-    <div class="row">
-        <div class="column" style="width: 50%">
-            @include('partials.emsearchbar')
-        </div>
-    </div>
+    @include('partials.searchbar', ['userSearch' => TRUE])
     
     <br>
 
     <ul>
         @foreach($users as $user)
-            @include('partials.user', ['showUser' => TRUE])
+            @include('partials.user')
         @endforeach
     </ul>
 
