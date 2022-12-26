@@ -43,7 +43,7 @@
             <p><a class="btn" aria-current="page" href="{{ route('users.answers', $user->id) }}"> My answers </a></p>
           </div>
           <div class="col">
-            <p><a class="btn" aria-current="page" href="#"> See Followed Tags </a></p>
+            <p><a class="btn" aria-current="page" href="{{ route('users.tags', $user->id) }}"> See Followed Tags </a></p>
             <p><a class="btn" aria-current="page" href="{{ route('users.badges', $user->id) }}"> My Badges </a></p>
           </div>
         </div>

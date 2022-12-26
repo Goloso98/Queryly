@@ -21,6 +21,9 @@ Route::patch('users/{id}/edit',  'UserController@update')->name('users.update');
 Route::get('users/{id}/questions', 'PostController@showUserQuestions')->name('users.questions');
 Route::get('users/{id}/answers', 'PostController@showUserAnswers')->name('users.answers');
 Route::get('users/{id}/badges', 'UserController@showBadges')->name('users.badges');
+Route::get('users/{id}/tags', 'UserController@showTags')->name('users.tags');
+Route::patch('users/{id}/tags', 'UserController@changeTags')->name('users.changeTags');
+
 Route::get('users', 'UserController@showUsers')->name('users.page');
 
 
