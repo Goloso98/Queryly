@@ -13,14 +13,14 @@ class UserPolicy
 
     public function show(User $user)
     {
-      if(Auth::user()->id == $user->id) return true;
+      return (Auth::user()->id == $user->id);
     }
 
     public function update(User $user){
-      if(Auth::user()->id == $user->id) return true;
+      return (Auth::user()->id == $user->id);
     }
 
     public function delete(User $user){
-      if(Auth::user()->id == $user->id) return true;
+      return (Auth::user()->id == $user->id);
     }
 }
