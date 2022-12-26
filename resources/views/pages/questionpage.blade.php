@@ -28,6 +28,7 @@
             <p class="card-text">{{ $question->posttext }}</p>
             {{ $question->postdate }}
             <a class="btn" aria-current="page" href="{{route('users.profile', $question->userid)}}">&#64;{{ $question->user()->first()->username }}</a>
+            @if( $question->edited )<p>Edited</p>@endif
             <br>
             @php
                 $stars = DB::table('stars')->where('postid', $question->id)->get();
