@@ -26,7 +26,6 @@ class PostController extends Controller
     }
 
     //Own user questions and answers
-
     public function showUserQuestions($userID)
     {
       $user = User::find($userID);
@@ -180,11 +179,8 @@ class PostController extends Controller
       if($request->has('search')){
         $title = $request->input('search');
 
-        $statement1 = 'tsvectors @@ plainto_tsquery(\'english\',\''.$title.'\')';
-        $posts = Post::whereRaw($statement1);
-
-        /* $statement1 = 'tsvectors @@ plainto_tsquery(\'english\',\'?\')';
-        $posts = Post::whereRaw($statement1, [$title]); */
+        $statement1 = 'tsvectors @@ plainto_tsquery(\'english\',?)';
+        $posts = Post::whereRaw($statement1, [$title]);
       } else {
         //here because code gets angry otherwise
         $posts = Post::all();
