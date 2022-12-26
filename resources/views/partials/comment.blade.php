@@ -1,4 +1,4 @@
-<article class="post" data-id="{{ $comment->id }}">
+<article class="comment" data-id="{{ $comment->id }}">
     <div class="card">
         <div class="card-body">
             <p>

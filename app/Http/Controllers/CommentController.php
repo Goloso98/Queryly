@@ -42,7 +42,7 @@ class CommentController extends Controller
         $request->session()->flash('alert-success', 'Comment has been successfully posted!');
 
         if($post->posttype == 'question') return redirect()->route('posts.postPage', ['id' => $post->id]);
-        if($post->posttype == 'answer') return redirect()->route('posts.postPage', ['question' => Post::find($post->parentpost)]);
+        if($post->posttype == 'answer') return redirect()->route('posts.postPage', ['id' => $post->parentpost]);
     }
 
     //edit comments
