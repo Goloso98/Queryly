@@ -67,7 +67,7 @@ class UserController extends Controller
 
       $validate = $request->validate([
         'name' => 'required',
-        'username' => 'required|unique:users,username|min:4|max:20'.$id,
+        'username' => 'required|min:4|max:20|unique:users,username,'.$id,
         'email' => 'required|unique:users,email,'.$id,
         'password' => 'nullable|string|min:6|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|confirmed',
       ]);
