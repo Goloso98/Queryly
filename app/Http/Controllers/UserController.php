@@ -69,7 +69,7 @@ class UserController extends Controller
         'name' => 'required',
         'username' => 'required|unique:users,username|min:4|max:20'.$id,
         'email' => 'required|unique:users,email,'.$id,
-        'password' => 'nullable|string|min:6|regex:/[a-z]/|confirmed',
+        'password' => 'nullable|string|min:6|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|confirmed',
       ]);
 
       if($request->input('name')!=$user->name) $user->name = $request->input('name');
@@ -82,6 +82,8 @@ class UserController extends Controller
       $user->save();
 
       $id=$user->id;
+
+      $request->session()->flash('alert-success', 'User has been successfully edited!');
 
       return redirect()->route('users.profile',['id'=>$id]);
     }

@@ -81,6 +81,8 @@ class PostController extends Controller
       $question = Post::find($postID);
       $user = Auth::user();
 
+      $request->session()->flash('alert-success', 'Question has been successfully posted!');
+
       return redirect()->route('posts.postPage', ['id' => $postID]);
     }
 
@@ -109,6 +111,8 @@ class PostController extends Controller
 
       $user = Auth::user();
 
+      $request->session()->flash('alert-success', 'Answer has been successfully posted!');
+
       return redirect()->route('posts.postPage', ['id' => $parentPost]);
     }
 
@@ -135,8 +139,11 @@ class PostController extends Controller
 
       $id=$post->id;
 
-      if($post->posttype == 'question')
+      if($post->posttype == 'question') {
+        $request->session()->flash('alert-success', 'Question has been successfully edited!');
         return redirect()->route('posts.postPage',['id'=>$id]);
+      }
+      $request->session()->flash('alert-success', 'Answer has been successfully edited!');
       return redirect()->route('posts.postPage', ['id'=>$post->parentpost]);
     }
 

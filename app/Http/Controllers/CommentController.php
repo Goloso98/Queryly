@@ -38,7 +38,9 @@ class CommentController extends Controller
         $data = array('userid' => $user->id, 'postid' => $id, 'commenttext' => $commentText);
 
         $postID = DB::table('comments')->insertGetId($data);
-        
+
+        $request->session()->flash('alert-success', 'Comment has been successfully posted!');
+
         if($post->posttype == 'question') return redirect()->route('posts.postPage', ['id' => $post->id]);
         if($post->posttype == 'answer') return redirect()->route('posts.postPage', ['question' => Post::find($post->parentpost)]);
     }
@@ -62,6 +64,8 @@ class CommentController extends Controller
         if($request->input('commenttext')!=$comment->commenttext) $comment->commenttext = $request->input('commenttext');
   
         $comment->save();
+
+        $request->session()->flash('alert-success', 'Comment has been successfully edited!');
         
         return redirect()->route('posts.postPage', ['id'=>$comment->postid]);
         

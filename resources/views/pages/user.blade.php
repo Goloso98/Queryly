@@ -8,6 +8,15 @@
       $role = app\Http\Controllers\UserController::showRole();
     @endphp
     <br>
+
+    <div class="flash-message">
+      @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+        @if(Session::has('alert-' . $msg))
+          <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}</p>
+        @endif
+      @endforeach
+    </div> <!-- end .flash-message -->
+
     <div>
       <div class="col">
         <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" class="rounded float-end" style="width: 20%" alt="description of myimage">
