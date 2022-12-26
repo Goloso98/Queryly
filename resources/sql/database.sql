@@ -53,6 +53,7 @@ CREATE TABLE posts (
     postText VARCHAR NOT NULL,
     parentPost INTEGER REFERENCES "posts" (id) ON UPDATE CASCADE ON DELETE CASCADE,
     isCorrect BOOLEAN,
+    edited BOOLEAN NOT NULL DEFAULT FALSE,
     CONSTRAINT post_title CHECK ((postType = 'question' AND title IS NOT NULL) OR (postType = 'answer' AND title IS NULL)),
     CONSTRAINT correctness CHECK ((postType = 'question' AND isCorrect IS NULL) OR (postType = 'answer' AND isCorrect IS NOT NULL))
 );
@@ -164,9 +165,25 @@ $BODY$
 LANGUAGE plpgsql;
 
 CREATE TRIGGER answer_trigger
-    AFTER INSERT OR UPDATE ON posts
+    AFTER INSERT ON posts
     FOR EACH ROW
     EXECUTE PROCEDURE add_answer_notification();
+
+-- POST EDITED
+CREATE FUNCTION set_post_edited() RETURNS TRIGGER AS
+$BODY$
+DECLARE notified_user INTEGER;
+BEGIN
+    NEW.edited = TRUE;
+    RETURN NEW;
+END;
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER post_edited_trigger
+    BEFORE UPDATE ON posts
+    FOR EACH ROW
+    EXECUTE PROCEDURE set_post_edited();
 
 -- QUESTION TAG NOTIFICATIONS
 CREATE OR REPLACE FUNCTION add_question_notification() RETURNS TRIGGER AS
