@@ -1,10 +1,10 @@
-<article class="post" data-id="{{ $answer->id }}" user-id="{{Auth::id()}}">
+<article class="post" data-id="{{ $answer->id }}" user-id="{{Auth::id()}}" id="answer-{{ $answer->id}}">
     <div class="card">
         <div class="card-body">
             @if($showTitle)
                 <h3 class="card-title">Answer to: {{ App\Models\Post::find($answer->parentpost)->title }}</h3>
                 <p>
-                    <a href="{{route('posts.postPage', $answer->parentpost)}}">See Post</a>
+                    <a href="{{route('posts.postPage', $answer->parentpost)}}#answer-{{ $answer->id}}">See Post</a>
                     @can('delete', $answer)
                        <a href="#" class="delete" id="delete-post">Delete Answer</a>
                     @endcan
@@ -26,6 +26,7 @@
             {{ $answer->postdate }}
             @if(!$showTitle)
                 <a class="btn" aria-current="page" href="{{route('users.profile', $answer->userid)}}">&#64;{{ $answer->user()->first()->username }}</a>
+                @if( $answer->edited )<p>Edited</p>@endif
             @endif
             <br>
             @if(!$showTitle)
