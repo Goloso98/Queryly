@@ -127,10 +127,17 @@ class PostController extends Controller
       $post = Post::find($id);
       $this->authorize('update', $post);
 
-      $validate = $request->validate([
-        'title' => 'required|max:200',
-        'postText' => 'required|max:1000|',
-      ]);
+      if($post->posttype == 'question') {
+        $validate = $request->validate([
+          'title' => 'required|max:200',
+          'postText' => 'required|max:1000|',
+        ]);
+      } else {
+        $validate = $request->validate([
+          'postText' => 'required|max:1000|',
+        ]);
+      }
+
 
       if($post->posttype == 'question' && $request->input('title')!=$post->title) $post->title = $request->input('title');
       if($request->input('postText')!=$post->posttext) $post->posttext = $request->input('postText');
