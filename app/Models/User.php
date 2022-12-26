@@ -7,6 +7,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use App\Models\Post;
+use App\Models\Badge;
+use App\Models\Tag;
 
 class User extends Authenticatable
 {
@@ -64,7 +66,7 @@ class User extends Authenticatable
      * The tags this user follows.
      */
     public function tags() {
-        return $this->hasMany('App\Models\Tag');
+        return $this->belongsToMany(Tag::class, 'user_tags', 'userid', 'tagid');
     }
 
     /**

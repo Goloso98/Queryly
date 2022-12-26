@@ -66,9 +66,11 @@ class CommentController extends Controller
         $comment->save();
 
         $request->session()->flash('alert-success', 'Comment has been successfully edited!');
-        
-        return redirect()->route('posts.postPage', ['id'=>$comment->postid]);
-        
+
+        $commentParent = Post::find($comment->postid);
+        if($commentParent->posttype == 'question') return redirect()->route('posts.postPage', ['id'=>$comment->postid]);
+        return redirect()->route('posts.postPage', ['id' => $commentParent->parentpost]);
+    
     }
 
     //Delete comment

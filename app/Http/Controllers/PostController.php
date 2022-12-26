@@ -11,6 +11,8 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Comment;
+use App\Models\Tag;
+use App\Models\Question_Tag;
 
 class PostController extends Controller
 {
@@ -67,6 +69,7 @@ class PostController extends Controller
     protected function postQuestion(Request $request)
     {
       $userID = Auth::id();
+      $tags = Tag::all();
 
       $validate = $request->validate([
         'title' => 'required|max:200',
@@ -75,15 +78,17 @@ class PostController extends Controller
 
       $title = $request->input('title');
       $postText = $request->input('postText');
-      $data = array('userid' => $userID, 'posttype' => 'question', 'title' => $title, 'posttext' => $postText );
+      $data = array('userid' => $userID, 'posttype' => 'question', 'title' => $title, 'posttext' => $postText);
       $postID = DB::table('posts')->insertGetId($data);
-
       $question = Post::find($postID);
+      foreach($tags as $tag){
+        if($request->has($tag->tagname)){
+          Question_tag::insert(['postid' => $postID, 'tagid' => $tag->id]);
+        }
+      }
       $user = Auth::user();
 
-      $request->session()->flash('alert-success', 'Question has been successfully posted!');
-
-      return redirect()->route('posts.postPage', ['id' => $postID]);
+      return view('pages.questionpage', ['user' => $user, 'question' => $question]);
     }
 
     //Add answer
@@ -125,6 +130,7 @@ class PostController extends Controller
 
     public function update(Request $request, $id){
       $post = Post::find($id);
+      $tags = Tag::all();
       $this->authorize('update', $post);
 
       if($post->posttype == 'question') {
@@ -142,6 +148,13 @@ class PostController extends Controller
       if($post->posttype == 'question' && $request->input('title')!=$post->title) $post->title = $request->input('title');
       if($request->input('postText')!=$post->posttext) $post->posttext = $request->input('postText');
 
+      Question_tag::where('postid', $id)->delete();
+      foreach($tags as $tag){
+        if($request->has($tag->tagname)){
+          Question_tag::insert(['postid' => $id, 'tagid' => $tag->id]);
+        }
+      }
+
       $post->save();
 
       $id=$post->id;
@@ -157,58 +170,44 @@ class PostController extends Controller
     public function search(Request $request)
     {
       $request->validate([
-            'search' => 'nullable',
-            'tags' => 'nullable',
-            'orderby' => 'required',
-            'searchfor' => 'required',
+        'search' => 'nullable',
+        'tag.*' => 'numeric',
+        'orderby' => 'required',
       ]);
 
       $order = $request->input('orderby');
-      $searchfor = $request->input('searchfor');
-      //dd($searchfor);
 
       if($request->has('search')){
         $title = $request->input('search');
-        $statement1 = 'tsvectors @@ plainto_tsquery(\'english\',\'?\')';
-        $posts = Post::whereRaw($statement1, [$title]);
 
-        $name = $request->input('search');
-        $statement2 = 'tsvectors @@ plainto_tsquery(\'english\',\'?\')';
-        $users = User::whereRaw($statement2, [$name]);
-        //dd($users);
+        $statement1 = 'tsvectors @@ plainto_tsquery(\'english\',\''.$title.'\')';
+        $posts = Post::whereRaw($statement1);
+
+        /* $statement1 = 'tsvectors @@ plainto_tsquery(\'english\',\'?\')';
+        $posts = Post::whereRaw($statement1, [$title]); */
       } else {
         //here because code gets angry otherwise
         $posts = Post::all();
-        $users = User::all();
       }
-
-/*      if($request->has('search')){
-        $title = $request->input('search');
-        $posts = Post::where('title','ILIKE',"$title");
-      }
-*/
-
-      /* if($request->has('tags')){
-        $tag = $request->input('tags');
-        $tags = Tag::where('tagname', 'ILIKE', "$tag");
-        $tagsid -> get ids
-        $relationships = Question_Tag::where('tagid','ILIKE',"$tagids");
-        for($i = 0; $i < $relationships.length(); $i++){
-          $postid = $relationships -> get post ids
-          $posts->where('id', 'LIKE', $postid);
-        } 
-      } */
 
       if($order == 'Newest'){
         $posts = $posts->orderBy('postdate', 'DESC');
       } else if ($order == 'Oldest'){
         $posts = $posts->orderBy('postdate', 'ASC');
       }
+      
+      if($request->has('tag')){
+        $tags = $request->input('tag');
 
-      if ($searchfor == 'questions') $posts = $posts->get();
-      if ($searchfor == 'users') $users = $users->get();
+        $posts = $posts->get()->filter(function($post) use ($tags){
+          return ($post->tags->contains(function ($item) use ($tags){return in_array($item->id, $tags);}));
+        });
+      } else {
+        $posts = $posts->get();
+      }
 
-      return view('pages.search', ['searchfor' => $searchfor, 'questions' => $posts, 'users' => $users], compact('posts'));
+      return view('pages.search', ['questions' => $posts], compact('posts'));
+
     }
 
     //Show Post's Answers

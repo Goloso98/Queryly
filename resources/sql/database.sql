@@ -174,13 +174,16 @@ $BODY$
 DECLARE notified_user INTEGER;
 BEGIN
     SELECT userID INTO notified_user FROM user_tags WHERE NEW.tagID = user_tags.tagID;
-    WITH inserted AS (
-        INSERT INTO notifications (userID, isRead, notificationDate)
-        VALUES (notified_user, FALSE, CURRENT_TIMESTAMP)
-        RETURNING id
-    )
-    INSERT INTO new_questions SELECT inserted.id, NEW.postID FROM inserted;
-    RETURN NEW;
+    IF (notified_user = NULL) THEN
+        WITH inserted AS (
+            INSERT INTO notifications (userID, isRead, notificationDate)
+            VALUES (notified_user, FALSE, CURRENT_TIMESTAMP)
+            RETURNING id
+        )
+        INSERT INTO new_questions SELECT inserted.id, NEW.postID FROM inserted;
+        RETURN NEW;
+    END IF;
+    RETURN NULL;
 END;
 $BODY$
 LANGUAGE plpgsql;
@@ -522,5 +525,15 @@ INSERT INTO badges (badgeName) VALUES ('Answered 15 questions');
 
 --user badge relationship
 INSERT INTO user_badges (userID, badgeID) VALUES (1,1);
-INSERT INTO user_badges (userID, badgeID) VALUES (1,2); 
+INSERT INTO user_badges (userID, badgeID) VALUES (1,2);
+
+--tags
+INSERT INTO tags (tagName) VALUES ('code');
+INSERT INTO tags (tagName) VALUES ('cook');
+INSERT INTO tags (tagName) VALUES ('animals');
+
+--user tags
+-- INSERT INTO user_tags (userID, tagID) VALUES (1,1);
+-- INSERT INTO user_tags (userID, tagID) VALUES (1,2);
+-- INSERT INTO user_tags (userID, tagID) VALUES (1,3);
 
