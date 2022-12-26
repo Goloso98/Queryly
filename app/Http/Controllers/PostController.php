@@ -178,9 +178,9 @@ class PostController extends Controller
       $order = $request->input('orderby');
 
       if($request->has('search')){
-        $title = $request->input('search');
+        $search_input = $request->input('search');
 
-        $statement1 = 'tsvectors @@ plainto_tsquery(\'english\',\''.$title.'\')';
+        $statement1 = 'tsvectors @@ plainto_tsquery(\'english\',\''.$search_input.'\')';
         $posts = Post::whereRaw($statement1);
 
         /* $statement1 = 'tsvectors @@ plainto_tsquery(\'english\',\'?\')';
@@ -206,7 +206,7 @@ class PostController extends Controller
         $posts = $posts->get();
       }
 
-      return view('pages.search', ['questions' => $posts], compact('posts'));
+      return view('pages.search', ['posts' => $posts], compact('posts'));
 
     }
 
