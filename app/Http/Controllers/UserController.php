@@ -13,6 +13,8 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\User_badge;
 use App\Models\Badge;
+use App\Models\User_tag;
+use App\Models\Tag;
 
 class UserController extends Controller
 {
@@ -102,5 +104,27 @@ class UserController extends Controller
       $userID = Auth::id();
       $role = DB::table('roles')->where('userid', $userID)->value('userrole');
       return $role;
+    }
+
+    //show tags
+    public function showTags(){
+      $user = User::find(Auth::id());
+      $tags = $user->tags;
+      return view('pages.usertags', ['user' => $user, 'tags' => $tags]);
+    }
+
+    //change followed tags
+    public function changeTags(Request $request, $id){
+      $tags = Tag::all();
+      User_tag::where('userid', $id)->delete();
+      foreach($tags as $tag){
+        if($request->has($tag->tagname)){
+          User_tag::insert(['userid' => $id, 'tagid' => $tag->id]);
+        }
+      }
+
+      $user = User::find($id);
+      $new_tags = $user->tags;
+      return view('pages.usertags', ['user' => $user, 'tags' => $new_tags]);
     }
 }
