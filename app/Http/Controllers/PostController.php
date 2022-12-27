@@ -287,15 +287,36 @@ class PostController extends Controller
     public function correctness($postid){
       $userid = Auth::id();
       $post = Post::find($postid);
-      error_log($post->iscorrect);
       $this->authorize('markcorrect', $post);
       if($post->iscorrect){
         $post->iscorrect = false;
       } else {
         $post->iscorrect = true;
       }
-
       $post->save();
+
+      $correctcount = Post::where(['userid' => $post->userid, 'posttype' => 'answer', 'iscorrect' => true])->count();
+        if($correctcount == 1){
+          $badgeid = Badge::where('badgename', '1 correct answer!')->get()->value('id');
+          User_badge::where(['userid' => $post->userid, 'badgeid' => $badgeid])->delete();
+          User_badge::insert(['userid' => $post->userid, 'badgeid' => $badgeid]);
+        } else if($correctcount == 5){
+          $badgeid = Badge::where('badgename', '5 correct answers!')->get()->value('id');
+          User_badge::where(['userid' => $post->userid, 'badgeid' => $badgeid])->delete();
+          User_badge::insert(['userid' => $post->userid, 'badgeid' => $badgeid]);
+        } else if($correctcount == 10){
+          $badgeid = Badge::where('badgename', '10 correct answers!')->get()->value('id');
+          User_badge::where(['userid' => $post->userid, 'badgeid' => $badgeid])->delete();
+          User_badge::insert(['userid' => $post->userid, 'badgeid' => $badgeid]);
+        } else if($correctcount == 15){
+          $badgeid = Badge::where('badgename', '15 correct answers!')->get()->value('id');
+          User_badge::where(['userid' => $post->userid, 'badgeid' => $badgeid])->delete();
+          User_badge::insert(['userid' => $post->userid, 'badgeid' => $badgeid]);
+        } else if($correctcount == 20){
+          $badgeid = Badge::where('badgename', '20 correct answers!')->get()->value('id');
+          User_badge::where(['userid' => $post->userid, 'badgeid' => $badgeid])->delete();
+          User_badge::insert(['userid' => $post->userid, 'badgeid' => $badgeid]);
+        }
       return;
     }
 }
