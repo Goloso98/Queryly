@@ -1,3 +1,5 @@
+@inject('carbon', 'Carbon\Carbon')
+
 @extends('layouts.app')
 
 @section('title', $user->name)
@@ -17,20 +19,20 @@
       @endforeach
     </div> <!-- end .flash-message -->
 
-    <div>
-      <div class="col">
-        <img src="{{ $user->avatar }}" class="rounded float-end" style="width: 20%" alt="description of myimage">
-      </div>
-      <div class="col">
+    <div class="row">
+      <div class="col-8">
         <header>
           <h2>{{ $user->name }}</h2>
           @if($role == 'Administrator' && Auth::user() == $user)
-            <p class="role">({{$role}})</p>
+          <p class="role">({{$role}})</p>
           @endif
         </header>
         <p>&#64;{{ $user->username }}</p>
         <p>e-mail: {{ $user->email }}</p>
-        <p>Age: {{$age}}</p>
+        <p>Age: {{ $carbon::parse($user->birthday)->diff($carbon::now())->y }}</p>
+      </div>
+      <div class="col-12 col-sm-4">
+        <img src="{{ $user->avatar }}" class="rounded img-fluid" alt="Profile Pictture">
       </div>
     </div>
     <hr>
