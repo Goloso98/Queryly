@@ -5,8 +5,8 @@
 @section('content')
 
 <form method="post" action="{{ route('editUser', $user->id) }}" enctype="multipart/form-data">
-    {{ csrf_field() }}
-    {{ method_field('patch') }}
+    @csrf
+    @method('PATCH')
     <br>
     <div>
         <h2 class="text-center">Edit your profile</h2>
