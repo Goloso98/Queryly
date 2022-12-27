@@ -6,6 +6,16 @@
   <article class="userbuttons" data-id="{{ $user->id }}">
     @php
       $role = app\Http\Controllers\UserController::showRole();
+      $roleAdmin = $role->contains(function($item){
+          return $item->userrole === 'Administrator';
+        });
+      $roleMod = $role->contains(function($item){
+          return $item->userrole === 'Moderator';
+        });
+      $roleText = '(';
+      if($roleAdmin) $roleText = $roleText.'Administrator';
+      if($roleMod) $roleText = $roleText.', Moderator';
+      $roleText = $roleText.')';
     @endphp
     <br>
 
@@ -24,8 +34,8 @@
       <div class="col">
         <header>
           <h2>{{ $user->name }}</h2>
-          @if($role == 'Administrator' && Auth::user() == $user)
-            <p class="role">({{$role}})</p>
+          @if(($roleAdmin || $roleMod) && Auth::user() == $user)
+            <p class="role">{{ $roleText }}</p>
           @endif
         </header>
         <p>&#64;{{ $user->username }}</p>
@@ -47,6 +57,11 @@
             <p><a class="btn" aria-current="page" href="{{ route('users.badges', $user->id) }}"> My Badges </a></p>
           </div>
         </div>
+        @if($roleMod)
+        <div class="row">
+          <p><a class="btn" aria-current="page" href="{{ route('tags') }}"> Manage Tags </a></p>
+        </div>
+        @endif
       </div>
       <hr>
       <div class="text-center">
@@ -68,7 +83,7 @@
       </div>
       <hr>
       <div class="text-center">
-        @if($role == 'Administrator')
+        @if($roleAdmin)
         <p><a class="delete" href="#"> Delete Account </a></p>
         @endif
       </div>
