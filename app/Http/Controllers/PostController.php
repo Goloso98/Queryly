@@ -15,6 +15,7 @@ use App\Models\Tag;
 use App\Models\Question_tag;
 use App\Models\Badge;
 use App\Models\User_badge;
+use App\Models\Star;
 
 class PostController extends Controller
 {
@@ -269,14 +270,20 @@ class PostController extends Controller
         $posts = $posts->filter(function($post) use ($tags){
           return ($post->tags->contains(function ($item) use ($tags){return in_array($item->id, $tags);}));
         });
-      } /* else {
-        $posts = $posts->get();
-      } */
+      }
 
       if($order == 'newest'){
         $posts = $posts->sortByDesc('postdate');
       } else if ($order == 'oldest'){
         $posts = $posts->sortBy('postdate');
+      } else if ($order == 'morevoted'){
+        $posts = $posts->sortByDesc(function($post){
+          return count(Star::where('postid', $post->id)->get());
+        });
+      } else if ($order == 'lessvoted'){
+        $posts = $posts->sortBy(function($post){
+          return count(Star::where('postid', $post->id)->get());
+        });
       }
 
       return view('pages.search', ['posts' => $posts, 'users' => [], 'userSearch' => $userSearch], compact('posts'));
