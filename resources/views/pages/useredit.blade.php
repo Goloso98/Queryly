@@ -43,10 +43,15 @@
                 {{ $errors->first('password') }}
             </span>
         @endif
-        <div class="input-group mb-3">
-            <!-- <label class="form-label" for="avatar">Update profile picture</label> -->
-            <input type="file" class="form-control" id="avatar" name="avatar"/>
+        <div class="input-group" id="avatarDiv">
+            <label for="avatar" class="input-group-text" id="avatarLabel">
+                Select Profile Picture
+            </label>
+            <input type="file" class="form-control" id="avatar" name="avatar">
+            &nbsp;&nbsp;
+            <span id="avatarName" form-text></span>
         </div>
+        <br>
         <div class="input-group mb-3">
             <span class="input-group-text">Password</span>
             <input id="password" type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" name="password">

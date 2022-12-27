@@ -1,3 +1,4 @@
+/* Menu */
 #menu__toggle {
   opacity: 0;
 }
@@ -69,11 +70,14 @@
 .menu__item:hover {
   background-color: #CFD8DC;
 }
+
+/* User Role */
 .role {
   font-size: 0.875rem;
   color: grey;
 }
 
+/* Character Counters */
 #count-postTitle {
   float: right;
   padding: 0.1rem 0 0 0;
@@ -86,7 +90,6 @@
   font-size: 0.875rem;
   color: grey;
 }
-
 #count-commentText {
   float: right;
   padding: 0.1rem 0 0 0;
@@ -94,35 +97,36 @@
   color: grey;
 }
 
+/* Header and Button alignment */
 .flex-header {
   display: flex;
 }
-.line {
-  padding: 35px;
-}
 
-.searchbar {
-  width: 50%;
-  margin: auto;
-  text-align: center;
-}
-
+/* Pages Info */
 .info-message {
   text-align: center;
 }
 
+/* Password Info */
 .info {
   padding: 0.1rem 0 0 0;
   font-size: 0.775rem;
   color: grey;
 }
 
+/* Error Messages */
 .error {
   padding: 0.1rem 0 0 0;
   font-size: 0.775rem;
   color: red;
 }
 
+/* Search */
+.searchbar {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+}
 input[type="search"] {
   height: 35px;
   border: 1;
@@ -134,13 +138,12 @@ input[type="search"] {
   background: white;
   padding: 0 1.6rem;
   border-radius: 0.7rem;
-  appearance: none; 
+  appearance: none;
   transition: all 0.3s cubic-bezier(0, 0, 0.43, 1.49);
   transition-property: width, border-radius;
   z-index: 1;
   position: relative;
 }
-
 #accordionTags > div > h2 > button {
   padding: 5px;
   background-color: white;
@@ -149,15 +152,29 @@ input[type="search"] {
   font-size: 0.9rem;
   color: #333;
 }
-
 #accordionTags > div {
   border-color: darkgrey;
   border: 1;
 }
-
 #orderby {
   padding: 5px;
   border-color: darkgray;
   font-size: 0.9rem;
   color: #333;
+}
+
+/* Avatar */
+#avatar {
+  display: none;
+}
+#avatarLabel {
+  cursor: pointer;
+  border-radius: 0.7rem;
+  text-align: center;
+}
+#avatarName {
+  color: #333;
+}
+#avatarDiv {
+  align-items: center;
 }
