@@ -234,7 +234,7 @@ passwordInput?.addEventListener("input", (event) => {
 let inputFile = document.getElementById("avatar");
         let avatarName = document.getElementById("avatarName")
 
-        inputFile.addEventListener("change", ()=>{
+        inputFile?.addEventListener("change", ()=>{
             let inputAvatar = document.querySelector("input[type=file]").files[0];
 
             avatarName.innerText = inputAvatar.name;
