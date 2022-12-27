@@ -6,10 +6,11 @@
     <form method="post" action="{{ route('posts.edit', $post->id) }}">
         {{ csrf_field() }}
         {{ method_field('patch') }}
+        <br>
         @if (($post->posttype) == 'question')
-            <h3>Edit your question</h3>
+            <h2 class="text-center">Edit your question</h2>
         @else
-            <h3>Edit your answer</h3>
+            <h2 class="text-center">Edit your answer</h2>
         @endif
         <br>
         @if (($post->posttype) == 'question')
@@ -70,7 +71,11 @@
             <button type="submit">
                 Save Changes
             </button>
-            <p><a href="#" onclick="history.back()">Cancel</a></p>
+            @if($post->posttype == 'question')
+                <p><a href="{{ route('posts.postPage', $post->id) }}" class="btn">Cancel</a></p>
+            @else
+                <p><a href="{{ route('posts.postPage', $post->parentpost) }}" class="btn">Cancel</a></p>
+            @endif
         </div>
         <br>
     </form>

@@ -6,7 +6,8 @@
     <form method="post" action="{{ route('comments.edit', $comment->id) }}">
         {{ csrf_field() }}
         {{ method_field('patch') }}
-        <h3>Edit your comment</h3>
+        <br>
+        <h2 class="text-center">Edit your comment</h2>
         <br>
         <div class="mb-3">
             <h5>Text</h5>
@@ -25,11 +26,22 @@
             </div>
         </div>
 
-        <div class="text-center">
-            <button type="submit">
+        <br>
+        <div id="editCommentButtons">
+            <button type="submit" class="btn text-center">
                 Save Changes
             </button>
-            <p><a href="#" onclick="history.back()">Cancel</a></p>
+            @php
+                $postType = DB::table('posts')->find($comment->postid)->posttype;
+            @endphp
+            @if($postType == 'question')
+                <p><a href="{{ route('posts.postPage', $comment->postid) }}" class="btn">Cancel</a></p>
+            @else
+                @php
+                    $postID = DB::table('posts')->find($comment->postid)->parentpost;
+                @endphp
+                <p><a href="{{ route('posts.postPage', $postID) }}" class="btn">Cancel</a></p>
+            @endif
         </div>
         <br>
     </form>

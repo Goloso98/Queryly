@@ -178,3 +178,8 @@ input[type="search"] {
 #avatarDiv {
   align-items: center;
 }
+
+/* Edit Buttons */
+#editCommentButtons {
+  text-align: center;
+}
