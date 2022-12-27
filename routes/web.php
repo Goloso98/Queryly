@@ -27,6 +27,12 @@ Route::post('resultsUsers', 'UserController@search')->name('searchUser');
 
 Route::get('users', 'UserController@showUsers')->name('users.page');
 
+//Tags
+Route::get('tags', 'TagController@show')->name('tags');
+Route::get('tags/new', 'TagController@createForm')->name('tags.addForm');
+Route::post('tags/new', 'TagController@create')->name('tags.add');
+Route::get('tags/delete', 'TagController@deleteForm')->name('tags.deleteForm');
+Route::post('tags/delete', 'TagController@delete')->name('tags.delete');
 
 //Comments
 Route::get('posts/{postid}/comments/new', 'CommentController@showCreateForm')->name('addComment');
