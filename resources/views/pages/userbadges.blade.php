@@ -8,10 +8,14 @@
   <h2 class="text-center">Your Badges</h2>
 @else
   <h2 class="text-center">{{ $user->username }}'s Badges</h2>
-@endif<br>
-<ul>
+@endif
+<br>
+
+<div class="row">
   @forelse($badges as $badge)
-    @include('partials.badge')
+    <div class="col-3">
+      <button type="button" class="btn btn-primary" id="badgeLabel">{{ $badge->badgename }}</button>
+    </div>
   @empty
     @if(Auth::id() == $user->id)
       <p class="info-message">You don't own any badges yet.</p>
@@ -19,6 +23,7 @@
       <p class="info-message">{{ $user->username }} doesn't own any badges yet.</p>
     @endif
   @endforelse
-</ul>
+</div>
+<br>
 
 @endsection
