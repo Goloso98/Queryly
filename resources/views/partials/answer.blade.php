@@ -25,7 +25,10 @@
             <p class="card-text">{{ $answer->posttext }}</p>
             {{ $answer->postdate }}
             @if(!$showTitle)
-                <a class="btn" aria-current="page" href="{{route('users.profile', $answer->userid)}}">&#64;{{ $answer->user()->first()->username }}</a>
+                @php
+                    $username = DB::table('users')->find($answer->userid)->username;
+                @endphp
+                <a class="btn" aria-current="page" href="{{route('users.profile', $answer->userid)}}">&#64;{{ $username }}</a>
                 @if( $answer->edited )<p>Edited</p>@endif
             @endif
             <br>
@@ -51,12 +54,12 @@
                     }
                 @endphp
                 @if($userStar)
-                    <i class="fa-solid fa-star star">{{ count($stars) }}</i>  
+                    <i class="fa-solid fa-star star">&nbsp;{{ count($stars) }}</i>  
                 @else
-                    <i class="fa-regular fa-star star">{{ count($stars) }}</i>  
+                    <i class="fa-regular fa-star star">&nbsp;{{ count($stars) }}</i>  
                 @endif
             @else
-                <i class="fa-regular fa-star">{{ count($stars) }}</i>
+                <i class="fa-regular fa-star">&nbsp;{{ count($stars) }}</i>
             @endif
             <br>
 

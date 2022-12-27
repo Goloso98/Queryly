@@ -26,13 +26,11 @@ class UserController extends Controller
      * @return Response
      */
 
-    //Show User Account
+    //Show User Profile
     public function show($id)
     {
       $user = User::find($id);
-      //$this->authorize('show', $user);
-      $age = Carbon::parse($user->birthday)->diff(Carbon::now())->y;
-      return view('pages.user', ['user' => $user, 'age' => $age]);
+      return view('pages.user', ['user' => $user]);
     }
 
     //Show Homepage
@@ -56,7 +54,7 @@ class UserController extends Controller
       return view('pages.userbadges', ['user' => $user, 'badges' => $user->badges]);
     }
 
-    //Edit Account
+    //Edit Profile
     public function showEditForm($id){
       $user = User::find($id);
       $this->authorize('update', $user);
@@ -98,7 +96,7 @@ class UserController extends Controller
       return redirect()->route('users.profile',['id'=>$id]);
     }
 
-    //Delete Account
+    //Delete Profile
     public function delete(Request $request, $id)
     {
       $user = User::find($id);
@@ -140,14 +138,14 @@ class UserController extends Controller
       return $role;
     }
 
-    //show tags
+    //Show Tags
     public function showTags(){
       $user = User::find(Auth::id());
       $tags = $user->tags;
       return view('pages.usertags', ['user' => $user, 'tags' => $tags]);
     }
 
-    //change followed tags
+    //Change Followed Tags
     public function changeTags(Request $request, $id){
       $tags = Tag::all();
       User_tag::where('userid', $id)->delete();

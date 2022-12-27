@@ -28,20 +28,13 @@
                     }
                 @endphp
                 @if($userStar)
-                    <i class="fa-solid fa-star star">{{ count($stars) }}</i>  
+                    <i class="fa-solid fa-star star">&nbsp;{{ count($stars) }}</i>  
                 @else
-                    <i class="fa-regular fa-star star">{{ count($stars) }}</i>  
+                    <i class="fa-regular fa-star star">&nbsp;{{ count($stars) }}</i>  
                 @endif
             @else
-               <i class="fa-regular fa-star">{{ count($stars) }}</i>
+               <i class="fa-regular fa-star">&nbsp;{{ count($stars) }}</i>
             @endif
-            <h5>Tags:</h5>
-            @php
-                $tags = $question->tags;
-            @endphp
-            @foreach ($tags as $tag)
-                <p>{{ $tag->tagname }}</p>
-            @endforeach
         </div>
     </div>
 </article>
