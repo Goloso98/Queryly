@@ -11,7 +11,7 @@
       $username = DB::table('users')->find($post->userid)->username;
     @endphp
     <h4 class="card-title">Answer to: {{ $post->title }}</h4>
-    <p class="card-text">{{ $post->postText }}</p>
+    <p class="card-text">{{ $post->posttext }}</p>
     {{ $post->postdate }}
     <a class="btn" aria-current="page" href="{{route('users.profile', $post->userid)}}">&#64;{{$username}}</a>   
   </div>
