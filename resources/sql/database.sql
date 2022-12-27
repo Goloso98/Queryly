@@ -535,16 +535,22 @@ INSERT INTO comments (postID, userID, commentText) VALUES (15,1,'Thank you!');
 INSERT INTO stars (postID, userID) VALUES (1,2);
 
 --badges
-INSERT INTO badges (badgeName) VALUES ('Posted 5 questions');
-INSERT INTO badges (badgeName) VALUES ('Posted 10 questions');
-INSERT INTO badges (badgeName) VALUES ('Posted 15 questions');
-INSERT INTO badges (badgeName) VALUES ('Answered 5 questions');
-INSERT INTO badges (badgeName) VALUES ('Answered 10 questions');
-INSERT INTO badges (badgeName) VALUES ('Answered 15 questions');
+INSERT INTO badges (badgeName) VALUES ('Posted 5 questions'); --1
+INSERT INTO badges (badgeName) VALUES ('Posted 10 questions'); --2
+INSERT INTO badges (badgeName) VALUES ('Posted 15 questions'); --3
+INSERT INTO badges (badgeName) VALUES ('Posted 20 questions'); --4
 
---user badge relationship
-INSERT INTO user_badges (userID, badgeID) VALUES (1,1);
-INSERT INTO user_badges (userID, badgeID) VALUES (1,2);
+INSERT INTO badges (badgeName) VALUES ('Answered 5 questions'); --5
+INSERT INTO badges (badgeName) VALUES ('Answered 10 questions'); --6
+INSERT INTO badges (badgeName) VALUES ('Answered 15 questions'); --7
+INSERT INTO badges (badgeName) VALUES ('Answered 20 questions'); --8
+
+INSERT INTO badges (badgeName) VALUES ('1 correct answer!'); --9
+INSERT INTO badges (badgeName) VALUES ('5 correct answers!'); --10
+INSERT INTO badges (badgeName) VALUES ('10 correct answers!'); --11
+INSERT INTO badges (badgeName) VALUES ('15 correct answers!'); --12
+INSERT INTO badges (badgeName) VALUES ('20 correct answers!'); --13
+
 
 --tags
 INSERT INTO tags (tagName) VALUES ('code');
