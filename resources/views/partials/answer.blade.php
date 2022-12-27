@@ -25,7 +25,10 @@
             <p class="card-text">{{ $answer->posttext }}</p>
             {{ $answer->postdate }}
             @if(!$showTitle)
-                <a class="btn" aria-current="page" href="{{route('users.profile', $answer->userid)}}">&#64;{{ $answer->user()->first()->username }}</a>
+                @php
+                    $username = DB::table('users')->find($answer->userid)->username;
+                @endphp
+                <a class="btn" aria-current="page" href="{{route('users.profile', $answer->userid)}}">&#64;{{ $username }}</a>
                 @if( $answer->edited )<p>Edited</p>@endif
             @endif
             <br>
