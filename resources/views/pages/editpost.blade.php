@@ -46,6 +46,7 @@
                 <span id="maximum-postText">/ 1000</span>
             </div>
         </div>
+
         @if (($post->posttype) == 'question')
             <div class="mb-3">
                 <h5>Tags</h5>

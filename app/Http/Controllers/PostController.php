@@ -164,6 +164,7 @@ class PostController extends Controller
     public function showEditForm($id){
       if (!Auth::check()) return redirect('/login');
       $post = Post::find($id);
+      $user = Auth::id();
       return view('pages.editpost', ['post' => $post]);
     }
 
@@ -195,6 +196,35 @@ class PostController extends Controller
       }
 
       $post->save();
+
+      $id=$post->id;
+
+      if($post->posttype == 'question') {
+        $request->session()->flash('alert-success', 'Question has been successfully edited!');
+        return redirect()->route('posts.postPage',['id'=>$id]);
+      }
+      $request->session()->flash('alert-success', 'Answer has been successfully edited!');
+      return redirect()->route('posts.postPage', ['id'=>$post->parentpost]);
+    }
+
+    //Edit post
+    public function showEditTagsForm($id){
+      if (!Auth::check()) return redirect('/login');
+      $post = Post::find($id);
+      return view('pages.editposttags', ['post' => $post]);
+    }
+
+    public function updateTags(Request $request, $id){
+      $post = Post::find($id);
+      $tags = Tag::all();
+      $this->authorize('updateTags', $post);
+
+      Question_tag::where('postid', $id)->delete();
+      foreach($tags as $tag){
+        if($request->has($tag->tagname)){
+          Question_tag::insert(['postid' => $id, 'tagid' => $tag->id]);
+        }
+      }
 
       $id=$post->id;
 

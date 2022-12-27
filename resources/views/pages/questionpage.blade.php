@@ -25,6 +25,9 @@
             @can('update', $question)
                 <a class="btn" aria-current="page" href="{{  route('posts.edit', $question->id)  }}">Edit</a>
             @endcan
+            @can('updateTags', $question)
+                <a class="btn" aria-current="page" href="{{  route('posts.editTags', $question->id)  }}">Edit Tags</a>
+            @endcan
             <p class="card-text">{{ $question->posttext }}</p>
             {{ $question->postdate }}
             <a class="btn" aria-current="page" href="{{route('users.profile', $question->userid)}}">&#64;{{ $question->user()->first()->username }}</a>
