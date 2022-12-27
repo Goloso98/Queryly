@@ -153,7 +153,7 @@ $BODY$
 DECLARE 
     notified_user INTEGER;
 BEGIN
-    IF NEW.postType = 'answer' AND SELECT userID FROM posts WHERE userID != NEW.userID AND id = NEW.parentPost THEN
+    IF NEW.postType = 'answer' AND (SELECT count(userID) FROM posts WHERE userID != NEW.userID AND id = NEW.parentPost LIMIT 1) > 0 THEN
         SELECT userID INTO notified_user FROM posts WHERE posts.id = NEW.parentPost;
         WITH inserted AS (
             INSERT INTO notifications (userID, isRead, notificationDate)
