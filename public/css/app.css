@@ -183,3 +183,7 @@ input[type="search"] {
 #editCommentButtons {
   text-align: center;
 }
+
+#tagsTable {
+  text-align: center;
+}

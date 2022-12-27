@@ -59,11 +59,6 @@
             <p><a class="btn" aria-current="page" href="{{ route('users.badges', $user->id) }}"> My Badges </a></p>
           </div>
         </div>
-        @if($roleMod)
-        <div class="row">
-          <p><a class="btn" aria-current="page" href="{{ route('tags') }}"> Manage Tags </a></p>
-        </div>
-        @endif
       </div>
       <hr>
       <div class="text-center">
