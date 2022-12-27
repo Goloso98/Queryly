@@ -13,6 +13,8 @@ use App\Models\Role;
 use App\Models\Comment;
 use App\Models\Tag;
 use App\Models\Question_tag;
+use App\Models\Badge;
+use App\Models\User_badge;
 
 class PostController extends Controller
 {
@@ -87,6 +89,25 @@ class PostController extends Controller
       }
       $user = Auth::user();
 
+      $questionCount = Post::where(['userid' => $user->id, 'posttype' => 'question'])->count();
+      if($questionCount == 5){
+        $badgeid = Badge::where('badgename', 'Posted 5 questions')->get()->value('id');
+        User_badge::where(['userid' => $user->id, 'badgeid' => $badgeid])->delete();
+        User_badge::insert(['userid' => $user->id, 'badgeid' => $badgeid]);
+      } else if ($questionCount == 10){
+        $badgeid = Badge::where('badgename', 'Posted 10 questions')->get()->value('id');
+        User_badge::where(['userid' => $user->id, 'badgeid' => $badgeid])->delete();
+        User_badge::insert(['userid' => $user->id, 'badgeid' => $badgeid]);
+      } else if ($questionCount == 15){
+        $badgeid = Badge::where('badgename', 'Posted 15 questions')->get()->value('id');
+        User_badge::where(['userid' => $user->id, 'badgeid' => $badgeid])->delete();
+        User_badge::insert(['userid' => $user->id, 'badgeid' => $badgeid]);
+      } else if ($questionCount == 20){
+        $badgeid = Badge::where('badgename', 'Posted 20 questions')->get()->value('id');
+        User_badge::where(['userid' => $user->id, 'badgeid' => $badgeid])->delete();
+        User_badge::insert(['userid' => $user->id, 'badgeid' => $badgeid]);
+      }
+
       return view('pages.questionpage', ['user' => $user, 'question' => $question]);
     }
 
@@ -114,6 +135,25 @@ class PostController extends Controller
       $postID = DB::table('posts')->insertGetId($data);
 
       $user = Auth::user();
+
+      $answerCount = Post::where(['userid' => $user->id, 'posttype' => 'answer'])->count();
+      if($answerCount == 5){
+        $badgeid = Badge::where('badgename', 'Answered 5 questions')->get()->value('id');
+        User_badge::where(['userid' => $user->id, 'badgeid' => $badgeid])->delete();
+        User_badge::insert(['userid' => $user->id, 'badgeid' => $badgeid]);
+      } else if ($answerCount == 10){
+        $badgeid = Badge::where('badgename', 'Answered 10 questions')->get()->value('id');
+        User_badge::where(['userid' => $user->id, 'badgeid' => $badgeid])->delete();
+        User_badge::insert(['userid' => $user->id, 'badgeid' => $badgeid]);
+      } else if ($answerCount == 15){
+        $badgeid = Badge::where('badgename', 'Answered 15 questions')->get()->value('id');
+        User_badge::where(['userid' => $user->id, 'badgeid' => $badgeid])->delete();
+        User_badge::insert(['userid' => $user->id, 'badgeid' => $badgeid]);
+      } else if ($answerCount == 20){
+        $badgeid = Badge::where('badgename', 'Answered 20 questions')->get()->value('id');
+        User_badge::where(['userid' => $user->id, 'badgeid' => $badgeid])->delete();
+        User_badge::insert(['userid' => $user->id, 'badgeid' => $badgeid]);
+      }
 
       $request->session()->flash('alert-success', 'Answer has been successfully posted!');
 

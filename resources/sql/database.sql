@@ -537,13 +537,15 @@ INSERT INTO stars (postID, userID) VALUES (1,2);
 INSERT INTO badges (badgeName) VALUES ('Posted 5 questions');
 INSERT INTO badges (badgeName) VALUES ('Posted 10 questions');
 INSERT INTO badges (badgeName) VALUES ('Posted 15 questions');
+INSERT INTO badges (badgeName) VALUES ('Posted 20 questions');
 INSERT INTO badges (badgeName) VALUES ('Answered 5 questions');
 INSERT INTO badges (badgeName) VALUES ('Answered 10 questions');
 INSERT INTO badges (badgeName) VALUES ('Answered 15 questions');
+INSERT INTO badges (badgeName) VALUES ('Answered 20 questions');
 
 --user badge relationship
-INSERT INTO user_badges (userID, badgeID) VALUES (1,1);
-INSERT INTO user_badges (userID, badgeID) VALUES (1,2);
+-- INSERT INTO user_badges (userID, badgeID) VALUES (1,1);
+-- INSERT INTO user_badges (userID, badgeID) VALUES (1,2);
 
 --tags
 INSERT INTO tags (tagName) VALUES ('code');
