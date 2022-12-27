@@ -24,8 +24,10 @@ class TagController extends Controller
     }
 
     public function create(Request $request){
+        $this->authorize('create', Tag::class);
+
         $validate = $request->validate([
-            'tagname' => 'required'
+            'tagname' => 'required|unique:tags'
         ]);
 
         $tagname = $request->input('tagname');
@@ -38,10 +40,12 @@ class TagController extends Controller
     }
 
     public function delete(Request $request){
+        $this->authorize('delete', Tag::class);
+
         $tags = Tag::all();
         foreach($tags as $tag){
-            if($request->has($tag->tagname)){
-                Tag::where('tagname', $tag->tagname)->delete();
+            if($request->has($tag->id)){
+                Tag::where('id', $tag->id)->delete();
             }
         }
         return redirect()->route('tags');

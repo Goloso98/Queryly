@@ -9,8 +9,8 @@
         <h3>Select the tags to delete:</h3>
         @foreach(App\Models\Tag::all() as $tag)
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="{{ $tag->tagname }}" id="{{ $tag->tagname }}" name="{{ $tag->tagname }}" >
-                <label class="form-check-label" for="{{ $tag->tagname }}">{{ $tag->tagname }}</label>
+                <input class="form-check-input" type="checkbox" value="{{ $tag->id }}" id="{{ $tag->id }}" name="{{ $tag->id }}" >
+                <label class="form-check-label" for="{{ $tag->id }}">{{ $tag->tagname }}</label>
             </div>
         @endforeach
         <br>
