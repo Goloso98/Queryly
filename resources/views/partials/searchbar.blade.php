@@ -35,8 +35,6 @@
         <br>
 
         <select class="form-select" id = "orderby" name = "orderby">
-            <!-- <option name = "mostvoted">Most Voted</option> -->
-            <!-- <option name = "lessvoted">Less Voted</option> -->
             <option value = "newest">Newest</option>
             <option value = "oldest">Oldest</option>
         </select>
