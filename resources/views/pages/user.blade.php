@@ -19,7 +19,7 @@
 
     <div>
       <div class="col">
-        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" class="rounded float-end" style="width: 20%" alt="description of myimage">
+        <img src="{{ $user->avatar }}" class="rounded float-end" style="width: 20%" alt="description of myimage">
       </div>
       <div class="col">
         <header>

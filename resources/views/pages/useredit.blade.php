@@ -4,7 +4,7 @@
 
 @section('content')
 
-<form method="post" action="{{ route('editUser', $user->id) }}">
+<form method="post" action="{{ route('editUser', $user->id) }}" enctype="multipart/form-data">
     {{ csrf_field() }}
     {{ method_field('patch') }}
     <br>
@@ -43,6 +43,10 @@
                 {{ $errors->first('password') }}
             </span>
         @endif
+        <div class="input-group mb-3">
+            <!-- <label class="form-label" for="avatar">Update profile picture</label> -->
+            <input type="file" class="form-control" id="avatar" name="avatar"/>
+        </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Password</span>
             <input id="password" type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" name="password">

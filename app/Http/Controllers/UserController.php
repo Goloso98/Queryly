@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
 use Carbon\Carbon;
 
 use App\Models\Post;
@@ -63,15 +64,17 @@ class UserController extends Controller
     }
 
     public function update(Request $request, $id){
+      //Image::make('public/blank-profile-picture-973460_960_720.png')->resize(300,300)->encode('jpg')->encode('data-url')->encoded
       
       $user = User::find($id);
       $this->authorize('update', $user);
-
+      
       $validate = $request->validate([
         'name' => 'required',
         'username' => 'required|min:4|max:20|unique:users,username,'.$id,
         'email' => 'required|unique:users,email,'.$id,
-        'password' => 'nullable|string|min:6|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|confirmed',
+        'avatar' => 'nullable|image|mimes:jpg,jpeg,png,gif,svg|max:2048',
+        'password' => 'nullable|string|min:6|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|confirmed'
       ]);
 
       if($request->input('name')!=$user->name) $user->name = $request->input('name');
@@ -79,6 +82,11 @@ class UserController extends Controller
       if($request->input('email')!=$user->email) $user->email = $request->input('email');
       if($request->input('password')!=NULL){
         $user->password = bcrypt($request->input('password'));
+      }
+      $image = $request->file('avatar');
+      if($request->hasFile('avatar') && $image->isValid()) {
+        $img = Image::make($image->getRealPath())->resize(300,300)->encode('jpg')->encode('data-url')->encoded;
+        $user->avatar = $img;
       }
 
       $user->save();
