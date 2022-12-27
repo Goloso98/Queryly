@@ -150,9 +150,10 @@ DROP FUNCTION IF EXISTS add_star_notification CASCADE;
 -- ANSWER NOTIFICATIONS
 CREATE FUNCTION add_answer_notification() RETURNS TRIGGER AS
 $BODY$
-DECLARE notified_user INTEGER;
+DECLARE 
+    notified_user INTEGER;
 BEGIN
-    IF NEW.postType = 'answer' THEN
+    IF NEW.postType = 'answer' AND SELECT userID FROM posts WHERE userID != NEW.userID AND id = NEW.parentPost THEN
         SELECT userID INTO notified_user FROM posts WHERE posts.id = NEW.parentPost;
         WITH inserted AS (
             INSERT INTO notifications (userID, isRead, notificationDate)
