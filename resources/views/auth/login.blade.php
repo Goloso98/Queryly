@@ -39,6 +39,13 @@
         <p></p>
         <a class="button button-outline" href="{{ route('register') }}">Register</a>
     </div>
+
+    @if (session('error'))
+      <div class="alert alert-danger">
+            {{ session('error') }}
+      </div>
+    @endif
+
 </form>
 <p></p>
 @endsection

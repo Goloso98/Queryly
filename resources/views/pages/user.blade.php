@@ -86,6 +86,19 @@
       <hr>
       <div class="text-center">
         @if($roleAdmin)
+        @if($user->isblocked)
+        <form method="post" action="{{ route('users.block', $user->id) }}">
+          {{ csrf_field() }}
+          {{ method_field('patch') }}
+          <button type="submit">Unblock Account</button>
+        </form>
+        @else
+        <form method="post" action="{{ route('users.block', $user->id) }}">
+          {{ csrf_field() }}
+          {{ method_field('patch') }}
+          <button type="submit">Block Account</button>
+        </form>
+        @endif
         <p><a class="delete" href="#"> Delete Account </a></p>
         @endif
       </div>

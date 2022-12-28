@@ -14,7 +14,7 @@
                     <p class="card-text">Age: {{ $carbon::parse($user->birthday)->diff($carbon::now())->y }}</p>
                 </div>
                 <div class="col-12 col-sm-4">
-                    <img src="{{ $user->avatar }}" class="rounded img-fluid" alt="Profile Pictture">
+                    <img src="{{ $user->avatar }}" class="rounded img-fluid" alt="Profile Picture">
                 </div>
             </div>
         </div>

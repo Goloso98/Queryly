@@ -96,6 +96,19 @@ class UserController extends Controller
       return redirect()->route('users.profile',['id'=>$id]);
     }
 
+    //Block/Unblock Profile
+    public function block($id){
+      $user = User::find($id);
+      if($user->isblocked){
+        $user->isblocked = false;
+      } else {
+        $user->isblocked = true;
+      }
+      $user->save();
+
+      return redirect()->route('users.profile', ['id' => $id]);
+    }
+
     //Delete Profile
     public function delete(Request $request, $id)
     {

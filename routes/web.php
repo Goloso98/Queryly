@@ -16,6 +16,7 @@ Route::get('homepage', 'UserController@showHome')->name('homepage');
 
 //Users
 Route::get('users/{id}', 'UserController@show')->name('users.profile');
+Route::patch('users/{id}', 'UserController@block')->name('users.block');
 Route::get('users/{id}/edit',  'UserController@showEditForm')->name('editUser');
 Route::patch('users/{id}/edit',  'UserController@update')->name('users.update');
 Route::get('users/{id}/questions', 'PostController@showUserQuestions')->name('users.questions');
@@ -24,7 +25,6 @@ Route::get('users/{id}/badges', 'UserController@showBadges')->name('users.badges
 Route::get('users/{id}/tags', 'UserController@showTags')->name('users.tags');
 Route::patch('users/{id}/tags', 'UserController@changeTags')->name('users.changeTags');
 Route::post('resultsUsers', 'UserController@search')->name('searchUser');
-
 Route::get('users', 'UserController@showUsers')->name('users.page');
 
 //Tags
