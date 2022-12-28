@@ -2,7 +2,7 @@
 
 @section('content')
 <br>
-<h2 class="text-center">Post Your Question</h2>
+<h2 class="centering">Post Your Question</h2>
 <br>
 <form method="POST" action="{{ route('addQuestion') }}">
     {{ csrf_field() }}

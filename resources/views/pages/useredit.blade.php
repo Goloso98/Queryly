@@ -9,7 +9,7 @@
     @method('PATCH')
     <br>
     <div>
-        <h2 class="text-center">Edit your profile</h2>
+        <h2 class="centering">Edit your profile</h2>
         <br>
         @if ($errors->has('name'))
             <span class="error">

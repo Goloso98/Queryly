@@ -68,7 +68,7 @@
                         </h2>
                         <div id="collapseTag" class="accordion-collapse collapse" aria-labelledby="headingTag" data-bs-parent="#accordionQTags">
                             <div class="accordion-body">
-                                <div class="container text-center">
+                                <div class="container centering">
                                     <div class="row">
                                         @php
                                             $tags = $question->tags;

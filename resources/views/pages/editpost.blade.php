@@ -8,9 +8,9 @@
         {{ method_field('patch') }}
         <br>
         @if (($post->posttype) == 'question')
-            <h2 class="text-center">Edit your question</h2>
+            <h2 class="centering">Edit your question</h2>
         @else
-            <h2 class="text-center">Edit your answer</h2>
+            <h2 class="centering">Edit your answer</h2>
         @endif
         <br>
         @if (($post->posttype) == 'question')

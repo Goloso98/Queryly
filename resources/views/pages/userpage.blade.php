@@ -2,7 +2,7 @@
 
 @section('content')
     <br>
-    <h2 class="text-center">Our Users</h2>
+    <h2 class="centering">Our Users</h2>
     <br>
     @include('partials.searchbar', ['userSearch' => TRUE])
     

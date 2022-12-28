@@ -5,9 +5,9 @@
 @section('content')
 <br>
 @if(Auth::id() == $user->id)
-  <h2 class="text-center">Your Badges ({{ $badges->count() }})</h2>
+  <h2 class="centering">Your Badges ({{ $badges->count() }})</h2>
 @else
-  <h2 class="text-center">{{ $user->username }}'s Badges ({{ $badges->count() }})</h2>
+  <h2 class="centering">{{ $user->username }}'s Badges ({{ $badges->count() }})</h2>
 @endif
 <br>
 
@@ -18,9 +18,9 @@
     </div>
   @empty
     @if(Auth::id() == $user->id)
-      <p class="info-message">You don't own any badges yet.</p>
+      <p class="centering">You don't own any badges yet.</p>
     @else
-      <p class="info-message">{{ $user->username }} doesn't own any badges yet.</p>
+      <p class="centering">{{ $user->username }} doesn't own any badges yet.</p>
     @endif
   @endforelse
 </div>

@@ -6,11 +6,11 @@
     <br>
     <form method="post" action="{{ route('tags.deleteForm') }}">
         {{ csrf_field() }}
-        <h2 class="text-center">Delete Tags</h2>
+        <h2 class="centering">Delete Tags</h2>
         <br>
         <div class="row">
             @foreach(App\Models\Tag::all() as $tag)
-                <div class="form-check col-3 tagsTable">
+                <div class="form-check col-3 centering">
                     <input class="form-check-input" type="checkbox" value="{{ $tag->id }}" id="{{ $tag->id }}" name="{{ $tag->id }}" >
                     <label class="form-check-label" for="{{ $tag->id }}">{{ $tag->tagname }}</label>
                 </div>

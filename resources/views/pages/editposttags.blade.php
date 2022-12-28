@@ -7,11 +7,11 @@
         {{ csrf_field() }}
         {{ method_field('patch') }}
         <br>
-        <h2 class="text-center">Edit Question Tags</h2>
+        <h2 class="centering">Edit Question Tags</h2>
         <br>
         <div class="row">
             @foreach(App\Models\Tag::all() as $tag)
-                <div class="form-check col-3 tagsTable">
+                <div class="form-check col-3 centering">
                     @if(!($post->tags->contains($tag->id)))
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="{{ $tag->tagname }}" id="{{ $tag->tagname }}" name="{{ $tag->tagname }}" >

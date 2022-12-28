@@ -6,7 +6,7 @@
 
 @section('content')
     <br>
-    <h2 class="text-center">Existing Tags ({{ $tags->count() }}):</h2>
+    <h2 class="centering">Existing Tags ({{ $tags->count() }}):</h2>
     <br>
     @php
       $role = app\Http\Controllers\UserController::showRole();
@@ -18,13 +18,14 @@
         });
     @endphp
     @if($roleAdmin)
-        <div class="text-center">
+        <div class="centering">
             <a class="btn" aria-current="page" href="{{ route('tags.addForm') }}">Add Tags</a>
             <a class="btn" aria-current="page" href="{{ route('tags.deleteForm') }}">Delete Tags</a>
         </div>
+        <br>
     @endif
 
-    <table class="table text-center tagsTable">
+    <table class="table centering centering">
         <thead>
             <tr>
             <th scope="col">Tag Name</th>

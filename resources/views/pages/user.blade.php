@@ -48,7 +48,7 @@
     <hr>
 
     @if(Auth::check() && Auth::user() == $user)
-      <div class="container text-center">
+      <div class="container centering">
         <div class="row">
           <div class="col">
             <p><a class="btn" aria-current="page" href="{{ route('users.questions', $user->id) }}"> My questions </a></p>
@@ -61,12 +61,12 @@
         </div>
       </div>
       <hr>
-      <div class="text-center">
+      <div class="centering">
         <p><a class="btn" aria-current="page" href="{{ route('editUser', $user->id) }}"> Edit </a></p>
         <p><a class="delete btn" href="#"> Delete My Account </a></p>
       </div>
     @else
-      <div class="container text-center">
+      <div class="container centering">
         <div class="row">
           <div class="col">
             <p><a class="btn" aria-current="page" href="{{ route('users.questions', $user->id) }}"> See questions </a></p>
@@ -79,7 +79,7 @@
         </div>
       </div>
       <hr>
-      <div class="text-center">
+      <div class="centering">
         @if($roleAdmin)
         <p><a class="delete btn" href="#"> Delete Account </a></p>
         @endif

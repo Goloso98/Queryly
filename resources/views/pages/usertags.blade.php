@@ -5,25 +5,25 @@
 @section('content')
 <br>
 @if(Auth::id() == $user->id)
-  <h2 class="info-message">Your Followed Tags ({{ $tags->count() }})</h2>
+  <h2 class="centering">Your Followed Tags ({{ $tags->count() }})</h2>
 @else
-  <h2 class="info-message">{{ $user->username }}'s Followed Tags ({{ $tags->count() }})</h2>
+  <h2 class="centering">{{ $user->username }}'s Followed Tags ({{ $tags->count() }})</h2>
 @endif<br>
 
-<div class="text-center">
+<div class="centering">
   <a class="btn outlined" aria-current="page" href="{{ route('changeTags', $user->id) }}">Update Followed Tags</a>
 </div>
 <br>
 <div class="row">
   @forelse($tags as $tag)
-    <div class="form-check col-3 tagsTable">
+    <div class="form-check col-3 centering">
       {{ $tag->tagname }}
     </div>
   @empty
     @if(Auth::id() == $user->id)
-      <p class="info-message">You don't follow any tags yet.</p>
+      <p class="centering">You don't follow any tags yet.</p>
     @else
-      <p class="info-message">{{ $user->username }} doesn't follow any tags yet.</p>
+      <p class="centering">{{ $user->username }} doesn't follow any tags yet.</p>
     @endif
   @endforelse
 </div>

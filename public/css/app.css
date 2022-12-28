@@ -102,11 +102,6 @@
   display: flex;
 }
 
-/* Pages Info */
-.info-message {
-  text-align: center;
-}
-
 /* Password Info */
 .info {
   padding: 0.1rem 0 0 0;
@@ -163,6 +158,7 @@ input[type="search"] {
   color: #333;
 }
 
+/* Question Tags */
 #accordionQTags > div > h2 > button {
   padding: 7px;
 }
@@ -183,25 +179,13 @@ input[type="search"] {
   align-items: center;
 }
 
-/* Edit Buttons */
+/* Buttons */
 .buttons {
   text-align: center;
   align-items: center;
   display: flex;
   flex-direction: column;
 }
-
-.tagsTable {
-  text-align: center;
-}
-
-/* Badges */
-.badgeLabel {
-  cursor: alias;
-  margin-bottom: 10px;
-}
-
-/* Buttons */
 .outlined {
   border: 1px;
   border-style: solid;
@@ -229,12 +213,21 @@ input[type="search"] {
   padding-top: 5px;
 }
 
+/* Labels */
 .editedLabel {
   color: grey;
   font-size: small;
 }
-
 .starLabel {
   color: #333;
   font-size: small;
+}
+.badgeLabel {
+  cursor: alias;
+  margin-bottom: 10px;
+}
+
+/* Center */
+.centering {
+  text-align: center;
 }

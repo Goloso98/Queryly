@@ -18,7 +18,7 @@
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        <div class="container text-center">
+                        <div class="container centering">
                             <div class="row">
                                 @foreach(App\Models\Tag::all() as $tag)
                                     <div class="form-check col-4">

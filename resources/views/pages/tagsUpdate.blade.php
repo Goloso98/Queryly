@@ -8,11 +8,11 @@
     {{ csrf_field() }}
     {{ method_field('patch') }}
     <br>
-    <h2 class="text-center">Follow (or Unfollow) Tags:</h2>
+    <h2 class="centering">Follow (or Unfollow) Tags:</h2>
     <br>
     <div class="row">
         @foreach(App\Models\Tag::all() as $tag)
-            <div class="form-check col-3 tagsTable">
+            <div class="form-check col-3 centering">
                 @if(!($user->tags->contains($tag->id)))
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="{{ $tag->tagname }}" id="{{ $tag->tagname }}" name="{{ $tag->tagname }}" >
