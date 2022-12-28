@@ -3,10 +3,10 @@
 @section('content')
 <form method="POST" action="{{ route('login') }}">
     {{ csrf_field() }}
-    <p></p>
+    <br>
     <h2 class="centering">Welcome Back!</h2>
-    <p></p>
     <hr>
+    <br>
     @if ($errors->has('email'))
       <span class="error">
         {{ $errors->first('email') }}
@@ -27,17 +27,17 @@
       <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" name="password">
     </div>
 
-    <div class="centering">
-        <p></p>
+    <div class="buttons">
+        <br>
         <label>
             <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
         </label>
-        <p></p>
-        <button type="submit">
+        <p></p> <!-- br does not work -->
+        <button type="submit" class="btn outlined">
             Login
         </button>
-        <p></p>
-        <a class="button button-outline" href="{{ route('register') }}">Register</a>
+        <p></p> <!-- br does not work -->
+        <a class="btn" href="{{ route('register') }}">Register</a>
     </div>
 
     @if (session('error'))

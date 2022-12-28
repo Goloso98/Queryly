@@ -40,6 +40,9 @@
         <p>&#64;{{ $user->username }}</p>
         <p>Email: {{ $user->email }}</p>
         <p>Age: {{ $carbon::parse($user->birthday)->diff($carbon::now())->y }}</p>
+        @if($user->isblocked)
+          <span class="report small">This account is blocked.</span>
+        @endif
       </div>
       <div class="col-12 col-sm-4">
         <img src="{{ $user->avatar }}" class="rounded img-fluid" alt="Profile Pictture">
@@ -79,26 +82,27 @@
         </div>
       </div>
       <hr>
-      <div class="centering">
+      <div class="buttons">
         @if($roleAdmin)
           @if($user->isblocked)
-          <form method="post" action="{{ route('users.block', $user->id) }}">
-            {{ csrf_field() }}
-            {{ method_field('patch') }}
-            <button type="submit">Unblock Account</button>
-          </form>
+            <form method="post" action="{{ route('users.block', $user->id) }}">
+              {{ csrf_field() }}
+              {{ method_field('patch') }}
+              <button type="submit" class="btn outlined">Unblock Account</button>
+            </form>
           @else
-          <form method="post" action="{{ route('users.block', $user->id) }}">
-            {{ csrf_field() }}
-            {{ method_field('patch') }}
-            <button type="submit">Block Account</button>
-          </form>
+            <form method="post" action="{{ route('users.block', $user->id) }}">
+              {{ csrf_field() }}
+              {{ method_field('patch') }}
+              <button type="submit" class="btn outlined">Block Account</button>
+            </form>
           @endif
-          <p><a class="delete btn" href="#"> Delete Account </a></p>
+          <br>
+          <a class="delete btn" href="#"> Delete Account </a>
         @endif
       </div>
     @endif
-
+  
   </article>
-
+<br>
 @endsection
