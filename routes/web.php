@@ -47,6 +47,8 @@ Route::get('posts/answers/new', 'PostController@showAddAnswerForm')->name('addAn
 Route::post('posts/answers/new', 'PostController@postAnswer')->name('posts.addAnswer');
 Route::get('posts/{id}/edit',  'PostController@showEditForm')->name('posts.edit');
 Route::patch('posts/{id}/edit',  'PostController@update')->name('posts.update');
+Route::get('posts/{id}/edittags',  'PostController@showEditTagsForm')->name('posts.editTags');
+Route::patch('posts/{id}/edittags',  'PostController@updateTags')->name('posts.updateTags');
 Route::get('posts/{id}/comments', 'PostController@showComments')->name('posts.comments');
 Route::post('resultsPosts', 'PostController@search')->name('searchPost');
 Route::get('posts/topquestions', 'PostController@showTopQuestions')->name('posts.top');

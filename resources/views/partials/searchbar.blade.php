@@ -35,10 +35,10 @@
         <br>
 
         <select class="form-select" id = "orderby" name = "orderby">
-            <!-- <option name = "mostvoted">Most Voted</option> -->
-            <!-- <option name = "lessvoted">Less Voted</option> -->
             <option value = "newest">Newest</option>
             <option value = "oldest">Oldest</option>
+            <option value = "morevoted">More Voted</option>
+            <option value = "lessvoted">Less Voted</option>
         </select>
     @endif
     <br>

@@ -15,11 +15,12 @@ use App\Models\Tag;
 use App\Models\Question_tag;
 use App\Models\Badge;
 use App\Models\User_badge;
+use App\Models\Star;
 
 class PostController extends Controller
 {
 
-    //homepage
+    //Homepage
     public function show($id)
     {
       $post = Post::find($id);
@@ -27,7 +28,7 @@ class PostController extends Controller
         return view('pages.questionpage', ['question' => $post]);
     }
 
-    //Own user questions and answers
+    //Own User Questions
     public function showUserQuestions($userID)
     {
       $user = User::find($userID);
@@ -36,6 +37,7 @@ class PostController extends Controller
       return view('pages.userquestions', ['user' => $user, 'questions' => $questions]);
     }
 
+    //Own User Answers
     public function showUserAnswers($userID)
     {
       $user = User::find($userID);
@@ -44,14 +46,14 @@ class PostController extends Controller
       return view('pages.useranswers', ['user' => $user, 'answers' => $answers]);
     }
 
-    //Comments to a post
+    //Show Comments
     public function showComments($id){
       $post = Post::find($id);
       $comments = Comment::where('postid', $id)->get();
       return view('pages.postcomments', ['post' => $post, 'comments' => $comments]);
     }
 
-    //Delete post
+    //Delete Post
     public function delete(Request $request, $id)
     {
       $post = Post::find($id);
@@ -60,7 +62,7 @@ class PostController extends Controller
       return $post;
     }
 
-    //Add question
+    //Add Question
     public function showAddQuestionForm()
     {
       if (!Auth::check()) return redirect('/login');
@@ -111,7 +113,7 @@ class PostController extends Controller
       return view('pages.questionpage', ['user' => $user, 'question' => $question]);
     }
 
-    //Add answer
+    //Add Answer
     public function showAddAnswerForm(Request $request)
     {
       if (!Auth::check()) return redirect('/login');
@@ -160,10 +162,11 @@ class PostController extends Controller
       return redirect()->route('posts.postPage', ['id' => $parentPost]);
     }
 
-    //Edit post
+    //Edit Post
     public function showEditForm($id){
       if (!Auth::check()) return redirect('/login');
       $post = Post::find($id);
+      $user = Auth::id();
       return view('pages.editpost', ['post' => $post]);
     }
 
@@ -182,7 +185,6 @@ class PostController extends Controller
           'postText' => 'required|max:1000|',
         ]);
       }
-
 
       if($post->posttype == 'question' && $request->input('title')!=$post->title) $post->title = $request->input('title');
       if($request->input('postText')!=$post->posttext) $post->posttext = $request->input('postText');
@@ -206,6 +208,36 @@ class PostController extends Controller
       return redirect()->route('posts.postPage', ['id'=>$post->parentpost]);
     }
 
+    //Edit Post Tags
+    public function showEditTagsForm($id){
+      if (!Auth::check()) return redirect('/login');
+      $post = Post::find($id);
+      return view('pages.editposttags', ['post' => $post]);
+    }
+
+    public function updateTags(Request $request, $id){
+      $post = Post::find($id);
+      $tags = Tag::all();
+      $this->authorize('updateTags', $post);
+
+      Question_tag::where('postid', $id)->delete();
+      foreach($tags as $tag){
+        if($request->has($tag->tagname)){
+          Question_tag::insert(['postid' => $id, 'tagid' => $tag->id]);
+        }
+      }
+
+      $id=$post->id;
+
+      if($post->posttype == 'question') {
+        $request->session()->flash('alert-success', 'Question has been successfully edited!');
+        return redirect()->route('posts.postPage',['id'=>$id]);
+      }
+      $request->session()->flash('alert-success', 'Answer has been successfully edited!');
+      return redirect()->route('posts.postPage', ['id'=>$post->parentpost]);
+    }
+
+    //Post Search
     public function search(Request $request)
     {
       $request->validate([
@@ -220,50 +252,55 @@ class PostController extends Controller
       }
 
       $order = $request->input('orderby');
-
-      if($request->has('search')){
+      
+      if($request->has('search') && $request->input("search") != null){
         $search_input = $request->input('search');
 
         $statement1 = 'tsvectors @@ plainto_tsquery(\'english\',?)';
         $posts = Post::whereRaw($statement1, [$search_input]);
+        $posts = $posts->get();
+      } else if ($request->input("search") == null) {
+        $posts = Post::all();
       } else {
         //here because code gets angry otherwise
         $posts = Post::all();
       }
 
-      if($order == 'Newest'){
-        $posts = $posts->orderBy('postdate', 'DESC');
-      } else if ($order == 'Oldest'){
-        $posts = $posts->orderBy('postdate', 'ASC');
-      }
-      
       if($request->has('tag')){
         $tags = $request->input('tag');
-
-        $posts = $posts->get()->filter(function($post) use ($tags){
+        $posts = $posts->filter(function($post) use ($tags){
           return ($post->tags->contains(function ($item) use ($tags){return in_array($item->id, $tags);}));
         });
-      } else {
-        $posts = $posts->get();
+      }
+
+      if($order == 'newest'){
+        $posts = $posts->sortByDesc('postdate');
+      } else if ($order == 'oldest'){
+        $posts = $posts->sortBy('postdate');
+      } else if ($order == 'morevoted'){
+        $posts = $posts->sortByDesc(function($post){
+          return count(Star::where('postid', $post->id)->get());
+        });
+      } else if ($order == 'lessvoted'){
+        $posts = $posts->sortBy(function($post){
+          return count(Star::where('postid', $post->id)->get());
+        });
       }
 
       return view('pages.search', ['posts' => $posts, 'users' => [], 'userSearch' => $userSearch], compact('posts'));
-
     }
 
-    //Show Post's Answers
-    public static function showAnswers($postParent) {
-      $allposts = Post::all();
-      $answers=[];
-      for($i=0; $i<count($allposts); $i++){
-        if($allposts[$i]->posttype == 'answer' && $allposts[$i]->parentpost == $postParent) array_push($answers, $allposts[$i]);
-      }
+    //Show Answers of Question
+    public static function showAnswers($postParent)
+    {
+      $answers = DB::table('posts')->where('posttype', 'answer')->where('parentpost', $postParent)->get();
       return $answers;
     }
 
     //Show Top Questions
-    public function showTopQuestions(){
-      $limit = 5;
+    public function showTopQuestions()
+    {
+      $limit = 10;
       $postData = DB::select(
         //DB::raw("select p.*, count(s.userId) nstars from posts p, stars s where p.id = s.postId group by (p.id) order by (nstars) desc limit 5"));
         DB::raw("select p.*, count(s.userId) nstars
@@ -273,7 +310,6 @@ class PostController extends Controller
           order by nstars desc
           limit ".$limit));
       $postModels = Post::hydrate($postData);
-      //dd($postData);
       $countleft = $limit - count($postModels);
       if ($countleft) {
         $arrSelected = $postModels->pluck('id')->all();
@@ -284,10 +320,13 @@ class PostController extends Controller
       return view('pages.topquestions', ['questionStars'=>$postModels->flatten()]);
     }
 
-    public function correctness($postid){
+    //Mark Answer as Correct
+    public function correctness($postid)
+    {
       $userid = Auth::id();
       $post = Post::find($postid);
       $this->authorize('markcorrect', $post);
+
       if($post->iscorrect){
         $post->iscorrect = false;
       } else {

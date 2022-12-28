@@ -18,8 +18,11 @@ class PostPolicy
     }
 
     public function update(User $user, Post $post){
-      $user_id = Auth::id();
       return (Auth::user()->id == $post->userid);
+    }
+
+    public function updateTags(User $user, Post $post){
+      return (Auth::user()->roles()->get()->pluck('userrole')->contains('Moderator'));
     }
 
     public function delete(User $user, Post $post){
