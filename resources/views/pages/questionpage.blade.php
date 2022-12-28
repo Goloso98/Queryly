@@ -22,6 +22,10 @@
             @can('delete', $question)
                 <a class="delete" id="delete-post" href="#"> Delete Question </a>
             @endcan
+            <form method="post" action="{{ route('posts.report', $question->id) }}">
+                {{ csrf_field() }}
+                <button type="submit"> Report Question </button>
+            </form>
             @can('update', $question)
                 <a class="btn" aria-current="page" href="{{  route('posts.edit', $question->id)  }}">Edit</a>
             @endcan

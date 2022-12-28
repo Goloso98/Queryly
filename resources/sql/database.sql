@@ -85,6 +85,8 @@ CREATE TABLE reports (
     userID INTEGER REFERENCES "users" (id) ON UPDATE CASCADE ON DELETE CASCADE,
     postID INTEGER REFERENCES "posts" (id) ON UPDATE CASCADE ON DELETE CASCADE,
     commentID INTEGER REFERENCES "comments" (id) ON UPDATE CASCADE ON DELETE CASCADE
+    CONSTRAINT post_report CHECK ((reportType = 'post' AND postID IS NOT NULL) OR (reportType = 'comment' AND postID IS NULL)),
+    CONSTRAINT comment_report CHECK ((reportType = 'comment' AND commentID IS NOT NULL) OR (reportType = 'post' AND commentID IS NULL))
 );
 
 CREATE TABLE tags (
@@ -578,4 +580,3 @@ INSERT INTO tags (tagName) VALUES ('animals');
 -- INSERT INTO user_tags (userID, tagID) VALUES (1,1);
 -- INSERT INTO user_tags (userID, tagID) VALUES (1,2);
 -- INSERT INTO user_tags (userID, tagID) VALUES (1,3);
-

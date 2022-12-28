@@ -7,6 +7,10 @@
                 @can('delete', $question)
                 <a class="delete" id="delete-post" href="#"> Delete Question </a>
                 @endcan
+                <form method="post" action="{{ route('posts.report', $question->id) }}">
+                    {{ csrf_field() }}
+                    <button type="submit"> Report Question </button>
+                </form>
             </p>
             <p class="card-text">{{ $question->posttext }}</p>
             {{ $question->postdate }}

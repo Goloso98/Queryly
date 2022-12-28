@@ -42,6 +42,13 @@ class Post extends Model
   }
 
   /**
+   * The reports this post has received
+   */
+  public function reports(){
+    return $this->hasMany('App\Models\Report', 'postid');
+  }
+
+  /**
   * The users that follow this question
   */
   public function followers(){

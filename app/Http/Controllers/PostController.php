@@ -16,6 +16,7 @@ use App\Models\Question_tag;
 use App\Models\Badge;
 use App\Models\User_badge;
 use App\Models\Star;
+use App\Models\Report;
 use App\Models\User_question;
 
 class PostController extends Controller
@@ -358,6 +359,20 @@ class PostController extends Controller
           User_badge::insert(['userid' => $post->userid, 'badgeid' => $badgeid]);
         }
       return;
+    }
+
+    public function report(Request $request, $id){
+      $userid = Auth::id();
+      $reporttype = 'post';
+      Report::insert(['userid' => $userid, 'reporttype' => $reporttype, 'postid' => $id]);
+      $post = Post::find($id);
+
+      if($post->posttype == 'question') {
+        $request->session()->flash('alert-success', 'Question has been successfully reported. Thank you for your help!');
+        return redirect()->route('posts.postPage', ['id' => $id]);
+      }
+      $request->session()->flash('alert-success', 'Answer has been successfully reported. Thank you for your help!');
+      return redirect()->route('posts.postPage', ['id'=>$post->parentpost]);
     }
 
     //Follow post

@@ -53,8 +53,6 @@ class User extends Authenticatable
         return $this->hasMany(Post::class, 'userid');
     }
 
-
-
     /**
      * The comments this user owns.
      */
@@ -88,6 +86,13 @@ class User extends Authenticatable
      */
     public function questions(){
         return $this->belongsToMany(Post::class, 'user_questions', 'userid', 'postid');
+    }
+
+    /**
+     * The reports this user has made
+     */
+    public function reports(){
+        return $this->hasMany('App\Models\Report', 'userid');
     }
 
 }
