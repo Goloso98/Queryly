@@ -22,6 +22,10 @@
                     @endcan
                 </p>
             @endif
+            <form method="post" action="{{ route('posts.report', $answer->id) }}">
+                {{ csrf_field() }}
+                <button type="submit"> Report Answer </button>
+            </form>
             <p class="card-text">{{ $answer->posttext }}</p>
             {{ $answer->postdate }}
             @if(!$showTitle)

@@ -39,6 +39,7 @@ Route::get('posts/{postid}/comments/new', 'CommentController@showCreateForm')->n
 Route::post('posts/{postid}/comments/new', 'CommentController@postComment')->name('comments.addComment');
 Route::get('comments/{commentid}/edit', 'CommentController@showEditForm')->name('comments.edit');
 Route::patch('comments/{commentid}/edit', 'CommentController@update')->name('comment.update');
+Route::post('comments/{id}', 'CommentController@report')->name('comment.report');
 
 //Posts
 Route::get('posts/questions/new', 'PostController@showAddQuestionForm')->name('addQuestion');
@@ -52,6 +53,7 @@ Route::patch('posts/{id}/edittags',  'PostController@updateTags')->name('posts.u
 Route::get('posts/{id}/comments', 'PostController@showComments')->name('posts.comments');
 Route::post('resultsPosts', 'PostController@search')->name('searchPost');
 Route::get('posts/topquestions', 'PostController@showTopQuestions')->name('posts.top');
+Route::post('posts/{id}', 'PostController@report')->name('posts.report');
 Route::get('posts/{id}', 'PostController@show')->name('posts.postPage'); //tem de ficar no fim
 
 // API

@@ -11,6 +11,7 @@ use App\Models\Post;
 use App\Models\Comment;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Report;
 
 class CommentController extends Controller
 {
@@ -85,5 +86,18 @@ class CommentController extends Controller
     public static function showComments($postid) {
         $comments = Comment::where('postid', '=', $postid)->get();
         return $comments;
-      }
+    }
+
+    public function report(Request $request, $id){
+        $userid = Auth::id();
+        $reporttype = 'comment';
+        Report::insert(['userid' => $userid, 'reporttype' => $reporttype, 'commentid' => $id]);
+        $comment = Comment::find($id);
+        $commentparent = Post::find($comment->postid);
+
+        $request->session()->flash('alert-success', 'Comment has been successfully reported. Thank you for your help!');
+        
+        if($commentparent->posttype == 'question') return redirect()->route('posts.postPage', ['id' => $commentparent->id]);
+        return redirect()->route('posts.postPage', ['id'=>$commentparent->parentpost]);
+    }
 }

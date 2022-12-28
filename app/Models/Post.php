@@ -40,4 +40,11 @@ class Post extends Model
   public function tags() {
     return $this->belongsToMany(Tag::class, 'question_tags', 'postid', 'tagid');
   }
+
+  /**
+   * The reports this post has received
+   */
+  public function reports(){
+    return $this->hasMany('App\Models\Report', 'postid');
+  }
 }
