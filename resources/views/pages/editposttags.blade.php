@@ -6,25 +6,27 @@
     <form method="post" action="{{ route('posts.editTags', $post->id) }}">
         {{ csrf_field() }}
         {{ method_field('patch') }}
-        @if (($post->posttype) == 'question')
-            <div class="mb-3">
-                <h5>Tags</h5>
-                @foreach($post->tags as $tag)
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="{{ $tag->tagname }}" id="{{ $tag->tagname }}" name="{{ $tag->tagname }}" checked>
-                        <label class="form-check-label" for="{{ $tag->tagname }}">{{ $tag->tagname }}</label>
-                    </div>
-                @endforeach
-                @foreach(App\Models\Tag::all() as $tag)
+        <br>
+        <h2 class="text-center">Edit Question Tags</h2>
+        <br>
+        <div class="row">
+            @foreach(App\Models\Tag::all() as $tag)
+                <div class="form-check col-3 tagsTable">
                     @if(!($post->tags->contains($tag->id)))
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="{{ $tag->tagname }}" id="{{ $tag->tagname }}" name="{{ $tag->tagname }}" >
-                        <label class="form-check-label" for="{{ $tag->tagname }}">{{ $tag->tagname }}</label>
+                            <input class="form-check-input" type="checkbox" value="{{ $tag->tagname }}" id="{{ $tag->tagname }}" name="{{ $tag->tagname }}" >
+                            <label class="form-check-label" for="{{ $tag->tagname }}">{{ $tag->tagname }}</label>
+                        </div>
+                    @else
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="{{ $tag->tagname }}" id="{{ $tag->tagname }}" name="{{ $tag->tagname }}" checked>
+                            <label class="form-check-label" for="{{ $tag->tagname }}">{{ $tag->tagname }}</label>
                         </div>
                     @endif
-                @endforeach
-            </div>
-        @endif
+
+                </div>
+            @endforeach
+        </div>
         <br>
         <div class="buttons">
             <button type="submit" class="btn outlined">
