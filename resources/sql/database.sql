@@ -498,7 +498,7 @@ CREATE OR REPLACE FUNCTION insert_comment(pi INTEGER, ui INTEGER, ctext VARCHAR)
 LANGUAGE plpgsql;
 
 -- POPULATION
-
+-- Super User
 INSERT INTO users(name, email, username, password, birthday) VALUES (
     'John Doe',
     'admin@example.com',
@@ -515,6 +515,100 @@ INSERT INTO roles(userID, userRole) VALUES (
     1,
     'Moderator'
 );
+
+--Admins
+INSERT INTO users(name, email, username, password, birthday) VALUES (
+    'Admin One',
+    'admin1@example.com',
+    'admin1',
+    '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+    '1969-02-26 09:06:47'
+);
+INSERT INTO roles(userID, userRole) VALUES (
+    2,
+    'Administrator'
+);
+INSERT INTO users(name, email, username, password, birthday) VALUES (
+    'Admin Two',
+    'admin2@example.com',
+    'admin2',
+    '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+    '1969-02-26 09:06:47'
+);
+INSERT INTO roles(userID, userRole) VALUES (
+    3,
+    'Administrator'
+);
+INSERT INTO users(name, email, username, password, birthday) VALUES (
+    'Admin Three',
+    'admin3@example.com',
+    'admin3',
+    '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+    '1969-02-26 09:06:47'
+);
+INSERT INTO roles(userID, userRole) VALUES (
+    4,
+    'Administrator'
+);
+
+--Moderators
+INSERT INTO users(name, email, username, password, birthday) VALUES (
+    'Mod One',
+    'mod1@example.com',
+    'mod1',
+    '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+    '1969-02-26 09:06:47'
+);
+INSERT INTO roles(userID, userRole) VALUES (
+    5,
+    'Moderator'
+);
+INSERT INTO users(name, email, username, password, birthday) VALUES (
+    'Mod Two',
+    'mod2@example.com',
+    'mod2',
+    '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+    '1969-02-26 09:06:47'
+);
+INSERT INTO roles(userID, userRole) VALUES (
+    6,
+    'Moderator'
+);
+INSERT INTO users(name, email, username, password, birthday) VALUES (
+    'Mod Three',
+    'mod3@example.com',
+    'mod3',
+    '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+    '1969-02-26 09:06:47'
+);
+INSERT INTO roles(userID, userRole) VALUES (
+    7,
+    'Moderator'
+);
+
+--Generic User
+INSERT INTO users(name, email, username, password, birthday) VALUES (
+    'NPC One',
+    'npc1@example.com',
+    'npc1',
+    '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+    '1969-02-26 09:06:47'
+);
+INSERT INTO users(name, email, username, password, birthday) VALUES (
+    'NPC Two',
+    'npc2@example.com',
+    'npc2',
+    '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+    '1969-02-26 09:06:47'
+);
+INSERT INTO users(name, email, username, password, birthday) VALUES (
+    'NPC Three',
+    'npc3@example.com',
+    'npc3',
+    '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+    '1969-02-26 09:06:47'
+);
+
 
 INSERT INTO users (name, email, username, password, birthday) VALUES ('Isacco Pyott', 'ipyott0@telegraph.co.uk', 'ipyott0', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '2017-09-03 08:02:38');
 INSERT INTO users (name, email, username, password, birthday) VALUES ('Brad Surby', 'bsurby1@nydailynews.com', 'bsurby1', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '2009-06-28 07:43:14');
