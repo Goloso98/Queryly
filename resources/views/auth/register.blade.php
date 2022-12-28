@@ -34,16 +34,6 @@
       <span class="input-group-text">Email</span>
         <input id="email" type="text" name="email" class="form-control" placeholder="Email">
     </div>
-    <div class="input-group" id="avatarDiv">
-        <label for="avatar" class="input-group-text" id="avatarLabel">
-            Select Profile Picture
-        </label>
-        <input type="file" class="form-control" id="avatar" name="avatar">
-        &nbsp;&nbsp;
-        <span id="avatarName" form-text></span>
-    </div>
-    <br>
-
     @if ($errors->has('birthday'))
       <span class="error">
           {{ $errors->first('birthday') }}

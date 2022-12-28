@@ -67,9 +67,9 @@
                 @endforeach
             </div>
         @endif
-
-        <div class="text-center">
-            <button type="submit">
+        <br>
+        <div id="buttons">
+            <button type="submit" class="btn" id="outlined">
                 Save Changes
             </button>
             @if($post->posttype == 'question')

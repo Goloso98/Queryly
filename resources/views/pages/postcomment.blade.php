@@ -46,10 +46,10 @@
         <span id="maximum-commentText">/ 250</span>
       </div>
     </div>
-
-    <div class="text-center">
-      <button type="submit">Comment</button>
-      <p><a href="#" onclick="history.back()">Cancel</a></p>
+    <br>
+    <div id="buttons">
+      <button type="submit" class="btn text-center" id="outlined">Comment</button>
+      <p><a href="#" onclick="history.back()" class="btn">Cancel</a></p>
     </div>
     <br>
 </form>

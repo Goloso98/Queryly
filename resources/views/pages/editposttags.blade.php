@@ -25,12 +25,12 @@
                 @endforeach
             </div>
         @endif
-
-        <div class="text-center">
-            <button type="submit">
-                Save Changes
+        <br>
+        <div id="buttons">
+            <button type="submit" class="btn" id="outlined">
+                Update tags
             </button>
-            <p><a href="#" onclick="history.back()">Cancel</a></p>
+            <p><a href="{{ route('posts.postPage', $post->id) }}" class="btn">Cancel</a></p>
         </div>
         <br>
     </form>

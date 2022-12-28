@@ -3,10 +3,10 @@
         <div class="card-body">
             <p>
                 @can('delete', $comment)
-                    <a class="delete" id="delete-comment" href="#"> Delete Comment </a>
+                    <a class="delete btn" id="delete-comment" href="#"> Delete Comment </a>
                 @endcan
                 @can('update', $comment)
-                    <a class="btn" aria-current="page" href="{{  route('comments.edit', $comment->id)  }}">Edit</a>
+                    <a class="btn" id="cardBtn" aria-current="page" href="{{  route('comments.edit', $comment->id)  }}">Edit</a>
                 @endcan
             </p>
             <p class="card-text">{{ $comment->commenttext }}</p>

@@ -40,7 +40,7 @@
         </select>
     @endif
     <br>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Search" class="btn" id="outlined">
     <br>
     @if ($errors->any())
     <div class="alert alert-danger">

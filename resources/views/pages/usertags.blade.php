@@ -11,13 +11,13 @@
 @endif<br>
 
 <div class="text-center">
-  <a class="btn" aria-current="page" href="{{ route('changeTags', $user->id) }}">Update Followed Tags</a>
+  <a class="btn" id="outlined" aria-current="page" href="{{ route('changeTags', $user->id) }}">Update Followed Tags</a>
 </div>
 <br>
 <div class="row">
   @forelse($tags as $tag)
     <div class="form-check col-3" id="tagsTable">
-      @include('partials.tag')
+      {{ $tag->tagname }}
     </div>
   @empty
     @if(Auth::id() == $user->id)
@@ -27,5 +27,6 @@
     @endif
   @endforelse
 </div>
+<br>
 
 @endsection

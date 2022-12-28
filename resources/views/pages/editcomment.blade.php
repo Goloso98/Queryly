@@ -25,10 +25,9 @@
                 <span id="maximum-commentText">/ 250</span>
             </div>
         </div>
-
         <br>
-        <div id="editCommentButtons">
-            <button type="submit" class="btn text-center">
+        <div id="buttons">
+            <button type="submit" class="btn text-center" id="outlined">
                 Save Changes
             </button>
             @php

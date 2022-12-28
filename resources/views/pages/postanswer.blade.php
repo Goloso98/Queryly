@@ -34,12 +34,13 @@
         <span id="maximum-postText">/ 1000</span>
       </div>
     </div>
-
-    <div class="text-center">
-      <button type="submit">
+    <br>
+    
+    <div id="buttons">
+      <button type="submit" class="btn" id="outlined">
         Answer
       </button>
-      <p><a href="#" onclick="history.back()">Cancel</a></p>
+      <p><a href="{{ route('posts.postPage', $post->id) }}" class="btn">Cancel</a></p>
     </div>
     <br>
 </form>

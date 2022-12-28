@@ -29,8 +29,8 @@
         @endforeach
     </div>
     <br>
-    <div class="text-center">
-        <button type="submit" class="btn">
+    <div id="buttons">
+        <button type="submit" class="btn" id="outlined">
             Update Tags
         </button>
         <p><a href="{{ route('users.tags', $user->id) }}" class="btn">Cancel</a></p>

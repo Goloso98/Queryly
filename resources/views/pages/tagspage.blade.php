@@ -36,7 +36,7 @@
             @foreach($tags as $tag)
                 <tr>
                     <td>{{ $tag->tagname }}</td>
-                    <td>{{ $tag->users()->count() }}</td>
+                    <td>{{ $tag->users()->count() }} review</td>
                     @php
                         $follow = DB::table('user_tags')->where('userid', Auth::id())->where('tagid', $tag->id)->get()
                     @endphp

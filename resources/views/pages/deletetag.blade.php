@@ -17,8 +17,8 @@
             @endforeach
         </div>
         <br>
-        <div class="text-center">
-            <button type="submit" class="btn">Delete Selected Tags</button>
+        <div id="buttons">
+            <button type="submit" class="btn" id="outlined">Delete Selected Tags</button>
             <p><a href="{{ route('tags.page') }}" class="btn">Cancel</a></p>
         </div>
         <br>

@@ -41,22 +41,13 @@
             </div>
           @endforeach
     </div>
-
-    <div class="text-center">
-      <button type="submit">
+    <br>
+    <div id="buttons">
+      <button type="submit" class="btn" id="outlined">
         Ask
       </button>
-      <p><a href="#" onclick="history.back()">Cancel</a></p>
+      <p><a href="#" onclick="history.back()" class="btn">Cancel</a></p>
     </div>
     <br>
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
 </form>
 @endsection

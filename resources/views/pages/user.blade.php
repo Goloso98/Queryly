@@ -38,7 +38,7 @@
           @endif
         </header>
         <p>&#64;{{ $user->username }}</p>
-        <p>e-mail: {{ $user->email }}</p>
+        <p>Email: {{ $user->email }}</p>
         <p>Age: {{ $carbon::parse($user->birthday)->diff($carbon::now())->y }}</p>
       </div>
       <div class="col-12 col-sm-4">
@@ -63,7 +63,7 @@
       <hr>
       <div class="text-center">
         <p><a class="btn" aria-current="page" href="{{ route('editUser', $user->id) }}"> Edit </a></p>
-        <p><a class="delete" href="#"> Delete My Account </a></p>
+        <p><a class="delete btn" href="#"> Delete My Account </a></p>
       </div>
     @else
       <div class="container text-center">
@@ -81,7 +81,7 @@
       <hr>
       <div class="text-center">
         @if($roleAdmin)
-        <p><a class="delete" href="#"> Delete Account </a></p>
+        <p><a class="delete btn" href="#"> Delete Account </a></p>
         @endif
       </div>
     @endif

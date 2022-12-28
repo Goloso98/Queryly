@@ -180,8 +180,11 @@ input[type="search"] {
 }
 
 /* Edit Buttons */
-#editCommentButtons {
+#buttons {
   text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 #tagsTable {
@@ -192,4 +195,42 @@ input[type="search"] {
 #badgeLabel {
   cursor: alias;
   margin-bottom: 10px;
+}
+
+/* Buttons */
+#outlined {
+  border: 1px;
+  border-style: solid;
+  border-color: #333;
+}
+#cardBtn{
+  color: darkgray;
+  padding: 0;
+  padding-right: 5px;
+  font-size: 0.9rem;
+}
+#delete-post {
+  color: darkgray;
+  padding: 0;
+  padding-right: 5px;
+  font-size: 0.9rem;
+}
+#delete-comment {
+  color: darkgray;
+  padding: 0;
+  padding-right: 5px;
+  font-size: 0.9rem;
+}
+#addCommentBtn {
+  padding: 0;
+  padding-left: 10px;
+}
+#addAnswerBtn {
+  padding: 0;
+  padding-left: 10px;
+  padding-top: 5px;
+}
+#editedLabel {
+  color: grey;
+  font-size: small;
 }

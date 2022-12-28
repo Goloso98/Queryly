@@ -3,9 +3,9 @@
         <div class="card-body">
             <h3 class="card-title">{{ $question->title }}</h3>
             <p>
-                <a href="{{route('posts.postPage', $question->id)}}">See Post</a>
+                <a href="{{route('posts.postPage', $question->id)}}" class="btn" id="cardBtn">See Post</a>
                 @can('delete', $question)
-                <a class="delete" id="delete-post" href="#"> Delete Question </a>
+                <a class="delete btn" id="delete-post" href="#"> Delete Question </a>
                 @endcan
             </p>
             <p class="card-text">{{ $question->posttext }}</p>
