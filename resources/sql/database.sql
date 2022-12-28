@@ -151,29 +151,17 @@ DROP FUNCTION IF EXISTS add_star_notification CASCADE;
 CREATE FUNCTION add_answer_notification() RETURNS TRIGGER AS
 $BODY$
 DECLARE
-    post_owner INTEGER;
     notified_user INTEGER;
 BEGIN
-    SELECT userid INTO post_owner FROM posts WHERE id = NEW.postid LIMIT 1;
-	
-	FOR notified_user IN SELECT DISTINCT userid
-		FROM user_tags
-		WHERE userid != post_owner AND tagid = NEW.tagid
-	LOOP
-		-- notified_user
-		-- NEW.postid
-		-- get if there is any notification already
-		-- select do notification para ter o userid e do new_question para saber o postid
-		IF NOT EXISTS(SELECT FROM new_questions LEFT JOIN notifications ON notificationid = id WHERE postid = NEW.postid AND userid = notified_user LIMIT 1)
-		THEN
-			WITH inserted AS (
-				INSERT INTO notifications (userID, isRead, notificationDate)
-            		VALUES (notified_user, FALSE, CURRENT_TIMESTAMP)
-            		RETURNING id
-			) INSERT INTO new_questions(notificationID, postID) SELECT inserted.id, NEW.postID FROM inserted;
-		END IF;
-	END LOOP;
-	RETURN NULL;
+    IF NEW.postType = 'answer' AND (SELECT count(userID) FROM posts WHERE userID != NEW.userID AND id = NEW.parentPost LIMIT 1) > 0 THEN
+        SELECT userID INTO notified_user FROM posts WHERE posts.id = NEW.parentPost;
+        WITH inserted AS (
+            INSERT INTO notifications (userID, isRead, notificationDate)
+            VALUES (notified_user, FALSE, CURRENT_TIMESTAMP)
+            RETURNING id
+        ) INSERT INTO new_answers SELECT inserted.id, NEW.id, NEW.parentPost FROM inserted;
+    END IF;
+    RETURN NULL;
 END;
 $BODY$
 LANGUAGE plpgsql;
@@ -204,22 +192,28 @@ CREATE OR REPLACE FUNCTION add_question_notification() RETURNS TRIGGER AS
 $BODY$
 DECLARE
     post_owner INTEGER;
-    notified_users INTEGER;
+    notified_user INTEGER;
 BEGIN
     SELECT userid INTO post_owner FROM posts WHERE id = NEW.postid LIMIT 1;
-    SELECT userid FROM user_tags WHERE userid != post_owner AND tagid = NEW.tagid;
-
-    -- SELECT userID INTO notified_user FROM user_tags WHERE NEW.tagID = user_tags.tagID;
-    -- IF (notified_user = NULL) THEN
-    --     WITH inserted AS (
-    --         INSERT INTO notifications (userID, isRead, notificationDate)
-    --         VALUES (notified_user, FALSE, CURRENT_TIMESTAMP)
-    --         RETURNING id
-    --     )
-    --     INSERT INTO new_questions SELECT inserted.id, NEW.postID FROM inserted;
-    --     RETURN NEW;
-    -- END IF;
-    -- RETURN NULL;
+	
+	FOR notified_user IN SELECT DISTINCT userid
+		FROM user_tags
+		WHERE userid != post_owner AND tagid = NEW.tagid
+	LOOP
+		-- notified_user
+		-- NEW.postid
+		-- get if there is any notification already
+		-- select do notification para ter o userid e do new_question para saber o postid
+		IF NOT EXISTS(SELECT FROM new_questions LEFT JOIN notifications ON notificationid = id WHERE postid = NEW.postid AND userid = notified_user LIMIT 1)
+		THEN
+			WITH inserted AS (
+				INSERT INTO notifications (userID, isRead, notificationDate)
+            		VALUES (notified_user, FALSE, CURRENT_TIMESTAMP)
+            		RETURNING id
+			) INSERT INTO new_questions(notificationID, postID) SELECT inserted.id, NEW.postID FROM inserted;
+		END IF;
+	END LOOP;
+	RETURN NULL;
 END;
 $BODY$
 LANGUAGE plpgsql;
