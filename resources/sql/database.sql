@@ -60,6 +60,11 @@ CREATE TABLE posts (
     CONSTRAINT correctness CHECK ((postType = 'question' AND isCorrect IS NULL) OR (postType = 'answer' AND isCorrect IS NOT NULL))
 );
 
+CREATE TABLE user_questions(
+    userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    postID INTEGER NOT NULL REFERENCES "posts" (id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
 CREATE TABLE stars (
     id SERIAL PRIMARY KEY,
     postID INTEGER NOT NULL REFERENCES "posts" (id) ON UPDATE CASCADE ON DELETE CASCADE,

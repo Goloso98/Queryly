@@ -80,7 +80,14 @@ class User extends Authenticatable
     * The badges this user has earned.
     */
     public function badges() {
-        return $this->belongstomany(Badge::class, 'user_badges', 'userid', 'badgeid');
+        return $this->belongsToMany(Badge::class, 'user_badges', 'userid', 'badgeid');
+    }
+
+    /**
+     * The questions this user follows
+     */
+    public function questions(){
+        return $this->belongsToMany(Post::class, 'user_questions', 'userid', 'postid');
     }
 
 }

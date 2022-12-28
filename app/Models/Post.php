@@ -40,4 +40,11 @@ class Post extends Model
   public function tags() {
     return $this->belongsToMany(Tag::class, 'question_tags', 'postid', 'tagid');
   }
+
+  /**
+  * The users that follow this question
+  */
+  public function followers(){
+    return $this->belongsToMany(User::class, 'user_questions', 'userid', 'postid');
+  }
 }

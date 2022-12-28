@@ -16,6 +16,7 @@ use App\Models\Question_tag;
 use App\Models\Badge;
 use App\Models\User_badge;
 use App\Models\Star;
+use App\Models\User_question;
 
 class PostController extends Controller
 {
@@ -357,5 +358,18 @@ class PostController extends Controller
           User_badge::insert(['userid' => $post->userid, 'badgeid' => $badgeid]);
         }
       return;
+    }
+
+    //Follow post
+    public function follow($id){
+      $relationship = User_question::where(['userid' => Auth::id(), 'postid' => $id]);
+      $helper = $relationship->value('postid');
+      if ($helper == null){
+        User_question::insert(['userid' => Auth::id(), 'postid' => $id]);
+      }
+      else {
+        $relationship->delete();
+      }
+      return redirect()->route('posts.follow', $id);
     }
 }

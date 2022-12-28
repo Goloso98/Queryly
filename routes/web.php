@@ -53,6 +53,7 @@ Route::get('posts/{id}/comments', 'PostController@showComments')->name('posts.co
 Route::post('resultsPosts', 'PostController@search')->name('searchPost');
 Route::get('posts/topquestions', 'PostController@showTopQuestions')->name('posts.top');
 Route::get('posts/{id}', 'PostController@show')->name('posts.postPage'); //tem de ficar no fim
+Route::patch('posts/{id}', 'PostController@follow')->name('posts.follow');
 
 // API
 Route::delete('api/posts/{id}', 'PostController@delete');
