@@ -163,6 +163,10 @@ input[type="search"] {
   color: #333;
 }
 
+#accordionQTags > div > h2 > button {
+  padding: 7px;
+}
+
 /* Avatar */
 #avatar {
   display: none;

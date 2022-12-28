@@ -54,14 +54,37 @@
             @else
             <i class="fa-regular fa-star">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>
             @endif
-
-            <h5>Tags:</h5> 
             @php
                 $tags = $question->tags;
             @endphp
-            @foreach ($tags as $tag)
-                <p>{{ $tag->tagname }}</p>
-            @endforeach
+            @if($tags->count() != 0)
+                <p></p> <!-- br nao funciona -->
+                <div class="accordion" id="accordionQTags">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTag">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTag" aria-expanded="true" aria-controls="collapseTag">
+                                Tags
+                            </button>
+                        </h2>
+                        <div id="collapseTag" class="accordion-collapse collapse" aria-labelledby="headingTag" data-bs-parent="#accordionQTags">
+                            <div class="accordion-body">
+                                <div class="container text-center">
+                                    <div class="row">
+                                        @php
+                                            $tags = $question->tags;
+                                        @endphp
+                                        @foreach ($tags as $tag)
+                                            <div class="form-check col-4">
+                                                {{ $tag->tagname }}
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
     @php
