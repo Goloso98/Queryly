@@ -3,10 +3,10 @@
 @section('content')
 <form method="POST" action="{{ route('register') }}">
     {{ csrf_field() }}
-    <p></p>
+    <br>
     <h2 class="centering">Create Your Account!</h2>
-    <p></p>
     <hr>
+    <br>
     @if ($errors->has('name'))
       <span class="error">
         {{ $errors->first('name') }}
@@ -63,13 +63,13 @@
       <li id="password-AZ">Must contain at least one uppercase letter</li>
       <li id="password-digit">Must contain at least one digit</li>
     </div>
+    <br>
 
-    <div class="centering">
-      <button type="submit">
+    <div class="buttons">
+      <button type="submit" class="btn outlined">
         Register
       </button>
-      <p></p>
-      <a class="button button-outline" href="{{ route('login') }}">Login</a>
+      <a class="btn" href="{{ route('login') }}">Login</a>
     </div>
 </form>
 <p></p>

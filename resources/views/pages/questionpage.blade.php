@@ -19,42 +19,49 @@
     <div class="card">
         <div class="card-body">
             <h2 class="card-title">Title: {{ $question->title }}</h2>
-            @can('delete', $question)
-                <a class="delete btn" id="delete-post" href="#"> Delete Question </a>
-            @endcan
-            <form method="post" action="{{ route('posts.report', $question->id) }}">
-                {{ csrf_field() }}
-                <button type="submit"> Report Question </button>
-            </form>
-            @can('update', $question)
-                <a class="btn cardBtn" aria-current="page" href="{{  route('posts.edit', $question->id)  }}">Edit</a>
-            @endcan
-            @can('updateTags', $question)
-                <a class="btn cardBtn" aria-current="page" href="{{  route('posts.editTags', $question->id)  }}">Edit Tags</a>
-            @endcan
-            @if(Auth::check() && Auth::id() != $question->userid)
-                @php
-                    $relationship = App\Models\User_question::where(['userid' => Auth::id(), 'postid' => $question->id])->value('postid');
-                @endphp
-                @if($relationship == null)
-                    <form method="post" action="{{ route('posts.follow', $question->id) }}">
-                        {{ csrf_field() }}
-                        {{ method_field('patch') }}
-                        <button type="submit" class="btn text-center">Follow Question</button>
-                    </form>
-                @else
-                    <form method="post" action="{{ route('posts.follow', $question->id) }}">
-                        {{ csrf_field() }}
-                        {{ method_field('patch') }}
-                        <button type="submit" class="btn text-center">Unfollow Question</button>
-                    </form>
-                @endif
-            @endif
+            <div class="row align">
+                <div class="col-8">
+                    @can('delete', $question)
+                        <a class="delete btn" id="delete-post" href="#"> Delete Question </a>
+                    @endcan
+                    @can('update', $question)
+                    <a class="btn cardBtn" aria-current="page" href="{{  route('posts.edit', $question->id)  }}">Edit</a>
+                    @endcan
+                    @can('updateTags', $question)
+                    <a class="btn cardBtn" aria-current="page" href="{{  route('posts.editTags', $question->id)  }}">Edit Tags</a>
+                    @endcan
+                </div>
+                <div class="col-12 col-sm-4">
+                    @if(Auth::check() && Auth::id() != $question->userid)
+                        @php
+                            $relationship = App\Models\User_question::where(['userid' => Auth::id(), 'postid' => $question->id])->value('postid');
+                        @endphp
+                        @if($relationship == null)
+                            <form method="post" action="{{ route('posts.follow', $question->id) }}">
+                                {{ csrf_field() }}
+                                {{ method_field('patch') }}
+                                <button type="submit" class="btn follow followBtn">Follow Question</button>
+                            </form>
+                        @else
+                        <form method="post" action="{{ route('posts.follow', $question->id) }}">
+                                {{ csrf_field() }}
+                                {{ method_field('patch') }}
+                                <button type="submit" class="btn follow followBtn">Unfollow Question</button>
+                            </form>
+                        @endif
+                    @endif
+                </div>
+            </div>
+            <br>
             <p class="card-text">{{ $question->posttext }}</p>
             @if( $question->edited )
                 <span class="editedLabel">(edited)</span>
                 <br>
             @endif
+            <form method="post" action="{{ route('posts.report', $question->id) }}">
+                {{ csrf_field() }}
+                <button type="submit" class="btn cardBtn report"> Report Question </button>
+            </form>
             {{ $question->postdate }}
             <a class="btn" aria-current="page" href="{{ route('users.profile', $question->userid) }}">&#64;{{ $question->user()->first()->username }}</a>
             <br>
@@ -64,9 +71,9 @@
             @if(Auth::check())
                 @php
                     $userStar = false;
-                    for($i = 0; $i < count($stars); $i++){
-                        if($stars[$i]->userid === Auth::id()) $userStar = true;
-                    }
+                        for($i = 0; $i < count($stars); $i++){
+                            if($stars[$i]->userid === Auth::id()) $userStar = true;
+                        }
                 @endphp
                 @if($userStar)
                     <i class="fa-solid fa-star star">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>  
@@ -74,22 +81,22 @@
                     <i class="fa-regular fa-star star">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>  
                 @endif
             @else
-            <i class="fa-regular fa-star">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>
+                <i class="fa-regular fa-star">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>
             @endif
             @php
                 $tags = $question->tags;
             @endphp
             @if($tags->count() != 0)
-                <p></p> <!-- br nao funciona -->
-                <div class="accordion" id="accordionQTags">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingTag">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTag" aria-expanded="true" aria-controls="collapseTag">
-                                Tags
-                            </button>
-                        </h2>
-                        <div id="collapseTag" class="accordion-collapse collapse" aria-labelledby="headingTag" data-bs-parent="#accordionQTags">
-                            <div class="accordion-body">
+            <p></p> <!-- br does not work -->
+            <div class="accordion" id="accordionQTags">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTag">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTag" aria-expanded="true" aria-controls="collapseTag">
+                            Tags
+                        </button>
+                    </h2>
+                    <div id="collapseTag" class="accordion-collapse collapse" aria-labelledby="headingTag" data-bs-parent="#accordionQTags">
+                        <div class="accordion-body">
                                 <div class="container centering">
                                     <div class="row">
                                         @php

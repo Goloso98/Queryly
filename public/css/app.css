@@ -212,6 +212,31 @@ input[type="search"] {
   padding-left: 10px;
   padding-top: 5px;
 }
+.report {
+  color: red;
+}
+.follow {
+  background-color: green;
+  border: none;
+  color: white;
+  padding: 8px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+.followBtn {
+  background-color: white;
+  color: black;
+  border: 2px solid green;
+}
+.followBtn:hover {
+  background-color: green;
+  color: white;
+}
 
 /* Labels */
 .editedLabel {
@@ -230,4 +255,8 @@ input[type="search"] {
 /* Center */
 .centering {
   text-align: center;
+}
+
+.align {
+  align-items: center;
 }

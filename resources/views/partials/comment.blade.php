@@ -8,12 +8,12 @@
                 @can('update', $comment)
                     <a class="btn cardBtn" aria-current="page" href="{{  route('comments.edit', $comment->id)  }}">Edit</a>
                 @endcan
-                <form method="post" action="{{ route('comment.report', $comment->id) }}">
-                    {{ csrf_field() }}
-                    <button type="submit"> Report Comment </button>
-                </form>
             </p>
             <p class="card-text">{{ $comment->commenttext }}</p>
+            <form method="post" action="{{ route('comment.report', $comment->id) }}">
+                {{ csrf_field() }}
+                <button type="submit" class="btn cardBtn report"> Report Comment </button>
+            </form>
             {{ $comment->commentdate }}
             @php
                 $username = DB::table('users')->find($comment->userid)->username;
