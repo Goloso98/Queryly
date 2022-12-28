@@ -8,9 +8,9 @@
         {{ method_field('patch') }}
         <br>
         @if (($post->posttype) == 'question')
-            <h2 class="text-center">Edit your question</h2>
+            <h2 class="centering">Edit your question</h2>
         @else
-            <h2 class="text-center">Edit your answer</h2>
+            <h2 class="centering">Edit your answer</h2>
         @endif
         <br>
         @if (($post->posttype) == 'question')
@@ -67,9 +67,9 @@
                 @endforeach
             </div>
         @endif
-
-        <div class="text-center">
-            <button type="submit">
+        <br>
+        <div class="buttons">
+            <button type="submit" class="btn outlined">
                 Save Changes
             </button>
             @if($post->posttype == 'question')

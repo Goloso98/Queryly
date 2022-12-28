@@ -2,7 +2,7 @@
 
 @section('content')
 <br>
-<h2 class="text-center">Post Your Answer</h2>
+<h2 class="centering">Post Your Answer</h2>
 <br>
 
 <div class="card">
@@ -11,7 +11,7 @@
       $username = DB::table('users')->find($post->userid)->username;
     @endphp
     <h4 class="card-title">Answer to: {{ $post->title }}</h4>
-    <p class="card-text">{{ $post->postText }}</p>
+    <p class="card-text">{{ $post->posttext }}</p>
     {{ $post->postdate }}
     <a class="btn" aria-current="page" href="{{route('users.profile', $post->userid)}}">&#64;{{$username}}</a>   
   </div>
@@ -34,12 +34,13 @@
         <span id="maximum-postText">/ 1000</span>
       </div>
     </div>
-
-    <div class="text-center">
-      <button type="submit">
+    <br>
+    
+    <div class="buttons">
+      <button type="submit" class="btn outlined">
         Answer
       </button>
-      <p><a href="#" onclick="history.back()">Cancel</a></p>
+      <p><a href="{{ route('posts.postPage', $post->id) }}" class="btn">Cancel</a></p>
     </div>
     <br>
 </form>

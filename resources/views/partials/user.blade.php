@@ -7,7 +7,7 @@
                 <div class="col-8">
                     <h3 class="card-title">{{ $user->name }}</h3>
                     <p>
-                        <a href="{{route('users.profile', $user->id)}}">See User</a>
+                        <a href="{{route('users.profile', $user->id)}}" class="btn cardBtn">See User</a>
                     </p>
                     <p class="card-text">&#64;{{ $user->username }}</p>
                     <p class="card-text">Email: {{$user->email}}</p>

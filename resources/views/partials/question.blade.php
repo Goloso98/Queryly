@@ -3,9 +3,9 @@
         <div class="card-body">
             <h3 class="card-title">{{ $question->title }}</h3>
             <p>
-                <a href="{{route('posts.postPage', $question->id)}}">See Post</a>
+                <a href="{{route('posts.postPage', $question->id)}}" class="btn cardBtn">See Post</a>
                 @can('delete', $question)
-                <a class="delete" id="delete-post" href="#"> Delete Question </a>
+                <a class="delete btn" id="delete-post" href="#"> Delete Question </a>
                 @endcan
                 <form method="post" action="{{ route('posts.report', $question->id) }}">
                     {{ csrf_field() }}
@@ -32,12 +32,12 @@
                     }
                 @endphp
                 @if($userStar)
-                    <i class="fa-solid fa-star star">&nbsp;{{ count($stars) }}</i>  
+                    <i class="fa-solid fa-star star">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>  
                 @else
-                    <i class="fa-regular fa-star star">&nbsp;{{ count($stars) }}</i>  
+                    <i class="fa-regular fa-star star">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>  
                 @endif
             @else
-               <i class="fa-regular fa-star">&nbsp;{{ count($stars) }}</i>
+               <i class="fa-regular fa-star">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>
             @endif
         </div>
     </div>

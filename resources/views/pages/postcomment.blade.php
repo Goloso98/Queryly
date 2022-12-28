@@ -4,7 +4,7 @@
 
 @section('content')
 <br>
-<h2 class="text-center">Post Your Comment</h2>
+<h2 class="centering">Post Your Comment</h2>
 <br>
 
 <form method="POST" action="{{ route('addComment', $post->id) }}">
@@ -46,10 +46,14 @@
         <span id="maximum-commentText">/ 250</span>
       </div>
     </div>
-
-    <div class="text-center">
-      <button type="submit">Comment</button>
-      <p><a href="#" onclick="history.back()">Cancel</a></p>
+    <br>
+    <div class="buttons">
+      <button type="submit" class="btn outlined">Comment</button>
+      @if($post->posttype == 'question')
+        <p><a href="{{ route('posts.postPage', $post->id) }}" class="btn">Cancel</a></p>
+      @else
+        <p><a href="{{ route('posts.postPage', $post->parentpost) }}" class="btn">Cancel</a></p>
+      @endif
     </div>
     <br>
 </form>

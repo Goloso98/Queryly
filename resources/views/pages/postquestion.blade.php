@@ -2,7 +2,7 @@
 
 @section('content')
 <br>
-<h2 class="text-center">Post Your Question</h2>
+<h2 class="centering">Post Your Question</h2>
 <br>
 <form method="POST" action="{{ route('addQuestion') }}">
     {{ csrf_field() }}
@@ -41,22 +41,13 @@
             </div>
           @endforeach
     </div>
-
-    <div class="text-center">
-      <button type="submit">
+    <br>
+    <div class="buttons">
+      <button type="submit" class="btn outlined">
         Ask
       </button>
-      <p><a href="#" onclick="history.back()">Cancel</a></p>
+      <p><a href="#" onclick="history.back()" class="btn">Cancel</a></p>
     </div>
     <br>
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
 </form>
 @endsection

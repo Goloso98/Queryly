@@ -102,11 +102,6 @@
   display: flex;
 }
 
-/* Pages Info */
-.info-message {
-  text-align: center;
-}
-
 /* Password Info */
 .info {
   padding: 0.1rem 0 0 0;
@@ -156,11 +151,16 @@ input[type="search"] {
   border-color: darkgrey;
   border: 1;
 }
-#orderby {
+.orderby {
   padding: 5px;
   border-color: darkgray;
   font-size: 0.9rem;
   color: #333;
+}
+
+/* Question Tags */
+#accordionQTags > div > h2 > button {
+  padding: 7px;
 }
 
 /* Avatar */
@@ -179,7 +179,55 @@ input[type="search"] {
   align-items: center;
 }
 
-/* Edit Buttons */
-#editCommentButtons {
+/* Buttons */
+.buttons {
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.outlined {
+  border: 1px;
+  border-style: solid;
+  border-color: #333;
+}
+.cardBtn{
+  color: darkgray;
+  padding: 0;
+  padding-right: 5px;
+  font-size: 0.9rem;
+}
+.delete {
+  color: darkgray;
+  padding: 0;
+  padding-right: 5px;
+  font-size: 0.9rem;
+}
+.addCommentBtn {
+  padding: 0;
+  padding-left: 10px;
+}
+.addAnswerBtn {
+  padding: 0;
+  padding-left: 10px;
+  padding-top: 5px;
+}
+
+/* Labels */
+.editedLabel {
+  color: grey;
+  font-size: small;
+}
+.starLabel {
+  color: #333;
+  font-size: small;
+}
+.badgeLabel {
+  cursor: alias;
+  margin-bottom: 10px;
+}
+
+/* Center */
+.centering {
   text-align: center;
 }

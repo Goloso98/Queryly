@@ -16,7 +16,7 @@ use App\Models\User_tag;
 class TagController extends Controller
 {   
     public function show(){
-        return view('pages.tags', ['tags' => Tag::all()]);
+        return view('pages.tagspage', ['tags' => Tag::all()]);
     }
 
     public function createForm(){
@@ -32,7 +32,7 @@ class TagController extends Controller
 
         $tagname = $request->input('tagname');
         Tag::insert(['tagname' => $tagname]);
-        return redirect()->route('tags');
+        return redirect()->route('tags.page');
     }
 
     public function deleteForm(){
@@ -48,6 +48,6 @@ class TagController extends Controller
                 Tag::where('id', $tag->id)->delete();
             }
         }
-        return redirect()->route('tags');
+        return redirect()->route('tags.page');
     }
 }

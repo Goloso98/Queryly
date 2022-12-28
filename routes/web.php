@@ -23,16 +23,10 @@ Route::get('users/{id}/questions', 'PostController@showUserQuestions')->name('us
 Route::get('users/{id}/answers', 'PostController@showUserAnswers')->name('users.answers');
 Route::get('users/{id}/badges', 'UserController@showBadges')->name('users.badges');
 Route::get('users/{id}/tags', 'UserController@showTags')->name('users.tags');
-Route::patch('users/{id}/tags', 'UserController@changeTags')->name('users.changeTags');
+Route::get('users/{id}/tags/update', 'UserController@showChangeTagsForm')->name('changeTags');
+Route::patch('users/{id}/tags/update', 'UserController@changeTags')->name('users.changeTags');
 Route::post('resultsUsers', 'UserController@search')->name('searchUser');
 Route::get('users', 'UserController@showUsers')->name('users.page');
-
-//Tags
-Route::get('tags', 'TagController@show')->name('tags');
-Route::get('tags/new', 'TagController@createForm')->name('tags.addForm');
-Route::post('tags/new', 'TagController@create')->name('tags.add');
-Route::get('tags/delete', 'TagController@deleteForm')->name('tags.deleteForm');
-Route::post('tags/delete', 'TagController@delete')->name('tags.delete');
 
 //Comments
 Route::get('posts/{postid}/comments/new', 'CommentController@showCreateForm')->name('addComment');
@@ -56,6 +50,13 @@ Route::get('posts/topquestions', 'PostController@showTopQuestions')->name('posts
 Route::post('posts/{id}', 'PostController@report')->name('posts.report');
 Route::get('posts/{id}', 'PostController@show')->name('posts.postPage'); //tem de ficar no fim
 Route::patch('posts/{id}', 'PostController@follow')->name('posts.follow');
+
+//Tags
+Route::get('tags', 'TagController@show')->name('tags.page');
+Route::get('tags/new', 'TagController@createForm')->name('tags.addForm');
+Route::post('tags/new', 'TagController@create')->name('tags.add');
+Route::get('tags/delete', 'TagController@deleteForm')->name('tags.deleteForm');
+Route::post('tags/delete', 'TagController@delete')->name('tags.delete');
 
 // API
 Route::delete('api/posts/{id}', 'PostController@delete');

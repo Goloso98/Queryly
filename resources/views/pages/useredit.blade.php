@@ -9,7 +9,7 @@
     @method('PATCH')
     <br>
     <div>
-        <h2 class="text-center">Edit your profile</h2>
+        <h2 class="centering">Edit your profile</h2>
         <br>
         @if ($errors->has('name'))
             <span class="error">
@@ -65,9 +65,9 @@
             <li id="password-digit">Must contain at least one digit</li>
         </div>
         <br>
-        <div class="text-center">
-            <input type="submit" value="Save Changes">
-            <p><a href="#" onclick="history.back()">Cancel</a></p>
+        <div class="buttons">
+            <input type="submit" class="btn outlined" value="Save Changes">
+            <p><a href="{{route('users.profile', $user->id)}}" class="btn">Cancel</a></p>
         </div>
         <br>
     </div>

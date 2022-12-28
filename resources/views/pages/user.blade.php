@@ -38,7 +38,7 @@
           @endif
         </header>
         <p>&#64;{{ $user->username }}</p>
-        <p>e-mail: {{ $user->email }}</p>
+        <p>Email: {{ $user->email }}</p>
         <p>Age: {{ $carbon::parse($user->birthday)->diff($carbon::now())->y }}</p>
       </div>
       <div class="col-12 col-sm-4">
@@ -48,7 +48,7 @@
     <hr>
 
     @if(Auth::check() && Auth::user() == $user)
-      <div class="container text-center">
+      <div class="container centering">
         <div class="row">
           <div class="col">
             <p><a class="btn" aria-current="page" href="{{ route('users.questions', $user->id) }}"> My questions </a></p>
@@ -59,19 +59,14 @@
             <p><a class="btn" aria-current="page" href="{{ route('users.badges', $user->id) }}"> My Badges </a></p>
           </div>
         </div>
-        @if($roleMod)
-        <div class="row">
-          <p><a class="btn" aria-current="page" href="{{ route('tags') }}"> Manage Tags </a></p>
-        </div>
-        @endif
       </div>
       <hr>
-      <div class="text-center">
+      <div class="centering">
         <p><a class="btn" aria-current="page" href="{{ route('editUser', $user->id) }}"> Edit </a></p>
-        <p><a class="delete" href="#"> Delete My Account </a></p>
+        <p><a class="delete btn" href="#"> Delete My Account </a></p>
       </div>
     @else
-      <div class="container text-center">
+      <div class="container centering">
         <div class="row">
           <div class="col">
             <p><a class="btn" aria-current="page" href="{{ route('users.questions', $user->id) }}"> See questions </a></p>
@@ -84,22 +79,22 @@
         </div>
       </div>
       <hr>
-      <div class="text-center">
+      <div class="centering">
         @if($roleAdmin)
-        @if($user->isblocked)
-        <form method="post" action="{{ route('users.block', $user->id) }}">
-          {{ csrf_field() }}
-          {{ method_field('patch') }}
-          <button type="submit">Unblock Account</button>
-        </form>
-        @else
-        <form method="post" action="{{ route('users.block', $user->id) }}">
-          {{ csrf_field() }}
-          {{ method_field('patch') }}
-          <button type="submit">Block Account</button>
-        </form>
-        @endif
-        <p><a class="delete" href="#"> Delete Account </a></p>
+          @if($user->isblocked)
+          <form method="post" action="{{ route('users.block', $user->id) }}">
+            {{ csrf_field() }}
+            {{ method_field('patch') }}
+            <button type="submit">Unblock Account</button>
+          </form>
+          @else
+          <form method="post" action="{{ route('users.block', $user->id) }}">
+            {{ csrf_field() }}
+            {{ method_field('patch') }}
+            <button type="submit">Block Account</button>
+          </form>
+          @endif
+          <p><a class="delete btn" href="#"> Delete Account </a></p>
         @endif
       </div>
     @endif

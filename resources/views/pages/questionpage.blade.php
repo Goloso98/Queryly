@@ -20,17 +20,17 @@
         <div class="card-body">
             <h2 class="card-title">Title: {{ $question->title }}</h2>
             @can('delete', $question)
-                <a class="delete" id="delete-post" href="#"> Delete Question </a>
+                <a class="delete btn" id="delete-post" href="#"> Delete Question </a>
             @endcan
             <form method="post" action="{{ route('posts.report', $question->id) }}">
                 {{ csrf_field() }}
                 <button type="submit"> Report Question </button>
             </form>
             @can('update', $question)
-                <a class="btn" aria-current="page" href="{{  route('posts.edit', $question->id)  }}">Edit</a>
+                <a class="btn cardBtn" aria-current="page" href="{{  route('posts.edit', $question->id)  }}">Edit</a>
             @endcan
             @can('updateTags', $question)
-                <a class="btn" aria-current="page" href="{{  route('posts.editTags', $question->id)  }}">Edit Tags</a>
+                <a class="btn cardBtn" aria-current="page" href="{{  route('posts.editTags', $question->id)  }}">Edit Tags</a>
             @endcan
             @if(Auth::check() && Auth::id() != $question->userid)
                 @php
@@ -51,9 +51,12 @@
                 @endif
             @endif
             <p class="card-text">{{ $question->posttext }}</p>
+            @if( $question->edited )
+                <span class="editedLabel">(edited)</span>
+                <br>
+            @endif
             {{ $question->postdate }}
-            <a class="btn" aria-current="page" href="{{route('users.profile', $question->userid)}}">&#64;{{ $question->user()->first()->username }}</a>
-            @if( $question->edited )<p>Edited</p>@endif
+            <a class="btn" aria-current="page" href="{{ route('users.profile', $question->userid) }}">&#64;{{ $question->user()->first()->username }}</a>
             <br>
             @php
                 $stars = DB::table('stars')->where('postid', $question->id)->get();
@@ -66,21 +69,44 @@
                     }
                 @endphp
                 @if($userStar)
-                    <i class="fa-solid fa-star star">&nbsp;{{ count($stars) }}</i>  
+                    <i class="fa-solid fa-star star">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>  
                 @else
-                    <i class="fa-regular fa-star star">&nbsp;{{ count($stars) }}</i>  
+                    <i class="fa-regular fa-star star">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>  
                 @endif
             @else
-            <i class="fa-regular fa-star">&nbsp;{{ count($stars) }}</i>
+            <i class="fa-regular fa-star">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>
             @endif
-
-            <h5>Tags:</h5> 
             @php
                 $tags = $question->tags;
             @endphp
-            @foreach ($tags as $tag)
-                <p>{{ $tag->tagname }}</p>
-            @endforeach
+            @if($tags->count() != 0)
+                <p></p> <!-- br nao funciona -->
+                <div class="accordion" id="accordionQTags">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTag">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTag" aria-expanded="true" aria-controls="collapseTag">
+                                Tags
+                            </button>
+                        </h2>
+                        <div id="collapseTag" class="accordion-collapse collapse" aria-labelledby="headingTag" data-bs-parent="#accordionQTags">
+                            <div class="accordion-body">
+                                <div class="container centering">
+                                    <div class="row">
+                                        @php
+                                            $tags = $question->tags;
+                                        @endphp
+                                        @foreach ($tags as $tag)
+                                            <div class="form-check col-4">
+                                                {{ $tag->tagname }}
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
     @php
@@ -89,7 +115,7 @@
     <br>
     <div class="flex-header">
         <h5>Comments: ({{count($questionComments)}})</h5>
-        <a class="btn" aria-current="page" href="{{route('addComment', $question->id)}}">Add Comment</a>
+        <a class="btn addCommentBtn" aria-current="page" href="{{route('addComment', $question->id)}}">Add Comment</a>
     </div>
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
@@ -116,7 +142,7 @@
     @endphp
     <div class="flex-header">
         <h3>Answers: ({{count($answers)}})</h3>
-        <a class="btn" aria-current="page" href="{{ route('addAnswer') }}?question={{$question->id}}"> Post Answer </a>
+        <a class="btn addAnswerBtn" aria-current="page" href="{{ route('addAnswer') }}?question={{$question->id}}"> Post Answer </a>
     </div>
 </header>
 <br>

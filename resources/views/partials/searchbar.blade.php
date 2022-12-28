@@ -18,7 +18,7 @@
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        <div class="container text-center">
+                        <div class="container centering">
                             <div class="row">
                                 @foreach(App\Models\Tag::all() as $tag)
                                     <div class="form-check col-4">
@@ -34,7 +34,7 @@
         </div>
         <br>
 
-        <select class="form-select" id = "orderby" name = "orderby">
+        <select class="form-select orderby" name = "orderby">
             <option value = "newest">Newest</option>
             <option value = "oldest">Oldest</option>
             <option value = "morevoted">More Voted</option>
@@ -42,16 +42,6 @@
         </select>
     @endif
     <br>
-    <input type="submit" value="Submit">
-    <br>
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
+    <input type="submit" value="Search" class="btn outlined">
     <br>
 </form>

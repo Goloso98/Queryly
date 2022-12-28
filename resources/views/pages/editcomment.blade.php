@@ -7,7 +7,7 @@
         {{ csrf_field() }}
         {{ method_field('patch') }}
         <br>
-        <h2 class="text-center">Edit your comment</h2>
+        <h2 class="centering">Edit your comment</h2>
         <br>
         <div class="mb-3">
             <h5>Text</h5>
@@ -25,10 +25,9 @@
                 <span id="maximum-commentText">/ 250</span>
             </div>
         </div>
-
         <br>
-        <div id="editCommentButtons">
-            <button type="submit" class="btn text-center">
+        <div class="buttons">
+            <button type="submit" class="btn outlined">
                 Save Changes
             </button>
             @php

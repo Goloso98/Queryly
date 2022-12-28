@@ -4,7 +4,7 @@
 <form method="POST" action="{{ route('login') }}">
     {{ csrf_field() }}
     <p></p>
-    <h2 class="text-center">Welcome Back!</h2>
+    <h2 class="centering">Welcome Back!</h2>
     <p></p>
     <hr>
     @if ($errors->has('email'))
@@ -27,7 +27,7 @@
       <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" name="password">
     </div>
 
-    <div class="text-center">
+    <div class="centering">
         <p></p>
         <label>
             <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me

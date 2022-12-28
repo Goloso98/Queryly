@@ -84,14 +84,16 @@ function sendDeleteUserRequest(event) {
 function starAddedHandler(creator){
   //if (this.status != 200) window.reload();
 
+  let counter = creator.lastChild;
+
   if(creator.classList.contains('fa-regular')){
     creator.classList.remove('fa-regular');
     creator.classList.add('fa-solid');
-    creator.innerText = parseInt(creator.innerText) + 1;
+    counter.innerText = parseInt(counter.innerText) + 1;
   } else if (creator.classList.contains('fa-solid')){
     creator.classList.remove('fa-solid');
     creator.classList.add('fa-regular');
-    creator.innerText = parseInt(creator.innerText) - 1;
+    counter.innerText = parseInt(counter.innerText) - 1;
   }
 }
 
@@ -120,7 +122,7 @@ function commentDeletedHandler() {
 }
 
 function userDeletedHandler() {
-  if (this.status == 200) window.location = '/logout';
+  // if (this.status == 200) window.location = '/logout';
   let user = JSON.parse(this.responseText);
   let article = document.querySelector('article.userbuttons[data-id="'+ user.id + '"]');
   article.remove();

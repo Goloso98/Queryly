@@ -112,8 +112,12 @@ class UserController extends Controller
     //Delete Profile
     public function delete(Request $request, $id)
     {
+      if(Auth::id() == $id) Auth::logout();
       $user = User::find($id);
       $user->delete();
+
+      $request->session()->flash('alert-success', 'This user has been successfully deleted!');
+
       return $user;
     }
 
@@ -159,6 +163,11 @@ class UserController extends Controller
     }
 
     //Change Followed Tags
+    public function showChangeTagsForm($id) {
+      $user = User::find($id);
+      return view('pages.tagsUpdate', ['user' => $user]);
+    }
+
     public function changeTags(Request $request, $id){
       $tags = Tag::all();
       User_tag::where('userid', $id)->delete();
@@ -170,6 +179,6 @@ class UserController extends Controller
 
       $user = User::find($id);
       $new_tags = $user->tags;
-      return view('pages.usertags', ['user' => $user, 'tags' => $new_tags]);
+      return redirect()->route('users.tags',['user' => $user->id, 'tags' => $new_tags, 'id' => $user->id]);
     }
 }

@@ -4,7 +4,7 @@
 <form method="POST" action="{{ route('register') }}">
     {{ csrf_field() }}
     <p></p>
-    <h2 class="text-center">Create Your Account!</h2>
+    <h2 class="centering">Create Your Account!</h2>
     <p></p>
     <hr>
     @if ($errors->has('name'))
@@ -34,13 +34,12 @@
       <span class="input-group-text">Email</span>
         <input id="email" type="text" name="email" class="form-control" placeholder="Email">
     </div>
-
     @if ($errors->has('birthday'))
       <span class="error">
           {{ $errors->first('birthday') }}
       </span>
     @endif
-    <div class="text-center">
+    <div class="centering">
       <label for="birthday">Birthday</label>
       <input id="birthday" type="date" name="birthday">
       <p></p>
@@ -65,7 +64,7 @@
       <li id="password-digit">Must contain at least one digit</li>
     </div>
 
-    <div class="text-center">
+    <div class="centering">
       <button type="submit">
         Register
       </button>
