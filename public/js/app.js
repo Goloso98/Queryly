@@ -122,7 +122,7 @@ function commentDeletedHandler() {
 }
 
 function userDeletedHandler() {
-  if (this.status == 200) window.location = '/logout';
+  // if (this.status == 200) window.location = '/logout';
   let user = JSON.parse(this.responseText);
   let article = document.querySelector('article.userbuttons[data-id="'+ user.id + '"]');
   article.remove();

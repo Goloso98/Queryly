@@ -99,8 +99,12 @@ class UserController extends Controller
     //Delete Profile
     public function delete(Request $request, $id)
     {
+      if(Auth::id() == $id) Auth::logout();
       $user = User::find($id);
       $user->delete();
+
+      $request->session()->flash('alert-success', 'This user has been successfully deleted!');
+
       return $user;
     }
 
@@ -162,6 +166,6 @@ class UserController extends Controller
 
       $user = User::find($id);
       $new_tags = $user->tags;
-      return redirect()->route('users.tags',['user' => $user, 'tags' => $new_tags, 'id' => $user->id]);
+      return redirect()->route('users.tags',['user' => $user->id, 'tags' => $new_tags, 'id' => $user->id]);
     }
 }
