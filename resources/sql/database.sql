@@ -5,6 +5,7 @@ SET search_path TO lbaw2294;
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS roles CASCADE;
 DROP TABLE IF EXISTS posts CASCADE;
+DROP TABLE IF EXISTS user_questions CASCADE;
 DROP TABLE IF EXISTS reports CASCADE;
 DROP TABLE IF EXISTS stars CASCADE;
 DROP TABLE if EXISTS comments CASCADE;
@@ -159,13 +160,19 @@ $BODY$
 DECLARE
     notified_user INTEGER;
 BEGIN
-    IF NEW.postType = 'answer' AND (SELECT count(userID) FROM posts WHERE userID != NEW.userID AND id = NEW.parentPost LIMIT 1) > 0 THEN
-        SELECT userID INTO notified_user FROM posts WHERE posts.id = NEW.parentPost;
-        WITH inserted AS (
-            INSERT INTO notifications (userID, isRead, notificationDate)
-            VALUES (notified_user, FALSE, CURRENT_TIMESTAMP)
-            RETURNING id
-        ) INSERT INTO new_answers SELECT inserted.id, NEW.id, NEW.parentPost FROM inserted;
+    IF NEW.postType = 'question' THEN
+        INSERT INTO user_questions (userid, postid)
+        VALUES (NEW.userid, NEW.id);
+    END IF;
+    IF NEW.postType = 'answer' THEN
+        FOR notified_user IN SELECT DISTINCT userid FROM user_questions WHERE postid = NEW.parentPost AND userid != NEW.userid
+        LOOP
+            WITH inserted AS (
+                INSERT INTO notifications (userID, isRead, notificationDate)
+                VALUES (notified_user, FALSE, CURRENT_TIMESTAMP)
+                RETURNING id
+            ) INSERT INTO new_answers(notificationid, postid, questionid) SELECT inserted.id, NEW.id, NEW.parentPost FROM inserted;
+        END LOOP;
     END IF;
     RETURN NULL;
 END;
