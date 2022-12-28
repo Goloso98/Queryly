@@ -4,12 +4,12 @@
             @if($showTitle)
                 <h3 class="card-title">Answer to: {{ App\Models\Post::find($answer->parentpost)->title }}</h3>
                 <p>
-                    <a href="{{route('posts.postPage', $answer->parentpost)}}#answer-{{ $answer->id}}" class="btn" id="cardBtn">See Post</a>
+                    <a href="{{route('posts.postPage', $answer->parentpost)}}#answer-{{ $answer->id}}" class="btn cardBtn">See Post</a>
                     @can('delete', $answer)
                        <a href="#" class="delete btn" id="delete-post">Delete Answer</a>
                     @endcan
                     @can('update', $answer)
-                        <a class="btn" id="cardBtn" aria-current="page" href="{{  route('posts.edit', $answer->id)  }}">Edit</a>
+                        <a class="btn cardBtn" aria-current="page" href="{{  route('posts.edit', $answer->id)  }}">Edit</a>
                     @endcan
                 </p>
             @else
@@ -18,13 +18,13 @@
                        <a href="#" class="delete btn" id="delete-post">Delete Answer</a>
                     @endcan
                     @can('update', $answer)
-                        <a class="btn" id="cardBtn" aria-current="page" href="{{  route('posts.edit', $answer->id)  }}">Edit</a>
+                        <a class="btn cardBtn" aria-current="page" href="{{  route('posts.edit', $answer->id)  }}">Edit</a>
                     @endcan
                 </p>
             @endif
             <p class="card-text">{{ $answer->posttext }}</p>
             @if( $answer->edited )
-                <span id="editedLabel">(edited)</span>
+                <span class="editedLabel">(edited)</span>
                 <br>
             @endif
             {{ $answer->postdate }}
@@ -57,12 +57,12 @@
                     }
                 @endphp
                 @if($userStar)
-                    <i class="fa-solid fa-star star">&nbsp;{{ count($stars) }}</i>  
+                    <i class="fa-solid fa-star star">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>  
                 @else
-                    <i class="fa-regular fa-star star">&nbsp;{{ count($stars) }}</i>  
+                    <i class="fa-regular fa-star star">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>  
                 @endif
             @else
-                <i class="fa-regular fa-star">&nbsp;{{ count($stars) }}</i>
+                <i class="fa-regular fa-star">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>
             @endif
             @if(!$showTitle)
                 <a class="btn" aria-current="page" href="{{route('addComment', $answer->id)}}">Add Comment</a>

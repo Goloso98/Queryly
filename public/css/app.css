@@ -156,7 +156,7 @@ input[type="search"] {
   border-color: darkgrey;
   border: 1;
 }
-#orderby {
+.orderby {
   padding: 5px;
   border-color: darkgray;
   font-size: 0.9rem;
@@ -180,57 +180,57 @@ input[type="search"] {
 }
 
 /* Edit Buttons */
-#buttons {
+.buttons {
   text-align: center;
   align-items: center;
   display: flex;
   flex-direction: column;
 }
 
-#tagsTable {
+.tagsTable {
   text-align: center;
 }
 
 /* Badges */
-#badgeLabel {
+.badgeLabel {
   cursor: alias;
   margin-bottom: 10px;
 }
 
 /* Buttons */
-#outlined {
+.outlined {
   border: 1px;
   border-style: solid;
   border-color: #333;
 }
-#cardBtn{
+.cardBtn{
   color: darkgray;
   padding: 0;
   padding-right: 5px;
   font-size: 0.9rem;
 }
-#delete-post {
+.delete {
   color: darkgray;
   padding: 0;
   padding-right: 5px;
   font-size: 0.9rem;
 }
-#delete-comment {
-  color: darkgray;
-  padding: 0;
-  padding-right: 5px;
-  font-size: 0.9rem;
-}
-#addCommentBtn {
+.addCommentBtn {
   padding: 0;
   padding-left: 10px;
 }
-#addAnswerBtn {
+.addAnswerBtn {
   padding: 0;
   padding-left: 10px;
   padding-top: 5px;
 }
-#editedLabel {
+
+.editedLabel {
   color: grey;
+  font-size: small;
+}
+
+.starLabel {
+  color: #333;
   font-size: small;
 }

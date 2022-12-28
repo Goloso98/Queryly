@@ -23,14 +23,14 @@
                 <a class="delete btn" id="delete-post" href="#"> Delete Question </a>
             @endcan
             @can('update', $question)
-                <a class="btn" id="cardBtn" aria-current="page" href="{{  route('posts.edit', $question->id)  }}">Edit</a>
+                <a class="btn cardBtn" aria-current="page" href="{{  route('posts.edit', $question->id)  }}">Edit</a>
             @endcan
             @can('updateTags', $question)
-                <a class="btn" id="cardBtn" aria-current="page" href="{{  route('posts.editTags', $question->id)  }}">Edit Tags</a>
+                <a class="btn cardBtn" aria-current="page" href="{{  route('posts.editTags', $question->id)  }}">Edit Tags</a>
             @endcan
             <p class="card-text">{{ $question->posttext }}</p>
             @if( $question->edited )
-                <span id="editedLabel">(edited)</span>
+                <span class="editedLabel">(edited)</span>
                 <br>
             @endif
             {{ $question->postdate }}
@@ -47,12 +47,12 @@
                     }
                 @endphp
                 @if($userStar)
-                    <i class="fa-solid fa-star star">&nbsp;{{ count($stars) }}</i>  
+                    <i class="fa-solid fa-star star">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>  
                 @else
-                    <i class="fa-regular fa-star star">&nbsp;{{ count($stars) }}</i>  
+                    <i class="fa-regular fa-star star">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>  
                 @endif
             @else
-            <i class="fa-regular fa-star">&nbsp;{{ count($stars) }}</i>
+            <i class="fa-regular fa-star">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>
             @endif
 
             <h5>Tags:</h5> 
@@ -70,7 +70,7 @@
     <br>
     <div class="flex-header">
         <h5>Comments: ({{count($questionComments)}})</h5>
-        <a class="btn" id="addCommentBtn" aria-current="page" href="{{route('addComment', $question->id)}}">Add Comment</a>
+        <a class="btn addCommentBtn" aria-current="page" href="{{route('addComment', $question->id)}}">Add Comment</a>
     </div>
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
@@ -97,7 +97,7 @@
     @endphp
     <div class="flex-header">
         <h3>Answers: ({{count($answers)}})</h3>
-        <a class="btn" id="addAnswerBtn" aria-current="page" href="{{ route('addAnswer') }}?question={{$question->id}}"> Post Answer </a>
+        <a class="btn addAnswerBtn" aria-current="page" href="{{ route('addAnswer') }}?question={{$question->id}}"> Post Answer </a>
     </div>
 </header>
 <br>

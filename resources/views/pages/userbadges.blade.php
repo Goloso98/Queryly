@@ -14,7 +14,7 @@
 <div class="row">
   @forelse($badges as $badge)
     <div class="col-3">
-      <button type="button" class="btn btn-primary" id="badgeLabel">{{ $badge->badgename }}</button>
+      <button type="button" class="btn btn-primary badgeLabel">{{ $badge->badgename }}</button>
     </div>
   @empty
     @if(Auth::id() == $user->id)

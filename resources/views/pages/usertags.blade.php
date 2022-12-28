@@ -11,12 +11,12 @@
 @endif<br>
 
 <div class="text-center">
-  <a class="btn" id="outlined" aria-current="page" href="{{ route('changeTags', $user->id) }}">Update Followed Tags</a>
+  <a class="btn outlined" aria-current="page" href="{{ route('changeTags', $user->id) }}">Update Followed Tags</a>
 </div>
 <br>
 <div class="row">
   @forelse($tags as $tag)
-    <div class="form-check col-3" id="tagsTable">
+    <div class="form-check col-3 tagsTable">
       {{ $tag->tagname }}
     </div>
   @empty

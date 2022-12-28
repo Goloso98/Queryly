@@ -65,8 +65,8 @@
             <li id="password-digit">Must contain at least one digit</li>
         </div>
         <br>
-        <div id="buttons">
-            <input type="submit" class="btn" id="outlined" value="Save Changes">
+        <div class="buttons">
+            <input type="submit" class="btn outlined" value="Save Changes">
             <p><a href="{{route('users.profile', $user->id)}}" class="btn">Cancel</a></p>
         </div>
         <br>

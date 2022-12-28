@@ -36,8 +36,8 @@
     </div>
     <br>
     
-    <div id="buttons">
-      <button type="submit" class="btn" id="outlined">
+    <div class="buttons">
+      <button type="submit" class="btn outlined">
         Answer
       </button>
       <p><a href="{{ route('posts.postPage', $post->id) }}" class="btn">Cancel</a></p>

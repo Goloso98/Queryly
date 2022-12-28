@@ -26,8 +26,8 @@
             </div>
         </div>
         <br>
-        <div id="buttons">
-            <button type="submit" class="btn text-center" id="outlined">
+        <div class="buttons">
+            <button type="submit" class="btn outlined">
                 Save Changes
             </button>
             @php

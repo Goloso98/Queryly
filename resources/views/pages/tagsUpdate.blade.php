@@ -12,7 +12,7 @@
     <br>
     <div class="row">
         @foreach(App\Models\Tag::all() as $tag)
-            <div class="form-check col-3" id="tagsTable">
+            <div class="form-check col-3 tagsTable">
                 @if(!($user->tags->contains($tag->id)))
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="{{ $tag->tagname }}" id="{{ $tag->tagname }}" name="{{ $tag->tagname }}" >
@@ -29,8 +29,8 @@
         @endforeach
     </div>
     <br>
-    <div id="buttons">
-        <button type="submit" class="btn" id="outlined">
+    <div class="buttons">
+        <button type="submit" class="btn outlined">
             Update Tags
         </button>
         <p><a href="{{ route('users.tags', $user->id) }}" class="btn">Cancel</a></p>

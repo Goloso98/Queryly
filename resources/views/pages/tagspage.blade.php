@@ -24,7 +24,7 @@
         </div>
     @endif
 
-    <table class="table text-center" id="tagsTable">
+    <table class="table text-center tagsTable">
         <thead>
             <tr>
             <th scope="col">Tag Name</th>

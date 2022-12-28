@@ -42,8 +42,8 @@
           @endforeach
     </div>
     <br>
-    <div id="buttons">
-      <button type="submit" class="btn" id="outlined">
+    <div class="buttons">
+      <button type="submit" class="btn outlined">
         Ask
       </button>
       <p><a href="#" onclick="history.back()" class="btn">Cancel</a></p>

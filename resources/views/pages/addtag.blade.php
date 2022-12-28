@@ -16,8 +16,8 @@
         <h5>Tag Name</h5>
         <textarea name="tagname" id="tagname" class="form-control" rows="1"></textarea>
         <br>
-        <div id="buttons">
-            <button type="submit" class="btn" id="outlined">Add</button>
+        <div class="buttons">
+            <button type="submit" class="btn outlined">Add</button>
             <p><a href="{{ route('tags.page') }}" class="btn">Cancel</a></p>
         </div>
         <br>

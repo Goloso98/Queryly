@@ -10,15 +10,15 @@
         <br>
         <div class="row">
             @foreach(App\Models\Tag::all() as $tag)
-                <div class="form-check col-3" id="tagsTable">
+                <div class="form-check col-3 tagsTable">
                     <input class="form-check-input" type="checkbox" value="{{ $tag->id }}" id="{{ $tag->id }}" name="{{ $tag->id }}" >
                     <label class="form-check-label" for="{{ $tag->id }}">{{ $tag->tagname }}</label>
                 </div>
             @endforeach
         </div>
         <br>
-        <div id="buttons">
-            <button type="submit" class="btn" id="outlined">Delete Selected Tags</button>
+        <div class="buttons">
+            <button type="submit" class="btn outlined">Delete Selected Tags</button>
             <p><a href="{{ route('tags.page') }}" class="btn">Cancel</a></p>
         </div>
         <br>

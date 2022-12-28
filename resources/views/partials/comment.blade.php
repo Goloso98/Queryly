@@ -6,7 +6,7 @@
                     <a class="delete btn" id="delete-comment" href="#"> Delete Comment </a>
                 @endcan
                 @can('update', $comment)
-                    <a class="btn" id="cardBtn" aria-current="page" href="{{  route('comments.edit', $comment->id)  }}">Edit</a>
+                    <a class="btn cardBtn" aria-current="page" href="{{  route('comments.edit', $comment->id)  }}">Edit</a>
                 @endcan
             </p>
             <p class="card-text">{{ $comment->commenttext }}</p>

@@ -34,22 +34,12 @@
         </div>
         <br>
 
-        <select class="form-select" id = "orderby" name = "orderby">
+        <select class="form-select orderby" name = "orderby">
             <option value = "newest">Newest</option>
             <option value = "oldest">Oldest</option>
         </select>
     @endif
     <br>
-    <input type="submit" value="Search" class="btn" id="outlined">
-    <br>
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
+    <input type="submit" value="Search" class="btn outlined">
     <br>
 </form>

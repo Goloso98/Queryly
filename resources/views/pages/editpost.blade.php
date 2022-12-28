@@ -68,8 +68,8 @@
             </div>
         @endif
         <br>
-        <div id="buttons">
-            <button type="submit" class="btn" id="outlined">
+        <div class="buttons">
+            <button type="submit" class="btn outlined">
                 Save Changes
             </button>
             @if($post->posttype == 'question')

@@ -47,9 +47,13 @@
       </div>
     </div>
     <br>
-    <div id="buttons">
-      <button type="submit" class="btn text-center" id="outlined">Comment</button>
-      <p><a href="#" onclick="history.back()" class="btn">Cancel</a></p>
+    <div class="buttons">
+      <button type="submit" class="btn outlined">Comment</button>
+      @if($post->posttype == 'question')
+        <p><a href="{{ route('posts.postPage', $post->id) }}" class="btn">Cancel</a></p>
+      @else
+        <p><a href="{{ route('posts.postPage', $post->parentpost) }}" class="btn">Cancel</a></p>
+      @endif
     </div>
     <br>
 </form>
