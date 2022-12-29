@@ -19,6 +19,13 @@
       if($roleAdmin && $roleMod) $roleText = $roleText.', ';
       if($roleMod) $roleText = $roleText.'Moderator';
       $roleText = $roleText.')';
+      $authroles = Auth::user()->roles;
+      $authAdmin = $authroles->contains(function($item){
+        return $item->userrole === 'Administrator';
+      });
+      $authMod = $authroles->contains(function($item){
+        return $item->userrole === 'Administrator';
+      });
     @endphp
     <br>
 
@@ -66,10 +73,10 @@
             <p><a class="btn" aria-current="page" href="{{ route('users.badges', $user->id) }}"> My Badges </a></p>
           </div>
         </div>
-        @if($roleAdmin)
+        @if($authAdmin)
           <p><a class="btn" aria-current="page" href="{{ route('admin.blocked') }}">See Blocked Users</a></p>
         @endif
-        @if($roleMod)
+        @if($authMod)
         <p><a class="btn" aria-current="page" href="{{ route('users.manageReports', $user->id) }}"> Manage Reports </a></p>
         @endif
       </div>
@@ -94,7 +101,7 @@
       <hr>
 
       <div class="centering">
-        @if($roleAdmin)
+        @if($authAdmin && $user->id != Auth::id())
           <form method="post" action="{{ route('users.block', $user->id) }}">
             @csrf
             @method('PATCH')
@@ -110,7 +117,7 @@
           </form>
         @endif
         @can('update', $user) 
-          <p><a class="btn" aria-current="page" href="{{ route('editUser', $user->id) }}"> Edit </a></p>
+          <p><a class="btn cardBtn" aria-current="page" href="{{ route('editUser', $user->id) }}"> Edit </a></p>
         @endcan
         @can('delete', $user)
           <p><a class="delete btn" href="#"> Delete Account </a></p>
