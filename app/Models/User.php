@@ -101,14 +101,14 @@ class User extends Authenticatable
      * If user is following the postid
      */
     public function isFollowingPost($postid) {
-        return User_question::where('userid', $this->id)->where('postid', $postid)->get()->isNonEmpty();
+        return User_question::where('userid', $this->id)->where('postid', $postid)->get()->isNotEmpty();
     }
 
     /**
-     * 
+     * check whether user has that role
      */
     public function hasRole($role) {
-        return Role::where('userid', $this->id)->where('userrole', $role)->get()->isNonEmpty();
+        return Role::where('userid', $this->id)->where('userrole', $role)->get()->isNotEmpty();
     }
 
 }
