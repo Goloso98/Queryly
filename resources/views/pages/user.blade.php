@@ -7,11 +7,11 @@
 @section('content')
   <article class="userbuttons" data-id="{{ $user->id }}">
     @php
-      $role = app\Http\Controllers\UserController::showRole();
-      $roleAdmin = $role->contains(function($item){
+      $roles = $user->roles;
+      $roleAdmin = $roles->contains(function($item){
           return $item->userrole === 'Administrator';
         });
-      $roleMod = $role->contains(function($item){
+      $roleMod = $roles->contains(function($item){
           return $item->userrole === 'Moderator';
         });
       $roleText = '(';
