@@ -11,11 +11,6 @@ class UserPolicy
 {
     use HandlesAuthorization;
 
-    public function show(User $user)
-    {
-      return (Auth::check());
-    }
-
     public function update(User $user, User $user_to_evaluate){
       $role = $user->roles()->get()->pluck('userrole')->contains('Administrator');
       return ($user->id == $user_to_evaluate->id || $role);

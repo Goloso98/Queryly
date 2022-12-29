@@ -10,10 +10,12 @@
                 @endcan
             </p>
             <p class="card-text">{{ $comment->commenttext }}</p>
-            <form method="post" action="{{ route('comment.report', $comment->id) }}">
-                {{ csrf_field() }}
-                <button type="submit" class="btn cardBtn report"> Report Comment </button>
-            </form>
+            @if(Auth::check())
+                <form method="post" action="{{ route('comment.report', $comment->id) }}">
+                    {{ csrf_field() }}
+                    <button type="submit" class="btn cardBtn report"> Report Comment </button>
+                </form>
+            @endif
             {{ $comment->commentdate }}
             @php
                 $username = DB::table('users')->find($comment->userid)->username;

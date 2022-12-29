@@ -23,10 +23,12 @@
                 <span class="editedLabel">(edited)</span>
                 <br>
             @endif
-            <form method="post" action="{{ route('posts.report', $answer->id) }}">
-                {{ csrf_field() }}
-                <button type="submit" class="btn cardBtn report"> Report Answer </button>
-            </form>
+            @if(Auth::check())
+                <form method="post" action="{{ route('posts.report', $answer->id) }}">
+                    {{ csrf_field() }}
+                    <button type="submit" class="btn cardBtn report"> Report Answer </button>
+                </form>
+            @endif
             {{ $answer->postdate }}
             @if(!$showTitle)
                 @php
