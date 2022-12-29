@@ -23,7 +23,10 @@
                 <br>
                 <div class="col-8">
                     @can('delete', $question)
-                        <a class="delete btn" id="delete-post" href="#"> Delete Question </a>
+                    <form method="post" action="{{ route('posts.delete', $question->id) }}">
+                        @csrf
+                        <button type="submit" class="delete btn">  Delete Question </button>
+                    </form>
                     @endcan
                     @can('update', $question)
                         <a class="btn cardBtn" aria-current="page" href="{{  route('posts.edit', $question->id)  }}">Edit</a>

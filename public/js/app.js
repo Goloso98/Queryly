@@ -1,9 +1,4 @@
 function addEventListeners() {
-  let postDeleters = document.querySelectorAll('#delete-post');
-  [].forEach.call(postDeleters, function(deleter) {
-    deleter.addEventListener('click', sendDeletePostRequest);
-  });
-
   let commentDeleters = document.querySelectorAll('#delete-comment');
   [].forEach.call(commentDeleters, function(deleter) {
     deleter.addEventListener('click', sendDeleteCommentRequest);
@@ -61,12 +56,6 @@ function sendCreateCheckRequest(event){
   sendAjaxRequest('put', '/api/posts/' + postid + '/correct', null, ()=>{return checkAddedHandler(this)});
 }
 
-function sendDeletePostRequest(event) {
-  let id = this.closest('article').getAttribute('data-id');
-  event.preventDefault();
-  sendAjaxRequest('delete', '/api/posts/' + id, null, postDeletedHandler);
-}
-
 function sendDeleteCommentRequest(event) {
   let id = this.closest('article').getAttribute('data-id');
   event.preventDefault();
@@ -107,12 +96,6 @@ function checkAddedHandler(creator){
     creator.classList.remove('fa-solid');
     creator.classList.add('fa-regular');
   }
-}
-
-function postDeletedHandler() {
-  let post = JSON.parse(this.responseText);
-  let article = document.querySelector('article.post[data-id="'+ post.id + '"]');
-  article.remove();
 }
 
 function commentDeletedHandler() {

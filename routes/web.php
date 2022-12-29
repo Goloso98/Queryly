@@ -53,7 +53,7 @@ Route::get('posts/topquestions', 'PostController@showTopQuestions')->name('posts
 Route::post('posts/{id}', 'PostController@report')->name('posts.report');
 Route::get('posts/{id}', 'PostController@show')->name('posts.postPage'); //tem de ficar no fim
 Route::patch('posts/{id}', 'PostController@follow')->name('posts.follow');
-Route::post('posts/{id}', 'PostController@delete')->name('posts.delete');
+Route::post('posts/{id}/delete', 'PostController@delete')->name('posts.delete');
 
 //Tags
 Route::get('tags', 'TagController@show')->name('tags.page');

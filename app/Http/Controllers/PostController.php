@@ -60,8 +60,15 @@ class PostController extends Controller
     {
       $post = Post::find($id);
       $this->authorize('delete', $post);
+      $posttype = $post->posttype;
+      $postid = $id;
+      if($posttype === 'answer') $postid = $post->parentpost;
+
       $post->delete();
-      return $post;
+      
+      $request->session()->flash('alert-success', 'Post has been successfully deleted!');
+      if($posttype === 'answer') return redirect()->route('posts.postPage', ['id' => $postid]);
+      return redirect()->route('homepage');
     }
 
     //Add Question

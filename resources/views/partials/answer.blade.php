@@ -12,7 +12,10 @@
             @endif
                 @if(Auth::check())
                     @if(Auth::id() == $answer->userid || Auth::user()->hasRole('Moderator'))
-                        <a href="#" class="delete btn" id="delete-post">Delete Answer</a>
+                        <form method="post" action="{{ route('posts.delete', $answer->id) }}">
+                            @csrf
+                            <button type="submit" class="delete btn">  Delete Answer </button>
+                        </form>
                     @endif
                     @if(Auth::id() == $answer->userid)
                         <a class="btn cardBtn" aria-current="page" href="{{  route('posts.edit', $answer->id)  }}">Edit</a>

@@ -9,7 +9,10 @@
             <p>
                 <a href="{{route('posts.postPage', $question->id)}}" class="btn cardBtn">See Post</a>
                 @can('delete', $question)
-                    <a class="delete btn" id="delete-post" href="#"> Delete Question </a>
+                    <form method="post" action="{{ route('posts.delete', $question->id) }}">
+                        @csrf
+                        <button type="submit" class="delete btn">  Delete Question </button>
+                    </form>
                 @endcan
             </p>
             <p class="card-text shrinkText">{{ $question->posttext }}</p>
