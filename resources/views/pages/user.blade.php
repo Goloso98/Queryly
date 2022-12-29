@@ -15,8 +15,8 @@
           return $item->userrole === 'Moderator';
         });
       $roleText = '(';
-      if($roleAdmin) $roleText = $roleText.'Administrator';
-      if($roleMod) $roleText = $roleText.', Moderator';
+      if($roleAdmin) $roleText = $roleText.'Administrator ';
+      if($roleMod) $roleText = $roleText.'Moderator';
       $roleText = $roleText.')';
     @endphp
     <br>
@@ -62,6 +62,9 @@
             <p><a class="btn" aria-current="page" href="{{ route('users.badges', $user->id) }}"> My Badges </a></p>
           </div>
         </div>
+        @if($roleAdmin)
+          <p><a class="btn" aria-current="page" href="{{ route('admin.blocked') }}">See Blocked Users</a></p>
+        @endif
       </div>
       <hr>
       <div class="centering">

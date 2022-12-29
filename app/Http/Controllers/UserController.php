@@ -45,7 +45,7 @@ class UserController extends Controller
     //Show All Users
     public function showUsers()
     {
-      $users = User::all();
+      $users = User::where('isblocked', 'FALSE')->get();
       return view('pages.userpage', ['users' => $users]);
     }
 
@@ -146,7 +146,6 @@ class UserController extends Controller
       return view('pages.search', ['posts' => [], 'users' => $users->get(), 'userSearch' => $userSearch], compact('users'));
     }
 
-
     //Show User Role
     public static function showRole()
     {
@@ -180,5 +179,11 @@ class UserController extends Controller
       $user = User::find($id);
       $new_tags = $user->tags;
       return redirect()->route('users.tags',['user' => $user->id, 'tags' => $new_tags, 'id' => $user->id]);
+    }
+
+    //Show Blocked Users
+    public function showBlockedUsers() {
+      $users = User::where('isblocked', 'TRUE')->get();
+      return view('pages.userBlocked', ['users' => $users]);
     }
 }

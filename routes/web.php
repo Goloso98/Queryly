@@ -15,6 +15,7 @@ Route::get('/', 'Auth\LoginController@home');
 Route::get('homepage', 'UserController@showHome')->name('homepage');
 
 //Users
+Route::get('users/blocked', 'UserController@showBlockedUsers')->name('admin.blocked');
 Route::get('users/{id}', 'UserController@show')->name('users.profile');
 Route::patch('users/{id}', 'UserController@block')->name('users.block');
 Route::get('users/{id}/edit',  'UserController@showEditForm')->name('editUser');

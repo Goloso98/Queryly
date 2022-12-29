@@ -10,9 +10,11 @@
     <br>
 
     <ul>
-        @foreach($questions as $question)
+        @forelse($questions as $question)
             @include('partials.question', ['showUser' => TRUE])
-        @endforeach
+        @empty
+            <p class="centering">There are no questions yet. :(</p>
+        @endforelse
     </ul>
 
 @endsection

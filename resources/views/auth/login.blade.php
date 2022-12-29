@@ -7,6 +7,11 @@
     <h2 class="centering">Welcome Back!</h2>
     <hr>
     <br>
+    @if (session('error'))
+      <div class="alert alert-danger">
+            {{ session('error') }}
+      </div>
+    @endif
     @if ($errors->has('email'))
       <span class="error">
         {{ $errors->first('email') }}
@@ -39,12 +44,6 @@
         <p></p> <!-- br does not work -->
         <a class="btn" href="{{ route('register') }}">Register</a>
     </div>
-
-    @if (session('error'))
-      <div class="alert alert-danger">
-            {{ session('error') }}
-      </div>
-    @endif
 
 </form>
 <p></p>
