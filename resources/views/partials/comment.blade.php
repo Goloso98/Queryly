@@ -23,7 +23,7 @@
                 @endcan
             </p>
             <p class="card-text">{{ $comment->commenttext }}</p>
-            @if(Auth::check())
+            @if(Auth::check() && !$report)
                 <form method="post" action="{{ route('comment.report', $comment->id) }}">
                     {{ csrf_field() }}
                     <button type="submit" class="btn cardBtn report"> Report Comment </button>
