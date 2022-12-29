@@ -28,18 +28,18 @@
             @can('updateTags', $question)
                 <a class="btn" aria-current="page" href="{{  route('posts.editTags', $question->id)  }}">Edit Tags</a>
             @endcan
-            @if(Auth::check() && Auth::id() != $question->userid)
-                <form method="post" action="{{ route('posts.follow', $question->id) }}">
-                    @csrf
-                    @method('PATCH')
-                    <button type="submit" class="btn text-center">
-                    @if(Auth::user()->isFollowingPost($question->id))
-                        Follow Question
-                    @else
-                        Unfollow Question
-                    @endif
-                    </button>
-                </form>
+            @if(Auth::check())
+            <form method="post" action="{{ route('posts.follow', $question->id) }}">
+                @csrf
+                @method('PATCH')
+                <button type="submit" class="btn text-center">
+                @if(Auth::user()->isFollowingPost($question->id))
+                    Follow Question
+                @else
+                    Unfollow Question
+                @endif
+                </button>
+            </form>
             @endif
             <p class="card-text">{{ $question->posttext }}</p>
             {{ $question->postdate }}
