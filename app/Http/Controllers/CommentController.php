@@ -79,8 +79,14 @@ class CommentController extends Controller
     {
         $comment = Comment::find($id);
         $this->authorize('delete', $comment);
+
+        $commentParent = Post::find($comment->postid);
+        $postid = $comment->postid;
+        if($commentParent->posttype === 'answer') $postid = $commentParent->parentpost;
+
         $comment->delete();
-        return $comment;
+        $request->session()->flash('alert-success', 'Comment has been successfully deleted!');
+        return redirect()->route('posts.postPage', ['id' => $postid]);
     }
 
     public static function showComments($postid) {

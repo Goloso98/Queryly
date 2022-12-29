@@ -1,9 +1,4 @@
 function addEventListeners() {
-  let commentDeleters = document.querySelectorAll('#delete-comment');
-  [].forEach.call(commentDeleters, function(deleter) {
-    deleter.addEventListener('click', sendDeleteCommentRequest);
-  });
-
   let reportDeleters = document.querySelectorAll('#delete-report');
   [].forEach.call(reportDeleters, function(deleter) {
     deleter.addEventListener('click', sendDeleteReportRequest);
@@ -18,7 +13,6 @@ function addEventListeners() {
   [].forEach.call(checkCreator, function(creator) {
     creator.addEventListener('click', sendCreateCheckRequest);
   });
-
 }
 
 function encodeForAjax(data) {
@@ -56,12 +50,6 @@ function sendCreateCheckRequest(event){
   sendAjaxRequest('put', '/api/posts/' + postid + '/correct', null, ()=>{return checkAddedHandler(this)});
 }
 
-function sendDeleteCommentRequest(event) {
-  let id = this.closest('article').getAttribute('data-id');
-  event.preventDefault();
-  sendAjaxRequest('delete', '/api/comments/' + id, null, commentDeletedHandler);
-}
-
 function sendDeleteReportRequest(event) {
   let id = this.closest('article').getAttribute('data-id');
   event.preventDefault();
@@ -96,12 +84,6 @@ function checkAddedHandler(creator){
     creator.classList.remove('fa-solid');
     creator.classList.add('fa-regular');
   }
-}
-
-function commentDeletedHandler() {
-  let comment = JSON.parse(this.responseText);
-  let article = document.querySelector('article.comment[data-id="'+ comment.id + '"]');
-  article.remove();
 }
 
 function reportDeletedHandler() {

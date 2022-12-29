@@ -16,7 +16,11 @@
             @endif
             <p>
                 @can('delete', $comment)
-                    <a class="delete btn" id="delete-comment" href="#"> Delete Comment </a>
+                    <form method="post" action="{{ route('comments.delete', $comment->id) }}">
+                        @csrf
+                        @method('PATCH')
+                        <button type="submit" class="delete btn">  Delete Comment </button>
+                    </form>
                 @endcan
                 @can('update', $comment)
                     <a class="btn cardBtn" aria-current="page" href="{{  route('comments.edit', $comment->id)  }}">Edit</a>
@@ -24,7 +28,7 @@
             </p>
             <p class="card-text">{{ $comment->commenttext }}</p>
             @if(Auth::check() && !$report)
-                <form method="post" action="{{ route('comment.report', $comment->id) }}">
+                <form method="post" action="{{ route('comments.report', $comment->id) }}">
                     {{ csrf_field() }}
                     <button type="submit" class="btn cardBtn report"> Report Comment </button>
                 </form>

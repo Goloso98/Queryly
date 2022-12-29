@@ -36,7 +36,8 @@ Route::get('posts/{postid}/comments/new', 'CommentController@showCreateForm')->n
 Route::post('posts/{postid}/comments/new', 'CommentController@postComment')->name('comments.addComment');
 Route::get('comments/{commentid}/edit', 'CommentController@showEditForm')->name('comments.edit');
 Route::patch('comments/{commentid}/edit', 'CommentController@update')->name('comment.update');
-Route::post('comments/{id}', 'CommentController@report')->name('comment.report');
+Route::post('comments/{id}', 'CommentController@report')->name('comments.report');
+Route::patch('comments/{id}', 'CommentController@delete')->name('comments.delete');
 
 //Posts
 Route::get('posts/questions/new', 'PostController@showAddQuestionForm')->name('addQuestion');
@@ -63,8 +64,6 @@ Route::get('tags/delete', 'TagController@deleteForm')->name('tags.deleteForm');
 Route::post('tags/delete', 'TagController@delete')->name('tags.delete');
 
 // API
-
-Route::delete('api/comments/{id}', 'CommentController@delete');
 Route::put('api/star/{userid}/{postid}', 'StarController@create');
 Route::delete('api/star/{userid}/{postid}', 'StarController@delete');
 Route::put('api/posts/{id}/correct', 'PostController@correctness');
