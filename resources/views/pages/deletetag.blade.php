@@ -7,6 +7,7 @@
     <form method="post" action="{{ route('tags.deleteForm') }}">
         {{ csrf_field() }}
         <h2 class="centering">Delete Tags</h2>
+        <hr>
         <br>
         <div class="row">
             @foreach(App\Models\Tag::all() as $tag)

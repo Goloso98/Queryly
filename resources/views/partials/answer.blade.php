@@ -2,11 +2,13 @@
     <div class="card">
         <div class="card-body">         
             @if($showTitle)
-                <h3 class="card-title">Answer to: {{ App\Models\Post::find($answer->parentpost)->title }}</h3>
+                @if($report)
+                    <h4 class="card-title">Answer to: {{ App\Models\Post::find($answer->parentpost)->title }}</h4>
+                @else
+                    <h3 class="card-title">Answer to: {{ App\Models\Post::find($answer->parentpost)->title }}</h3>
+                @endif
                 <p>
                 <a href="{{route('posts.postPage', $answer->parentpost)}}#answer-{{ $answer->id}}" class="btn cardBtn">See Post</a>
-            @else
-                <p>
             @endif
                 @if(Auth::check())
                     @if(Auth::id() == $answer->userid || Auth::user()->hasRole('Moderator'))
@@ -87,7 +89,7 @@
                             <div id="answer-{{ $answer->id }}" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     @foreach($answerComments as $comment)
-                                        @include('partials.comment')
+                                        @include('partials.comment', ['report' => FALSE])
                                     @endforeach
                                 </div>
                             </div>

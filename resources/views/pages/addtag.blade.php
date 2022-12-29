@@ -7,6 +7,7 @@
     <form method="post" action="{{ route('tags.addForm') }}">
         {{ csrf_field() }}
         <h2 class="centering">Insert New Tag</h2>
+        <hr>
         <br>
         @if ($errors->has('tagname'))
             <span class="error">

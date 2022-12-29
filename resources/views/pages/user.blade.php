@@ -19,19 +19,13 @@
       if($roleAdmin && $roleMod) $roleText = $roleText.', ';
       if($roleMod) $roleText = $roleText.'Moderator';
       $roleText = $roleText.')';
-      
-      if(Auth::check()){
-        $authroles = Auth::user()->roles;
-        $authAdmin = $authroles->contains(function($item){
-            return $item->userrole === 'Administrator';
-          });
-        $authMod = $authroles->contains(function($item){
-            return $item->userrole === 'Administrator';
-          });
-      } else {
-        $authAdmin = false;
-        $authMod = false;
-      }
+      $authroles = Auth::user()->roles;
+      $authAdmin = $authroles->contains(function($item){
+        return $item->userrole === 'Administrator';
+      });
+      $authMod = $authroles->contains(function($item){
+        return $item->userrole === 'Administrator';
+      });
     @endphp
     <br>
 
@@ -107,7 +101,7 @@
       <hr>
 
       <div class="centering">
-        @if($authAdmin)
+        @if($authAdmin && $user->id != Auth::id())
           <form method="post" action="{{ route('users.block', $user->id) }}">
             @csrf
             @method('PATCH')
@@ -123,7 +117,7 @@
           </form>
         @endif
         @can('update', $user) 
-          <p><a class="btn" aria-current="page" href="{{ route('editUser', $user->id) }}"> Edit </a></p>
+          <p><a class="btn cardBtn" aria-current="page" href="{{ route('editUser', $user->id) }}"> Edit </a></p>
         @endcan
         @can('delete', $user)
           <p><a class="delete btn" href="#"> Delete Account </a></p>

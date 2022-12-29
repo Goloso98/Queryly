@@ -12,10 +12,11 @@
 @else
   <h2 class="centering">{{ $user->username }}'s Answers ({{ $counter }})</h2>
 @endif
+<hr>
 <br>
 <ul>
   @forelse($answers as $answer)
-    @include('partials.answer', ['showTitle' => TRUE])
+    @include('partials.answer', ['showTitle' => TRUE, 'report' => FALSE])
   @empty
     @if(Auth::id() == $user->id)
       <p class="centering">You haven't posted any answers yet.</p>

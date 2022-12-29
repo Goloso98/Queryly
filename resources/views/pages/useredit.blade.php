@@ -10,6 +10,7 @@
     <br>
     <div>
         <h2 class="centering">Edit your profile</h2>
+        <hr>
         <br>
         @if ($errors->has('name'))
             <span class="error">

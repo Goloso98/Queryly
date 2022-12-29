@@ -5,6 +5,7 @@
 @section('content')
 <br>
 <h2 class="centering">Post Your Comment</h2>
+<hr>
 <br>
 
 <form method="POST" action="{{ route('addComment', $post->id) }}">

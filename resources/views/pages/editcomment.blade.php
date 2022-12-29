@@ -8,6 +8,7 @@
         {{ method_field('patch') }}
         <br>
         <h2 class="centering">Edit your comment</h2>
+        <hr>
         <br>
         <div class="mb-3">
             <h5>Text</h5>

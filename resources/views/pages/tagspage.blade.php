@@ -7,6 +7,7 @@
 @section('content')
     <br>
     <h2 class="centering">Existing Tags ({{ $tags->count() }}):</h2>
+    <hr>
     <br>
     @php
       $role = app\Http\Controllers\UserController::showRole();

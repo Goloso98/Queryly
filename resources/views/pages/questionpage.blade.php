@@ -132,7 +132,7 @@
             <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     @foreach($questionComments as $comment)
-                        @include('partials.comment')
+                        @include('partials.comment', ['report' => FALSE])
                     @endforeach
                 </div>
             </div>
@@ -154,7 +154,7 @@
 <ul>
     @foreach($answers as $answer)
         
-        @include('partials.answer', ['showTitle' => FALSE])
+        @include('partials.answer', ['showTitle' => FALSE, 'report' => FALSE])
     @endforeach
 </ul>
 
