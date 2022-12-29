@@ -9,11 +9,6 @@ function addEventListeners() {
     deleter.addEventListener('click', sendDeleteCommentRequest);
   });
 
-  let userDeleters = document.querySelectorAll('article.userbuttons a.delete');
-  [].forEach.call(userDeleters, function(deleter) {
-    deleter.addEventListener('click', sendDeleteUserRequest);
-  });
-
   let reportDeleters = document.querySelectorAll('#delete-report');
   [].forEach.call(reportDeleters, function(deleter) {
     deleter.addEventListener('click', sendDeleteReportRequest);
@@ -78,12 +73,6 @@ function sendDeleteCommentRequest(event) {
   sendAjaxRequest('delete', '/api/comments/' + id, null, commentDeletedHandler);
 }
 
-function sendDeleteUserRequest(event) {
-  let id = this.closest('article').getAttribute('data-id');
-  event.preventDefault();
-  sendAjaxRequest('delete', '/api/users/' + id, null, userDeletedHandler);
-}
-
 function sendDeleteReportRequest(event) {
   let id = this.closest('article').getAttribute('data-id');
   event.preventDefault();
@@ -129,13 +118,6 @@ function postDeletedHandler() {
 function commentDeletedHandler() {
   let comment = JSON.parse(this.responseText);
   let article = document.querySelector('article.comment[data-id="'+ comment.id + '"]');
-  article.remove();
-}
-
-function userDeletedHandler() {
-  // if (this.status == 200) window.location = '/logout';
-  let user = JSON.parse(this.responseText);
-  let article = document.querySelector('article.userbuttons[data-id="'+ user.id + '"]');
   article.remove();
 }
 

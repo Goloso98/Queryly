@@ -18,6 +18,7 @@ Route::get('homepage', 'UserController@showHome')->name('homepage');
 Route::get('users/blocked', 'UserController@showBlockedUsers')->name('admin.blocked');
 Route::get('users/{id}', 'UserController@show')->name('users.profile');
 Route::patch('users/{id}', 'UserController@block')->name('users.block');
+Route::post('users/{id}', 'UserController@delete')->name('users.delete');
 Route::get('users/{id}/edit',  'UserController@showEditForm')->name('editUser');
 Route::patch('users/{id}/edit',  'UserController@update')->name('users.update');
 Route::get('users/{id}/questions', 'PostController@showUserQuestions')->name('users.questions');
@@ -52,6 +53,7 @@ Route::get('posts/topquestions', 'PostController@showTopQuestions')->name('posts
 Route::post('posts/{id}', 'PostController@report')->name('posts.report');
 Route::get('posts/{id}', 'PostController@show')->name('posts.postPage'); //tem de ficar no fim
 Route::patch('posts/{id}', 'PostController@follow')->name('posts.follow');
+Route::post('posts/{id}', 'PostController@delete')->name('posts.delete');
 
 //Tags
 Route::get('tags', 'TagController@show')->name('tags.page');
@@ -61,8 +63,7 @@ Route::get('tags/delete', 'TagController@deleteForm')->name('tags.deleteForm');
 Route::post('tags/delete', 'TagController@delete')->name('tags.delete');
 
 // API
-Route::delete('api/posts/{id}', 'PostController@delete');
-Route::delete('api/users/{id}', 'UserController@delete');
+
 Route::delete('api/comments/{id}', 'CommentController@delete');
 Route::put('api/star/{userid}/{postid}', 'StarController@create');
 Route::delete('api/star/{userid}/{postid}', 'StarController@delete');

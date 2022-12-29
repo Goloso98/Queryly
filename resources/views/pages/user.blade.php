@@ -83,7 +83,10 @@
       <hr>
       <div class="centering">
         <p><a class="btn" aria-current="page" href="{{ route('editUser', $user->id) }}"> Edit </a></p>
-        <p><a class="delete btn" href="#"> Delete My Account </a></p>
+        <form method="post" action="{{ route('users.delete', $user->id) }}">
+          @csrf
+          <button type="submit" class="btn">  Delete My Account </button>
+        </form>
       </div>
     @else
       <div class="container centering">
@@ -120,7 +123,10 @@
           <p><a class="btn cardBtn" aria-current="page" href="{{ route('editUser', $user->id) }}"> Edit </a></p>
         @endcan
         @can('delete', $user)
-          <p><a class="delete btn" href="#"> Delete Account </a></p>
+          <form method="post" action="{{ route('users.delete', $user->id) }}">
+            @csrf
+            <button type="submit" class="btn">  Delete Account </button>
+          </form>
         @endcan
       </div>
     @endif

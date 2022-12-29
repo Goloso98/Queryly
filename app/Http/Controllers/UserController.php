@@ -111,13 +111,12 @@ class UserController extends Controller
     //Delete Profile
     public function delete(Request $request, $id)
     {
-      if(Auth::id() == $id) Auth::logout();
       $user = User::find($id);
+      $username = $user->name;
       $user->delete();
-
-      $request->session()->flash('alert-success', 'This user has been successfully deleted!');
-
-      return $user;
+      $request->session()->flash('alert-success', $username.' has been successfully deleted!');
+      if(Auth::id() == $id) return redirect('logout');
+      return redirect(route('users.page'));
     }
 
     //Search Users
