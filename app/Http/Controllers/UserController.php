@@ -30,7 +30,9 @@ class UserController extends Controller
     //Show User Profile
     public function show($id)
     {
+      if (!Auth::check()) return redirect('/login');
       $user = User::find($id);
+      $this->authorize('show');
       return view('pages.user', ['user' => $user]);
     }
 
@@ -38,8 +40,6 @@ class UserController extends Controller
     public function showHome()
     {
       $questions = Post::where('posttype', 'question')->get();
-      /* print_r($questions);
-      die(); */
       return view('pages.homepage', ['questions' => $questions]);
     }
 
