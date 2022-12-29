@@ -17,11 +17,13 @@ class UserPolicy
     }
 
     public function update(User $user, User $user_to_evaluate){
-      return (Auth::user()->id == $user_to_evaluate->id);
+      $role = Auth::user()->roles()->get()->pluck('userrole')->contains('Administrator');
+      return (Auth::user()->id == $user_to_evaluate->id || $role);
     }
 
     public function delete(User $user, User $user_to_evaluate){
-      return (Auth::user()->id == $user_to_evaluate->id);
+      $role = Auth::user()->roles()->get()->pluck('userrole')->contains('Administrator');
+      return (Auth::user()->id == $user_to_evaluate->id || $role);
     }
 
     public function changeTags(User $user, User $user_to_evaluate){

@@ -20,11 +20,11 @@ class TagPolicy
     }
 
     public function create(User $user){
-      return (Auth::check() && Auth::user()->roles()->get()->pluck('userrole')->contains('Moderator'));
+      return (Auth::check() && Auth::user()->roles()->get()->pluck('userrole')->contains('Administrator'));
     }
 
     public function delete(User $user){
-      return (Auth::check() && Auth::user()->roles()->get()->pluck('userrole')->contains('Moderator'));
+      return (Auth::check() && Auth::user()->roles()->get()->pluck('userrole')->contains('Administrator'));
     }
 
 }
