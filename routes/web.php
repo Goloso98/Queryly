@@ -25,6 +25,7 @@ Route::get('users/{id}/badges', 'UserController@showBadges')->name('users.badges
 Route::get('users/{id}/tags', 'UserController@showTags')->name('users.tags');
 Route::get('users/{id}/tags/update', 'UserController@showChangeTagsForm')->name('changeTags');
 Route::patch('users/{id}/tags/update', 'UserController@changeTags')->name('users.changeTags');
+Route::get('users/{id}/manageReports', 'UserController@manageReports')->name('users.manageReports');
 Route::post('resultsUsers', 'UserController@search')->name('searchUser');
 Route::get('users', 'UserController@showUsers')->name('users.page');
 
@@ -65,7 +66,7 @@ Route::delete('api/comments/{id}', 'CommentController@delete');
 Route::put('api/star/{userid}/{postid}', 'StarController@create');
 Route::delete('api/star/{userid}/{postid}', 'StarController@delete');
 Route::put('api/posts/{id}/correct', 'PostController@correctness');
-
+Route::delete('api/report/{id}', 'ReportController@delete');
 
 // Authentication
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

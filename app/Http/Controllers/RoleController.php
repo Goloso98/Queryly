@@ -13,6 +13,5 @@ use App\Models\Role;
 
 class RoleController extends Controller
 {
-
-
+    
 }

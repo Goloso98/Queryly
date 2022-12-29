@@ -14,6 +14,11 @@ function addEventListeners() {
     deleter.addEventListener('click', sendDeleteUserRequest);
   });
 
+  let reportDeleters = document.querySelectorAll('#delete-report');
+  [].forEach.call(reportDeleters, function(deleter) {
+    deleter.addEventListener('click', sendDeleteReportRequest);
+  });
+
   let starCreator = document.getElementsByClassName('star');
   [].forEach.call(starCreator, function(creator) {
     creator.addEventListener('click', sendCreateStarRequest);
@@ -79,6 +84,12 @@ function sendDeleteUserRequest(event) {
   sendAjaxRequest('delete', '/api/users/' + id, null, userDeletedHandler);
 }
 
+function sendDeleteReportRequest(event) {
+  let id = this.closest('article').getAttribute('data-id');
+  event.preventDefault();
+  sendAjaxRequest('delete', '/api/report/' + id, null, reportDeletedHandler);
+}
+
 
 
 function starAddedHandler(creator){
@@ -125,6 +136,13 @@ function userDeletedHandler() {
   // if (this.status == 200) window.location = '/logout';
   let user = JSON.parse(this.responseText);
   let article = document.querySelector('article.userbuttons[data-id="'+ user.id + '"]');
+  article.remove();
+}
+
+function reportDeletedHandler() {
+  // if (this.status == 200) window.location = '/logout';
+  let report = JSON.parse(this.responseText);
+  let article = document.querySelector('article.rport[data-id="'+ report.id + '"]');
   article.remove();
 }
 

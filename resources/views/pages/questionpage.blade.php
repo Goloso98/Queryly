@@ -45,6 +45,10 @@
             {{ $question->postdate }}
             <a class="btn" aria-current="page" href="{{route('users.profile', $question->userid)}}">&#64;{{ $question->user()->first()->username }}</a>
             @if( $question->edited )<p>Edited</p>@endif
+            <form method="post" action="{{ route('posts.report', $question->id) }}">
+                {{ csrf_field() }}
+                <button type="submit" class="btn cardBtn report"> Report Question </button>
+            </form>
             <br>
             @php
                 $stars = DB::table('stars')->where('postid', $question->id)->get();
