@@ -8,10 +8,10 @@
             @else
                 <p>
             @endif
-                    @if(Auth::id() == $answer->userid || Auth::user()->roles()->get()->pluck('userrole')->contains('Moderator'))
+                    @if(Auth::check() && (Auth::id() == $answer->userid || Auth::user()->hasRole('Moderator')))
                         <a href="#" class="delete btn" id="delete-post">Delete Answer</a>
                     @endif
-                    @if(Auth::id() == $answer->userid || Auth::user()->roles()->get()->pluck('userrole')->contains('Moderator'))
+                    @if(Auth::check() && (Auth::id() == $answer->userid || Auth::user()->hasRole('Moderator')))
                         <a class="btn cardBtn" aria-current="page" href="{{  route('posts.edit', $answer->id)  }}">Edit</a>
                     @endif
                 </p>
