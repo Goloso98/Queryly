@@ -87,10 +87,10 @@
                 $tags = $question->tags;
             @endphp
             @if($tags->count() != 0)
-            <p></p> <!-- br does not work -->
-            <div class="accordion" id="accordionQTags">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingTag">
+                <p></p> <!-- br does not work -->
+                <div class="accordion" id="accordionQTags">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTag">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTag" aria-expanded="true" aria-controls="collapseTag">
                             Tags
                         </button>
