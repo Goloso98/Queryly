@@ -18,6 +18,7 @@ class ReportController extends Controller
     public function delete(Request $request, $id)
     {   
         $report = Report::find($id);
+        $this->authorize('delete', $report);
         $report->delete();
         $request->session()->flash('alert-success', 'This report has been successfully deleted!');
         return $report;
