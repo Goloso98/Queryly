@@ -48,6 +48,7 @@
                     @endif
                 </div>
             </div>
+            <br>
             <p class="card-text">{{ $question->posttext }}</p>
             @if( $question->edited )
                 <span class="editedLabel">(edited)</span>
@@ -78,8 +79,6 @@
             @else
             <i class="fa-regular fa-star">&nbsp;{{ count($stars) }}</i>
             @endif
-
-            <h5>Tags:</h5> 
             @php
                 $tags = $question->tags;
             @endphp
