@@ -19,13 +19,12 @@ class CommentPolicy
     }
 
     public function update(User $user, Comment $comment){
-      $user_id = Auth::id();
-      return (Auth::user()->id == $comment->userid);
+      $role = Auth::user()->roles()->get()->pluck('userrole')->contains('Moderator');
+      return (Auth::user()->id == $comment->userid || $role);
     }
 
     public function delete(User $user, Comment $comment){
-      $user_id = Auth::id();
-      $roles = Auth::user()->roles()->get()->pluck('userrole')->contains('Administrator');
-      return (Auth::user()->id == $comment->userid || $roles);
+      $role = Auth::user()->roles()->get()->pluck('userrole')->contains('Moderator');
+      return (Auth::user()->id == $comment->userid || $role);
     }
 }

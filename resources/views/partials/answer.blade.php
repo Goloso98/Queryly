@@ -1,27 +1,18 @@
 <article class="post" data-id="{{ $answer->id }}" user-id="{{Auth::id()}}" id="answer-{{ $answer->id}}">
     <div class="card">
-        <div class="card-body">
+        <div class="card-body">         
             @if($showTitle)
                 <h3 class="card-title">Answer to: {{ App\Models\Post::find($answer->parentpost)->title }}</h3>
-                <p>
-                    <a href="{{route('posts.postPage', $answer->parentpost)}}#answer-{{ $answer->id}}" class="btn cardBtn">See Post</a>
-                    @can('delete', $answer)
-                       <a href="#" class="delete btn" id="delete-post">Delete Answer</a>
-                    @endcan
-                    @can('update', $answer)
-                        <a class="btn cardBtn" aria-current="page" href="{{  route('posts.edit', $answer->id)  }}">Edit</a>
-                    @endcan
-                </p>
-            @else
-                <p>
-                    @can('delete', $answer)
-                       <a href="#" class="delete btn" id="delete-post">Delete Answer</a>
-                    @endcan
-                    @can('update', $answer)
-                        <a class="btn cardBtn" aria-current="page" href="{{  route('posts.edit', $answer->id)  }}">Edit</a>
-                    @endcan
-                </p>
+                <a href="{{route('posts.postPage', $answer->parentpost)}}#answer-{{ $answer->id}}" class="btn cardBtn">See Post</a>
             @endif
+
+            @can('delete', $answer)
+                <a href="#" class="delete btn" id="delete-post">Delete Answer</a>
+            @endcan
+            @can('update', $answer)
+                <a class="btn cardBtn" aria-current="page" href="{{  route('posts.edit', $answer->id)  }}">Edit</a>
+            @endcan
+
             <p class="card-text">{{ $answer->posttext }}</p>
             @if( $answer->edited )
                 <span class="editedLabel">(edited)</span>
