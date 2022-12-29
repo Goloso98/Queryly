@@ -29,22 +29,17 @@
                 <a class="btn" aria-current="page" href="{{  route('posts.editTags', $question->id)  }}">Edit Tags</a>
             @endcan
             @if(Auth::check() && Auth::id() != $question->userid)
-                @php
-                    $relationship = App\Models\User_question::where(['userid' => Auth::id(), 'postid' => $question->id])->value('postid');
-                @endphp
-                @if($relationship == null)
-                    <form method="post" action="{{ route('posts.follow', $question->id) }}">
-                        {{ csrf_field() }}
-                        {{ method_field('patch') }}
-                        <button type="submit" class="btn text-center">Follow Question</button>
-                    </form>
-                @else
-                    <form method="post" action="{{ route('posts.follow', $question->id) }}">
-                        {{ csrf_field() }}
-                        {{ method_field('patch') }}
-                        <button type="submit" class="btn text-center">Unfollow Question</button>
-                    </form>
-                @endif
+                <form method="post" action="{{ route('posts.follow', $question->id) }}">
+                    @csrf
+                    @method('PATCH')
+                    <button type="submit" class="btn text-center">
+                    @if(Auth::user()->isFollowingPost($question->id))
+                        Follow Question
+                    @else
+                        Unfollow Question
+                    @endif
+                    </button>
+                </form>
             @endif
             <p class="card-text">{{ $question->posttext }}</p>
             {{ $question->postdate }}
