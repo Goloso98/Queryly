@@ -363,10 +363,21 @@ class PostController extends Controller
 
     public function report(Request $request, $id){
       $userid = Auth::id();
+      $user = Auth::user();
       $reporttype = 'post';
-      Report::insert(['userid' => $userid, 'reporttype' => $reporttype, 'postid' => $id]);
       $post = Post::find($id);
+      $exists = $user->reports->contains(function($report) use ($id){return ($report->postid == $id);});
+      if($exists){
+        if($post->posttype == 'question') {
+          $request->session()->flash('alert-warning', 'You have already reported this question!');
+          return redirect()->route('posts.postPage', ['id' => $id]);
+        }
+        $request->session()->flash('alert-warning', 'You have already reported this answer!');
+        return redirect()->route('posts.postPage', ['id'=>$post->parentpost]);
+      }
 
+      Report::insert(['userid' => $userid, 'reporttype' => $reporttype, 'postid' => $id]);
+      
       if($post->posttype == 'question') {
         $request->session()->flash('alert-success', 'Question has been successfully reported. Thank you for your help!');
         return redirect()->route('posts.postPage', ['id' => $id]);
