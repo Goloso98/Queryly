@@ -156,8 +156,8 @@ class UserController extends Controller
     }
 
     //Show Tags
-    public function showTags(){
-      $user = User::find(Auth::id());
+    public function showTags($id){
+      $user = User::find($id);
       $tags = $user->tags;
       return view('pages.usertags', ['user' => $user, 'tags' => $tags]);
     }
@@ -170,6 +170,8 @@ class UserController extends Controller
 
     public function changeTags(Request $request, $id){
       $tags = Tag::all();
+      $user = User::find($id);
+      $this->authorize('changeTags', $user);
       User_tag::where('userid', $id)->delete();
       foreach($tags as $tag){
         if($request->has($tag->tagname)){

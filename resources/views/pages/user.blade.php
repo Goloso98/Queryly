@@ -76,7 +76,7 @@
             <p><a class="btn" aria-current="page" href="{{ route('users.answers', $user->id) }}"> See answers </a></p>
           </div>
           <div class="col">
-            <p><a class="btn" aria-current="page" href="#"> See Followed Tags </a></p>
+            <p><a class="btn" aria-current="page" href="{{ route('users.tags', $user->id) }}"> See Followed Tags </a></p>
             <p><a class="btn" aria-current="page" href="{{ route('users.badges', $user->id) }}"> See Badges </a></p>
           </div>
         </div>
@@ -84,19 +84,17 @@
       <hr>
       <div class="buttons">
         @if($roleAdmin)
-          @if($user->isblocked)
-            <form method="post" action="{{ route('users.block', $user->id) }}">
-              {{ csrf_field() }}
-              {{ method_field('patch') }}
-              <button type="submit" class="btn outlined">Unblock Account</button>
-            </form>
-          @else
-            <form method="post" action="{{ route('users.block', $user->id) }}">
-              {{ csrf_field() }}
-              {{ method_field('patch') }}
-              <button type="submit" class="btn outlined">Block Account</button>
-            </form>
-          @endif
+          <form method="post" action="{{ route('users.block', $user->id) }}">
+            @csrf
+            @method('PATCH')
+            <button type="submit" class="btn outlined">
+              @if($user->isblocked)
+                Unblock Account
+              @else
+                Block Account
+              @endif
+            </button>
+          </form>
           <br>
           <a class="delete btn" href="#"> Delete Account </a>
         @endif
