@@ -18,8 +18,4 @@ mix.options({ manifest: false })
 //         //
 //     ]);
 
-if(process.env.NODE_ENV.trim() === 'production') {
-    mix.sass('resources/assets/sass/newbs.scss', 'public/css/newbs.min.css');
-} else {
-    mix.sass('resources/assets/sass/newbs.scss', 'public/css/newbs.css');
-}
+mix.sass('resources/assets/sass/newbs.scss', 'public/css/newbs.css');
