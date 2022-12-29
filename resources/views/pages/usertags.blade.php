@@ -10,10 +10,12 @@
   <h2 class="centering">{{ $user->username }}'s Followed Tags ({{ $tags->count() }})</h2>
 @endif<br>
 
-<div class="centering">
-  <a class="btn outlined" aria-current="page" href="{{ route('changeTags', $user->id) }}">Update Followed Tags</a>
-</div>
-<br>
+@can('changeTags', $user)
+  <div class="centering">
+    <a class="btn outlined" aria-current="page" href="{{ route('changeTags', $user->id) }}">Update Followed Tags</a>
+  </div>
+  <br>
+@endcan
 <div class="row">
   @forelse($tags as $tag)
     <div class="form-check col-3 centering">

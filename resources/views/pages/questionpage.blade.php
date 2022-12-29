@@ -19,32 +19,43 @@
     <div class="card">
         <div class="card-body">
             <h2 class="card-title">Title: {{ $question->title }}</h2>
-            @can('delete', $question)
-                <a class="delete" id="delete-post" href="#"> Delete Question </a>
-            @endcan
-            @can('update', $question)
-                <a class="btn" aria-current="page" href="{{  route('posts.edit', $question->id)  }}">Edit</a>
-            @endcan
-            @can('updateTags', $question)
-                <a class="btn" aria-current="page" href="{{  route('posts.editTags', $question->id)  }}">Edit Tags</a>
-            @endcan
-            @if(Auth::check())
-            <form method="post" action="{{ route('posts.follow', $question->id) }}">
-                @csrf
-                @method('PATCH')
-                <button type="submit" class="btn text-center">
-                @if(Auth::user()->isFollowingPost($question->id))
-                    Unfollow Question
-                @else
-                    Follow Question
-                @endif
-                </button>
-            </form>
-            @endif
+            <div class="row align">
+                <br>
+                <div class="col-8">
+                    @can('delete', $question)
+                        <a class="delete btn" id="delete-post" href="#"> Delete Question </a>
+                    @endcan
+                    @can('update', $question)
+                        <a class="btn cardBtn" aria-current="page" href="{{  route('posts.edit', $question->id)  }}">Edit</a>
+                    @endcan
+                    @can('updateTags', $question)
+                        <a class="btn cardBtn" aria-current="page" href="{{  route('posts.editTags', $question->id)  }}">Edit Tags</a>
+                    @endcan
+                </div>
+                <div class="col-4">
+                    @if(Auth::check() && Auth::id() != $question->userid)
+                        <form method="post" action="{{ route('posts.follow', $question->id) }}">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" class="btn followBtn">
+                            @if(Auth::user()->isFollowingPost($question->id))
+                                Unfollow Question
+                            @else
+                                Follow Question
+                            @endif
+                            </button>
+                        </form>
+                    @endif
+                </div>
+            </div>
+            <br>
             <p class="card-text">{{ $question->posttext }}</p>
+            @if( $question->edited )
+                <span class="editedLabel">(edited)</span>
+                <br>
+            @endif
             {{ $question->postdate }}
             <a class="btn" aria-current="page" href="{{route('users.profile', $question->userid)}}">&#64;{{ $question->user()->first()->username }}</a>
-            @if( $question->edited )<p>Edited</p>@endif
             <form method="post" action="{{ route('posts.report', $question->id) }}">
                 {{ csrf_field() }}
                 <button type="submit" class="btn cardBtn report"> Report Question </button>
@@ -68,8 +79,6 @@
             @else
             <i class="fa-regular fa-star">&nbsp;{{ count($stars) }}</i>
             @endif
-
-            <h5>Tags:</h5> 
             @php
                 $tags = $question->tags;
             @endphp
