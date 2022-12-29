@@ -36,13 +36,17 @@
             @endif
             <br>
             @if(!$showTitle)
-                @php
-                    $correct = $answer->iscorrect;
-                @endphp
-                @if( $correct )
-                    <i class="fa-solid fa-circle-check check"></i>
+                @if(Auth::check() && Auth::id() == App\Models\Post::find($answer->parentpost)->userid)
+                    @php
+                        $correct = $answer->iscorrect;
+                    @endphp
+                    @if( $correct )
+                        <i class="fa-solid fa-circle-check check"></i>
+                    @else
+                        <i class="fa-regular fa-circle-check check"></i>
+                    @endif
                 @else
-                    <i class="fa-regular fa-circle-check check"></i>
+                    <i class="fa-regular fa-circle-check"></i>
                 @endif
             @endif
 
