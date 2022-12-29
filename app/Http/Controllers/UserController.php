@@ -44,8 +44,8 @@ class UserController extends Controller
     //Show All Users
     public function showUsers()
     {
-      $users = User::where('isblocked', 'FALSE')->get();
-      return view('pages.userpage', ['users' => $users]);
+      $users = User::where('isblocked', 'FALSE')->paginate(7);
+      return view('pages.userpage', compact('users'));
     }
 
     public function showBadges($id){
