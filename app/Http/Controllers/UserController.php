@@ -16,6 +16,7 @@ use App\Models\User_badge;
 use App\Models\Badge;
 use App\Models\User_tag;
 use App\Models\Tag;
+use App\Models\Report;
 
 class UserController extends Controller
 {
@@ -182,5 +183,9 @@ class UserController extends Controller
       $user = User::find($id);
       $new_tags = $user->tags;
       return redirect()->route('users.tags',['user' => $user->id, 'tags' => $new_tags, 'id' => $user->id]);
+    }
+
+    public function manageReports(){
+      return view('pages.manageReports', ['reports' => Report::all()]);
     }
 }
