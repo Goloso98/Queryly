@@ -18,7 +18,8 @@ class PostPolicy
     }
 
     public function update(User $user, Post $post){
-      return (Auth::user()->id == $post->userid);
+      $role = Auth::user()->roles()->get()->pluck('userrole')->contains('Moderator');
+      return (Auth::user()->id == $post->userid || $role);
     }
 
     public function updateTags(User $user, Post $post){
@@ -26,10 +27,8 @@ class PostPolicy
     }
 
     public function delete(User $user, Post $post){
-      $user_id = Auth::id();
-      $roles = Auth::user()->roles()->get()->pluck('userrole')->contains('Administrator');
-
-      return (Auth::user()->id == $post->userid || $roles);
+      $role = Auth::user()->roles()->get()->pluck('userrole')->contains('Moderator');
+      return (Auth::user()->id == $post->userid || $role);
     }
 
     public function markcorrect(User $user, Post $post){

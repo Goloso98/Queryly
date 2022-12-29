@@ -5,7 +5,7 @@
             <p>
                 <a href="{{route('posts.postPage', $question->id)}}" class="btn cardBtn">See Post</a>
                 @can('delete', $question)
-                <a class="delete btn" id="delete-post" href="#"> Delete Question </a>
+                    <a class="delete btn" id="delete-post" href="#"> Delete Question </a>
                 @endcan
             </p>
             <p class="card-text">{{ $question->posttext }}</p>
