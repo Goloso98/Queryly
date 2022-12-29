@@ -49,22 +49,39 @@
         </div>
 
         @if (($post->posttype) == 'question')
-            <div class="mb-3">
-                <h5>Tags</h5>
-                @foreach($post->tags as $tag)
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="{{ $tag->tagname }}" id="{{ $tag->tagname }}" name="{{ $tag->tagname }}" checked>
-                        <label class="form-check-label" for="{{ $tag->tagname }}">{{ $tag->tagname }}</label>
-                    </div>
-                @endforeach
-                @foreach(App\Models\Tag::all() as $tag)
-                    @if(!($post->tags->contains($tag->id)))
-                        <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="{{ $tag->tagname }}" id="{{ $tag->tagname }}" name="{{ $tag->tagname }}" >
-                        <label class="form-check-label" for="{{ $tag->tagname }}">{{ $tag->tagname }}</label>
+            <br>
+            <div class="accordion" id="accordionQTags">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTag">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTag" aria-expanded="true" aria-controls="collapseTag">
+                            Tags
+                        </button>
+                    </h2>
+                    <div id="collapseTag" class="accordion-collapse collapse" aria-labelledby="headingTag" data-bs-parent="#accordionQTags">
+                        <div class="accordion-body">
+                            <div class="container centering">
+                                <div class="row">
+                                    @foreach(App\Models\Tag::all() as $tag)
+                                        <div class="form-check col-3 centering">
+                                            @if(!($post->tags->contains($tag->id)))
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="{{ $tag->tagname }}" id="{{ $tag->tagname }}" name="{{ $tag->tagname }}" >
+                                                    <label class="form-check-label" for="{{ $tag->tagname }}">{{ $tag->tagname }}</label>
+                                                </div>
+                                            @else
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="{{ $tag->tagname }}" id="{{ $tag->tagname }}" name="{{ $tag->tagname }}" checked>
+                                                    <label class="form-check-label" for="{{ $tag->tagname }}">{{ $tag->tagname }}</label>
+                                                </div>
+                                            @endif
+
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
                         </div>
-                    @endif
-                @endforeach
+                    </div>
+                </div>
             </div>
         @endif
         <br>

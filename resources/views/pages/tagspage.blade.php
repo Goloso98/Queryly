@@ -30,6 +30,7 @@
             <tr>
             <th scope="col">Tag Name</th>
             <th scope="col">Followers</th>
+            <th scope="col">Posts</th>
             <th scope="col">Follow</th>
             </tr>
         </thead>
@@ -38,9 +39,13 @@
                 <tr>
                     <td>{{ $tag->tagname }}</td>
                     @php
-                        $count = DB::table('user_tags')->where('tagid', $tag->id)->count();
+                        $countFollow = DB::table('user_tags')->where('tagid', $tag->id)->count();
                     @endphp
-                    <td>{{ $count }}</td>
+                    <td>{{ $countFollow }}</td>
+                    @php
+                        $countPosts = DB::table('question_tags')->where('tagid', $tag->id)->count();
+                    @endphp
+                    <td>{{ $countPosts }}</td>
                     @php
                         $follow = DB::table('user_tags')->where('userid', Auth::id())->where('tagid', $tag->id)->get()
                     @endphp

@@ -54,7 +54,30 @@
     </div>
 
     <hr>
-    <div class="container centering">
+
+    @if(Auth::check() && Auth::user() == $user)
+      <div class="container centering">
+        <div class="row">
+          <div class="col">
+            <p><a class="btn" aria-current="page" href="{{ route('users.questions', $user->id) }}"> My questions </a></p>
+            <p><a class="btn" aria-current="page" href="{{ route('users.answers', $user->id) }}"> My answers </a></p>
+          </div>
+          <div class="col">
+            <p><a class="btn" aria-current="page" href="{{ route('users.tags', $user->id) }}"> See Followed Tags </a></p>
+            <p><a class="btn" aria-current="page" href="{{ route('users.badges', $user->id) }}"> My Badges </a></p>
+          </div>
+        </div>
+        @if($roleAdmin)
+          <p><a class="btn" aria-current="page" href="{{ route('admin.blocked') }}">See Blocked Users</a></p>
+        @endif
+      </div>
+      <hr>
+      <div class="centering">
+        <p><a class="btn" aria-current="page" href="{{ route('editUser', $user->id) }}"> Edit </a></p>
+        <p><a class="delete btn" href="#"> Delete My Account </a></p>
+      </div>
+    @else
+      <div class="container centering">
         <div class="row">
           <div class="col">
             <p><a class="btn" aria-current="page" href="{{ route('users.questions', $user->id) }}"> See questions </a></p>
