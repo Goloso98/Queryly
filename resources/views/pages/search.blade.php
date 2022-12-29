@@ -24,12 +24,12 @@
                     @php
                         $question = $post;
                     @endphp
-                    @include('partials.question', ['showUser' => TRUE])
+                    @include('partials.question', ['showUser' => TRUE, 'report' => FALSE])
                 @else
                     @php
                         $answer = $post;
                     @endphp
-                    @include('partials.answer', ['showTitle' => TRUE])
+                    @include('partials.answer', ['showTitle' => TRUE, 'report' => FALSE])
                 @endif
             @empty
                 <p class="centering">No results found</p>

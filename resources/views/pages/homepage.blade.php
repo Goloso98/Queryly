@@ -10,7 +10,7 @@
     
     <br>
     @forelse($questions as $question)
-        @include('partials.question', ['showUser' => TRUE])
+        @include('partials.question', ['showUser' => TRUE, 'report' => FALSE])
     @empty
         <p class="centering">There are no questions yet. :(</p>
     @endforelse

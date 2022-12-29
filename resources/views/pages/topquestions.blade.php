@@ -7,7 +7,7 @@
     <br>
     <ul>
         @foreach($questionStars as $question)
-            @include('partials.question', ['showUser' => TRUE])
+            @include('partials.question', ['showUser' => TRUE, 'report' => FALSE])
         @endforeach
     </ul>
 

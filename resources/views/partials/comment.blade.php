@@ -1,6 +1,19 @@
 <article class="comment" data-id="{{ $comment->id }}">
     <div class="card">
         <div class="card-body">
+            @if($report)
+                @php
+                    $post = App\Models\Post::find($comment->postid);
+                @endphp
+                @if($post->posttype == 'question')
+                    <h4 class="card-title">Comment on Question: {{ App\Models\Post::find($comment->postid)->title }}</h4>
+                @else
+                    @php
+                        $parentPost = App\Models\Post::find($post->parentpost)
+                    @endphp
+                    <h4 class="card-title">Comment on Answer to: {{ $parentPost->title }}</h4>
+                @endif
+            @endif
             <p>
                 @can('delete', $comment)
                     <a class="delete btn" id="delete-comment" href="#"> Delete Comment </a>
