@@ -119,8 +119,8 @@
     @endphp
     <br>
     <div class="flex-header">
-        <h5>Comments: ({{count($questionComments)}})</h5>
-        <a class="btn" aria-current="page" href="{{route('addComment', $question->id)}}">Add Comment</a>
+        <h5 class="pageHeader">Comments: ({{count($questionComments)}})</h5>
+        <a class="btn addCommentBtn" aria-current="page" href="{{route('addComment', $question->id)}}">Add Comment</a>
     </div>
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
@@ -146,16 +146,17 @@
         $answers = app\Http\Controllers\PostController::showAnswers($question->id);
     @endphp
     <div class="flex-header">
-        <h3>Answers: ({{count($answers)}})</h3>
+        <h3 class="pageHeader">Answers: ({{count($answers)}})</h3>
         <a class="btn" aria-current="page" href="{{ route('addAnswer') }}?question={{$question->id}}"> Post Answer </a>
     </div>
 </header>
 <br>
 <ul>
-    @foreach($answers as $answer)
-        
+    @forelse($answers as $answer)
         @include('partials.answer', ['showTitle' => FALSE, 'report' => FALSE])
-    @endforeach
+    @empty
+        <p class="centering">There are no answers to this question yet.</p>
+    @endforelse
 </ul>
 
 @endsection
