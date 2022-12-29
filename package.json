@@ -1,18 +1,27 @@
 {
-    "private": true,
-    "scripts": {
-        "dev": "npm run development",
-        "development": "mix",
-        "watch": "mix watch",
-        "watch-poll": "mix watch -- --watch-options-poll=1000",
-        "hot": "mix watch --hot",
-        "prod": "npm run production",
-        "production": "mix --production"
-    },
-    "devDependencies": {
-        "axios": "^0.21",
-        "laravel-mix": "^6.0.6",
-        "lodash": "^4.17.19",
-        "postcss": "^8.1.14"
-    }
+  "name": "queryly",
+  "version": "1.0.0",
+  "description": "## Collaborative Q&A The link to the page with more information about our theme is [here](https://docs.google.com/document/u/1/d/e/2PACX-1vR32xc08c7jw9CTvy9KPDdSd0Hv9oRsAPpx0KooTmtFQrUuM6Er_Cm8ZT2OaeT11D1IKlEOb7uy5WV_/pub).",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "development": "cross-env NODE_ENV=development npx mix",
+    "dev": "cross-env NODE_ENV=development npx mix",
+
+    "production": "cross-env NODE_ENV=production npx mix",
+    "prod": "cross-env NODE_ENV=production npx mix",
+    
+    "webpack": "cross-env NODE_ENV=development webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "bootstrap": "^5.3.0-alpha1",
+    "laravel-mix": "^6.0.49",
+    "resolve-url-loader": "^5.0.0",
+    "sass": "^1.57.1",
+    "sass-loader": "^12.6.0"
+  }
 }
