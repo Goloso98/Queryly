@@ -12,6 +12,7 @@
 @else
   <h2 class="centering">{{ $user->username }}'s Answers ({{ $counter }})</h2>
 @endif
+<hr>
 <br>
 <ul>
   @forelse($answers as $answer)

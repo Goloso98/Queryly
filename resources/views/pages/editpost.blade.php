@@ -12,6 +12,7 @@
         @else
             <h2 class="centering">Edit your answer</h2>
         @endif
+        <hr>
         <br>
         @if (($post->posttype) == 'question')
             <div class="mb-3">

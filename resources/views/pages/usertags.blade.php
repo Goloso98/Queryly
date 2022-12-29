@@ -8,7 +8,9 @@
   <h2 class="centering">Your Followed Tags ({{ $tags->count() }})</h2>
 @else
   <h2 class="centering">{{ $user->username }}'s Followed Tags ({{ $tags->count() }})</h2>
-@endif<br>
+@endif
+<hr>
+<br>
 
 @can('changeTags', $user)
   <div class="centering">

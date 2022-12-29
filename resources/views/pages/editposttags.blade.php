@@ -8,6 +8,7 @@
         {{ method_field('patch') }}
         <br>
         <h2 class="centering">Edit Question Tags</h2>
+        <hr>
         <br>
         <div class="row">
             @foreach(App\Models\Tag::all() as $tag)

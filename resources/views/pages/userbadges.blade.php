@@ -9,6 +9,7 @@
 @else
   <h2 class="centering">{{ $user->username }}'s Badges ({{ $badges->count() }})</h2>
 @endif
+<hr>
 <br>
 
 <div class="row">

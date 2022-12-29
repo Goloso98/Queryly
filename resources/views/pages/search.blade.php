@@ -12,6 +12,7 @@
     @endif
     <br>
     <h2 class="centering">Search Results ({{ $length }})</h2>
+    <hr>
     <br>
     @include('partials.searchbar', ['userSearch' => $userSearch])
     <br>

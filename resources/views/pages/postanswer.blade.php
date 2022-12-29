@@ -3,6 +3,7 @@
 @section('content')
 <br>
 <h2 class="centering">Post Your Answer</h2>
+<hr>
 <br>
 
 <div class="card">
