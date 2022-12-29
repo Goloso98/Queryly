@@ -34,9 +34,9 @@
                 @method('PATCH')
                 <button type="submit" class="btn text-center">
                 @if(Auth::user()->isFollowingPost($question->id))
-                    Follow Question
-                @else
                     Unfollow Question
+                @else
+                    Follow Question
                 @endif
                 </button>
             </form>
