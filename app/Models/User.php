@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Post;
 use App\Models\Badge;
 use App\Models\Tag;
+use App\Models\User_question;
 
 class User extends Authenticatable
 {
@@ -93,6 +94,13 @@ class User extends Authenticatable
      */
     public function reports(){
         return $this->hasMany('App\Models\Report', 'userid');
+    }
+
+    /**
+     * If user is following the postid
+     */
+    public function isFollowingPost($postid) {
+        return User_question::where('userid', $this->id)->where('postid', $postid)->get()->isEmpty();
     }
 
 }

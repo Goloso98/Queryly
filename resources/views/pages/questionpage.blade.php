@@ -32,24 +32,19 @@
                     @endcan
                 </div>
                 <div class="col-12 col-sm-4">
-                    @if(Auth::check() && Auth::id() != $question->userid)
-                        @php
-                            $relationship = App\Models\User_question::where(['userid' => Auth::id(), 'postid' => $question->id])->value('postid');
-                        @endphp
-                        @if($relationship == null)
-                            <form method="post" action="{{ route('posts.follow', $question->id) }}">
-                                {{ csrf_field() }}
-                                {{ method_field('patch') }}
-                                <button type="submit" class="btn follow followBtn">Follow Question</button>
-                            </form>
+                @if(Auth::check() && Auth::id() != $question->userid)
+                    <form method="post" action="{{ route('posts.follow', $question->id) }}">
+                        @csrf
+                        @method('PATCH')
+                        <button type="submit" class="btn text-center">
+                        @if(Auth::user()->isFollowingPost($question->id))
+                            Follow Question
                         @else
-                        <form method="post" action="{{ route('posts.follow', $question->id) }}">
-                                {{ csrf_field() }}
-                                {{ method_field('patch') }}
-                                <button type="submit" class="btn follow followBtn">Unfollow Question</button>
-                            </form>
+                            Unfollow Question
                         @endif
-                    @endif
+                        </button>
+                    </form>
+                @endif
                 </div>
             </div>
             <br>
