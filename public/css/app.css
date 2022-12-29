@@ -256,7 +256,17 @@ input[type="search"] {
 .centering {
   text-align: center;
 }
-
 .align {
   align-items: center;
+}
+
+/* Shrink Text Shown */
+.shrinkTitle, .shrinkText {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.shrinkText {
+  -webkit-line-clamp: 3;
 }

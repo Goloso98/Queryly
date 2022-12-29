@@ -1,14 +1,14 @@
 <article class="post" data-id="{{ $question->id }}" user-id="{{ Auth::id() }}">
     <div class="card">
         <div class="card-body">
-            <h3 class="card-title">{{ $question->title }}</h3>
+            <h3 class="card-title shrinkTitle">{{ $question->title }}</h3>
             <p>
                 <a href="{{route('posts.postPage', $question->id)}}" class="btn cardBtn">See Post</a>
                 @can('delete', $question)
                 <a class="delete btn" id="delete-post" href="#"> Delete Question </a>
                 @endcan
             </p>
-            <p class="card-text">{{ $question->posttext }}</p>
+            <p class="card-text shrinkText">{{ $question->posttext }}</p>
             {{ $question->postdate }}
             @if($showUser)
                 @php
