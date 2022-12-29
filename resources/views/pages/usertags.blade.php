@@ -17,7 +17,7 @@
 <div class="row">
   @forelse($tags as $tag)
     <div class="form-check col-3 centering">
-      {{ $tag->tagname }}
+      <button type="button" class="btn btn-primary badgeLabel">{{ $tag->tagname }}</button>
     </div>
   @empty
     @if(Auth::id() == $user->id)
