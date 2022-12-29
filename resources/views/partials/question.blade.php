@@ -9,6 +9,10 @@
                 @endcan
             </p>
             <p class="card-text">{{ $question->posttext }}</p>
+            <form method="post" action="{{ route('posts.report', $question->id) }}">
+                {{ csrf_field() }}
+                <button type="submit" class="btn cardBtn report"> Report Question </button>
+            </form>
             {{ $question->postdate }}
             @if($showUser)
                 @php

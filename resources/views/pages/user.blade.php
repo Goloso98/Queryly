@@ -93,6 +93,9 @@
         </form>
         <br>
       @endif
+      @if($roleMod)
+        <p><a class="btn" aria-current="page" href="{{ route('users.manageReports', $user->id) }}"> Manage Reports </a></p>
+      @endif
     </div>
   </article>
 <br>
