@@ -14,6 +14,21 @@
                     <a class="btn btn-outline-light" aria-current="page" href="/posts/questions/new">Post Question</a>
                 </li>
 
+                <!-- --- mobile sub menu -->
+                <li class="nav-item d-sm-none">
+                    <a class="btn btn-outline-light" aria-current="page" href="{{ route('homepage') }}">Browse</a>
+                </li>
+                <li class="nav-item d-sm-none">
+                    <a class="btn btn-outline-light" aria-current="page" href="{{ route('posts.top') }}">Top Questions</a>
+                </li>
+                <li class="nav-item d-sm-none">
+                    <a class="btn btn-outline-light" aria-current="page" href="{{ route('users.page') }}">Users</a>
+                </li>
+                <li class="nav-item d-sm-none">
+                    <a class="btn btn-outline-light" aria-current="page" href="{{ route('tags.page') }}">Tags</a>
+                </li>
+                <!-- --- mobile sub menu end -->
+
                 @if (Auth::check())
                 <li class="nav-item">
                     <a class="btn btn-outline-light" aria-current="page" href="/logout">Logout</a>
@@ -27,7 +42,6 @@
                     <a class="btn btn-outline-light" aria-current="page" href="/login">Login</a>
                 </li>
                 @endif
-
             </ul>
         </div>
     </div>
