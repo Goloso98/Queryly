@@ -2,8 +2,6 @@
 
 @extends('layouts.app')
 
-@section('title', Auth::user()->name)
-
 @section('content')
     <br>
     <h2 class="centering">Existing Tags ({{ $tags->count() }}):</h2>
@@ -32,7 +30,9 @@
             <th scope="col">Tag Name</th>
             <th scope="col">Followers</th>
             <th scope="col">Posts</th>
+            @if(Auth::check())
             <th scope="col">Follow</th>
+            @endif
             </tr>
         </thead>
         <tbody>
@@ -47,13 +47,15 @@
                         $countPosts = DB::table('question_tags')->where('tagid', $tag->id)->count();
                     @endphp
                     <td>{{ $countPosts }}</td>
+                    @if(Auth::check())
                     @php
-                        $follow = DB::table('user_tags')->where('userid', Auth::id())->where('tagid', $tag->id)->get()
+                        $hasfollows = DB::table('user_tags')->where('userid', Auth::id())->where('tagid', $tag->id)->get()->isNotEmpty();
                     @endphp
-                    @if($follow->count())
+                    @if($hasfollows)
                         <td>Yes</td>
                     @else
                         <td>No</td>
+                    @endif
                     @endif
                 </tr>
             @endforeach
