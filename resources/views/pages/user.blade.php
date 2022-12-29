@@ -16,7 +16,8 @@
         });
       $roleText = '(';
       if($roleAdmin) $roleText = $roleText.'Administrator';
-      if($roleMod) $roleText = $roleText.', Moderator';
+      if($roleAdmin && $roleModel) $roleText = $roleText.', ';
+      if($roleMod) $roleText = $roleText.'Moderator';
       $roleText = $roleText.')';
     @endphp
     <br>

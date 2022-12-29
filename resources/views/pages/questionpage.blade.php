@@ -113,6 +113,7 @@
 <br>
 <ul>
     @foreach($answers as $answer)
+        
         @include('partials.answer', ['showTitle' => FALSE])
     @endforeach
 </ul>

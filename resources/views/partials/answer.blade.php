@@ -3,15 +3,18 @@
         <div class="card-body">         
             @if($showTitle)
                 <h3 class="card-title">Answer to: {{ App\Models\Post::find($answer->parentpost)->title }}</h3>
+                <p>
                 <a href="{{route('posts.postPage', $answer->parentpost)}}#answer-{{ $answer->id}}" class="btn cardBtn">See Post</a>
+            @else
+                <p>
             @endif
-
-            @can('delete', $answer)
-                <a href="#" class="delete btn" id="delete-post">Delete Answer</a>
-            @endcan
-            @can('update', $answer)
-                <a class="btn cardBtn" aria-current="page" href="{{  route('posts.edit', $answer->id)  }}">Edit</a>
-            @endcan
+                    @if(Auth::id() == $answer->userid || Auth::user()->roles()->get()->pluck('userrole')->contains('Moderator'))
+                        <a href="#" class="delete btn" id="delete-post">Delete Answer</a>
+                    @endif
+                    @if(Auth::id() == $answer->userid || Auth::user()->roles()->get()->pluck('userrole')->contains('Moderator'))
+                        <a class="btn cardBtn" aria-current="page" href="{{  route('posts.edit', $answer->id)  }}">Edit</a>
+                    @endif
+                </p>
 
             <p class="card-text">{{ $answer->posttext }}</p>
             @if( $answer->edited )
