@@ -8,13 +8,10 @@
     
     
     <br>
-
-    <ul>
-        @forelse($questions as $question)
-            @include('partials.question', ['showUser' => TRUE])
-        @empty
-            <p class="centering">There are no questions yet. :(</p>
-        @endforelse
-    </ul>
+    @forelse($questions as $question)
+        @include('partials.question', ['showUser' => TRUE])
+    @empty
+        <p class="centering">There are no questions yet. :(</p>
+    @endforelse
 
 @endsection

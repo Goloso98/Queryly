@@ -24,21 +24,21 @@
             @include('partials.navbar')
         </div>
     </div>
-    <div class="container">
-      <div class="row">
-        <div class="col" style="width: 0%">
-            <div class="container">
-                <!-- <x-breadcrumb /> -->
-                <div class="row">
-                    <div class="col-2"></div>
-                    <div class="col-8">
-                        @yield('content')
-                    </div>
-                    <div class="col-2"></div>
-                </div>
+    <div class="row">
+        <div class="col-3 d-none d-sm-block">
+            <br>
+            <div class="menu">
+                <h3 class="centering">Menu</h3>
+                <hr>
+                <a class="menu__item" type="button" class="btn btn-outline-dark" href="{{ route('homepage') }}">Browse</a>
+                <a class="menu__item" type="button" class="btn btn-outline-dark" href="{{ route('posts.top') }}">Top Questions</a>
+                <a class="menu__item" type="button" class="btn btn-outline-dark" href="{{ route('users.page') }}">Users</a>
+                <a class="menu__item" type="button" class="btn btn-outline-dark" href="{{ route('tags.page') }}">Tags</a>
             </div>
         </div>
-      </div>
+        <div class="col-sm-7 col-12 mx-3 mx-sm-0">
+            @yield('content')
+        </div>
     </div>
     <div class="bg-info">
         <div class="container">
