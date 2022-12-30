@@ -198,6 +198,20 @@ passwordInput?.addEventListener("input", (event) => {
 
 });
 
+const accordionButtons = document.querySelectorAll('.accordion');
+accordionButtons.forEach(button => {
+  button.addEventListener('click', function() {
+    // Get the content panel that corresponds to this accordion button
+    const panel = this.nextElementSibling;
+    // Toggle the display of the panel
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+  });
+});
+
 let inputFile = document.getElementById("avatar");
         let avatarName = document.getElementById("avatarName")
 

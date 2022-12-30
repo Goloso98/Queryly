@@ -81,6 +81,7 @@ Route::post('register', 'Auth\RegisterController@register');
 
 //Static
 Route::view('aboutus', 'pages.about')->name('about');
+Route::post('contacts', 'ContactController@create');
 Route::view('contacts', 'pages.contacts')->name('contacts');
 Route::view('faq', 'pages.faq')->name('faq');
 

@@ -112,6 +112,34 @@ input[type="search"] {
   color: #333;
 }
 
+.accordion-collapse {
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 0.9rem;
+  transition: 0.42s;
+  
+  padding: 5px;
+  border-radius: 0.7rem;
+  box-shadow: none;
+}
+
+.active, .accordion:hover {
+  background-color: #eee; 
+}
+
+.panel {
+  padding: 0 18px;
+  display: none;
+  background-color: white;
+  overflow: hidden;
+}
+
 /* Question Tags */
 #accordionQTags > div > h2 > button {
   padding: 7px;
