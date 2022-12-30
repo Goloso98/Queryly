@@ -14,6 +14,9 @@
 Route::get('/', 'Auth\LoginController@home');
 Route::get('homepage', 'UserController@showHome')->name('homepage');
 
+//email
+Route::get('/send-email', 'UserController@sendEmail');
+
 //Users
 Route::get('users/blocked', 'UserController@showBlockedUsers')->name('admin.blocked');
 Route::get('users/{id}', 'UserController@show')->name('users.profile');
@@ -80,3 +83,5 @@ Route::post('register', 'Auth\RegisterController@register');
 Route::view('aboutus', 'pages.about')->name('about');
 Route::view('contacts', 'pages.contacts')->name('contacts');
 Route::view('faq', 'pages.faq')->name('faq');
+
+

@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
 use Carbon\Carbon;
 
+use Mail;
+use App\Mail\RecoverPassword;
+
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Role;
@@ -189,5 +192,17 @@ class UserController extends Controller
     public function showBlockedUsers() {
       $users = User::where('isblocked', 'TRUE')->get();
       return view('pages.userBlocked', ['users' => $users]);
+    }
+
+    public function sendEmail(){
+      $mailData = [
+        'name' => 'Margarida Nazaré',
+        'email' => 'margaridanazare4973@gmail.com', // Change to your email for testing.
+      ];
+
+      Mail::to($mailData['email'])->send(new RecoverPassword($mailData));
+        
+      dd("Email was sent successfully.");
+
     }
 }
