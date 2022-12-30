@@ -16,19 +16,15 @@
     <ul>
       <li>
         <h3>Ana Sofia Teixeira</h3>
-        <p>uwu</p>
       </li>
       <li>
         <h3>Gabriel Alves</h3>
-        <p>uwu</p>
       </li>
       <li>
         <h3>Guilherme Bica</h3>
-        <p>uwu</p>
       </li>
       <li>
         <h3>Margarida Nazaré</h3>
-        <p>uwu</p>
       </li>
     </ul>
   </body>
