@@ -92,7 +92,7 @@
                 <div class="accordion" id="accordionQTags">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingTag">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTag" aria-expanded="true" aria-controls="collapseTag">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTag" aria-expanded="false" aria-controls="collapseTag">
                             Tags
                         </button>
                     </h2>
@@ -125,14 +125,14 @@
         <h5 class="pageHeader">Comments: ({{count($questionComments)}})</h5>
         <a class="btn addCommentBtn" aria-current="page" href="{{route('addComment', $question->id)}}">Add Comment</a>
     </div>
-    <div class="accordion" id="accordionExample">
+    <div class="accordion" id="accordionCom">
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                     Show Comments
                 </button>
             </h2>
-            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionCom">
                 <div class="accordion-body">
                     @foreach($questionComments as $comment)
                         @include('partials.comment', ['report' => FALSE])
