@@ -8,7 +8,7 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse justify-content-end centering" id="navbarSupportedContent">
             <ul class="navbar-nav gap-2 mb-2 mb-sm-0">
                 <li class="nav-item">
                     <a class="btn btn-outline-light" aria-current="page" href="/posts/questions/new">Post Question</a>
