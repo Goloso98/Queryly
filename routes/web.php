@@ -13,9 +13,13 @@
 // Home
 Route::get('/', 'Auth\LoginController@home');
 Route::get('homepage', 'UserController@showHome')->name('homepage');
+Route::get('/recoverpassword', 'UserController@recoverpasswordForm')->name('recoverpasswordForm');
+Route::post('/recoverpassword', 'UserController@recoverpassword')->name('recoverpassword');
+Route::get('/newpassword/{email}', 'UserController@newpasswordForm')->name('newpasswordForm');
+Route::post('/newpassword/{email}', 'UserController@newpassword')->name('newpassword');
 
 //email
-Route::get('/send-email', 'UserController@sendEmail');
+Route::get('/send-email/{email}/{username}', 'UserController@sendRecoverPasswordEmail')->name('sendemail');
 
 //Users
 Route::get('users/blocked', 'UserController@showBlockedUsers')->name('admin.blocked');

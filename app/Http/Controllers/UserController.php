@@ -194,15 +194,42 @@ class UserController extends Controller
       return view('pages.userBlocked', ['users' => $users]);
     }
 
-    public function sendEmail(){
+    public function recoverpasswordForm(){
+      return view('auth.recoverpassword');
+    }
+
+    public function recoverpassword(Request $request){
+      $validate = $request->validate([
+        'email' => 'required|exists:users,email'
+      ]);
+
+      $email = $request->input('email');
+      $username = User::where('email', $email)->value('name');
+      return redirect()->route('sendemail', ['email' => $email, 'username' => $username]);
+    }
+
+    public function newpasswordForm($email){
+      return view('auth.newpassword', ['email' => $email]);
+    }
+
+    public function newpassword(Request $request, $email){
+      $validate = $request->validate([
+        'password' => 'required|string|min:6|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|confirmed'
+      ]);
+
+      $helper = User::where('email', $email)->value('id');
+      $user = User::find($helper);
+      $user->password = bcrypt($request->input('password'));
+      $user->save();
+      return redirect()->route('login');
+    }
+
+    public function sendRecoverPasswordEmail($email, $username){
       $mailData = [
-        'name' => 'Margarida Nazaré',
-        'email' => 'margaridanazare4973@gmail.com', // Change to your email for testing.
+        'name' => $username,
+        'email' => $email,
       ];
-
       Mail::to($mailData['email'])->send(new RecoverPassword($mailData));
-        
-      dd("Email was sent successfully.");
-
+      return view('auth.emailsent');
     }
 }
