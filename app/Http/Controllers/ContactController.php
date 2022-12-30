@@ -18,6 +18,8 @@ class ContactController extends Controller
                          'email' => $request->input('email'), 
                          'message' => $request->input('message')]);
 
+        $request->session()->flash("alert-success","Your message was sent successfully!");
+
         return view("pages.contacts");
     }
 }
