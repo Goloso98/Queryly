@@ -125,7 +125,7 @@
         @can('delete', $user)
           <form method="post" action="{{ route('users.delete', $user->id) }}">
             @csrf
-            <button type="submit" class="btn">  Delete Account </button>
+            <button type="submit" class="btn cardBtn">  Delete Account </button>
           </form>
         @endcan
       </div>
