@@ -84,6 +84,7 @@
                     </div>
                 </div>
             </div>
+            <br>
         @endif
         <br>
         <div class="buttons">
