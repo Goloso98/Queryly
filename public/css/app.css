@@ -124,13 +124,6 @@ input[type="search"] {
   border-radius: 0.7rem;
 }
 
-.panel {
-  padding: 0 18px;
-  display: none;
-  background-color: white;
-  overflow: hidden;
-}
-
 /* Question Tags */
 #accordionQTags > div > h2 > button {
   padding: 7px;
