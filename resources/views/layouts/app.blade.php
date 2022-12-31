@@ -40,6 +40,7 @@
             @yield('content')
         </div>
     </div>
+    <button onclick="topFunction()" id="topBtn" title="Go to top">Top</button>
     <div class="bg-info">
         <div class="container">
             @include('partials.footer')

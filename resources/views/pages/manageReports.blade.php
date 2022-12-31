@@ -30,6 +30,4 @@
 <p class="centering">No reports.</p>
 @endforelse
 
-<button onclick="topFunction()" id="topBtn" title="Go to top">Top</button>
-
 @endsection
