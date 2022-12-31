@@ -1,37 +1,58 @@
 @extends('layouts.app')
 
 @section('content')
-  @if(Session::has("alert-success"))
-    <div class="flash-message">
-      <p class="alert alert-success">
-        {{ Session::get("alert-success") }}
-      </p>
-    </div>
-  @endif
-  <h1>Contact Us</h1>
+  <br>
+  <div class="flash-message">
+    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+      @if(Session::has('alert-' . $msg))
+        <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}</p>
+      @endif
+    @endforeach
+  </div> <!-- end .flash-message -->
+  <br>
+  <h2 class="centering">Contact Us</h2>
+  <hr>
+  <br>
   <p>Thank you for considering reaching out to us. We are here to help and answer any questions you may have. Please don't hesitate to contact us.</p>
-  <h2>Contact Information</h2>
+  <br>
+  <h3 class="centering">Contact Information</h3>
   <ul>
     <li>Phone: 9199pfñmeencomode</li>
     <li>Email: albertojoaquim420@gmail.com</li>
     <li>Address: Rua das Flores 69</li>
   </ul>
-  @if(Session::has("alert-success"))
-  <div class="flash-message">
-    <p class="alert alert-success">
-      {{ Session::get("alert-success") }}
-    </p>
+  <br>
+  <div class="centering">
+    <h3>Send Us a Message</h3>
+    <br>
+    <form method="POST">
+      @csrf 
+      <div class="input-group mb-3">
+        <span class="input-group-text">Name</span>
+        <input id="name" type="text" name="name" class="form-control" placeholder="Name">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text">Email</span>
+        <input id="email" type="email" name="email" class="form-control" placeholder="Email">
+      </div>
+      <div class="mb-3">
+      <h5>Message:</h5>
+      @if ($errors->has('commenttext'))
+        <span class="error">
+          {{ $errors->first('commenttext') }}
+        </span>
+      @endif
+      <textarea name="message" id="message" class="form-control" rows="3" maxlength="250"></textarea>
+      <div id="count-message">
+        <span id="current-message">0</span>
+        <span id="maximum-message">/ 250</span>
+      </div>
+      <br>
+    </div>
+      <div class="buttons">
+        <input type="submit" value="Submit" class="btn outlined">
+        <br>
+      </div>
+    </form> 
   </div>
-  @endif
-  <h2>Send Us a Message</h2>
-  <form method="POST">
-    @csrf 
-    <label for="name">Name:</label><br>
-    <input type="text" id="name" name="name"><br>
-    <label for="email">Email:</label><br>
-    <input type="email" id="email" name="email"><br>
-    <label for="message">Message:</label><br>
-    <textarea id="message" name="message"></textarea><br>
-    <input type="submit" value="Submit">
-  </form> 
 @endsection

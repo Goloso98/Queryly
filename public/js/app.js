@@ -161,6 +161,28 @@ commentTextArea?.addEventListener("input", (event) => {
   }
 });
 
+const messageTextArea = document.querySelector("#message");
+const messageCounter = document.querySelector("#count-message");
+const messageTypedCharacters = document.querySelector("#current-message");
+const maximumMessageCharacters = 250;
+
+messageTextArea?.addEventListener("input", (event) => {
+
+  const typedCharacters = messageTextArea.value.length;
+
+  if (typedCharacters > maximumMessageCharacters) {
+    return false;
+  }
+
+  messageTypedCharacters.textContent = typedCharacters;
+
+  if (typedCharacters >= 150 && typedCharacters < 200) {
+    messageCounter.classList = "text-warning";
+  } else if (typedCharacters >= 200) {
+    messageCounter.classList = "text-danger";
+  }
+});
+
 const passwordInput = document.querySelector("#password");
 const passwordMin = 6;
 const passwordMinSpan = document.querySelector("#password-min");

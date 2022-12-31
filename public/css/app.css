@@ -30,19 +30,7 @@
 }
 
 /* Character Counters */
-#count-postTitle {
-  float: right;
-  padding: 0.1rem 0 0 0;
-  font-size: 0.875rem;
-  color: grey;
-}
-#count-postText {
-  float: right;
-  padding: 0.1rem 0 0 0;
-  font-size: 0.875rem;
-  color: grey;
-}
-#count-commentText {
+#count-postTitle, #count-postText, #count-commentText, #count-message {
   float: right;
   padding: 0.1rem 0 0 0;
   font-size: 0.875rem;
@@ -112,6 +100,7 @@ input[type="search"] {
   color: #333;
 }
 
+/* Accordions */
 .accordion-collapse {
   background-color: #fff;
   color: #333;
@@ -128,9 +117,11 @@ input[type="search"] {
   border-radius: 0.7rem;
   box-shadow: none;
 }
-
 .active, .accordion:hover {
   background-color: #eee; 
+}
+.accordionFaqs {
+  border-radius: 0.7rem;
 }
 
 .panel {
@@ -254,6 +245,9 @@ input[type="search"] {
 }
 .pageHeader {
   margin: 0;
+}
+.about {
+  list-style: none;
 }
 
 /* Shrink Text Shown */
