@@ -23,6 +23,8 @@ Route::get('/send-email/{email}/{username}', 'UserController@sendRecoverPassword
 
 //Users
 Route::get('users/blocked', 'UserController@showBlockedUsers')->name('admin.blocked');
+Route::get('users/messages', 'ContactController@showMessages')->name('admin.messages');
+Route::patch('users/messages/{id}', 'ContactController@delete')->name('messages.delete');
 Route::get('users/{id}', 'UserController@show')->name('users.profile');
 Route::patch('users/{id}', 'UserController@block')->name('users.block');
 Route::post('users/{id}', 'UserController@delete')->name('users.delete');

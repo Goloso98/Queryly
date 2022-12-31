@@ -22,4 +22,19 @@ class ContactController extends Controller
 
         return view("pages.contacts");
     }
+
+    //Show Message
+    public function showMessages() {
+        $messages = Contact::all();
+        return view('pages.messagesPage', ['messages' => $messages]);
+    }
+
+    //Delete Message
+    public function delete(Request $request, $id)
+    {
+        $message = Contact::find($id);
+        $message->delete();
+        $request->session()->flash('alert-success', 'Message has been successfully deleted!');
+        return redirect(route('admin.messages'));
+    }
 }

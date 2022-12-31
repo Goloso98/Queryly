@@ -74,10 +74,11 @@
           </div>
         </div>
         @if($authAdmin)
+          <p><a class="btn" aria-current="page" href="{{ route('admin.messages') }}">Messages</a></p>
           <p><a class="btn" aria-current="page" href="{{ route('admin.blocked') }}">See Blocked Users</a></p>
         @endif
         @if($authMod)
-        <p><a class="btn" aria-current="page" href="{{ route('users.manageReports', $user->id) }}"> Manage Reports </a></p>
+          <p><a class="btn" aria-current="page" href="{{ route('users.manageReports', $user->id) }}"> Manage Reports </a></p>
         @endif
       </div>
       <hr>

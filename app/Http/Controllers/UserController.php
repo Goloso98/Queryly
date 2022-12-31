@@ -194,6 +194,7 @@ class UserController extends Controller
       return view('pages.userBlocked', ['users' => $users]);
     }
 
+    //Recover Password
     public function recoverpasswordForm(){
       return view('auth.recoverpassword');
     }
