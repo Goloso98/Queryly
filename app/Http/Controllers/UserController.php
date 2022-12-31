@@ -138,7 +138,7 @@ class UserController extends Controller
         $search_input = $request->input('search');
 
         $statement1 = 'tsvectors @@ plainto_tsquery(\'english\',?)';
-        $users = User::whereRaw($statement1, [$search_input]);
+        $users = User::whereRaw($statement1, [$search_input])->where('isblocked', 'FALSE');
       } else {
         //here because code gets angry otherwise
         $users = User::all();
