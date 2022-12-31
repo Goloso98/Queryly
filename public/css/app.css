@@ -219,6 +219,9 @@ input[type="search"] {
   background-color: green;
   color: white;
 }
+.userBtn {
+  color: white;
+}
 
 /* Labels */
 .editedLabel {
@@ -265,7 +268,7 @@ input[type="search"] {
 }
 
 /* Back to Top Button */
-#myBtn {
+#topBtn {
   display: none;
   position: fixed;
   bottom: 20px;
@@ -280,7 +283,7 @@ input[type="search"] {
   border-radius: 10px;
   font-size: 18px;
 }
-#myBtn:hover {
+#topBtn:hover {
   background-color: #555;
 }
 

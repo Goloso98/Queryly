@@ -34,7 +34,7 @@
                     <a class="btn btn-outline-light" aria-current="page" href="/logout">Logout</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page"
+                    <a class="nav-link userBtn" aria-current="page"
                        href="/users/{{ Auth::user()->id }}">{{ Auth::user()->name }}</a>
                 </li>
                 @else

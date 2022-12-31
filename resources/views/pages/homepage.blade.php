@@ -22,6 +22,6 @@
     @empty
         <p class="centering">There are no questions yet. :(</p>
     @endforelse
-    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <button onclick="topFunction()" id="topBtn" title="Go to top">Top</button>
 
 @endsection
