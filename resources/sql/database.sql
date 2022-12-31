@@ -507,127 +507,49 @@ LANGUAGE plpgsql;
 
 -- POPULATION
 -- Super User
-INSERT INTO users(name, email, username, password, birthday) VALUES (
-    'John Doe',
-    'admin@example.com',
-    'johndoe',
-    '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
-    '2003-02-26 09:06:47'
-); -- Password is 1234. Generated using Hash::make('1234')
-
-INSERT INTO roles(userID, userRole) VALUES (
-    1,
-    'Administrator'
-);
-INSERT INTO roles(userID, userRole) VALUES (
-    1,
-    'Moderator'
-);
+INSERT INTO users(name, email, username, password, birthday) VALUES ('John Doe','admin@example.com','johndoe','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','2003-02-26 09:06:47');
+INSERT INTO roles(userID, userRole) VALUES (1,'Administrator');
+INSERT INTO roles(userID, userRole) VALUES (1,'Moderator');
 
 --Admins
-INSERT INTO users(name, email, username, password, birthday) VALUES (
-    'Admin One',
-    'admin1@example.com',
-    'admin1',
-    '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
-    '1969-02-26 09:06:47'
-);
-INSERT INTO roles(userID, userRole) VALUES (
-    2,
-    'Administrator'
-);
-INSERT INTO users(name, email, username, password, birthday) VALUES (
-    'Admin Two',
-    'admin2@example.com',
-    'admin2',
-    '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
-    '1969-02-26 09:06:47'
-);
-INSERT INTO roles(userID, userRole) VALUES (
-    3,
-    'Administrator'
-);
-INSERT INTO users(name, email, username, password, birthday) VALUES (
-    'Admin Three',
-    'admin3@example.com',
-    'admin3',
-    '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
-    '1969-02-26 09:06:47'
-);
-INSERT INTO roles(userID, userRole) VALUES (
-    4,
-    'Administrator'
-);
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Deena Buckley','deena_buckley@example.com','DeenaBuckley','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','07/07/93');
+INSERT INTO roles(userID, userRole) VALUES (2,'Administrator');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Pattie Perkins','pattie_perkins@example.com','PattiePerkins','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','03/01/99');
+INSERT INTO roles(userID, userRole) VALUES (3,'Administrator');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Susannah Griffith','susannah_griffith@example.com','SusannahGriffith','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','02/03/02');
+INSERT INTO roles(userID, userRole) VALUES (4,'Administrator');
 
 --Moderators
-INSERT INTO users(name, email, username, password, birthday) VALUES (
-    'Mod One',
-    'mod1@example.com',
-    'mod1',
-    '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
-    '1969-02-26 09:06:47'
-);
-INSERT INTO roles(userID, userRole) VALUES (
-    5,
-    'Moderator'
-);
-INSERT INTO users(name, email, username, password, birthday) VALUES (
-    'Mod Two',
-    'mod2@example.com',
-    'mod2',
-    '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
-    '1969-02-26 09:06:47'
-);
-INSERT INTO roles(userID, userRole) VALUES (
-    6,
-    'Moderator'
-);
-INSERT INTO users(name, email, username, password, birthday) VALUES (
-    'Mod Three',
-    'mod3@example.com',
-    'mod3',
-    '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
-    '1969-02-26 09:06:47'
-);
-INSERT INTO roles(userID, userRole) VALUES (
-    7,
-    'Moderator'
-);
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Anaya Salas','anaya_salas@example.com','AnayaSalas','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','04/03/94');
+INSERT INTO roles(userID, userRole) VALUES (5,'Moderator');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Tallulah Hayes','tallulah_hayes@example.com','TallulahHayes','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','03/12/84');
+INSERT INTO roles(userID, userRole) VALUES (6,'Moderator');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Leyton Harding','leyton_harding@example.com','LeytonHarding','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','08/08/92');
+INSERT INTO roles(userID, userRole) VALUES (7,'Moderator');
 
 --Generic User
-INSERT INTO users(name, email, username, password, birthday) VALUES (
-    'NPC One',
-    'npc1@example.com',
-    'npc1',
-    '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
-    '1969-02-26 09:06:47'
-);
-INSERT INTO users(name, email, username, password, birthday) VALUES (
-    'NPC Two',
-    'npc2@example.com',
-    'npc2',
-    '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
-    '1969-02-26 09:06:47'
-);
-INSERT INTO users(name, email, username, password, birthday) VALUES (
-    'NPC Three',
-    'npc3@example.com',
-    'npc3',
-    '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
-    '1969-02-26 09:06:47'
-);
-
-
-INSERT INTO users (name, email, username, password, birthday) VALUES ('Isacco Pyott', 'ipyott0@telegraph.co.uk', 'ipyott0', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '2017-09-03 08:02:38');
-INSERT INTO users (name, email, username, password, birthday) VALUES ('Brad Surby', 'bsurby1@nydailynews.com', 'bsurby1', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '2009-06-28 07:43:14');
-INSERT INTO users (name, email, username, password, birthday) VALUES ('Chrissie Leif', 'cleif2@marriott.com', 'cleif2', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '2017-04-22 21:40:55');
-INSERT INTO users (name, email, username, password, birthday) VALUES ('Pete Weston', 'pweston3@noaa.gov', 'pweston3', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '2017-06-22 19:02:26');
-INSERT INTO users (name, email, username, password, birthday) VALUES ('Kennie Remon', 'kremon4@cbsnews.com', 'kremon4', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '2013-02-07 04:56:07');
-INSERT INTO users (name, email, username, password, birthday) VALUES ('Charlene Blazynski', 'cblazynski5@accuweather.com', 'cblazynski5', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '2008-05-04 18:11:19');
-INSERT INTO users (name, email, username, password, birthday) VALUES ('Annabal Chaffey', 'achaffey6@unesco.org', 'achaffey6', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '2001-08-27 15:13:28');
-INSERT INTO users (name, email, username, password, birthday) VALUES ('Julie Swainston', 'jswainston7@webnode.com', 'jswainston7', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '2013-03-19 16:49:16');
-INSERT INTO users (name, email, username, password, birthday) VALUES ('Omar Bangs', 'obangs8@nsw.gov.au', 'obangs8', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '2012-04-11 10:44:55');
-INSERT INTO users (name, email, username, password, birthday) VALUES ('Lauraine Bushell', 'lbushell9@gravatar.com', 'lbushell9', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '2003-02-26 09:06:47');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Jonah Kaufman','jonah_kaufman@example.com','JonahKaufman','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','10/13/93');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Poppie Bartlett','poppie_bartlett@example.com','PoppieBartlett','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','09/14/85');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Natalia Wheeler','natalia_wheeler@example.com','NataliaWheeler','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','06/17/99');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Carl Nelson','carl_nelson@example.com','CarlNelson','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','12/28/07');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Ruth Bates','ruth_bates@example.com','RuthBates','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','05/09/87');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Robbie Mcintosh','robbie_mcintosh@example.com','RobbieMcintosh','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','02/27/86');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Annabelle Andersen','annabelle_andersen@example.com','AnnabelleAndersen','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','04/01/03');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Angel Warren','angel_warren@example.com','AngelWarren','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','11/27/92');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Diego King','diego_king@example.com','DiegoKing','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','09/03/89');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Richard Barrett','richard_barrett@example.com','RichardBarrett','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','09/14/96');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Katie Calhoun','katie_calhoun@example.com','KatieCalhoun','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','06/11/93');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Hugo Serrano','hugo_serrano@example.com','HugpSerrano','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','10/11/09');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Isacco Pyott', 'ipyott0@example.com', 'ipyott0', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '08/05/97');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Brad Surby', 'bsurby1@example.com', 'bsurby1', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '03/25/94');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Chrissie Leif', 'cleif2@example.com', 'cleif2', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '02/18/95');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Pete Weston', 'pweston3@example.com', 'pweston3', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '06/02/96');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Kennie Remon', 'kremon4@example.com', 'kremon4', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '09/15/94');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Charlene Blazynski', 'cblazynski5@example.com', 'cblazynski5', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '09/29/99');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Annabal Chaffey', 'achaffey6@example.com', 'achaffey6', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '05/08/90');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Julie Swainston', 'jswainston7@example.com', 'jswainston7', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '02/08/86');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Omar Bangs', 'obangs8@example.com', 'obangs8', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '07/25/88');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Lauraine Bushell', 'lbushell9@example.com', 'lbushell9', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '01/20/94');
 
 --questions
 INSERT INTO posts (userID, postType, title, postText) VALUES (1, 'question', 'Dialogue', 'How do you write dialogue?'); 
@@ -681,9 +603,19 @@ INSERT INTO badges (badgeName) VALUES ('20 correct answers!'); --13
 
 
 --tags
+INSERT INTO tags (tagName) VALUES ('python');
+INSERT INTO tags (tagName) VALUES ('java');
+INSERT INTO tags (tagName) VALUES ('C');
+INSERT INTO tags (tagName) VALUES ('html');
+INSERT INTO tags (tagName) VALUES ('php');
 INSERT INTO tags (tagName) VALUES ('code');
-INSERT INTO tags (tagName) VALUES ('cook');
+INSERT INTO tags (tagName) VALUES ('food');
+INSERT INTO tags (tagName) VALUES ('cats');
+INSERT INTO tags (tagName) VALUES ('dogs');
+INSERT INTO tags (tagName) VALUES ('fish');
 INSERT INTO tags (tagName) VALUES ('animals');
+INSERT INTO tags (tagName) VALUES ('help');
+INSERT INTO tags (tagName) VALUES ('advice');
 
 --user tags
 -- INSERT INTO user_tags (userID, tagID) VALUES (1,1);
