@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+  @if(Session::has("alert-success"))
+    <div class="flash-message">
+      <p class="alert alert-success">
+        {{ Session::get("alert-success") }}
+      </p>
+    </div>
+  @endif
   <h1>Contact Us</h1>
   <p>Thank you for considering reaching out to us. We are here to help and answer any questions you may have. Please don't hesitate to contact us.</p>
   <h2>Contact Information</h2>
