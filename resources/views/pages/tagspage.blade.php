@@ -3,7 +3,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <br>
+    <br><br>
     <h2 class="centering">Existing Tags ({{ $tags->count() }}):</h2>
     <hr>
     <br>

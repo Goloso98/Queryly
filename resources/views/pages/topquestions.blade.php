@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <br>
+    <br><br>
     <h2 class="centering">Top 10 Questions</h2>
     <hr>
     <br>
