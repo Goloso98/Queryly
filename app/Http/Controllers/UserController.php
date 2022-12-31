@@ -205,30 +205,32 @@ class UserController extends Controller
       ]);
 
       $email = $request->input('email');
+      $userid = User::where('email', $email)->value('id');
       $username = User::where('email', $email)->value('name');
-      return redirect()->route('sendemail', ['email' => $email, 'username' => $username]);
+      return redirect()->route('sendemail', ['id' => $userid]);
     }
 
-    public function newpasswordForm($email){
-      return view('auth.newpassword', ['email' => $email]);
+    public function newpasswordForm($id){
+      return view('auth.newpassword', ['id' => $id]);
     }
 
-    public function newpassword(Request $request, $email){
+    public function newpassword(Request $request, $id){
       $validate = $request->validate([
         'password' => 'required|string|min:6|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|confirmed'
       ]);
 
-      $helper = User::where('email', $email)->value('id');
-      $user = User::find($helper);
+      $user = User::find($id);
       $user->password = bcrypt($request->input('password'));
       $user->save();
       return redirect()->route('login');
     }
 
-    public function sendRecoverPasswordEmail($email, $username){
+    public function sendRecoverPasswordEmail($id){
+      $user = User::find($id);
       $mailData = [
-        'name' => $username,
-        'email' => $email,
+        'id' => $id,
+        'name' => $user->name,
+        'email' => $user->email,
       ];
       Mail::to($mailData['email'])->send(new RecoverPassword($mailData));
       return view('auth.emailsent');

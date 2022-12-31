@@ -2,7 +2,7 @@
 
 @section('content')
 
-<form method="POST" action="{{ route('newpasswordForm', ['email' => $email]) }}">
+<form method="POST" action="{{ route('newpasswordForm', ['id' => $id]) }}">
     {{ csrf_field() }}
     <br>
     <h2 class="centering">Change your password:</h2>

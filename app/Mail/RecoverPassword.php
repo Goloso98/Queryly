@@ -29,7 +29,7 @@ class RecoverPassword extends Mailable
      */
     public function build()
     {   
-        return $this->view('emails.recoverpassword', ['email' => $this->mailData['email']]);
+        return $this->view('emails.recoverpassword', ['id' => $this->mailData['id']]);
     }
 }
 
