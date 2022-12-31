@@ -283,3 +283,12 @@ input[type="search"] {
 #myBtn:hover {
   background-color: #555;
 }
+
+/* Accordion Colors */
+.accordion-button {
+  color: #333;
+}
+.accordion-button:not(.collapsed){
+  background-color: lightgreen;
+  color: #333;
+}
