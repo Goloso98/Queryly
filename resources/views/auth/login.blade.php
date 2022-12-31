@@ -32,9 +32,10 @@
       <span class="input-group-text">Password</span>
       <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" name="password">
     </div>
-    <p><a href="{{ route('recoverpassword') }}">Forgot My Password</a></p>
-
+    
     <div class="buttons">
+        <br>
+        <a href="{{ route('recoverpassword') }}">Forgot My Password</a>
         <br>
         <label>
             <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
