@@ -219,7 +219,7 @@ input[type="search"] {
   background-color: green;
   color: white;
 }
-.userBtn {
+.userBtn, .userBtn:hover {
   color: white;
 }
 
