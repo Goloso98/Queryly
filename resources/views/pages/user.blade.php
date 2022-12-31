@@ -118,7 +118,7 @@
         </p>
       </form>
       @endif
-      @if($roleAdmin && $user->id != Auth::id())
+      @if($authAdmin && $user->id != Auth::id())
         @can('update', $user) 
           <p><a class="btn cardBtn" aria-current="page" href="{{ route('editUser', $user->id) }}"> Edit </a></p>
         @endcan
