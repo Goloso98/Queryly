@@ -19,7 +19,7 @@
     <script src="{{ URL::asset('js/app.js') }}" defer></script>
 </head>
 <body class="d-flex flex-column min-vh-100">
-    <div class="bg-primary position-sticky">
+    <div class="bg-primary position-sticky fixed-top">
         <div class="container">
             @include('partials.navbar')
         </div>
