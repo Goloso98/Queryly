@@ -666,6 +666,39 @@ INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (7,
 INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (9, 'answer', 'It is on the 1st of december', 5, TRUE);
 INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (5, 'answer', 'I think you use the keyword import.', 7, FALSE);
 
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
+VALUES (1, 'answer', 'There are many benefits of having plants in your home, including improving air quality, reducing stress, and adding beauty to your space. Some popular indoor plants include snake plants, spider plants, and peace lilies.', 12, TRUE);
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
+VALUES (1, 'answer', 'Some easy recipes for a beginner cook might include pasta with marinara sauce, grilled cheese sandwiches, or scrambled eggs. Other simple dishes might include baked salmon, stir fry, or tacos.', 12, TRUE);
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
+VALUES (1, 'answer', 'Some good exercises to do at home without any equipment include push-ups, sit-ups, squats, lunges, and burpees. You can also do bodyweight exercises like planks, mountain climbers, and jump squats. Another option is to use items you have around the house as improvised weights, such as cans of soup or water bottles.', 12, TRUE);
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
+VALUES (1, 'answer',"Some good strategies for beginner investors might include starting with a diversified portfolio of mutual funds or ETFs, considering a robo-advisor to manage your investments, and learning about different investment strategies and risks. It's also important to have a long-term perspective and to be patient.", 13, TRUE);
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
+VALUES (1, 'answer', 'Some tips for networking and finding a job in a new industry include attending industry events and conferences, reaching out to connections and asking for introductions, and joining professional organizations or groups related to your field. It can also be helpful to volunteer or intern to gain experience and make connections.', 13, TRUE);
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
+VALUES (2, 'answer', 'To make a simple pasta dish, you will need pasta, tomato sauce, and any desired toppings (such as cheese, vegetables, or meat). Boil the pasta according to package instructions, then drain and mix with the tomato sauce. Top with your desired toppings and serve.', 33, TRUE);
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
+VALUES (2, 'answer', 'To make a basic grilled cheese sandwich, you will need bread, butter, and cheese. Spread butter on one side of each slice of bread, then place cheese between the slices. Heat a pan over medium heat and place the sandwich in the pan, butter side down. Grill until the bread is toasted and the cheese is melted, then serve.', 35, TRUE);
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
+VALUES (2, 'answer', 'To make scrambled eggs, you will need eggs, milk (optional), and butter or oil. Beat the eggs in a bowl, then stir in a splash of milk if desired. Heat a pan over medium heat and add a small amount of butter or oil. Pour the eggs into the pan and stir until they are cooked to your desired consistency. Serve with toast or other desired accompaniments.', 37, TRUE);
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
+VALUES (2, 'answer', 'To make baked salmon, you will need a salmon fillet, olive oil, salt, and pepper. Preheat your oven to 400°F. Place the salmon in a baking dish and brush with olive oil. Sprinkle with salt and pepper. Bake for 12-15 minutes, or until the salmon is cooked to your desired level of doneness. Serve with your desired accompaniments.', 39, TRUE);
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
+VALUES (3, 'answer', 'To make tacos, you will need taco shells or tortillas, your choice of filling (such as ground beef, chicken, or beans), and any desired toppings (such as cheese, lettuce, and tomato). Cook the filling according to your desired recipe, then fill the taco shells or tortillas with the filling and toppings. Serve with salsa, sour cream, or any other desired accompaniments.', 40, TRUE);
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
+VALUES (3, 'answer', 'Some good tips for organizing your closet include getting rid of items you no longer wear, organizing by category (such as tops, bottoms, shoes), and using storage solutions like hangers, bins, and shelves. It can also be helpful to use color coding or labels to keep things organized.', 42, TRUE);
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
+VALUES (3, 'answer', 'To grow herbs, you will need a sunny spot with well-draining soil, a container or garden bed, and herb seeds or plants. Plant the herbs according to the instructions on the seed packet or plant label, and water them regularly. Harvest the herbs by snipping off the leaves as needed.', 44, TRUE);
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
+VALUES (4, 'answer', "To make a healthy meal, you can start by including a variety of vegetables, whole grains, and lean protein sources. You can also try using healthy cooking techniques like grilling, baking, or steaming, and using herbs and spices to flavor your dishes instead of added salt or sugar. Don't forget to stay hydrated by drinking plenty of water throughout the day.", 46, TRUE);
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
+VALUES (4, 'answer', 'To pay off debt, you can start by making a budget and identifying your highest-interest debts. Consider making extra payments towards those debts or consolidating them to get a lower interest rate. It can also be helpful to cut expenses and increase your income to have more money to put towards paying off your debts.', 48, TRUE);
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
+VALUES (4, 'answer', 'To stay safe online, you can start by using strong, unique passwords and enabling two-factor authentication on your accounts. You should also be cautious when clicking on links or downloading attachments, and avoid sharing personal information online. It can also be helpful to use security software to protect your devices.', 50, TRUE);
+INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
+VALUES (4, 'answer', 'Some good strategies for disciplining children include setting clear expectations and consequences, consistently enforcing rules, and praising good behavior. It can also be helpful to teach children problem-solving skills and to provide positive reinforcement for good behavior.', 15, TRUE);
+
 -- comments
 INSERT INTO comments (postID, userID, commentText) VALUES (1,1,'It has been solved');
 INSERT INTO comments (postID, userID, commentText) VALUES (15,1,'Thank you!');
