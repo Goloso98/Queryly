@@ -511,7 +511,7 @@ INSERT INTO users(name, email, username, password, birthday) VALUES ('John Doe',
 INSERT INTO roles(userID, userRole) VALUES (1,'Administrator');
 INSERT INTO roles(userID, userRole) VALUES (1,'Moderator');
 
---Admins
+--Administrators
 INSERT INTO users(name, email, username, password, birthday) VALUES ('Deena Buckley','deena_buckley@example.com','DeenaBuckley','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','07/07/93');
 INSERT INTO roles(userID, userRole) VALUES (2,'Administrator');
 INSERT INTO users(name, email, username, password, birthday) VALUES ('Pattie Perkins','pattie_perkins@example.com','PattiePerkins','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','03/01/99');
@@ -554,107 +554,184 @@ INSERT INTO users(name, email, username, password, birthday) VALUES ('Lauraine B
 
 --questions
 --1
-INSERT INTO posts (userID, postType, title, postText) VALUES (1, 'question', 'Dialogue', 'How do you write dialogue?'); 
+INSERT INTO posts (userID, postType, title, postText) VALUES (1, 'question', 'Dialogue', 'How do you write dialogue?');
+INSERT INTO user_questions (userID, postID) VALUES (1,1);
+INSERT INTO user_questions (userID, postID) VALUES (8,1);
+INSERT INTO user_questions (userID, postID) VALUES (22,1);
 --2
 INSERT INTO posts (userID, postType, title, postText) VALUES (5, 'question', 'Rabbits', 'How many types of rabbit are there?');
+INSERT INTO user_questions (userID, postID) VALUES (5,2); 
+INSERT INTO user_questions (userID, postID) VALUES (25,2);
+INSERT INTO user_questions (userID, postID) VALUES (10,2);  
 --3
 INSERT INTO posts (userID, postType, title, postText) VALUES (10, 'question', 'Latin', 'How do you write the verb to be in latin?');
+INSERT INTO user_questions (userID, postID) VALUES (10,3);
+INSERT INTO user_questions (userID, postID) VALUES (7,3);
+INSERT INTO user_questions (userID, postID) VALUES (19,3);
 --4
 INSERT INTO posts (userID, postType, title, postText) VALUES (6, 'question', 'Photography', 'Are there any good places to take photos in Porto?');
+INSERT INTO user_questions (userID, postID) VALUES (6,4);
+INSERT INTO user_questions (userID, postID) VALUES (17,4);
+INSERT INTO user_questions (userID, postID) VALUES (28,4);
 --5
 INSERT INTO posts (userID, postType, title, postText) VALUES (5, 'question', 'Day of independence', 'When is the portuguese day of independence?');
+INSERT INTO user_questions (userID, postID) VALUES (5,5);
+INSERT INTO user_questions (userID, postID) VALUES (24,5);
+INSERT INTO user_questions (userID, postID) VALUES (20,5);
 --6
 INSERT INTO posts (userID, postType, title, postText) VALUES (7, 'question', 'Colombian arepas', 'I cannot seem to make arepas right any time. The cheese always overflows! Does anyone know what I am doing wrong?');
+INSERT INTO user_questions (userID, postID) VALUES (7,6);
+INSERT INTO user_questions (userID, postID) VALUES (26,6);
+INSERT INTO user_questions (userID, postID) VALUES (16,6);
 --7
 INSERT INTO posts (userID, postType, title, postText) VALUES (8, 'question', 'Importing in javascript', 'How do you import another document in a javascript file?');
+INSERT INTO user_questions (userID, postID) VALUES (8,7);
+INSERT INTO user_questions (userID, postID) VALUES (10,7);
+INSERT INTO user_questions (userID, postID) VALUES (18,7);
 --8
 INSERT INTO posts (userID, postType, title, postText) VALUES (2, 'question', 'Plants', 'What are the benefits of having plants in your home?');
+INSERT INTO user_questions (userID, postID) VALUES (2,8);
 --9
 INSERT INTO posts (userID, postType, title, postText) VALUES (3, 'question', 'Cooking', 'What are some easy recipes for a beginner cook?');
+INSERT INTO user_questions (userID, postID) VALUES (3,9); 
 --10
 INSERT INTO posts (userID, postType, title, postText) VALUES (4, 'question', 'Exercise', 'What are some good exercises to do at home without any equipment?');
+INSERT INTO user_questions (userID, postID) VALUES (4,10); 
 --11
 INSERT INTO posts (userID, postType, title, postText) VALUES (7, 'question', 'Investing', 'What are some good strategies for beginner investors?');
+INSERT INTO user_questions (userID, postID) VALUES (7,11); 
 --12
 INSERT INTO posts (userID, postType, title, postText) VALUES (8, 'question', 'Career advice', 'What are some tips for networking and finding a job in a new industry?');
+INSERT INTO user_questions (userID, postID) VALUES (8,12); 
 --13
 INSERT INTO posts (userID, postType, title, postText) VALUES (2, 'question', 'Gardening', 'What are some good plants to grow in containers?');
+INSERT INTO user_questions (userID, postID) VALUES (2,13); 
 --14
 INSERT INTO posts (userID, postType, title, postText) VALUES (3, 'question', 'DIY', 'What are some easy DIY home improvement projects?');
+INSERT INTO user_questions (userID, postID) VALUES (3,14); 
 --15
 INSERT INTO posts (userID, postType, title, postText) VALUES (4, 'question', 'Travel', 'What are some must-see destinations in Europe?');
+INSERT INTO user_questions (userID, postID) VALUES (4,15); 
 --16
 INSERT INTO posts (userID, postType, title, postText) VALUES (5, 'question', 'Finance', 'What are some good tips for saving money?');
+INSERT INTO user_questions (userID, postID) VALUES (5,16); 
 --17
 INSERT INTO posts (userID, postType, title, postText) VALUES (6, 'question', 'Career development', 'What are some good ways to improve your skills and advance in your career?');
+INSERT INTO user_questions (userID, postID) VALUES (6,17); 
 --18
 INSERT INTO posts (userID, postType, title, postText) VALUES (7, 'question', 'Technology', 'What are some good resources for learning about new technologies?');
+INSERT INTO user_questions (userID, postID) VALUES (7,17); 
 --19
 INSERT INTO posts (userID, postType, title, postText) VALUES (8, 'question', 'Parenting', 'What are some good strategies for balancing work and family life?');
+INSERT INTO user_questions (userID, postID) VALUES (8,19); 
 --20
 INSERT INTO posts (userID, postType, title, postText) VALUES (2, 'question', 'Personal growth', 'What are some good ways to set and achieve personal goals?');
+INSERT INTO user_questions (userID, postID) VALUES (2,20); 
 --21
 INSERT INTO posts (userID, postType, title, postText) VALUES (3, 'question', 'Photography', 'What are some good tips for taking better photos?');
+INSERT INTO user_questions (userID, postID) VALUES (3,21);
 --22
 INSERT INTO posts (userID, postType, title, postText) VALUES (4, 'question', 'Fashion', 'What are some good tips for building a versatile and stylish wardrobe?');
+INSERT INTO user_questions (userID, postID) VALUES (4,22);
+INSERT INTO user_questions (userID, postID) VALUES (27,22);
+INSERT INTO user_questions (userID, postID) VALUES (15,22);
 --23
 INSERT INTO posts (userID, postType, title, postText) VALUES (5, 'question', 'Food', 'What are some good healthy eating habits to adopt?');
+INSERT INTO user_questions (userID, postID) VALUES (5,23);
+INSERT INTO user_questions (userID, postID) VALUES (19,23);
+INSERT INTO user_questions (userID, postID) VALUES (27,23);
 --24
 INSERT INTO posts (userID, postType, title, postText) VALUES (6, 'question', 'Music', 'What are some good tips for learning to play an instrument?');
+INSERT INTO user_questions (userID, postID) VALUES (6,24);
 --25
 INSERT INTO posts (userID, postType, title, postText) VALUES (7, 'question', 'Writing', 'What are some good tips for improving your writing skills?');
+INSERT INTO user_questions (userID, postID) VALUES (7,25); 
 --26
 INSERT INTO posts (userID, postType, title, postText) VALUES (8, 'question', 'Art', 'What are some good tips for improving your drawing skills?');
+INSERT INTO user_questions (userID, postID) VALUES (8,26); 
 --27
 INSERT INTO posts (userID, postType, title, postText) VALUES (2, 'question', 'Sports', 'What are some good tips for improving your physical fitness?');
+INSERT INTO user_questions (userID, postID) VALUES (2,27); 
 --28
 INSERT INTO posts (userID, postType, title, postText) VALUES (3, 'question', 'Pet care', 'What are some good tips for taking care of a new pet?');
+INSERT INTO user_questions (userID, postID) VALUES (3,28); 
 --29
 INSERT INTO posts (userID, postType, title, postText) VALUES (4, 'question', 'Nature', 'What are some good ways to appreciate and protect the natural world?');
+INSERT INTO user_questions (userID, postID) VALUES (4,29);
+INSERT INTO user_questions (userID, postID) VALUES (7,29);
+INSERT INTO user_questions (userID, postID) VALUES (11,29);
 --30
 INSERT INTO posts (userID, postType, title, postText) VALUES (5, 'question', 'Travel', 'What are some good tips for budget travel?');
+INSERT INTO user_questions (userID, postID) VALUES (5,30);
 --31
 INSERT INTO posts (userID, postType, title, postText) VALUES (6, 'question', 'Home organization', 'What are some good strategies for keeping your home organized and clutter-free?');
+INSERT INTO user_questions (userID, postID) VALUES (6,31);
 --32
 INSERT INTO posts (userID, postType, title, postText) VALUES (7, 'question', 'Gardening', 'What are some good tips for starting a vegetable garden?');
+INSERT INTO user_questions (userID, postID) VALUES (7,32);
+INSERT INTO user_questions (userID, postID) VALUES (19,32);
+INSERT INTO user_questions (userID, postID) VALUES (26,32);
 --33
 INSERT INTO posts (userID, postType, title, postText) VALUES (8, 'question', 'Cooking', 'What are some good tips for cooking healthy meals?');
+INSERT INTO user_questions (userID, postID) VALUES (8,33);
+INSERT INTO user_questions (userID, postID) VALUES (23,33);
+INSERT INTO user_questions (userID, postID) VALUES (26,33);
 --34
 INSERT INTO posts (userID, postType, title, postText) VALUES (2, 'question', 'Finance', 'What are some good strategies for saving for retirement?');
+INSERT INTO user_questions (userID, postID) VALUES (2,34);
 --35
 INSERT INTO posts (userID, postType, title, postText) VALUES (3, 'question', 'Technology', 'What are some good tips for staying safe online?');
+INSERT INTO user_questions (userID, postID) VALUES (3,35);
 --36
 INSERT INTO posts (userID, postType, title, postText) VALUES (4, 'question', 'Parenting', 'What are some good strategies for disciplining children?');
+INSERT INTO user_questions (userID, postID) VALUES (4,36);
 --37
 INSERT INTO posts (userID, postType, title, postText) VALUES (5, 'question', 'Personal growth', 'What are some good ways to reduce stress and improve mental health?');
+INSERT INTO user_questions (userID, postID) VALUES (5,37);
+INSERT INTO user_questions (userID, postID) VALUES (12,37);
+INSERT INTO user_questions (userID, postID) VALUES (17,37);
 --38
 INSERT INTO posts (userID, postType, title, postText) VALUES (6, 'question', 'Photography', 'What are some good tips for taking great photos with a smartphone?');
+INSERT INTO user_questions (userID, postID) VALUES (6,38);
 --39
 INSERT INTO posts (userID, postType, title, postText) VALUES (7, 'question', 'Fashion', 'What are some good tips for dressing for success in the workplace?');
+INSERT INTO user_questions (userID, postID) VALUES (7,39);
 --40
 INSERT INTO posts (userID, postType, title, postText) VALUES (8, 'question', 'Food', 'What are some good tips for cooking for a large group?');
+INSERT INTO user_questions (userID, postID) VALUES (8,40);
 --41
 INSERT INTO posts (userID, postType, title, postText) VALUES (2, 'question', 'Music', 'What are some good tips for learning to sing?');
+INSERT INTO user_questions (userID, postID) VALUES (2,41);
 --42
 INSERT INTO posts (userID, postType, title, postText) VALUES (3, 'question', 'Writing', 'What are some good tips for writing a great essay?');
+INSERT INTO user_questions (userID, postID) VALUES (3,42);
 --43
 INSERT INTO posts (userID, postType, title, postText) VALUES (4, 'question', 'Art', 'What are some good tips for creating great compositions in art?');
+INSERT INTO user_questions (userID, postID) VALUES (4,43);
 --44
 INSERT INTO posts (userID, postType, title, postText) VALUES (5, 'question', 'Sports', 'What are some good tips for improving your golf game?');
+INSERT INTO user_questions (userID, postID) VALUES (5,44);
 --45
 INSERT INTO posts (userID, postType, title, postText) VALUES (6, 'question', 'Pet care', 'What are some good tips for training a new puppy?');
+INSERT INTO user_questions (userID, postID) VALUES (6,45);
 --46
 INSERT INTO posts (userID, postType, title, postText) VALUES (7, 'question', 'Nature', 'What are some good ways to get involved in conservation efforts?');
+INSERT INTO user_questions (userID, postID) VALUES (7,46);
 --47
 INSERT INTO posts (userID, postType, title, postText) VALUES (8, 'question', 'Travel', 'What are some good tips for packing light?');
+INSERT INTO user_questions (userID, postID) VALUES (8,47);
 --48
 INSERT INTO posts (userID, postType, title, postText) VALUES (1, 'question', 'Home organization', 'What are some good ways to organize your closet?');
+INSERT INTO user_questions (userID, postID) VALUES (1,48);
 --49
 INSERT INTO posts (userID, postType, title, postText) VALUES (1, 'question', 'Gardening', 'What are some good tips for growing herbs?');
+INSERT INTO user_questions (userID, postID) VALUES (1,49);
 --50
 INSERT INTO posts (userID, postType, title, postText) VALUES (1, 'question', 'Cooking', 'What are some good tips for cooking with a slow cooker?');
+INSERT INTO user_questions (userID, postID) VALUES (1,50);
 --51
 INSERT INTO posts (userID, postType, title, postText) VALUES (1, 'question', 'Finance', 'What are some good strategies for paying off debt?');
+INSERT INTO user_questions (userID, postID) VALUES (1,51);
 
 -- answers
 INSERT INTO posts(userID, postType, postText, parentPost, isCorrect) VALUES (1, 'answer', 'Use the keyword import, followed by the name of your class inside curly brackets, them write from "file". Like this: import { className } from "file". ', 7, FALSE);
@@ -841,29 +918,140 @@ INSERT INTO badges(badgeName) VALUES ('20 correct answers!'); --13
 
 
 --tags
+--1
 INSERT INTO tags(tagName) VALUES ('python');
+--2
 INSERT INTO tags(tagName) VALUES ('java');
+--3
 INSERT INTO tags(tagName) VALUES ('C');
+--4
 INSERT INTO tags(tagName) VALUES ('html');
+--5
 INSERT INTO tags(tagName) VALUES ('php');
+--6
 INSERT INTO tags(tagName) VALUES ('code');
+--7
 INSERT INTO tags(tagName) VALUES ('food');
+--8
 INSERT INTO tags(tagName) VALUES ('cats');
+--9
 INSERT INTO tags(tagName) VALUES ('dogs');
+--10
 INSERT INTO tags(tagName) VALUES ('pets');
+--11
 INSERT INTO tags(tagName) VALUES ('animals');
+--12
 INSERT INTO tags(tagName) VALUES ('help');
+--13
 INSERT INTO tags(tagName) VALUES ('advice');
+--14
 INSERT INTO tags(tagName) VALUES ('gym');
+--15
 INSERT INTO tags(tagName) VALUES ('workout');
+--16
 INSERT INTO tags(tagName) VALUES ('parenting');
+--17
 INSERT INTO tags(tagName) VALUES ('art');
+--18
 INSERT INTO tags(tagName) VALUES ('music');
+--19
 INSERT INTO tags(tagName) VALUES ('school');
+--20
 INSERT INTO tags(tagName) VALUES ('plants');
 
 
 --user tags
--- INSERT INTO user_tags (userID, tagID) VALUES (1,1);
--- INSERT INTO user_tags (userID, tagID) VALUES (1,2);
--- INSERT INTO user_tags (userID, tagID) VALUES (1,3);
+INSERT INTO user_tags (userID, tagID) VALUES (1,1);
+INSERT INTO user_tags (userID, tagID) VALUES (1,2);
+INSERT INTO user_tags (userID, tagID) VALUES (1,3);
+INSERT INTO user_tags (userID, tagID) VALUES (1,4);
+INSERT INTO user_tags (userID, tagID) VALUES (1,5);
+INSERT INTO user_tags (userID, tagID) VALUES (1,6);
+INSERT INTO user_tags (userID, tagID) VALUES (1,7);
+INSERT INTO user_tags (userID, tagID) VALUES (1,8);
+INSERT INTO user_tags (userID, tagID) VALUES (1,9);
+INSERT INTO user_tags (userID, tagID) VALUES (1,10);
+INSERT INTO user_tags (userID, tagID) VALUES (1,11);
+INSERT INTO user_tags (userID, tagID) VALUES (1,12);
+INSERT INTO user_tags (userID, tagID) VALUES (1,13);
+INSERT INTO user_tags (userID, tagID) VALUES (1,14);
+INSERT INTO user_tags (userID, tagID) VALUES (1,15);
+INSERT INTO user_tags (userID, tagID) VALUES (1,16);
+INSERT INTO user_tags (userID, tagID) VALUES (1,17);
+INSERT INTO user_tags (userID, tagID) VALUES (1,18);
+INSERT INTO user_tags (userID, tagID) VALUES (1,19);
+INSERT INTO user_tags (userID, tagID) VALUES (1,20);
+INSERT INTO user_tags (userID, tagID) VALUES (2,20);
+INSERT INTO user_tags (userID, tagID) VALUES (2,13);
+INSERT INTO user_tags (userID, tagID) VALUES (2,14);
+INSERT INTO user_tags (userID, tagID) VALUES (2,15);
+INSERT INTO user_tags (userID, tagID) VALUES (2,18);
+INSERT INTO user_tags (userID, tagID) VALUES (3,8);
+INSERT INTO user_tags (userID, tagID) VALUES (3,9);
+INSERT INTO user_tags (userID, tagID) VALUES (3,10);
+INSERT INTO user_tags (userID, tagID) VALUES (3,11);
+INSERT INTO user_tags (userID, tagID) VALUES (3,13);
+INSERT INTO user_tags (userID, tagID) VALUES (4,11);
+INSERT INTO user_tags (userID, tagID) VALUES (4,15);
+INSERT INTO user_tags (userID, tagID) VALUES (4,20);
+INSERT INTO user_tags (userID, tagID) VALUES (5,3);
+INSERT INTO user_tags (userID, tagID) VALUES (5,6);
+INSERT INTO user_tags (userID, tagID) VALUES (5,11);
+INSERT INTO user_tags (userID, tagID) VALUES (5,20);
+INSERT INTO user_tags (userID, tagID) VALUES (6,15);
+INSERT INTO user_tags (userID, tagID) VALUES (6,20);
+INSERT INTO user_tags (userID, tagID) VALUES (6,3);
+INSERT INTO user_tags (userID, tagID) VALUES (6,1);
+INSERT INTO user_tags (userID, tagID) VALUES (7,1);
+INSERT INTO user_tags (userID, tagID) VALUES (7,9);
+INSERT INTO user_tags (userID, tagID) VALUES (7,16);
+INSERT INTO user_tags (userID, tagID) VALUES (7,17);
+INSERT INTO user_tags (userID, tagID) VALUES (8,14);
+INSERT INTO user_tags (userID, tagID) VALUES (8,5);
+INSERT INTO user_tags (userID, tagID) VALUES (8,9);
+INSERT INTO user_tags (userID, tagID) VALUES (8,17);
+
+--question-tags
+INSERT INTO question_tags (postID, tagID) VALUES (1,12);
+INSERT INTO question_tags (postID, tagID) VALUES (1,13);
+INSERT INTO question_tags (postID, tagID) VALUES (1,17);
+INSERT INTO question_tags (postID, tagID) VALUES (2,10);
+INSERT INTO question_tags (postID, tagID) VALUES (2,11);
+INSERT INTO question_tags (postID, tagID) VALUES (3,12);
+INSERT INTO question_tags (postID, tagID) VALUES (3,19);
+INSERT INTO question_tags (postID, tagID) VALUES (4,13);
+INSERT INTO question_tags (postID, tagID) VALUES (4,17);
+INSERT INTO question_tags (postID, tagID) VALUES (5,12);
+INSERT INTO question_tags (postID, tagID) VALUES (5,19);
+INSERT INTO question_tags (postID, tagID) VALUES (6,7);
+INSERT INTO question_tags (postID, tagID) VALUES (6,12);
+INSERT INTO question_tags (postID, tagID) VALUES (6,13);
+INSERT INTO question_tags (postID, tagID) VALUES (7,2);
+INSERT INTO question_tags (postID, tagID) VALUES (7,6);
+INSERT INTO question_tags (postID, tagID) VALUES (8,13);
+INSERT INTO question_tags (postID, tagID) VALUES (8,20);
+INSERT INTO question_tags (postID, tagID) VALUES (9,7);
+INSERT INTO question_tags (postID, tagID) VALUES (9,13);
+INSERT INTO question_tags (postID, tagID) VALUES (10,15);
+INSERT INTO question_tags (postID, tagID) VALUES (11,13);
+INSERT INTO question_tags (postID, tagID) VALUES (12,13);
+INSERT INTO question_tags (postID, tagID) VALUES (13,20);
+INSERT INTO question_tags (postID, tagID) VALUES (16,13);
+INSERT INTO question_tags (postID, tagID) VALUES (17,13);
+INSERT INTO question_tags (postID, tagID) VALUES (18,6);
+INSERT INTO question_tags (postID, tagID) VALUES (18,12);
+INSERT INTO question_tags (postID, tagID) VALUES (19,12);
+INSERT INTO question_tags (postID, tagID) VALUES (19,16);
+INSERT INTO question_tags (postID, tagID) VALUES (20,12);
+INSERT INTO question_tags (postID, tagID) VALUES (20,13);
+INSERT INTO question_tags (postID, tagID) VALUES (21,12);
+INSERT INTO question_tags (postID, tagID) VALUES (21,17);
+INSERT INTO question_tags (postID, tagID) VALUES (22,12);
+INSERT INTO question_tags (postID, tagID) VALUES (22,13);
+INSERT INTO question_tags (postID, tagID) VALUES (23,7);
+INSERT INTO question_tags (postID, tagID) VALUES (23,12);
+INSERT INTO question_tags (postID, tagID) VALUES (23,13);
+INSERT INTO question_tags (postID, tagID) VALUES (24,17);
+INSERT INTO question_tags (postID, tagID) VALUES (24,18);
+INSERT INTO question_tags (postID, tagID) VALUES (25,13);
+INSERT INTO question_tags (postID, tagID) VALUES (25,17);

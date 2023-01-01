@@ -18,13 +18,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/js/bootstrap.bundle.min.js" defer></script>
     <script src="{{ URL::asset('js/app.js') }}" defer></script>
 </head>
-<body>
-    <div class="bg-primary position-sticky">
+<body class="d-flex flex-column min-vh-100">
+    <div class="bg-primary position-sticky fixed-top">
         <div class="container">
             @include('partials.navbar')
         </div>
     </div>
-    <div class="row">
+    <div class="row mw-100">
         <div class="col-3 d-none d-sm-block">
             <br>
             <div class="menu">
@@ -41,7 +41,7 @@
         </div>
     </div>
     <button onclick="topFunction()" id="topBtn" title="Go to top">Top</button>
-    <div class="bg-info">
+    <div class="bg-info mt-auto">
         <div class="container">
             @include('partials.footer')
         </div>
