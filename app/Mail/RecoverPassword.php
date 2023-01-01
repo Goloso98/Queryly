@@ -11,15 +11,15 @@ class RecoverPassword extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $mailData;
+    public $token;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($mailData)
+    public function __construct($token)
     {
-        $this->mailData = $mailData;
+        $this->token = $token;
     }
 
     /**
@@ -29,7 +29,7 @@ class RecoverPassword extends Mailable
      */
     public function build()
     {   
-        return $this->view('emails.recoverpassword', ['id' => $this->mailData['id']]);
+        return $this->view('emails.recoverpassword', ['token' => $this->token]);
     }
 }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -201,38 +202,62 @@ class UserController extends Controller
 
     public function recoverpassword(Request $request){
       $validate = $request->validate([
-        'email' => 'required|exists:users,email'
+        'email' => 'required|email'
       ]);
 
-      $email = $request->input('email');
-      $userid = User::where('email', $email)->value('id');
-      $username = User::where('email', $email)->value('name');
-      return redirect()->route('sendemail', ['id' => $userid]);
+      $email_in = $request->input('email');
+      $userid = User::where('email', $email_in)->value('id');
+
+      if ($userid) {
+        $token = Str::uuid()->toString();
+        // todo
+        // $token = "4d91197a-a95b-438a-9938-26566a0d2c4d";
+        $request->session()->put('recover_token', $token);
+        $request->session()->put('recover_mail', $email_in);
+
+        Mail::to($email_in)->send(new RecoverPassword($token));
+      }
+      return view('auth.emailsent');
     }
 
-    public function newpasswordForm($id){
-      return view('auth.newpassword', ['id' => $id]);
+    public function newpasswordForm($token){
+      return view('auth.newpassword', ['token' => $token]);
     }
 
-    public function newpassword(Request $request, $id){
+    public function newpassword(Request $request){
       $validate = $request->validate([
-        'password' => 'required|string|min:6|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|confirmed'
+        'password' => 'required|string|min:6|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|confirmed',
+        'email' => 'required|email',
+        'token' => 'required|uuid'
       ]);
 
-      $user = User::find($id);
-      $user->password = bcrypt($request->input('password'));
-      $user->save();
+      $user = User::where('email', $request->input('email'))->first();
+
+      if ($user && 
+        $request->session()->exists('recover_mail') &&
+        $request->session()->exists('recover_token') &&
+        $request->session()->get('recover_mail') == $request->input('email') &&
+        $request->session()->get('recover_token') == $request->input('token')
+        ) {
+          $user->password = bcrypt($request->input('password'));
+          $user->save();
+      }
       return redirect()->route('login');
     }
 
-    public function sendRecoverPasswordEmail($id){
-      $user = User::find($id);
-      $mailData = [
-        'id' => $id,
-        'name' => $user->name,
-        'email' => $user->email,
-      ];
-      Mail::to($mailData['email'])->send(new RecoverPassword($mailData));
-      return view('auth.emailsent');
-    }
+    // public function sendRecoverPasswordEmail(User $user){
+    //   // $token = Str::uuid()->toString();
+    //   // todo
+    //   $token = "12345";
+    //   session(['token' => $token]);
+
+    //   $mailData = [
+    //     'token' => $token,
+    //     'id' => $user->id,
+    //     'name' => $user->name,
+    //     'email' => $user->email,
+    //   ];
+    //   Mail::to($mailData['email'])->send(new RecoverPassword($mailData));
+    //   return view('auth.emailsent');
+    // }
 }

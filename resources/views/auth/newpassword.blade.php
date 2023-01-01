@@ -2,8 +2,9 @@
 
 @section('content')
 
-<form method="POST" action="{{ route('newpasswordForm', ['id' => $id]) }}">
-    {{ csrf_field() }}
+<form method="POST" action="{{ route('newpassword') }}">
+    @csrf
+    <input type="hidden" name="token" value="{{ $token }}">
     <br>
     <h2 class="centering">Change your password:</h2>
     @if ($errors->has('password'))
@@ -11,6 +12,10 @@
         {{ $errors->first('password') }}
       </span>
     @endif
+    <div class="input-group mb-3">
+      <span class="input-group-text">Email</span>
+      <input id="email" type="text" name="email" class="form-control" placeholder="Email">
+    </div>
     <div class="input-group mb-3">
       <span class="input-group-text">Password</span>
       <input id="password" type="password" name="password" class="form-control" placeholder="Password">
