@@ -24,7 +24,7 @@
             @include('partials.navbar')
         </div>
     </div>
-    <div class="row">
+    <div class="row mw-100">
         <div class="col-3 d-none d-sm-block">
             <br>
             <div class="menu">
