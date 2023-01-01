@@ -565,6 +565,95 @@ INSERT INTO posts (userID, postType, title, postText) VALUES (10, 'question', 'e
 INSERT INTO posts (userID, postType, title, postText) VALUES (3, 'question', 'eleifend pede libero quis orci nullam molestie nibh in lectus', 'lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque at nulla suspendisse potenti cras in purus eu magna vulputate luctus cum sociis natoque penatibus et magnis dis parturient montes');
 INSERT INTO posts (userID, postDate, postType, title, postText) VALUES (1, '2022-11-20', 'question', 'Ordering Test', 'Ordering Test text');
 
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (2, 'question', 'Plants', 'What are the benefits of having plants in your home?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (3, 'question', 'Cooking', 'What are some easy recipes for a beginner cook?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (4, 'question', 'Exercise', 'What are some good exercises to do at home without any equipment?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (7, 'question', 'Investing', 'What are some good strategies for beginner investors?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (8, 'question', 'Career advice', 'What are some tips for networking and finding a job in a new industry?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (2, 'question', 'Gardening', 'What are some good plants to grow in containers?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (3, 'question', 'DIY', 'What are some easy DIY home improvement projects?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (4, 'question', 'Travel', 'What are some must-see destinations in Europe?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (5, 'question', 'Finance', 'What are some good tips for saving money?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (6, 'question', 'Career development', 'What are some good ways to improve your skills and advance in your career?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (7, 'question', 'Technology', 'What are some good resources for learning about new technologies?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (8, 'question', 'Parenting', 'What are some good strategies for balancing work and family life?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (2, 'question', 'Personal growth', 'What are some good ways to set and achieve personal goals?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (3, 'question', 'Photography', 'What are some good tips for taking better photos?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (4, 'question', 'Fashion', 'What are some good tips for building a versatile and stylish wardrobe?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (5, 'question', 'Food', 'What are some good healthy eating habits to adopt?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (6, 'question', 'Music', 'What are some good tips for learning to play an instrument?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (7, 'question', 'Writing', 'What are some good tips for improving your writing skills?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (8, 'question', 'Art', 'What are some good tips for improving your drawing skills?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (2, 'question', 'Sports', 'What are some good tips for improving your physical fitness?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (3, 'question', 'Pet care', 'What are some good tips for taking care of a new pet?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (4, 'question', 'Nature', 'What are some good ways to appreciate and protect the natural world?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (5, 'question', 'Travel', 'What are some good tips for budget travel?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (6, 'question', 'Home organization', 'What are some good strategies for keeping your home organized and clutter-free?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (7, 'question', 'Gardening', 'What are some good tips for starting a vegetable garden?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (8, 'question', 'Cooking', 'What are some good tips for cooking healthy meals?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (2, 'question', 'Finance', 'What are some good strategies for saving for retirement?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (3, 'question', 'Technology', 'What are some good tips for staying safe online?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (4, 'question', 'Parenting', 'What are some good strategies for disciplining children?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (5, 'question', 'Personal growth', 'What are some good ways to reduce stress and improve mental health?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (6, 'question', 'Photography', 'What are some good tips for taking great photos with a smartphone?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (7, 'question', 'Fashion', 'What are some good tips for dressing for success in the workplace?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (8, 'question', 'Food', 'What are some good tips for cooking for a large group?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (2, 'question', 'Music', 'What are some good tips for learning to sing?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (3, 'question', 'Writing', 'What are some good tips for writing a great essay?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (4, 'question', 'Art', 'What are some good tips for creating great compositions in art?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (5, 'question', 'Sports', 'What are some good tips for improving your golf game?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (6, 'question', 'Pet care', 'What are some good tips for training a new puppy?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (7, 'question', 'Nature', 'What are some good ways to get involved in conservation efforts?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (8, 'question', 'Travel', 'What are some good tips for packing light?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (1, 'question', 'Home organization', 'What are some good ways to organize your closet?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (1, 'question', 'Gardening', 'What are some good tips for growing herbs?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (1, 'question', 'Cooking', 'What are some good tips for cooking with a slow cooker?');
+INSERT INTO posts (userID, postType, title, postText) 
+VALUES (1, 'question', 'Finance', 'What are some good strategies for paying off debt?');
+
 -- answers
 INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (2, 'answer', 'convallis nulla neque libero convallis eget eleifend luctus ultricies eu nibh quisque id justo sit amet sapien dignissim vestibulum vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae nulla dapibus dolor vel est donec odio justo sollicitudin ut suscipit a feugiat et', 8, FALSE);
 INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (7, 'answer', 'pulvinar sed nisl nunc rhoncus dui vel sem sed sagittis nam congue risus semper porta volutpat quam pede lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque at nulla suspendisse potenti cras in purus eu magna vulputate luctus cum', 8, FALSE);
