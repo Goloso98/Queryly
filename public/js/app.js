@@ -220,7 +220,7 @@ passwordInput?.addEventListener("input", (event) => {
 
 });
 
-const accordionButtons = document.querySelectorAll('.accordion');
+const accordionButtons = document.querySelectorAll('.accordionfaq');
 accordionButtons.forEach(button => {
   button.addEventListener('click', function() {
     // Get the content panel that corresponds to this accordion button

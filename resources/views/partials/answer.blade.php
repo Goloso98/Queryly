@@ -83,14 +83,14 @@
                 @endphp
                 @if($answerComments->count() != 0)
                     <div class="accordion" id="accordionExample">
-                        <div class="accordion-item">
+                        <div class="card">
                             <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#answer-{{ $answer->id }}" aria-expanded="false" aria-controls="collapseTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $answer->id }}" aria-expanded="false" aria-controls="collapse{{ $answer->id }}">
                                     Show Comments ({{count($answerComments)}})
                                 </button>
                             </h2>
-                            <div id="answer-{{ $answer->id }}" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
+                            <div id="collapse{{ $answer->id }}" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                <div class="card-body">
                                     @foreach($answerComments as $comment)
                                         @include('partials.comment', ['report' => FALSE])
                                     @endforeach
@@ -103,6 +103,9 @@
         </div>
     </div>
 </article>
+
+
+
 <br>
 
 
