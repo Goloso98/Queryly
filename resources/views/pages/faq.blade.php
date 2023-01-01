@@ -7,7 +7,7 @@
 <br>
 <p class="centering">Welcome to our FAQ page! Here you can find answers to common questions about our company and our products or services.</p>
  
-<div class="accordion" id="accordion">
+<div class="accordion accordionfaq" id="accordion">
   <div class="accordion-item">
     <h2 class="accordion-header" id="flush-headingOne">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
