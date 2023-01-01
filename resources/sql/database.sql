@@ -550,232 +550,318 @@ INSERT INTO users(name, email, username, password, birthday) VALUES ('Annabal Ch
 INSERT INTO users(name, email, username, password, birthday) VALUES ('Julie Swainston', 'jswainston7@example.com', 'jswainston7', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '02/08/86');
 INSERT INTO users(name, email, username, password, birthday) VALUES ('Omar Bangs', 'obangs8@example.com', 'obangs8', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '07/25/88');
 INSERT INTO users(name, email, username, password, birthday) VALUES ('Lauraine Bushell', 'lbushell9@example.com', 'lbushell9', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '01/20/94');
+--22
 
 --questions
+--1
 INSERT INTO posts (userID, postType, title, postText) VALUES (1, 'question', 'Dialogue', 'How do you write dialogue?'); 
+--2
 INSERT INTO posts (userID, postType, title, postText) VALUES (5, 'question', 'Rabbits', 'How many types of rabbit are there?');
+--3
 INSERT INTO posts (userID, postType, title, postText) VALUES (10, 'question', 'Latin', 'How do you write the verb to be in latin?');
+--4
 INSERT INTO posts (userID, postType, title, postText) VALUES (6, 'question', 'Photography', 'Are there any good places to take photos in Porto?');
+--5
 INSERT INTO posts (userID, postType, title, postText) VALUES (5, 'question', 'Day of independence', 'When is the portuguese day of independence?');
+--6
 INSERT INTO posts (userID, postType, title, postText) VALUES (7, 'question', 'Colombian arepas', 'I cannot seem to make arepas right any time. The cheese always overflows! Does anyone know what I am doing wrong?');
+--7
 INSERT INTO posts (userID, postType, title, postText) VALUES (8, 'question', 'Importing in javascript', 'How do you import another document in a javascript file?');
-INSERT INTO posts (userID, postType, title, postText) VALUES (8, 'question', 'Rabbits of the world', 'lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque at nulla suspendisse potenti cras in purus eu magna vulputate luctus cum sociis natoque penatibus et magnis dis parturient montes');
-INSERT INTO posts (userID, postType, title, postText) VALUES (7, 'question', 'eleifend pede libero quis orci nullam molestie nibh in lectus', 'lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque at nulla suspendisse potenti cras in purus eu magna vulputate luctus cum sociis natoque penatibus et magnis dis parturient montes');
-INSERT INTO posts (userID, postType, title, postText) VALUES (10, 'question', 'eleifend pede libero quis orci nullam molestie nibh in lectus', 'lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque at nulla suspendisse potenti cras in purus eu magna vulputate luctus cum sociis natoque penatibus et magnis dis parturient montes');
-INSERT INTO posts (userID, postType, title, postText) VALUES (3, 'question', 'eleifend pede libero quis orci nullam molestie nibh in lectus', 'lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque at nulla suspendisse potenti cras in purus eu magna vulputate luctus cum sociis natoque penatibus et magnis dis parturient montes');
-INSERT INTO posts (userID, postDate, postType, title, postText) VALUES (1, '2022-11-20', 'question', 'Ordering Test', 'Ordering Test text');
-
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (2, 'question', 'Plants', 'What are the benefits of having plants in your home?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (3, 'question', 'Cooking', 'What are some easy recipes for a beginner cook?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (4, 'question', 'Exercise', 'What are some good exercises to do at home without any equipment?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (7, 'question', 'Investing', 'What are some good strategies for beginner investors?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (8, 'question', 'Career advice', 'What are some tips for networking and finding a job in a new industry?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (2, 'question', 'Gardening', 'What are some good plants to grow in containers?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (3, 'question', 'DIY', 'What are some easy DIY home improvement projects?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (4, 'question', 'Travel', 'What are some must-see destinations in Europe?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (5, 'question', 'Finance', 'What are some good tips for saving money?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (6, 'question', 'Career development', 'What are some good ways to improve your skills and advance in your career?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (7, 'question', 'Technology', 'What are some good resources for learning about new technologies?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (8, 'question', 'Parenting', 'What are some good strategies for balancing work and family life?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (2, 'question', 'Personal growth', 'What are some good ways to set and achieve personal goals?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (3, 'question', 'Photography', 'What are some good tips for taking better photos?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (4, 'question', 'Fashion', 'What are some good tips for building a versatile and stylish wardrobe?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (5, 'question', 'Food', 'What are some good healthy eating habits to adopt?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (6, 'question', 'Music', 'What are some good tips for learning to play an instrument?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (7, 'question', 'Writing', 'What are some good tips for improving your writing skills?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (8, 'question', 'Art', 'What are some good tips for improving your drawing skills?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (2, 'question', 'Sports', 'What are some good tips for improving your physical fitness?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (3, 'question', 'Pet care', 'What are some good tips for taking care of a new pet?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (4, 'question', 'Nature', 'What are some good ways to appreciate and protect the natural world?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (5, 'question', 'Travel', 'What are some good tips for budget travel?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (6, 'question', 'Home organization', 'What are some good strategies for keeping your home organized and clutter-free?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (7, 'question', 'Gardening', 'What are some good tips for starting a vegetable garden?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (8, 'question', 'Cooking', 'What are some good tips for cooking healthy meals?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (2, 'question', 'Finance', 'What are some good strategies for saving for retirement?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (3, 'question', 'Technology', 'What are some good tips for staying safe online?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (4, 'question', 'Parenting', 'What are some good strategies for disciplining children?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (5, 'question', 'Personal growth', 'What are some good ways to reduce stress and improve mental health?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (6, 'question', 'Photography', 'What are some good tips for taking great photos with a smartphone?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (7, 'question', 'Fashion', 'What are some good tips for dressing for success in the workplace?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (8, 'question', 'Food', 'What are some good tips for cooking for a large group?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (2, 'question', 'Music', 'What are some good tips for learning to sing?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (3, 'question', 'Writing', 'What are some good tips for writing a great essay?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (4, 'question', 'Art', 'What are some good tips for creating great compositions in art?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (5, 'question', 'Sports', 'What are some good tips for improving your golf game?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (6, 'question', 'Pet care', 'What are some good tips for training a new puppy?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (7, 'question', 'Nature', 'What are some good ways to get involved in conservation efforts?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (8, 'question', 'Travel', 'What are some good tips for packing light?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (1, 'question', 'Home organization', 'What are some good ways to organize your closet?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (1, 'question', 'Gardening', 'What are some good tips for growing herbs?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (1, 'question', 'Cooking', 'What are some good tips for cooking with a slow cooker?');
-INSERT INTO posts (userID, postType, title, postText) 
-VALUES (1, 'question', 'Finance', 'What are some good strategies for paying off debt?');
+--8
+INSERT INTO posts (userID, postType, title, postText) VALUES (2, 'question', 'Plants', 'What are the benefits of having plants in your home?');
+--9
+INSERT INTO posts (userID, postType, title, postText) VALUES (3, 'question', 'Cooking', 'What are some easy recipes for a beginner cook?');
+--10
+INSERT INTO posts (userID, postType, title, postText) VALUES (4, 'question', 'Exercise', 'What are some good exercises to do at home without any equipment?');
+--11
+INSERT INTO posts (userID, postType, title, postText) VALUES (7, 'question', 'Investing', 'What are some good strategies for beginner investors?');
+--12
+INSERT INTO posts (userID, postType, title, postText) VALUES (8, 'question', 'Career advice', 'What are some tips for networking and finding a job in a new industry?');
+--13
+INSERT INTO posts (userID, postType, title, postText) VALUES (2, 'question', 'Gardening', 'What are some good plants to grow in containers?');
+--14
+INSERT INTO posts (userID, postType, title, postText) VALUES (3, 'question', 'DIY', 'What are some easy DIY home improvement projects?');
+--15
+INSERT INTO posts (userID, postType, title, postText) VALUES (4, 'question', 'Travel', 'What are some must-see destinations in Europe?');
+--16
+INSERT INTO posts (userID, postType, title, postText) VALUES (5, 'question', 'Finance', 'What are some good tips for saving money?');
+--17
+INSERT INTO posts (userID, postType, title, postText) VALUES (6, 'question', 'Career development', 'What are some good ways to improve your skills and advance in your career?');
+--18
+INSERT INTO posts (userID, postType, title, postText) VALUES (7, 'question', 'Technology', 'What are some good resources for learning about new technologies?');
+--19
+INSERT INTO posts (userID, postType, title, postText) VALUES (8, 'question', 'Parenting', 'What are some good strategies for balancing work and family life?');
+--20
+INSERT INTO posts (userID, postType, title, postText) VALUES (2, 'question', 'Personal growth', 'What are some good ways to set and achieve personal goals?');
+--21
+INSERT INTO posts (userID, postType, title, postText) VALUES (3, 'question', 'Photography', 'What are some good tips for taking better photos?');
+--22
+INSERT INTO posts (userID, postType, title, postText) VALUES (4, 'question', 'Fashion', 'What are some good tips for building a versatile and stylish wardrobe?');
+--23
+INSERT INTO posts (userID, postType, title, postText) VALUES (5, 'question', 'Food', 'What are some good healthy eating habits to adopt?');
+--24
+INSERT INTO posts (userID, postType, title, postText) VALUES (6, 'question', 'Music', 'What are some good tips for learning to play an instrument?');
+--25
+INSERT INTO posts (userID, postType, title, postText) VALUES (7, 'question', 'Writing', 'What are some good tips for improving your writing skills?');
+--26
+INSERT INTO posts (userID, postType, title, postText) VALUES (8, 'question', 'Art', 'What are some good tips for improving your drawing skills?');
+--27
+INSERT INTO posts (userID, postType, title, postText) VALUES (2, 'question', 'Sports', 'What are some good tips for improving your physical fitness?');
+--28
+INSERT INTO posts (userID, postType, title, postText) VALUES (3, 'question', 'Pet care', 'What are some good tips for taking care of a new pet?');
+--29
+INSERT INTO posts (userID, postType, title, postText) VALUES (4, 'question', 'Nature', 'What are some good ways to appreciate and protect the natural world?');
+--30
+INSERT INTO posts (userID, postType, title, postText) VALUES (5, 'question', 'Travel', 'What are some good tips for budget travel?');
+--31
+INSERT INTO posts (userID, postType, title, postText) VALUES (6, 'question', 'Home organization', 'What are some good strategies for keeping your home organized and clutter-free?');
+--32
+INSERT INTO posts (userID, postType, title, postText) VALUES (7, 'question', 'Gardening', 'What are some good tips for starting a vegetable garden?');
+--33
+INSERT INTO posts (userID, postType, title, postText) VALUES (8, 'question', 'Cooking', 'What are some good tips for cooking healthy meals?');
+--34
+INSERT INTO posts (userID, postType, title, postText) VALUES (2, 'question', 'Finance', 'What are some good strategies for saving for retirement?');
+--35
+INSERT INTO posts (userID, postType, title, postText) VALUES (3, 'question', 'Technology', 'What are some good tips for staying safe online?');
+--36
+INSERT INTO posts (userID, postType, title, postText) VALUES (4, 'question', 'Parenting', 'What are some good strategies for disciplining children?');
+--37
+INSERT INTO posts (userID, postType, title, postText) VALUES (5, 'question', 'Personal growth', 'What are some good ways to reduce stress and improve mental health?');
+--38
+INSERT INTO posts (userID, postType, title, postText) VALUES (6, 'question', 'Photography', 'What are some good tips for taking great photos with a smartphone?');
+--39
+INSERT INTO posts (userID, postType, title, postText) VALUES (7, 'question', 'Fashion', 'What are some good tips for dressing for success in the workplace?');
+--40
+INSERT INTO posts (userID, postType, title, postText) VALUES (8, 'question', 'Food', 'What are some good tips for cooking for a large group?');
+--41
+INSERT INTO posts (userID, postType, title, postText) VALUES (2, 'question', 'Music', 'What are some good tips for learning to sing?');
+--42
+INSERT INTO posts (userID, postType, title, postText) VALUES (3, 'question', 'Writing', 'What are some good tips for writing a great essay?');
+--43
+INSERT INTO posts (userID, postType, title, postText) VALUES (4, 'question', 'Art', 'What are some good tips for creating great compositions in art?');
+--44
+INSERT INTO posts (userID, postType, title, postText) VALUES (5, 'question', 'Sports', 'What are some good tips for improving your golf game?');
+--45
+INSERT INTO posts (userID, postType, title, postText) VALUES (6, 'question', 'Pet care', 'What are some good tips for training a new puppy?');
+--46
+INSERT INTO posts (userID, postType, title, postText) VALUES (7, 'question', 'Nature', 'What are some good ways to get involved in conservation efforts?');
+--47
+INSERT INTO posts (userID, postType, title, postText) VALUES (8, 'question', 'Travel', 'What are some good tips for packing light?');
+--48
+INSERT INTO posts (userID, postType, title, postText) VALUES (1, 'question', 'Home organization', 'What are some good ways to organize your closet?');
+--49
+INSERT INTO posts (userID, postType, title, postText) VALUES (1, 'question', 'Gardening', 'What are some good tips for growing herbs?');
+--50
+INSERT INTO posts (userID, postType, title, postText) VALUES (1, 'question', 'Cooking', 'What are some good tips for cooking with a slow cooker?');
+--51
+INSERT INTO posts (userID, postType, title, postText) VALUES (1, 'question', 'Finance', 'What are some good strategies for paying off debt?');
 
 -- answers
-INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (2, 'answer', 'convallis nulla neque libero convallis eget eleifend luctus ultricies eu nibh quisque id justo sit amet sapien dignissim vestibulum vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae nulla dapibus dolor vel est donec odio justo sollicitudin ut suscipit a feugiat et', 8, FALSE);
-INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (7, 'answer', 'pulvinar sed nisl nunc rhoncus dui vel sem sed sagittis nam congue risus semper porta volutpat quam pede lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque at nulla suspendisse potenti cras in purus eu magna vulputate luctus cum', 8, FALSE);
-INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (1, 'answer', 'Use the keyword import, followed by the name of your class inside curly brackets, them write from "file". Like this: import { className } from "file". ', 7, FALSE);
-INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (7, 'answer', 'You write it using quotes.', 1, TRUE);
-INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (6, 'answer', 'quam sollicitudin vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praesent blandit lacinia erat vestibulum sed magna at nunc commodo placerat praesent blandit nam nulla integer pede justo lacinia eget tincidunt eget tempus vel pede morbi porttitor lorem id', 10, FALSE);
-INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (8, 'answer', 'sum, es, est, sumus, estis, sant', 3, FALSE);
-INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (7, 'answer', 'lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque at nulla suspendisse potenti cras in purus eu magna vulputate luctus cum sociis natoque penatibus et magnis dis parturient montes', 9, FALSE);
-INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (7, 'answer', 'dolor morbi vel lectus in quam fringilla rhoncus mauris enim leo rhoncus sed vestibulum sit amet cursus id turpis integer aliquet massa id lobortis convallis tortor risus dapibus augue vel accumsan tellus nisi eu orci mauris lacinia sapien quis libero nullam sit amet turpis elementum', 1, FALSE);
-INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (9, 'answer', 'It is on the 1st of december', 5, TRUE);
-INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) VALUES (5, 'answer', 'I think you use the keyword import.', 7, FALSE);
+INSERT INTO posts(userID, postType, postText, parentPost, isCorrect) VALUES (1, 'answer', 'Use the keyword import, followed by the name of your class inside curly brackets, them write from "file". Like this: import { className } from "file". ', 7, FALSE);
+INSERT INTO posts(userID, postType, postText, parentPost, isCorrect) VALUES (2, 'answer', 'You write it using quotes.', 1, TRUE);
+INSERT INTO posts(userID, postType, postText, parentPost, isCorrect) VALUES (3, 'answer', 'sum, es, est, sumus, estis, sant', 3, FALSE);
+INSERT INTO posts(userID, postType, postText, parentPost, isCorrect) VALUES (4, 'answer', 'It is on the 1st of december', 5, TRUE);
+INSERT INTO posts(userID, postType, postText, parentPost, isCorrect) VALUES (5, 'answer', 'I think you use the keyword import.', 7, FALSE);
+INSERT INTO posts(userID, postType, postText, parentPost, isCorrect) VALUES (6, 'answer', 'Some easy recipes for a beginner cook might include pasta with marinara sauce, grilled cheese sandwiches, or scrambled eggs. Other simple dishes might include baked salmon, stir fry, or tacos.', 9, FALSE);
+INSERT INTO posts(userID, postType, postText, parentPost, isCorrect) VALUES (7, 'answer', 'Some good exercises to do at home without any equipment include push-ups, sit-ups, squats, lunges, and burpees. You can also do bodyweight exercises like planks, mountain climbers, and jump squats.', 10, FALSE);
+INSERT INTO posts(userID, postType, postText, parentPost, isCorrect) VALUES (8, 'answer', 'Some good strategies for beginner investors might include starting with a diversified portfolio of mutual funds or ETFs, considering a robo-advisor to manage your investments, and learning about different investment.', 11, FALSE);
+INSERT INTO posts(userID, postType, postText, parentPost, isCorrect) VALUES (9, 'answer', 'Some tips for networking and finding a job in a new industry include attending industry events and conferences, reaching out to connections and asking for introductions, and joining professional organizations.', 12, FALSE);
+INSERT INTO posts(userID, postType, postText, parentPost, isCorrect) VALUES (10, 'answer', 'You can make a simple pasta dish. Its simple and suitable for begginers! You will need pasta, tomato sauce, and any desired toppings (such as cheese, vegetables, or meat). Boil the pasta according to package instructions, then drain and mix with the tomato sauce.', 9, FALSE);
+INSERT INTO posts(userID, postType, postText, parentPost, isCorrect) VALUES (11, 'answer', 'Make a basic grilled cheese sandwich, you will need bread, butter, and cheese. Spread butter on one side of each slice of bread, then place cheese between the slices.', 9, FALSE);
+INSERT INTO posts(userID, postType, postText, parentPost, isCorrect) VALUES (12, 'answer', 'Scrambled eggs are really simple! You will need eggs, milk (optional), and butter or oil. Beat the eggs in a bowl, then stir in a splash of milk if desired. Heat a pan over medium heat and add a small amount of butter or oil.', 9, FALSE);
+INSERT INTO posts(userID, postType, postText, parentPost, isCorrect) VALUES (13, 'answer', 'Try to make baked salmon, you will need a salmon fillet, olive oil, salt, and pepper. Preheat your oven to 400°F. Place the salmon in a baking dish and brush with olive oil. Sprinkle with salt and pepper.', 9, FALSE);
+INSERT INTO posts(userID, postType, postText, parentPost, isCorrect) VALUES (14, 'answer', 'I always love to make tacos, it is so simple! You will need taco shells or tortillas, your choice of filling (such as ground beef, chicken, or beans), and any desired toppings (such as cheese, lettuce, and tomato).', 40, FALSE);
+INSERT INTO posts(userID, postType, postText, parentPost, isCorrect) VALUES (15, 'answer', 'Some good tips for organizing your closet include getting rid of items you no longer wear, organizing by category (such as tops, bottoms, shoes), and using storage solutions like hangers, bins, and shelves. ', 48, FALSE);
+INSERT INTO posts(userID, postType, postText, parentPost, isCorrect) VALUES (16, 'answer', 'To grow herbs, you will need a sunny spot with well-draining soil, a container or garden bed, and herb seeds or plants.', 49, FALSE);
+INSERT INTO posts(userID, postType, postText, parentPost, isCorrect) VALUES (17, 'answer', 'To make a healthy meal, you can start by including a variety of vegetables, whole grains, and lean protein sources. You can also try using healthy cooking techniques like grilling, baking, or steaming.', 33, FALSE);
+INSERT INTO posts(userID, postType, postText, parentPost, isCorrect) VALUES (18, 'answer', 'To pay off debt, you can start by making a budget and identifying your highest-interest debts. Consider making extra payments towards those debts or consolidating them to get a lower interest rate.', 51, FALSE);
+INSERT INTO posts(userID, postType, postText, parentPost, isCorrect) VALUES (19, 'answer', 'To stay safe online, you can start by using strong, unique passwords and enabling two-factor authentication on your accounts. You should also be cautious when clicking on links or downloading attachments.', 35, FALSE);
+INSERT INTO posts(userID, postType, postText, parentPost, isCorrect) VALUES (20, 'answer', 'Some good strategies for disciplining children include setting clear expectations and consequences, consistently enforcing rules, and praising good behavior.', 36, FALSE);
 
---ta a dar erro nao sie o que é
---INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
---VALUES (1, 'answer', 'Some easy recipes for a beginner cook might include pasta with marinara sauce, grilled cheese sandwiches, or scrambled eggs. Other simple dishes might include baked salmon, stir fry, or tacos.', 12, FALSE);
---INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
---VALUES (1, 'answer', 'Some good exercises to do at home without any equipment include push-ups, sit-ups, squats, lunges, and burpees. You can also do bodyweight exercises like planks, mountain climbers, and jump squats.', 12, FALSE);
---INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
---VALUES (1, 'answer',"Some good strategies for beginner investors might include starting with a diversified portfolio of mutual funds or ETFs, considering a robo-advisor to manage your investments, and learning about different investment. ", 13, FALSE);
---INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
---VALUES (1, 'answer', 'Some tips for networking and finding a job in a new industry include attending industry events and conferences, reaching out to connections and asking for introductions, and joining professional organizations.', 13, FALSE);
---INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
---VALUES (2, 'answer', 'To make a simple pasta dish, you will need pasta, tomato sauce, and any desired toppings (such as cheese, vegetables, or meat). Boil the pasta according to package instructions, then drain and mix with the tomato sauce.', 33, FALSE);
---INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
---VALUES (2, 'answer', 'To make a basic grilled cheese sandwich, you will need bread, butter, and cheese. Spread butter on one side of each slice of bread, then place cheese between the slices.', 35, FALSE);
---INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
---VALUES (2, 'answer', 'To make scrambled eggs, you will need eggs, milk (optional), and butter or oil. Beat the eggs in a bowl, then stir in a splash of milk if desired. Heat a pan over medium heat and add a small amount of butter or oil.', 37, FALSE);
---INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
---VALUES (2, 'answer', 'To make baked salmon, you will need a salmon fillet, olive oil, salt, and pepper. Preheat your oven to 400°F. Place the salmon in a baking dish and brush with olive oil. Sprinkle with salt and pepper.', 39, FALSE);
---INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
---VALUES (3, 'answer', 'To make tacos, you will need taco shells or tortillas, your choice of filling (such as ground beef, chicken, or beans), and any desired toppings (such as cheese, lettuce, and tomato).', 40, FALSE);
---INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
---VALUES (3, 'answer', 'Some good tips for organizing your closet include getting rid of items you no longer wear, organizing by category (such as tops, bottoms, shoes), and using storage solutions like hangers, bins, and shelves. ', 42, FALSE);
---INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
---VALUES (3, 'answer', 'To grow herbs, you will need a sunny spot with well-draining soil, a container or garden bed, and herb seeds or plants.', 44, FALSE);
---INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
---VALUES (4, 'answer', "To make a healthy meal, you can start by including a variety of vegetables, whole grains, and lean protein sources. You can also try using healthy cooking techniques like grilling, baking, or steaming.", 46, FALSE);
---INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
---VALUES (4, 'answer', 'To pay off debt, you can start by making a budget and identifying your highest-interest debts. Consider making extra payments towards those debts or consolidating them to get a lower interest rate.', 48, FALSE);
---INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
---VALUES (4, 'answer', 'To stay safe online, you can start by using strong, unique passwords and enabling two-factor authentication on your accounts. You should also be cautious when clicking on links or downloading attachments.', 50, FALSE);
---INSERT INTO posts (userID, postType, postText, parentPost, isCorrect) 
---VALUES (4, 'answer', 'Some good strategies for disciplining children include setting clear expectations and consequences, consistently enforcing rules, and praising good behavior.', 15, FALSE);
-
--- comments
-INSERT INTO comments (postID, userID, commentText) VALUES (1,1,'It has been solved');
-INSERT INTO comments (postID, userID, commentText) VALUES (15,1,'Thank you!');
-
-INSERT INTO comments (postID, userID, commentText) 
-VALUES (44, 1, 'I totally agree with this answer!');
-INSERT INTO comments (postID, userID, commentText) 
-VALUES (47, 1, 'This was a great suggestion, thank you!');
-INSERT INTO comments (postID, userID, commentText) 
-VALUES (48, 1, 'I tried this and it worked really well for me!');
-INSERT INTO comments (postID, userID, commentText) 
-VALUES (49, 1, 'This was really helpful, thank you!');
-INSERT INTO comments (postID, userID, commentText) 
-VALUES (50, 1, 'I totally agree with this answer!');
-INSERT INTO comments (postID, userID, commentText) 
-VALUES (15, 1, 'I think this is a really important point to consider!');
-INSERT INTO comments (postID, userID, commentText) 
-VALUES (16, 1, 'I agree, this is a great tip!');
-INSERT INTO comments (postID, userID, commentText) 
-VALUES (17, 1, 'I had never thought of this before, thank you!');
-INSERT INTO comments (postID, userID, commentText) 
-VALUES (18, 1, 'This was really helpful, thank you!');
-INSERT INTO comments (postID, userID, commentText) 
-VALUES (19, 1, 'I totally agree with this comment!');
-INSERT INTO comments (postID, userID, commentText) 
-VALUES (20, 1, 'This was a really helpful suggestion, thank you!');
-INSERT INTO comments (postID, userID, commentText) 
-VALUES (21, 1, 'I had never thought of this before, thank you for the suggestion!');
-INSERT INTO comments (postID, userID, commentText) 
-VALUES (22, 1, 'I totally agree with this comment!');
-INSERT INTO comments (postID, userID, commentText) 
-VALUES (23, 1, 'This was a really helpful suggestion, thank you!');
-INSERT INTO comments (postID, userID, commentText) 
-VALUES (24, 1, 'I agree, this is a great tip!');
-INSERT INTO comments (postID, userID, commentText) 
-VALUES (25, 1, 'I had never thought of this before, thank you for the suggestion!');
-INSERT INTO comments (postID, userID, commentText) 
-VALUES (26, 1, 'This was really helpful, thank you!');
-INSERT INTO comments (postID, userID, commentText) 
-VALUES (27, 1, 'I totally agree with this comment!');
-INSERT INTO comments (postID, userID, commentText) 
-VALUES (28, 1, 'This was a really helpful suggestion, thank you!');
+-- comments TO DO
+INSERT INTO comments(postID, userID, commentText) VALUES (1, 1,'It has been solved');
+INSERT INTO comments(postID, userID, commentText) VALUES (2, 5,'Thank you!');
+INSERT INTO comments(postID, userID, commentText) VALUES (3, 10, 'I appreciate the answers!');
+INSERT INTO comments(postID, userID, commentText) VALUES (4, 6, 'This was a great suggestion, thank you!');
+INSERT INTO comments(postID, userID, commentText) VALUES (5, 5, 'Now I know!');
+INSERT INTO comments(postID, userID, commentText) VALUES (6, 7, 'This was really helpful, thank you!');
+INSERT INTO comments(postID, userID, commentText) VALUES (7, 8, 'It works now!');
+INSERT INTO comments(postID, userID, commentText) VALUES (8, 2, 'I think this is a really important point to consider!');
+INSERT INTO comments(postID, userID, commentText) VALUES (9, 3, 'I agree, this is a great tip!');
+INSERT INTO comments(postID, userID, commentText) VALUES (10, 4, 'I had never thought of this before, thank you!');
+INSERT INTO comments(postID, userID, commentText) VALUES (11, 7, 'This was really helpful, thank you!');
+INSERT INTO comments(postID, userID, commentText) VALUES (12, 8, 'I totally agree with this comment!');
+INSERT INTO comments(postID, userID, commentText) VALUES (13, 2, 'This was a really helpful suggestion, thank you!');
+INSERT INTO comments(postID, userID, commentText) VALUES (14, 3, 'I had never thought of this before, thank you for the suggestion!');
+INSERT INTO comments(postID, userID, commentText) VALUES (15, 4, 'I totally agree with this comment!');
+INSERT INTO comments(postID, userID, commentText) VALUES (16, 5, 'This was a really helpful suggestion, thank you!');
+INSERT INTO comments(postID, userID, commentText) VALUES (17, 6, 'I agree, this is a great tip!');
+INSERT INTO comments(postID, userID, commentText) VALUES (18, 7, 'I had never thought of this before, thank you for the suggestion!');
+INSERT INTO comments(postID, userID, commentText) VALUES (19, 8, 'This was really helpful, thank you!');
+INSERT INTO comments(postID, userID, commentText) VALUES (20, 2, 'I totally agree with this comment!');
+INSERT INTO comments(postID, userID, commentText) VALUES (21, 3, 'This was a really helpful suggestion, thank you!');
+INSERT INTO comments(postID, userID, commentText) VALUES (22, 4,' It has been solved');
+INSERT INTO comments(postID, userID, commentText) VALUES (23, 5,' Thank you!');
+INSERT INTO comments(postID, userID, commentText) VALUES (24, 6, 'I totally agree with this answer!');
+INSERT INTO comments(postID, userID, commentText) VALUES (25, 7, 'This was a great suggestion, thank you!');
+INSERT INTO comments(postID, userID, commentText) VALUES (26, 8, 'I tried this and it worked really well for me!');
+INSERT INTO comments(postID, userID, commentText) VALUES (27, 2, 'This was really helpful, thank you!');
+INSERT INTO comments(postID, userID, commentText) VALUES (28, 3, 'I totally agree with this answer!');
+INSERT INTO comments(postID, userID, commentText) VALUES (29, 4, 'I think this is a really important point to consider!');
+INSERT INTO comments(postID, userID, commentText) VALUES (30, 5, 'I agree, this is a great tip!');
+INSERT INTO comments(postID, userID, commentText) VALUES (31, 6, 'I had never thought of this before, thank you!');
+INSERT INTO comments(postID, userID, commentText) VALUES (32, 7, 'This was really helpful, thank you!');
+INSERT INTO comments(postID, userID, commentText) VALUES (33, 8, 'I totally agree with this comment!');
+INSERT INTO comments(postID, userID, commentText) VALUES (34, 2, 'This was a really helpful suggestion, thank you!');
+INSERT INTO comments(postID, userID, commentText) VALUES (35, 3, 'I had never thought of this before, thank you for the suggestion!');
+INSERT INTO comments(postID, userID, commentText) VALUES (36, 4, 'I totally agree with this comment!');
+INSERT INTO comments(postID, userID, commentText) VALUES (37, 5, 'This was a really helpful suggestion, thank you!');
+INSERT INTO comments(postID, userID, commentText) VALUES (38, 6, 'I agree, this is a great tip!');
+INSERT INTO comments(postID, userID, commentText) VALUES (39, 7, 'I had never thought of this before, thank you for the suggestion!');
+INSERT INTO comments(postID, userID, commentText) VALUES (40, 8, 'This was really helpful, thank you!');
+INSERT INTO comments(postID, userID, commentText) VALUES (41, 2, 'I totally agree with this comment!');
+INSERT INTO comments(postID, userID, commentText) VALUES (42, 3, 'This was a really helpful suggestion, thank you!');
+INSERT INTO comments(postID, userID, commentText) VALUES (43, 4,'It has been solved');
+INSERT INTO comments(postID, userID, commentText) VALUES (44, 5,'Thank you!');
+INSERT INTO comments(postID, userID, commentText) VALUES (45, 6, 'I totally agree with this answer!');
+INSERT INTO comments(postID, userID, commentText) VALUES (46, 7, 'This was a great suggestion, thank you!');
+INSERT INTO comments(postID, userID, commentText) VALUES (47, 8, 'I tried this and it worked really well for me!');
+INSERT INTO comments(postID, userID, commentText) VALUES (48, 1, 'This was really helpful, thank you!');
+INSERT INTO comments(postID, userID, commentText) VALUES (49, 1, 'I totally agree with this answer!');
+INSERT INTO comments(postID, userID, commentText) VALUES (50, 1, 'I think this is a really important point to consider!');
+INSERT INTO comments(postID, userID, commentText) VALUES (51, 1, 'I agree, this is a great tip!');
 
 --stars
+INSERT INTO stars (postID, userID) VALUES (1,1);
+INSERT INTO stars (postID, userID) VALUES (7,1);
+INSERT INTO stars (postID, userID) VALUES (48,1);
+INSERT INTO stars (postID, userID) VALUES (49,1);
+INSERT INTO stars (postID, userID) VALUES (50,1);
+INSERT INTO stars (postID, userID) VALUES (51,1);
+INSERT INTO stars (postID, userID) VALUES (52,1);
 INSERT INTO stars (postID, userID) VALUES (1,2);
+INSERT INTO stars (postID, userID) VALUES (8,2);
+INSERT INTO stars (postID, userID) VALUES (13,2);
+INSERT INTO stars (postID, userID) VALUES (20,2);
+INSERT INTO stars (postID, userID) VALUES (27,2);
+INSERT INTO stars (postID, userID) VALUES (34,2);
+INSERT INTO stars (postID, userID) VALUES (41,2);
+INSERT INTO stars (postID, userID) VALUES (53,2);
+INSERT INTO stars (postID, userID) VALUES (3,3);
+INSERT INTO stars (postID, userID) VALUES (9,3);
+INSERT INTO stars (postID, userID) VALUES (14,3);
+INSERT INTO stars (postID, userID) VALUES (21,3);
+INSERT INTO stars (postID, userID) VALUES (28,3);
+INSERT INTO stars (postID, userID) VALUES (35,3);
+INSERT INTO stars (postID, userID) VALUES (42,3);
+INSERT INTO stars (postID, userID) VALUES (54,3);
+INSERT INTO stars (postID, userID) VALUES (5,4);
+INSERT INTO stars (postID, userID) VALUES (10,4);
+INSERT INTO stars (postID, userID) VALUES (15,4);
+INSERT INTO stars (postID, userID) VALUES (22,4);
+INSERT INTO stars (postID, userID) VALUES (29,4);
+INSERT INTO stars (postID, userID) VALUES (36,4);
+INSERT INTO stars (postID, userID) VALUES (43,4);
+INSERT INTO stars (postID, userID) VALUES (55,4);
+INSERT INTO stars (postID, userID) VALUES (2,5);
+INSERT INTO stars (postID, userID) VALUES (5,5);
+INSERT INTO stars (postID, userID) VALUES (7,5);
+INSERT INTO stars (postID, userID) VALUES (16,5);
+INSERT INTO stars (postID, userID) VALUES (23,5);
+INSERT INTO stars (postID, userID) VALUES (30,5);
+INSERT INTO stars (postID, userID) VALUES (37,5);
+INSERT INTO stars (postID, userID) VALUES (44,5);
+INSERT INTO stars (postID, userID) VALUES (56,5);
+INSERT INTO stars (postID, userID) VALUES (4,6);
+INSERT INTO stars (postID, userID) VALUES (9,6);
+INSERT INTO stars (postID, userID) VALUES (17,6);
+INSERT INTO stars (postID, userID) VALUES (24,6);
+INSERT INTO stars (postID, userID) VALUES (31,6);
+INSERT INTO stars (postID, userID) VALUES (38,6);
+INSERT INTO stars (postID, userID) VALUES (45,6);
+INSERT INTO stars (postID, userID) VALUES (57,6);
+INSERT INTO stars (postID, userID) VALUES (6,7);
+INSERT INTO stars (postID, userID) VALUES (10,7);
+INSERT INTO stars (postID, userID) VALUES (11,7);
+INSERT INTO stars (postID, userID) VALUES (18,7);
+INSERT INTO stars (postID, userID) VALUES (25,7);
+INSERT INTO stars (postID, userID) VALUES (32,7);
+INSERT INTO stars (postID, userID) VALUES (39,7);
+INSERT INTO stars (postID, userID) VALUES (46,7);
+INSERT INTO stars (postID, userID) VALUES (58,7);
+INSERT INTO stars (postID, userID) VALUES (7,8);
+INSERT INTO stars (postID, userID) VALUES (11,8);
+INSERT INTO stars (postID, userID) VALUES (12,8);
+INSERT INTO stars (postID, userID) VALUES (19,8);
+INSERT INTO stars (postID, userID) VALUES (26,8);
+INSERT INTO stars (postID, userID) VALUES (33,8);
+INSERT INTO stars (postID, userID) VALUES (40,8);
+INSERT INTO stars (postID, userID) VALUES (47,8);
+INSERT INTO stars (postID, userID) VALUES (59,8);
+INSERT INTO stars (postID, userID) VALUES (12,9);
+INSERT INTO stars (postID, userID) VALUES (60,9);
+INSERT INTO stars (postID, userID) VALUES (3,10);
+INSERT INTO stars (postID, userID) VALUES (9,10);
+INSERT INTO stars (postID, userID) VALUES (61,10);
+INSERT INTO stars (postID, userID) VALUES (9,11);
+INSERT INTO stars (postID, userID) VALUES (62,11);
+INSERT INTO stars (postID, userID) VALUES (9,12);
+INSERT INTO stars (postID, userID) VALUES (63,12);
+INSERT INTO stars (postID, userID) VALUES (9,13);
+INSERT INTO stars (postID, userID) VALUES (64,13);
+INSERT INTO stars (postID, userID) VALUES (40,14);
+INSERT INTO stars (postID, userID) VALUES (65,14);
+INSERT INTO stars (postID, userID) VALUES (48,15);
+INSERT INTO stars (postID, userID) VALUES (66,15);
+INSERT INTO stars (postID, userID) VALUES (49,16);
+INSERT INTO stars (postID, userID) VALUES (67,16);
+INSERT INTO stars (postID, userID) VALUES (33,17);
+INSERT INTO stars (postID, userID) VALUES (68,17);
+INSERT INTO stars (postID, userID) VALUES (51,18);
+INSERT INTO stars (postID, userID) VALUES (69,18);
+INSERT INTO stars (postID, userID) VALUES (35,19);
+INSERT INTO stars (postID, userID) VALUES (70,19);
+INSERT INTO stars (postID, userID) VALUES (36,20);
+INSERT INTO stars (postID, userID) VALUES (71,20);
 
 --badges
-INSERT INTO badges (badgeName) VALUES ('Posted 5 questions'); --1
-INSERT INTO badges (badgeName) VALUES ('Posted 10 questions'); --2
-INSERT INTO badges (badgeName) VALUES ('Posted 15 questions'); --3
-INSERT INTO badges (badgeName) VALUES ('Posted 20 questions'); --4
-
-INSERT INTO badges (badgeName) VALUES ('Answered 5 questions'); --5
-INSERT INTO badges (badgeName) VALUES ('Answered 10 questions'); --6
-INSERT INTO badges (badgeName) VALUES ('Answered 15 questions'); --7
-INSERT INTO badges (badgeName) VALUES ('Answered 20 questions'); --8
-
-INSERT INTO badges (badgeName) VALUES ('1 correct answer!'); --9
-INSERT INTO badges (badgeName) VALUES ('5 correct answers!'); --10
-INSERT INTO badges (badgeName) VALUES ('10 correct answers!'); --11
-INSERT INTO badges (badgeName) VALUES ('15 correct answers!'); --12
-INSERT INTO badges (badgeName) VALUES ('20 correct answers!'); --13
+INSERT INTO badges(badgeName) VALUES ('Posted 5 questions'); --1
+INSERT INTO badges(badgeName) VALUES ('Posted 10 questions'); --2
+INSERT INTO badges(badgeName) VALUES ('Posted 15 questions'); --3
+INSERT INTO badges(badgeName) VALUES ('Posted 20 questions'); --4
+INSERT INTO badges(badgeName) VALUES ('Answered 5 questions'); --5
+INSERT INTO badges(badgeName) VALUES ('Answered 10 questions'); --6
+INSERT INTO badges(badgeName) VALUES ('Answered 15 questions'); --7
+INSERT INTO badges(badgeName) VALUES ('Answered 20 questions'); --8
+INSERT INTO badges(badgeName) VALUES ('1 correct answer!'); --9
+INSERT INTO badges(badgeName) VALUES ('5 correct answers!'); --10
+INSERT INTO badges(badgeName) VALUES ('10 correct answers!'); --11
+INSERT INTO badges(badgeName) VALUES ('15 correct answers!'); --12
+INSERT INTO badges(badgeName) VALUES ('20 correct answers!'); --13
 
 
 --tags
-INSERT INTO tags (tagName) VALUES ('python');
-INSERT INTO tags (tagName) VALUES ('java');
-INSERT INTO tags (tagName) VALUES ('C');
-INSERT INTO tags (tagName) VALUES ('html');
-INSERT INTO tags (tagName) VALUES ('php');
-INSERT INTO tags (tagName) VALUES ('code');
-INSERT INTO tags (tagName) VALUES ('food');
-INSERT INTO tags (tagName) VALUES ('cats');
-INSERT INTO tags (tagName) VALUES ('dogs');
-INSERT INTO tags (tagName) VALUES ('fish');
-INSERT INTO tags (tagName) VALUES ('animals');
-INSERT INTO tags (tagName) VALUES ('help');
-INSERT INTO tags (tagName) VALUES ('advice');
+INSERT INTO tags(tagName) VALUES ('python');
+INSERT INTO tags(tagName) VALUES ('java');
+INSERT INTO tags(tagName) VALUES ('C');
+INSERT INTO tags(tagName) VALUES ('html');
+INSERT INTO tags(tagName) VALUES ('php');
+INSERT INTO tags(tagName) VALUES ('code');
+INSERT INTO tags(tagName) VALUES ('food');
+INSERT INTO tags(tagName) VALUES ('cats');
+INSERT INTO tags(tagName) VALUES ('dogs');
+INSERT INTO tags(tagName) VALUES ('pets');
+INSERT INTO tags(tagName) VALUES ('animals');
+INSERT INTO tags(tagName) VALUES ('help');
+INSERT INTO tags(tagName) VALUES ('advice');
+INSERT INTO tags(tagName) VALUES ('gym');
+INSERT INTO tags(tagName) VALUES ('workout');
+INSERT INTO tags(tagName) VALUES ('parenting');
+INSERT INTO tags(tagName) VALUES ('art');
+INSERT INTO tags(tagName) VALUES ('music');
+INSERT INTO tags(tagName) VALUES ('school');
+INSERT INTO tags(tagName) VALUES ('plants');
+
 
 --user tags
 -- INSERT INTO user_tags (userID, tagID) VALUES (1,1);
