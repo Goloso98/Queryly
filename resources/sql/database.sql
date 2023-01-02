@@ -809,7 +809,6 @@ INSERT INTO comments(postID, userID, commentText) VALUES (50, 1, 'I think this i
 INSERT INTO comments(postID, userID, commentText) VALUES (51, 1, 'I agree, this is a great tip!');
 
 --stars
-INSERT INTO stars (postID, userID) VALUES (1,1);
 INSERT INTO stars (postID, userID) VALUES (7,1);
 INSERT INTO stars (postID, userID) VALUES (48,1);
 INSERT INTO stars (postID, userID) VALUES (49,1);
