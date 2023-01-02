@@ -785,10 +785,10 @@ INSERT INTO comments(postID, userID, commentText) VALUES (26, 8, 'I tried this a
 INSERT INTO comments(postID, userID, commentText) VALUES (27, 2, 'This was really helpful, thank you!');
 INSERT INTO comments(postID, userID, commentText) VALUES (28, 3, 'I totally agree with this answer!');
 INSERT INTO comments(postID, userID, commentText) VALUES (29, 4, 'I think this is a really important point to consider!');
-INSERT INTO comments(postID, userID, commentText) VALUES (30, 5, 'I agree, this is a great tip!');
+INSERT INTO comments(postID, userID, commentText) VALUES (30, 5, 'This is a great tip!');
 INSERT INTO comments(postID, userID, commentText) VALUES (31, 6, 'I had never thought of this before, thank you!');
 INSERT INTO comments(postID, userID, commentText) VALUES (32, 7, 'This was really helpful, thank you!');
-INSERT INTO comments(postID, userID, commentText) VALUES (33, 8, 'I totally agree with this comment!');
+INSERT INTO comments(postID, userID, commentText) VALUES (33, 8, 'I totally value your comment!');
 INSERT INTO comments(postID, userID, commentText) VALUES (34, 2, 'This was a really helpful suggestion, thank you!');
 INSERT INTO comments(postID, userID, commentText) VALUES (35, 3, 'I had never thought of this before, thank you for the suggestion!');
 INSERT INTO comments(postID, userID, commentText) VALUES (36, 4, 'I totally agree with this comment!');
@@ -804,7 +804,7 @@ INSERT INTO comments(postID, userID, commentText) VALUES (45, 6, 'I totally agre
 INSERT INTO comments(postID, userID, commentText) VALUES (46, 7, 'This was a great suggestion, thank you!');
 INSERT INTO comments(postID, userID, commentText) VALUES (47, 8, 'I tried this and it worked really well for me!');
 INSERT INTO comments(postID, userID, commentText) VALUES (48, 1, 'This was really helpful, thank you!');
-INSERT INTO comments(postID, userID, commentText) VALUES (49, 1, 'I totally agree with this answer!');
+INSERT INTO comments(postID, userID, commentText) VALUES (49, 1, 'Thanks!');
 INSERT INTO comments(postID, userID, commentText) VALUES (50, 1, 'I think this is a really important point to consider!');
 INSERT INTO comments(postID, userID, commentText) VALUES (51, 1, 'I agree, this is a great tip!');
 
