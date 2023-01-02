@@ -921,6 +921,45 @@ INSERT INTO badges(badgeName) VALUES ('10 people liked a post you made!'); --16
 INSERT INTO badges(badgeName) VALUES ('15 people liked a post you made!'); --17
 INSERT INTO badges(badgeName) VALUES ('20 people liked a post you made!'); --18
 
+--user badges questions
+INSERT INTO user_badges(userID, badgeID) VALUES (1,1);
+INSERT INTO user_badges(userID, badgeID) VALUES (2,1);
+INSERT INTO user_badges(userID, badgeID) VALUES (3,1);
+INSERT INTO user_badges(userID, badgeID) VALUES (4,1);
+INSERT INTO user_badges(userID, badgeID) VALUES (5,1);
+INSERT INTO user_badges(userID, badgeID) VALUES (6,1);
+INSERT INTO user_badges(userID, badgeID) VALUES (7,1);
+INSERT INTO user_badges(userID, badgeID) VALUES (8,1);
+INSERT INTO user_badges(userID, badgeID) VALUES (10,1);
+
+--user badges corrects
+INSERT INTO user_badges(userID, badgeID) VALUES (2,9);
+INSERT INTO user_badges(userID, badgeID) VALUES (4,9);
+
+--user badges stars
+INSERT INTO user_badges(userID, badgeID) VALUES (1,14);
+INSERT INTO user_badges(userID, badgeID) VALUES (1,15);
+INSERT INTO user_badges(userID, badgeID) VALUES (2,14);
+INSERT INTO user_badges(userID, badgeID) VALUES (2,15);
+INSERT INTO user_badges(userID, badgeID) VALUES (2,16);
+INSERT INTO user_badges(userID, badgeID) VALUES (3,14);
+INSERT INTO user_badges(userID, badgeID) VALUES (4,14);
+INSERT INTO user_badges(userID, badgeID) VALUES (4,15);
+INSERT INTO user_badges(userID, badgeID) VALUES (5,14);
+INSERT INTO user_badges(userID, badgeID) VALUES (5,15);
+INSERT INTO user_badges(userID, badgeID) VALUES (5,16);
+INSERT INTO user_badges(userID, badgeID) VALUES (5,17);
+INSERT INTO user_badges(userID, badgeID) VALUES (6,14);
+INSERT INTO user_badges(userID, badgeID) VALUES (6,15);
+INSERT INTO user_badges(userID, badgeID) VALUES (6,16);
+INSERT INTO user_badges(userID, badgeID) VALUES (7,14);
+INSERT INTO user_badges(userID, badgeID) VALUES (7,15);
+INSERT INTO user_badges(userID, badgeID) VALUES (7,16);
+INSERT INTO user_badges(userID, badgeID) VALUES (8,14);
+INSERT INTO user_badges(userID, badgeID) VALUES (8,15);
+INSERT INTO user_badges(userID, badgeID) VALUES (8,16);
+INSERT INTO user_badges(userID, badgeID) VALUES (10,14);
+INSERT INTO user_badges(userID, badgeID) VALUES (10,15);
 
 --tags
 --1
