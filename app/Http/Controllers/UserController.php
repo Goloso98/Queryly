@@ -245,19 +245,10 @@ class UserController extends Controller
       return redirect()->route('login');
     }
 
-    // public function sendRecoverPasswordEmail(User $user){
-    //   // $token = Str::uuid()->toString();
-    //   // todo
-    //   $token = "12345";
-    //   session(['token' => $token]);
-
-    //   $mailData = [
-    //     'token' => $token,
-    //     'id' => $user->id,
-    //     'name' => $user->name,
-    //     'email' => $user->email,
-    //   ];
-    //   Mail::to($mailData['email'])->send(new RecoverPassword($mailData));
-    //   return view('auth.emailsent');
-    // }
+    public function getUserNotificationsCount(){
+      if (Auth::check()) {
+        return Auth::user()->unreadNotificationsCounter();
+      }
+      abort(401);
+    }
 }

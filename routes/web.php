@@ -77,6 +77,7 @@ Route::put('api/star/{userid}/{postid}', 'StarController@create');
 Route::delete('api/star/{userid}/{postid}', 'StarController@delete');
 Route::put('api/posts/{id}/correct', 'PostController@correctness');
 Route::delete('api/report/{id}', 'ReportController@delete');
+Route::get('api/user/notifications/count', 'UserController@getUserNotificationsCount');
 
 // Authentication
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

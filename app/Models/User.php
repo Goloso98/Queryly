@@ -111,4 +111,18 @@ class User extends Authenticatable
         return Role::where('userid', $this->id)->where('userrole', $role)->get()->isNotEmpty();
     }
 
+    /**
+     * The notifications this user has.
+     */
+    public function notifications() {
+        return $this->hasMany('App\Models\Notification', 'userid');
+    }
+
+    /**
+     * count user unread notifications
+     */
+    public function unreadNotificationsCounter() {
+        return $this->notifications()->where('isread', false)->count();
+    }
+
 }

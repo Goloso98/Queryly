@@ -34,6 +34,9 @@
                     <a class="btn btn-outline-light" aria-current="page" href="/logout">Logout</a>
                 </li>
                 <li class="nav-item">
+                    <button id="notificationButton"><span id="notificationCounter"></span>notify</button>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link userBtn" aria-current="page"
                        href="/users/{{ Auth::user()->id }}">{{ Auth::user()->name }}</a>
                 </li>

@@ -13,7 +13,15 @@ function addEventListeners() {
   [].forEach.call(checkCreator, function(creator) {
     creator.addEventListener('click', sendCreateCheckRequest);
   });
+
+  // Notifications handler
+  let notifyBTN = document.getElementById("notificationButton");
+
+  notifyTimer = setInterval(function () {
+    sendAjaxRequest('get', '/api/user/notifications/count', null, notifyCounterHandler)
+  }, 5 * 1000);
 }
+
 
 function encodeForAjax(data) {
   if (data == null) return null;
@@ -72,6 +80,13 @@ function starAddedHandler(creator){
     creator.classList.add('fa-regular');
     counter.innerText = parseInt(counter.innerText) - 1;
   }
+}
+
+let notifyTimer;
+function notifyCounterHandler(){
+  if (this.status != 200)
+    clearInterval(notifyTimer);
+  document.getElementById("notificationCounter").innerText = this.responseText;
 }
 
 function checkAddedHandler(creator){
