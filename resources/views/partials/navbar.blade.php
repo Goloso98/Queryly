@@ -4,9 +4,10 @@
             <img src="{{ URL::asset('logo.png') }}" alt="{{ config('app.name', 'Laravel') }}!"
                  style="width:42px;height:42px;">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        <button class="navbar-toggler position-relative" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
+            <span id="notificationCounter2" class="position-absolute bottom-0 start-0 translate-middle badge rounded-pill bg-danger"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end centering" id="navbarSupportedContent">
             <ul class="navbar-nav gap-2 mb-2 mb-sm-0">
@@ -33,8 +34,12 @@
                 <li class="nav-item">
                     <a class="btn btn-outline-light" aria-current="page" href="/logout">Logout</a>
                 </li>
-                <li class="nav-item">
-                    <button id="notificationButton"><span id="notificationCounter"></span>notify</button>
+                <li class="nav-item mx-2">
+                    <button id="notificationButton" type="button" class="btn btn-primary">
+                        <i class="fa-solid fa-bell position-relative">
+                            <span id="notificationCounter" class="position-absolute top-0 start-100 badge rounded-pill bg-danger"></span>
+                        </i>
+                    </button>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link userBtn" aria-current="page"

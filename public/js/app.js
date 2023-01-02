@@ -16,10 +16,8 @@ function addEventListeners() {
 
   // Notifications handler
   let notifyBTN = document.getElementById("notificationButton");
-
-  notifyTimer = setInterval(function () {
-    sendAjaxRequest('get', '/api/user/notifications/count', null, notifyCounterHandler)
-  }, 5 * 1000);
+  sendAjaxRequest('get', '/api/user/notifications/count', null, notifyCounterHandler);
+  notifyTimer = setInterval(()=>sendAjaxRequest('get', '/api/user/notifications/count', null, notifyCounterHandler), 5 * 1000);
 }
 
 
@@ -86,7 +84,9 @@ let notifyTimer;
 function notifyCounterHandler(){
   if (this.status != 200)
     clearInterval(notifyTimer);
-  document.getElementById("notificationCounter").innerText = this.responseText;
+  const notify = this.responseText >= 100 ? '99+' : this.responseText;
+  document.getElementById("notificationCounter").innerText = notify;
+  document.getElementById("notificationCounter2").innerText = notify;
 }
 
 function checkAddedHandler(creator){
