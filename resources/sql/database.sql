@@ -915,6 +915,11 @@ INSERT INTO badges(badgeName) VALUES ('5 correct answers!'); --10
 INSERT INTO badges(badgeName) VALUES ('10 correct answers!'); --11
 INSERT INTO badges(badgeName) VALUES ('15 correct answers!'); --12
 INSERT INTO badges(badgeName) VALUES ('20 correct answers!'); --13
+INSERT INTO badges(badgeName) VALUES ('Someone liked a post you made!'); --14
+INSERT INTO badges(badgeName) VALUES ('5 people liked a post you made!'); --15
+INSERT INTO badges(badgeName) VALUES ('10 people liked a post you made!'); --16
+INSERT INTO badges(badgeName) VALUES ('15 people liked a post you made!'); --17
+INSERT INTO badges(badgeName) VALUES ('20 people liked a post you made!'); --18
 
 
 --tags
