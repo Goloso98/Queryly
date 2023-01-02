@@ -86,7 +86,8 @@ function notifyCounterHandler(){
     clearInterval(notifyTimer);
   const notify = this.responseText >= 100 ? '99+' : this.responseText;
   document.getElementById("notificationCounter").innerText = notify;
-  document.getElementById("notificationCounter2").innerText = notify;
+  const mobile = document.getElementById("notificationCounter2");
+  this.responseText ? mobile.classList.remove("d-none") : mobile.classList.add("d-none")
 }
 
 function checkAddedHandler(creator){

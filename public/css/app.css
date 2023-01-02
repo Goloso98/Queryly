@@ -282,3 +282,7 @@ input[type="search"] {
   background-color: lightgreen;
   color: #333;
 }
+
+.pushright {
+  float: inline-end;
+}
