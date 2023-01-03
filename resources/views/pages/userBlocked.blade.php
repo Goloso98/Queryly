@@ -9,7 +9,7 @@
 <br>
 <ul>
     @forelse($users as $user)
-        @include('partials.user')
+        @include('partials.user', ['profile' => false])
     @empty
         <p class="centering">There are no blocked users.</p>
     @endforelse

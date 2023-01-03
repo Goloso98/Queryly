@@ -38,7 +38,7 @@
     @else
         <ul>
             @forelse($users as $user)
-                @include('partials.user')
+                @include('partials.user', ['profile' => false])
             @empty
                 <p class="centering">No results found</p>
             @endforelse
