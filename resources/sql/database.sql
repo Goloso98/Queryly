@@ -225,10 +225,6 @@ BEGIN
 		FROM user_tags
 		WHERE userid != post_owner AND tagid = NEW.tagid
 	LOOP
-		-- notified_user
-		-- NEW.postid
-		-- get if there is any notification already
-		-- select do notification para ter o userid e do new_question para saber o postid
 		IF NOT EXISTS(SELECT FROM new_questions LEFT JOIN notifications ON notificationid = id WHERE postid = NEW.postid AND userid = notified_user LIMIT 1)
 		THEN
 			WITH inserted AS (
