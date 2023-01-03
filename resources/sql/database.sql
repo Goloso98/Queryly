@@ -29,6 +29,7 @@ DROP TYPE if EXISTS report_type CASCADE;
 CREATE TYPE post_type AS ENUM ('question', 'answer');
 CREATE TYPE user_role AS ENUM ('Moderator', 'Administrator');
 CREATE TYPE report_type AS ENUM ('post', 'comment');
+CREATE TYPE notify_type AS ENUM ('new_answers', 'new_questions', 'new_comments', 'new_badges', 'new_stars');
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -121,6 +122,7 @@ CREATE TABLE notifications (
     id SERIAL PRIMARY KEY,
     userID INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE CASCADE ON DELETE CASCADE,
     isRead BOOLEAN NOT NULL,
+    notifyType notify_type NOT NULL,
     notificationDate DATE NOT NULL
 );
 
@@ -178,8 +180,8 @@ BEGIN
         FOR notified_user IN SELECT DISTINCT userid FROM user_questions WHERE postid = NEW.parentPost AND userid != NEW.userid
         LOOP
             WITH inserted AS (
-                INSERT INTO notifications (userID, isRead, notificationDate)
-                VALUES (notified_user, FALSE, CURRENT_TIMESTAMP)
+                INSERT INTO notifications (userID, isRead, notificationDate, notifyType)
+                VALUES (notified_user, FALSE, CURRENT_TIMESTAMP, 'new_answers')
                 RETURNING id
             ) INSERT INTO new_answers(notificationid, postid, questionid) SELECT inserted.id, NEW.id, NEW.parentPost FROM inserted;
         END LOOP;
@@ -230,8 +232,8 @@ BEGIN
 		IF NOT EXISTS(SELECT FROM new_questions LEFT JOIN notifications ON notificationid = id WHERE postid = NEW.postid AND userid = notified_user LIMIT 1)
 		THEN
 			WITH inserted AS (
-				INSERT INTO notifications (userID, isRead, notificationDate)
-            		VALUES (notified_user, FALSE, CURRENT_TIMESTAMP)
+				INSERT INTO notifications (userID, isRead, notificationDate, notifyType)
+            		VALUES (notified_user, FALSE, CURRENT_TIMESTAMP, 'new_questions')
             		RETURNING id
 			) INSERT INTO new_questions(notificationID, postID) SELECT inserted.id, NEW.postID FROM inserted;
 		END IF;
@@ -251,8 +253,8 @@ CREATE OR REPLACE FUNCTION add_comment_notification() RETURNS TRIGGER AS
 $BODY$
 BEGIN
     WITH inserted AS (
-        INSERT INTO notifications (userID, isRead, notificationDate)
-        VALUES (NEW.userID, FALSE, CURRENT_TIMESTAMP)
+        INSERT INTO notifications (userID, isRead, notificationDate, notifyType)
+        VALUES (NEW.userID, FALSE, CURRENT_TIMESTAMP, 'new_comments')
         RETURNING id
     )
     INSERT INTO new_comments SELECT inserted.id, NEW.id FROM inserted;
@@ -273,8 +275,8 @@ DECLARE notified_user INTEGER;
 BEGIN
     SELECT userID INTO notified_user FROM posts WHERE NEW.postID = posts.id;
     WITH inserted AS (
-        INSERT INTO notifications (userID, isRead, notificationDate)
-        VALUES (notified_user, FALSE, CURRENT_TIMESTAMP)
+        INSERT INTO notifications (userID, isRead, notificationDate, notifyType)
+        VALUES (notified_user, FALSE, CURRENT_TIMESTAMP, 'new_stars')
         RETURNING id
     )
     INSERT INTO new_stars SELECT inserted.id, NEW.postID FROM inserted;
@@ -293,8 +295,8 @@ CREATE OR REPLACE FUNCTION add_badge_notification() RETURNS TRIGGER AS
 $BODY$
 BEGIN
     WITH inserted AS (
-        INSERT INTO notifications (userID, isRead, notificationDate)
-        VALUES (NEW.userID, FALSE, CURRENT_TIMESTAMP)
+        INSERT INTO notifications (userID, isRead, notificationDate, notifyType)
+        VALUES (NEW.userID, FALSE, CURRENT_TIMESTAMP, 'new_badges')
         RETURNING id
     )
     INSERT INTO new_badges SELECT inserted.id, NEW.badgeID FROM inserted;
