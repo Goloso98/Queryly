@@ -42,4 +42,3 @@
         </div>
     </div>
 </article>
-<br>

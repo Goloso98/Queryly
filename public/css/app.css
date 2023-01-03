@@ -291,3 +291,13 @@ input[type="search"] {
 .footer {
   background-color: #6FD25A;
 }
+
+/* Notifications Header */
+.offcanvas-header {
+  background-color: #6FD25A;
+  color: white;
+}
+
+.card {
+  margin-bottom: 15px;
+}
