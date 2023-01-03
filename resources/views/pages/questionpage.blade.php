@@ -77,12 +77,12 @@
                     }
                 @endphp
                 @if($userStar)
-                    <i class="fa-solid fa-star star">&nbsp;{{ count($stars) }}</i>  
+                    <i class="fa-solid fa-star star" title="unlike question">&nbsp;{{ count($stars) }}</i>  
                 @else
-                    <i class="fa-regular fa-star star">&nbsp;{{ count($stars) }}</i>  
+                    <i class="fa-regular fa-star star" title="like question">&nbsp;{{ count($stars) }}</i>  
                 @endif
             @else
-            <i class="fa-regular fa-star">&nbsp;{{ count($stars) }}</i>
+            <i class="fa-regular fa-star" title="like question">&nbsp;{{ count($stars) }}</i>
             @endif
             @php
                 $tags = $question->tags;

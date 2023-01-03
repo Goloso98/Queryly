@@ -46,12 +46,12 @@
                         $correct = $answer->iscorrect;
                     @endphp
                     @if( $correct )
-                        <i class="fa-solid fa-circle-check check"></i>
+                        <i class="fa-solid fa-circle-check check" title="mark incorrect"></i>
                     @else
-                        <i class="fa-regular fa-circle-check check"></i>
+                        <i class="fa-regular fa-circle-check check" title="mark correct"></i>
                     @endif
                 @else
-                    <i class="fa-regular fa-circle-check"></i>
+                    <i class="fa-regular fa-circle-check" title="mark correct"></i>
                 @endif
             @endif
 
@@ -66,12 +66,12 @@
                     }
                 @endphp
                 @if($userStar)
-                    <i class="fa-solid fa-star star">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>  
+                    <i class="fa-solid fa-star star" title="unlike answer">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>  
                 @else
-                    <i class="fa-regular fa-star star">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>  
+                    <i class="fa-regular fa-star star" title="like answer">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>  
                 @endif
             @else
-                <i class="fa-regular fa-star">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>
+                <i class="fa-regular fa-star" title="like answer">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>
             @endif
             @if(!$showTitle)
                 <a class="btn" aria-current="page" href="{{route('addComment', $answer->id)}}">Add Comment</a>
