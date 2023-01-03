@@ -28,6 +28,7 @@ class PostController extends Controller
       $post = Post::find($id);
       if($post->posttype == 'question')
         return view('pages.questionpage', ['question' => $post]);
+      return view('pages.questionpage', ['question' => Post::find($post->parentpost)]);
     }
 
     //Own User Questions

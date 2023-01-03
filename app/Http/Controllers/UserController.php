@@ -269,14 +269,21 @@ class UserController extends Controller
         abort(401);
       }
 
-      return Auth::user()->notifications()->get();
+      $content = Auth::user()->notifications()->orderBy('id', 'desc')->get();
+
+      $resp = [ 'userid' => Auth::id(), 'content' => $content ];
+
+      return $resp;
     }
 
-    public function readNotify($id) {
-      $notify = Notification::find($id);
-      if(!($notify && Auth::check() && Auth::id()==$notify->userid)) abort(404);
+    public function readNotify() {
+      if (!Auth::check()) {
+        abort(401);
+      }
+      return '{"status": "ok"}';
+      $notify = Notification::find(4);
+      // if(!($notify && Auth::check() && Auth::id()==$notify->userid)) abort(404);
       $notify->isread = TRUE;
       $notify->save();
-      return "";
     }
 }

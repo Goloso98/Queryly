@@ -84,10 +84,11 @@ let notifyTimer;
 function notifyCounterHandler(){
   if (this.status != 200)
     clearInterval(notifyTimer);
-  const notify = this.responseText >= 100 ? '99+' : this.responseText;
-  document.getElementById("notificationCounter").innerText = notify;
+  const count = this.responseText >= 100 ? '99+' : this.responseText;
+  const nav = document.getElementById("notificationCounter");
+  if (nav) nav.innerText = count;
   const mobile = document.getElementById("notificationCounter2");
-  this.responseText ? mobile.classList.remove("d-none") : mobile.classList.add("d-none")
+  if (mobile) this.responseText ? mobile.classList.remove("d-none") : mobile.classList.add("d-none");
   const offcanvas = document.getElementsByClassName("offcanvas-title")[0].children[0].innerHTML = this.responseText;
 }
 
@@ -277,6 +278,8 @@ function topFunction() {
   document.documentElement.scrollTop = 0;
 }
 
+
+
 //notify offcanvas update on click
 let notifyTypeHandler = {
   'new_answers': (obj)=> {
@@ -288,16 +291,15 @@ let notifyTypeHandler = {
     markRead.classList.add('btn');
     markRead.innerText = 'Mark as read';
     notification.appendChild(card);
-    notification.appendChild(markRead);
+    // notification.appendChild(markRead);
     card.innerText = 'You received a new answer!\n\n' + obj.notificationdate;
-    markRead.addEventListener("click", function(e) {
-      sendAjaxRequest('PATCH', 'api/user/notifications/read/'+obj.id, null, null);
-      e.stopPropagation();
-    });
+    // markRead.addEventListener("click", function(e) {
+    //   // sendAjaxRequest('PATCH', 'api/user/notifications/read/'+obj.id, null, null);
+    //   e.stopPropagation();
+    // });
     notification.addEventListener("click", function(e) {
-      sendAjaxRequest('PATCH', 'api/user/notifications/read/'+obj.id, null, () => 
-      window.location.href = '/posts/'+obj.new_content.questionid+'#answer-'+obj.new_content.postid
-      );
+      // sendAjaxRequest('PATCH', 'api/user/notifications/read/'+obj.id, null, null);
+      window.location.href = '/posts/'+obj.new_content.questionid+'#answer-'+obj.new_content.postid;
     });
     return notification;
   },
@@ -311,10 +313,10 @@ let notifyTypeHandler = {
     markRead.classList.add('btn');
     markRead.innerText = 'Mark as read';
     notification.appendChild(card);
-    notification.appendChild(markRead);
-    card.innerText = 'A new question has been posted on tag....!\n' + obj.notificationdate;
+    // notification.appendChild(markRead);
+    card.innerText = 'A new question has been posted on a tag you follow!\n' + obj.notificationdate;
     notification.addEventListener("click", function(e) {
-      //sendAjaxRequest('PATCH', 'api/user/notifications/read/'+obj.id, null, null);
+      // sendAjaxRequest('PATCH', 'api/user/notifications/read/'+obj.id, null, null);
       window.location.href = '/posts/'+obj.new_content.postid;
       
     });
@@ -328,9 +330,9 @@ let notifyTypeHandler = {
     notification.appendChild(card);
     card.innerText = 'A new comment has been posted on your question!\n' + obj.notificationdate;
     notification.addEventListener("click", function() {
-      notification.innerText = 'clicked';
-      sendAjaxRequest('patch', 'api/user/notifications/read/'+obj.id, null, null);
-      // window.location.href = 'posts/'.obj.new_content.postid;
+      // notification.innerText = 'clicked';
+      // sendAjaxRequest('PATCH', '/api/user/notifications/read', null, null);
+      window.location.href = '/posts/'+obj.new_content.postid;
     });
     return notification;
   },
@@ -342,8 +344,8 @@ let notifyTypeHandler = {
     notification.appendChild(card);
     card.innerText = 'You received a new badge!\n' + obj.notificationdate;
     notification.addEventListener("click", function() {
-      notification.innerText = 'clicked';
-      sendAjaxRequest('patch', 'api/user/notifications/read/'+obj.id, null, null);
+      // notification.innerText = 'clicked';
+      // sendAjaxRequest('patch', '/api/user/notifications/read/', null, null);
       // window.location.href = 'users/????/badges';
     });
     return notification;
@@ -354,26 +356,26 @@ let notifyTypeHandler = {
     const card = document.createElement('div');
     card.classList.add('card-body');
     notification.appendChild(card);
-    card.innerText = 'Your post (check if answer or question?) just received a like!\n' + obj.notificationdate;
+    card.innerText = 'Your post just received a like!\n' + obj.notificationdate;
     notification.addEventListener("click", function() {
-      notification.innerText = 'clicked';
-      sendAjaxRequest('patch', 'api/user/notifications/read/'+obj.id, null, null);
-      // window.location.href = 'posts/'.obj.new_content.postid;
+      // notification.innerText = 'clicked';
+      // sendAjaxRequest('patch', 'api/user/notifications/read/'+obj.id, null, null);
+      window.location.href = '#'; //'/posts/'+obj.new_content.postid;
     });
     return notification;
   },
 }
 let notificationsArray = [];
 function updateNotify() {
-  if (this.status != 200) return;
   const notify = document.getElementById("notificationsArea");
+  if (this.status != 200 || !notify) return;
   // notify.innerHTML = this.responseText;
   notify.innerHTML = "";
   obj = JSON.parse(this.responseText);
-  obj.forEach(elm => {
-    notify.appendChild(notifyTypeHandler[elm.notifytype](elm));
+  obj.content.forEach(elm => {
+    notify?.appendChild(notifyTypeHandler[elm.notifytype](elm));
   });
   // console.log(obj);
 }
 const notifyBtn = document.getElementById("notificationButton");
-notifyBtn.addEventListener("click", ()=>sendAjaxRequest('get', '/api/user/notifications/', null, updateNotify));
+if (notifyBtn) notifyBtn.addEventListener("click", ()=>sendAjaxRequest('get', '/api/user/notifications/', null, updateNotify));

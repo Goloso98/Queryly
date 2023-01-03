@@ -77,7 +77,7 @@ Route::put('api/star/{userid}/{postid}', 'StarController@create');
 Route::delete('api/star/{userid}/{postid}', 'StarController@delete');
 Route::put('api/posts/{id}/correct', 'PostController@correctness');
 Route::delete('api/report/{id}', 'ReportController@delete');
-Route::patch('api/user/notifications/read/{id}', 'UserController@readNotify');
+Route::get('api/user/notifications/read', 'UserController@readNotify');
 Route::get('api/user/notifications/count', 'UserController@getUserNotificationsCount');
 Route::get('api/user/notifications/', 'UserController@getUserNotifications');
 
