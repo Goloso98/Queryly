@@ -34,6 +34,10 @@ class UserController extends Controller
     //Show User Profile
     public function show($id)
     {
+      $valid = User::where(['id' => $id, 'isdeleted' => false])->get()->isNotEmpty();
+      if(!$valid){
+        abort(404);
+      }
       $user = User::find($id);
       return view('pages.user', ['user' => $user]);
     }
@@ -48,7 +52,7 @@ class UserController extends Controller
     //Show All Users
     public function showUsers()
     {
-      $users = User::where('isblocked', 'FALSE')->paginate(7);
+      $users = User::where('isdeleted', 'FALSE')->paginate(7);
       return view('pages.userpage', compact('users'));
     }
 
@@ -117,7 +121,15 @@ class UserController extends Controller
     {
       $user = User::find($id);
       $username = $user->name;
-      $user->delete();
+      $user->name = 'deleted';
+      $user->username = 'deleted'.$id;
+      $user->email = 'deleted'.$id;
+      $user->password = 'deleted';
+      $user->avatar = 'deleted';
+
+      $user->isdeleted = true;
+      $user->save();
+      
       $request->session()->flash('alert-success', $username.' has been successfully deleted!');
       if(Auth::id() == $id) return redirect('logout');
       return redirect(route('users.page'));
@@ -127,7 +139,7 @@ class UserController extends Controller
     public function search(Request $request)
     {
       $request->validate([
-        'search' => 'required',
+        'search' => 'nullable',
       ]);
 
       $userSearch = FALSE;
@@ -135,17 +147,16 @@ class UserController extends Controller
         $userSearch = TRUE;
       }
 
-      if($request->has('search')){
+      if($request->has('search') && $request->input("search") != null){
         $search_input = $request->input('search');
 
         $statement1 = 'tsvectors @@ plainto_tsquery(\'english\',?)';
-        $users = User::whereRaw($statement1, [$search_input])->where('isblocked', 'FALSE');
+        $users = User::whereRaw($statement1, [$search_input])->where('isdeleted', 'FALSE');
       } else {
-        //here because code gets angry otherwise
         $users = User::all();
       }
-      
-      return view('pages.search', ['posts' => [], 'users' => $users->get(), 'userSearch' => $userSearch], compact('users'));
+      if($request->has('search') && $request->input("search") != null) $users = $users->get();
+      return view('pages.search', ['posts' => [], 'users' => $users, 'userSearch' => $userSearch], compact('users'));
     }
 
     //Show User Role

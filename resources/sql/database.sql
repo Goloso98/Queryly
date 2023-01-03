@@ -528,7 +528,7 @@ INSERT INTO users(name, email, username, password, birthday) VALUES ('Leyton Har
 INSERT INTO roles(userID, userRole) VALUES (7,'Moderator');
 
 --Generic User
-INSERT INTO users(name, email, username, password, birthday) VALUES ('Jonah Kaufman','jonah_kaufman@example.com','JonahKaufman','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','10/13/93');
+INSERT INTO users(name, email, username, password, birthday, isDeleted) VALUES ('Annabelle Kaufman','jonah_kaufman@example.com','JonahKaufman','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','10/13/93', TRUE);
 INSERT INTO users(name, email, username, password, birthday) VALUES ('Poppie Bartlett','poppie_bartlett@example.com','PoppieBartlett','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','09/14/85');
 INSERT INTO users(name, email, username, password, birthday) VALUES ('Natalia Wheeler','natalia_wheeler@example.com','NataliaWheeler','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','06/17/99');
 INSERT INTO users(name, email, username, password, birthday) VALUES ('Carl Nelson','carl_nelson@example.com','CarlNelson','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','12/28/07');
@@ -540,7 +540,7 @@ INSERT INTO users(name, email, username, password, birthday) VALUES ('Diego King
 INSERT INTO users(name, email, username, password, birthday) VALUES ('Richard Barrett','richard_barrett@example.com','RichardBarrett','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','09/14/96');
 INSERT INTO users(name, email, username, password, birthday) VALUES ('Katie Calhoun','katie_calhoun@example.com','KatieCalhoun','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','06/11/93');
 INSERT INTO users(name, email, username, password, birthday) VALUES ('Hugo Serrano','hugo_serrano@example.com','HugpSerrano','$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W','10/11/09');
-INSERT INTO users(name, email, username, password, birthday) VALUES ('Isacco Pyott', 'ipyott0@example.com', 'ipyott0', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '08/05/97');
+INSERT INTO users(name, email, username, password, birthday) VALUES ('Annabelle Pyott', 'ipyott0@example.com', 'ipyott0', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '08/05/97');
 INSERT INTO users(name, email, username, password, birthday) VALUES ('Brad Surby', 'bsurby1@example.com', 'bsurby1', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '03/25/94');
 INSERT INTO users(name, email, username, password, birthday) VALUES ('Chrissie Leif', 'cleif2@example.com', 'cleif2', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '02/18/95');
 INSERT INTO users(name, email, username, password, birthday) VALUES ('Pete Weston', 'pweston3@example.com', 'pweston3', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '06/02/96');
@@ -785,10 +785,10 @@ INSERT INTO comments(postID, userID, commentText) VALUES (26, 8, 'I tried this a
 INSERT INTO comments(postID, userID, commentText) VALUES (27, 2, 'This was really helpful, thank you!');
 INSERT INTO comments(postID, userID, commentText) VALUES (28, 3, 'I totally agree with this answer!');
 INSERT INTO comments(postID, userID, commentText) VALUES (29, 4, 'I think this is a really important point to consider!');
-INSERT INTO comments(postID, userID, commentText) VALUES (30, 5, 'I agree, this is a great tip!');
+INSERT INTO comments(postID, userID, commentText) VALUES (30, 5, 'This is a great tip!');
 INSERT INTO comments(postID, userID, commentText) VALUES (31, 6, 'I had never thought of this before, thank you!');
 INSERT INTO comments(postID, userID, commentText) VALUES (32, 7, 'This was really helpful, thank you!');
-INSERT INTO comments(postID, userID, commentText) VALUES (33, 8, 'I totally agree with this comment!');
+INSERT INTO comments(postID, userID, commentText) VALUES (33, 8, 'I totally value your comment!');
 INSERT INTO comments(postID, userID, commentText) VALUES (34, 2, 'This was a really helpful suggestion, thank you!');
 INSERT INTO comments(postID, userID, commentText) VALUES (35, 3, 'I had never thought of this before, thank you for the suggestion!');
 INSERT INTO comments(postID, userID, commentText) VALUES (36, 4, 'I totally agree with this comment!');
@@ -804,12 +804,11 @@ INSERT INTO comments(postID, userID, commentText) VALUES (45, 6, 'I totally agre
 INSERT INTO comments(postID, userID, commentText) VALUES (46, 7, 'This was a great suggestion, thank you!');
 INSERT INTO comments(postID, userID, commentText) VALUES (47, 8, 'I tried this and it worked really well for me!');
 INSERT INTO comments(postID, userID, commentText) VALUES (48, 1, 'This was really helpful, thank you!');
-INSERT INTO comments(postID, userID, commentText) VALUES (49, 1, 'I totally agree with this answer!');
+INSERT INTO comments(postID, userID, commentText) VALUES (49, 1, 'Thanks!');
 INSERT INTO comments(postID, userID, commentText) VALUES (50, 1, 'I think this is a really important point to consider!');
 INSERT INTO comments(postID, userID, commentText) VALUES (51, 1, 'I agree, this is a great tip!');
 
 --stars
-INSERT INTO stars (postID, userID) VALUES (1,1);
 INSERT INTO stars (postID, userID) VALUES (7,1);
 INSERT INTO stars (postID, userID) VALUES (48,1);
 INSERT INTO stars (postID, userID) VALUES (49,1);
@@ -915,7 +914,51 @@ INSERT INTO badges(badgeName) VALUES ('5 correct answers!'); --10
 INSERT INTO badges(badgeName) VALUES ('10 correct answers!'); --11
 INSERT INTO badges(badgeName) VALUES ('15 correct answers!'); --12
 INSERT INTO badges(badgeName) VALUES ('20 correct answers!'); --13
+INSERT INTO badges(badgeName) VALUES ('Someone liked a post you made!'); --14
+INSERT INTO badges(badgeName) VALUES ('5 people liked a post you made!'); --15
+INSERT INTO badges(badgeName) VALUES ('10 people liked a post you made!'); --16
+INSERT INTO badges(badgeName) VALUES ('15 people liked a post you made!'); --17
+INSERT INTO badges(badgeName) VALUES ('20 people liked a post you made!'); --18
 
+--user badges questions
+INSERT INTO user_badges(userID, badgeID) VALUES (1,1);
+INSERT INTO user_badges(userID, badgeID) VALUES (2,1);
+INSERT INTO user_badges(userID, badgeID) VALUES (3,1);
+INSERT INTO user_badges(userID, badgeID) VALUES (4,1);
+INSERT INTO user_badges(userID, badgeID) VALUES (5,1);
+INSERT INTO user_badges(userID, badgeID) VALUES (6,1);
+INSERT INTO user_badges(userID, badgeID) VALUES (7,1);
+INSERT INTO user_badges(userID, badgeID) VALUES (8,1);
+INSERT INTO user_badges(userID, badgeID) VALUES (10,1);
+
+--user badges corrects
+INSERT INTO user_badges(userID, badgeID) VALUES (2,9);
+INSERT INTO user_badges(userID, badgeID) VALUES (4,9);
+
+--user badges stars
+INSERT INTO user_badges(userID, badgeID) VALUES (1,14);
+INSERT INTO user_badges(userID, badgeID) VALUES (1,15);
+INSERT INTO user_badges(userID, badgeID) VALUES (2,14);
+INSERT INTO user_badges(userID, badgeID) VALUES (2,15);
+INSERT INTO user_badges(userID, badgeID) VALUES (2,16);
+INSERT INTO user_badges(userID, badgeID) VALUES (3,14);
+INSERT INTO user_badges(userID, badgeID) VALUES (4,14);
+INSERT INTO user_badges(userID, badgeID) VALUES (4,15);
+INSERT INTO user_badges(userID, badgeID) VALUES (5,14);
+INSERT INTO user_badges(userID, badgeID) VALUES (5,15);
+INSERT INTO user_badges(userID, badgeID) VALUES (5,16);
+INSERT INTO user_badges(userID, badgeID) VALUES (5,17);
+INSERT INTO user_badges(userID, badgeID) VALUES (6,14);
+INSERT INTO user_badges(userID, badgeID) VALUES (6,15);
+INSERT INTO user_badges(userID, badgeID) VALUES (6,16);
+INSERT INTO user_badges(userID, badgeID) VALUES (7,14);
+INSERT INTO user_badges(userID, badgeID) VALUES (7,15);
+INSERT INTO user_badges(userID, badgeID) VALUES (7,16);
+INSERT INTO user_badges(userID, badgeID) VALUES (8,14);
+INSERT INTO user_badges(userID, badgeID) VALUES (8,15);
+INSERT INTO user_badges(userID, badgeID) VALUES (8,16);
+INSERT INTO user_badges(userID, badgeID) VALUES (10,14);
+INSERT INTO user_badges(userID, badgeID) VALUES (10,15);
 
 --tags
 --1

@@ -9,6 +9,7 @@
         @endif
       @endforeach
     </div> <!-- end .flash-message -->
+
     <br>
     <h2 class="centering">Our Users</h2>
     <hr>
@@ -19,7 +20,7 @@
 
     <ul>
         @foreach($users as $user)
-            @include('partials.user')
+            @include('partials.user', ['profile' => FALSE])
         @endforeach
     </ul>
     <div class="d-flex justify-content-center">

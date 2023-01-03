@@ -51,7 +51,7 @@
         </div>
     </div>
     <button onclick="topFunction()" id="topBtn" title="Go to top">Top</button>
-    <div class="bg-info mt-auto">
+    <div class="footer mt-auto">
         <div class="container">
             @include('partials.footer')
         </div>
