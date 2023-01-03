@@ -268,10 +268,7 @@ class PostController extends Controller
         $statement1 = 'tsvectors @@ plainto_tsquery(\'english\',?)';
         $posts = Post::whereRaw($statement1, [$search_input]);
         $posts = $posts->get();
-      } else if ($request->input("search") == null) {
-        $posts = Post::all();
       } else {
-        //here because code gets angry otherwise
         $posts = Post::all();
       }
 

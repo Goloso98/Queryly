@@ -9,6 +9,7 @@
         @endif
       @endforeach
     </div> <!-- end .flash-message -->
+
     <br>
     <h2 class="centering">Our Users</h2>
     <hr>

@@ -19,13 +19,18 @@
       if($roleAdmin && $roleMod) $roleText = $roleText.', ';
       if($roleMod) $roleText = $roleText.'Moderator';
       $roleText = $roleText.')';
-      $authroles = Auth::user()->roles;
-      $authAdmin = $authroles->contains(function($item){
-        return $item->userrole === 'Administrator';
-      });
-      $authMod = $authroles->contains(function($item){
-        return $item->userrole === 'Administrator';
-      });
+      if(Auth::check()){
+        $authroles = Auth::user()->roles;
+        $authAdmin = $authroles->contains(function($item){
+          return $item->userrole === 'Administrator';
+        });
+        $authMod = $authroles->contains(function($item){
+          return $item->userrole === 'Administrator';
+        });
+      } else {
+        $authAdmin = false;
+        $authMod = false;
+      }
     @endphp
     <br>
 
