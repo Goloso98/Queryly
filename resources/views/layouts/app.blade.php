@@ -19,6 +19,16 @@
     <script src="{{ URL::asset('js/app.js') }}" defer></script>
 </head>
 <body class="d-flex flex-column min-vh-100">
+    <div class="offcanvas offcanvas-end" id="notificationsOffcanvas">
+    <div class="offcanvas-header">
+        <h1 class="offcanvas-title">Notifications (<span>0</span>)</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body" id="notificationsArea">
+        <div><p>ola</p></div>
+    </div>
+    </div>
+
     <div class="bg-primary position-sticky fixed-top">
         <div class="container">
             @include('partials.navbar')

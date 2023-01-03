@@ -251,4 +251,12 @@ class UserController extends Controller
       }
       abort(401);
     }
+
+    public function getUserNotifications(){
+      if (!Auth::check()) {
+        abort(401);
+      }
+
+      return Auth::user()->notifications()->get();
+    }
 }

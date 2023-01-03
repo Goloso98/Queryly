@@ -88,6 +88,7 @@ function notifyCounterHandler(){
   document.getElementById("notificationCounter").innerText = notify;
   const mobile = document.getElementById("notificationCounter2");
   this.responseText ? mobile.classList.remove("d-none") : mobile.classList.add("d-none")
+  const offcanvas = document.getElementsByClassName("offcanvas-title")[0].children[0].innerHTML = this.responseText;
 }
 
 function checkAddedHandler(creator){

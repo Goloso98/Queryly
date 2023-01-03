@@ -7,7 +7,6 @@
         <button class="navbar-toggler position-relative" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-            <!-- <span id="notificationCounter2" class="position-absolute bottom-0 start-0 translate-middle badge rounded-pill bg-danger"></span> -->
             <span id="notificationCounter2" class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle d-none"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end centering" id="navbarSupportedContent">
@@ -36,7 +35,7 @@
                     <a class="btn btn-outline-light" aria-current="page" href="/logout">Logout</a>
                 </li>
                 <li class="nav-item">
-                    <button id="notificationButton" type="button" class="btn btn-primary">
+                    <button id="notificationButton" type="button" class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#notificationsOffcanvas">
                         <i class="fa-solid fa-bell position-relative mx-1">
                             <span id="notificationCounter" class="position-absolute top-0 start-100 badge rounded-pill bg-danger"></span>
                         </i>
