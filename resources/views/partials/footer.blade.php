@@ -1,4 +1,4 @@
-<footer class="p-3">
+<footer>
     <div class="col centering">
         <a class="btn" href=" {{ route('about') }} "> About Us </a>
         <a class="btn" href=" {{ route('contacts') }} "> Contacts </a>
