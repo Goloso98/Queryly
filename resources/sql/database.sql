@@ -288,6 +288,26 @@ CREATE TRIGGER add_star_notification
     FOR EACH ROW
     EXECUTE PROCEDURE add_star_notification();
 
+-- BADGE NOTIFICATIONS
+CREATE OR REPLACE FUNCTION add_badge_notification() RETURNS TRIGGER AS
+$BODY$
+BEGIN
+    WITH inserted AS (
+        INSERT INTO notifications (userID, isRead, notificationDate)
+        VALUES (NEW.userID, FALSE, CURRENT_TIMESTAMP)
+        RETURNING id
+    )
+    INSERT INTO new_badges SELECT inserted.id, NEW.badgeID FROM inserted;
+    RETURN NEW;
+END;
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER add_badge_notification
+    AFTER INSERT ON user_badges
+    FOR EACH ROW
+    EXECUTE PROCEDURE add_badge_notification();
+
 -- PERFORMANCE INDEXES
 
 -- TAGS
