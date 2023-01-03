@@ -93,10 +93,12 @@
         @can('update', $user) 
           <p><a class="btn cardBtn" aria-current="page" href="{{ route('editUser', $user->id) }}"> Edit </a></p>
         @endcan
-        <form method="post" action="{{ route('users.delete', $user->id) }}">
-          @csrf
-          <button type="submit" class="btn cardBtn">  Delete Account </button>
-        </form>
+        @can('update', $user)
+          <form method="post" action="{{ route('users.delete', $user->id) }}">
+            @csrf
+            <button type="submit" class="btn cardBtn">  Delete Account </button>
+          </form>
+        @endcan
       </div>
     @endif
     <br>
