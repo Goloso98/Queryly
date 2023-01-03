@@ -21,6 +21,6 @@ class Notification extends Model
   }
 
   public function getNewContentAttribute() {
-    return DB::table('new_answers')->where("notificationid", $this->id)->first();
+    return DB::table($this->notifytype)->where("notificationid", $this->id)->first();
   }
 }
