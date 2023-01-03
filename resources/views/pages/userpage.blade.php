@@ -20,7 +20,7 @@
 
     <ul>
         @foreach($users as $user)
-            @include('partials.user')
+            @include('partials.user', ['profile' => FALSE])
         @endforeach
     </ul>
     <div class="d-flex justify-content-center">
