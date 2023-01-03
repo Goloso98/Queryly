@@ -20,10 +20,10 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
     <div class="offcanvas offcanvas-end" id="notificationsOffcanvas">
-    <div class="offcanvas-header">
-        <h1 class="offcanvas-title">Notifications (<span>0</span>)</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-    </div>
+        <div class="offcanvas-header">
+            <h3 class="offcanvas-title">Notifications (<span>0</span>)</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
         <div class="offcanvas-body" id="notificationsArea"></div>
     </div>
 
