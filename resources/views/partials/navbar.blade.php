@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
     <div class="container-fluid">
         <a href="{{ route('homepage')}}" class="navbar-brand">
-            <img src="{{ URL::asset('logo.png') }}" alt="{{ config('app.name', 'Laravel') }}!"
+            <img src="{{ URL::asset('logo.png') }}" alt="logo"
                  style="width:42px;height:42px;">
         </a>
         <button class="navbar-toggler position-relative" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
