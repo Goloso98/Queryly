@@ -35,12 +35,12 @@
                     }
                 @endphp
                 @if($userStar)
-                    <i class="fa-solid fa-star star">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>  
+                    <i class="fa-solid fa-star star" title="unlike question">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>  
                 @else
-                    <i class="fa-regular fa-star star">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>  
+                    <i class="fa-regular fa-star star" title="like question">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>  
                 @endif
             @else
-               <i class="fa-regular fa-star">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>
+               <i class="fa-regular fa-star" title="like question">&nbsp;<span class="starLabel">{{ count($stars) }}</span></i>
             @endif
         </div>
     </div>
