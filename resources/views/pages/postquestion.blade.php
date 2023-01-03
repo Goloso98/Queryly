@@ -45,7 +45,7 @@
         <div class="accordion-body">
             <div class="container centering">
               <div class="row">
-                @foreach(App\Models\Tag::all() as $tag)
+                @foreach(App\Models\Tag::select( DB::raw('id, tagname, UPPER(tagName) as name') )->orderBy('name', 'ASC')->get() as $tag)
                   <div class="form-check col-4">
                     <input class="form-check-input" type="checkbox" value="{{ $tag->id }}" id="{{ $tag->tagname }}" name="{{ $tag->tagname }}">
                     <label class="form-check-label" for="{{ $tag->tagname }}">{{ $tag->tagname }}</label>

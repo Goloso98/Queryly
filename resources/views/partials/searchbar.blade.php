@@ -12,7 +12,7 @@
         <div class="accordion" id="accordionTags">
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                         Tags
                     </button>
                 </h2>
@@ -20,8 +20,8 @@
                     <div class="accordion-body">
                         <div class="container centering">
                             <div class="row">
-                                @foreach(App\Models\Tag::all() as $tag)
-                                    <div class="form-check col-4">
+                                @foreach(App\Models\Tag::select( DB::raw('id, tagname, UPPER(tagName) as name') )->orderBy('name', 'ASC')->get() as $tag)
+                                    <div class="form-check col-12 col-md-6 col-lg-4">
                                         <input class="form-check-input" type="checkbox" value="{{ $tag->id }}" id="{{ $tag->tagname }}" name="tag[]">
                                         <label class="form-check-label" for="{{ $tag->tagname }}">{{ $tag->tagname }}</label>
                                     </div>
