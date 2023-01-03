@@ -279,3 +279,31 @@ function topFunction() {
   document.body.scrollTop = 0; // For Safari
   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
+
+//notify offcanvas update on click
+let notifyTypeHandler = {
+  'new_answers': 
+      (obj)=>`<p>answers @ ${obj.notificationdate}</p>`,
+  'new_questions': 
+      (obj)=>`<p>questions @ ${obj.notificationdate}</p>`,
+  'new_comments': 
+      (obj)=>`<p>comments @ ${obj.notificationdate}</p>`,
+  'new_badges': 
+      (obj)=>`<p>badges @ ${obj.notificationdate}</p>`,
+  'new_stars': 
+      (obj)=>`<p>stars @ ${obj.notificationdate}</p>`
+}
+let notificationsArray = [];
+function updateNotify() {
+  if (this.status != 200) return;
+  const notify = document.getElementById("notificationsArea");
+  // notify.innerHTML = this.responseText;
+  notify.innerHTML = "";
+  obj = JSON.parse(this.responseText);
+  obj.forEach(elm => {
+    notify.innerHTML += (notifyTypeHandler[elm.notifytype](elm));
+  });
+  // console.log(obj);
+}
+const notifyBtn = document.getElementById("notificationButton");
+notifyBtn.addEventListener("click", ()=>sendAjaxRequest('get', '/api/user/notifications/', null, updateNotify));

@@ -24,9 +24,7 @@
         <h1 class="offcanvas-title">Notifications (<span>0</span>)</h1>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
     </div>
-    <div class="offcanvas-body" id="notificationsArea">
-        <div><p>ola</p></div>
-    </div>
+        <div class="offcanvas-body" id="notificationsArea"></div>
     </div>
 
     <div class="bg-primary position-sticky fixed-top">
