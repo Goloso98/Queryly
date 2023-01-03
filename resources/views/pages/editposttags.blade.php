@@ -11,7 +11,7 @@
         <hr>
         <br>
         <div class="row">
-            @foreach(App\Models\Tag::all() as $tag)
+            @foreach(App\Models\Tag::select( DB::raw('id, tagname, UPPER(tagName) as name') )->orderBy('name', 'ASC')->get() as $tag)
                 <div class="form-check col-3 centering">
                     @if(!($post->tags->contains($tag->id)))
                         <div class="form-check">

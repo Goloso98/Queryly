@@ -10,7 +10,7 @@
         <hr>
         <br>
         <div class="row">
-            @foreach(App\Models\Tag::all() as $tag)
+            @foreach(App\Models\Tag::select( DB::raw('id, tagname, UPPER(tagName) as name') )->orderBy('name', 'ASC')->get() as $tag)
                 <div class="form-check col-3 centering">
                     <input class="form-check-input" type="checkbox" value="{{ $tag->id }}" id="{{ $tag->id }}" name="{{ $tag->id }}" >
                     <label class="form-check-label" for="{{ $tag->id }}">{{ $tag->tagname }}</label>
