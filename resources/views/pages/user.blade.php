@@ -7,18 +7,6 @@
 @section('content')
   <article class="userbuttons" data-id="{{ $user->id }}">
     @php
-      $roles = $user->roles;
-      $roleAdmin = $roles->contains(function($item){
-          return $item->userrole === 'Administrator';
-        });
-      $roleMod = $roles->contains(function($item){
-          return $item->userrole === 'Moderator';
-        });
-      $roleText = '(';
-      if($roleAdmin) $roleText = $roleText.'Administrator';
-      if($roleAdmin && $roleMod) $roleText = $roleText.', ';
-      if($roleMod) $roleText = $roleText.'Moderator';
-      $roleText = $roleText.')';
       if(Auth::check()){
         $authroles = Auth::user()->roles;
         $authAdmin = $authroles->contains(function($item){
