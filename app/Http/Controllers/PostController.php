@@ -181,8 +181,8 @@ class PostController extends Controller
 
     public function update(Request $request, $id){
       $post = Post::find($id);
-      $tags = Tag::all();
       $this->authorize('update', $post);
+      $tags = Tag::all();
 
       if($post->posttype == 'question') {
         $validate = $request->validate([

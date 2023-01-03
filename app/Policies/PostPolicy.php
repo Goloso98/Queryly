@@ -18,8 +18,7 @@ class PostPolicy
     }
 
     public function update(User $user, Post $post){
-      $role = $user->roles()->get()->pluck('userrole')->contains('Moderator');
-      return ($user->id == $post->userid || $role);
+      return ($user->id == $post->userid);
     }
 
     public function updateTags(User $user, Post $post){
