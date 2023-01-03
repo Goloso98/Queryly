@@ -8,7 +8,7 @@
 
 @section('content')
 <br>
-<article class="post" data-id="{{ $question->id }}" user-id="{{Auth::id()}}">
+<article class="post" data-id="{{ $question->id }}">
     <div class="flash-message">
       @foreach (['danger', 'warning', 'success', 'info'] as $msg)
         @if(Session::has('alert-' . $msg))
@@ -154,12 +154,10 @@
     </div>
 </header>
 <br>
-<ul>
-    @forelse($answers as $answer)
-        @include('partials.answer', ['showTitle' => FALSE, 'report' => FALSE])
-    @empty
-        <p class="centering">There are no answers to this question yet.</p>
-    @endforelse
-</ul>
+@forelse($answers as $answer)
+    @include('partials.answer', ['showTitle' => FALSE, 'report' => FALSE])
+@empty
+    <div class="centering">There are no answers to this question yet.</div>
+@endforelse
 
 @endsection

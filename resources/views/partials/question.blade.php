@@ -1,4 +1,4 @@
-<article class="post" data-id="{{ $question->id }}" user-id="{{ Auth::id() }}">
+<article class="post" data-id="{{ $question->id }}">
     <div class="card">
         <div class="card-body">
             @if($report)
@@ -6,7 +6,7 @@
             @else
                 <h3 class="card-title shrinkTitle">{{ $question->title }}</h3>
             @endif
-            <p>
+            <div>
                 <a href="{{route('posts.postPage', $question->id)}}" class="btn cardBtn">See Post</a>
                 @can('delete', $question)
                     <form method="post" action="{{ route('posts.delete', $question->id) }}">
@@ -14,7 +14,7 @@
                         <button type="submit" class="delete btn">  Delete Question </button>
                     </form>
                 @endcan
-            </p>
+            </div>
             <p class="card-text shrinkText">{{ $question->posttext }}</p>
             {{ $question->postdate }}
             @if($showUser)

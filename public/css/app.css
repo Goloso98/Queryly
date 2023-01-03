@@ -66,7 +66,6 @@
 }
 input[type="search"] {
   height: 35px;
-  border: 1;
   border-width: thin;
   outline: 0;
   color: #333;
@@ -91,7 +90,6 @@ input[type="search"] {
 }
 #accordionTags > div {
   border-color: darkgrey;
-  border: 1;
 }
 .orderby {
   padding: 5px;

@@ -18,7 +18,6 @@
     <br>
     
     @if(!$userSearch)
-        <ul>
             @forelse($posts as $post)
                 @if($post->posttype == 'question')
                     @php
@@ -34,14 +33,11 @@
             @empty
                 <p class="centering">No results found</p>
             @endforelse
-        </ul>
     @else
-        <ul>
             @forelse($users as $user)
                 @include('partials.user', ['profile' => false])
             @empty
                 <p class="centering">No results found</p>
             @endforelse
-        </ul>
     @endif
 @endsection

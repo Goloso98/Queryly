@@ -15,7 +15,7 @@
                     <a class="btn btn-outline-light" aria-current="page" href="/posts/questions/new">Post Question</a>
                 </li>
 
-                <!-- --- mobile sub menu -->
+                <!-- mobile sub menu -->
                 <li class="nav-item d-sm-none">
                     <a class="btn btn-outline-light" aria-current="page" href="{{ route('homepage') }}">Browse</a>
                 </li>
@@ -28,7 +28,7 @@
                 <li class="nav-item d-sm-none">
                     <a class="btn btn-outline-light" aria-current="page" href="{{ route('tags.page') }}">Tags</a>
                 </li>
-                <!-- --- mobile sub menu end -->
+                <!-- mobile sub menu end -->
 
                 @if (Auth::check())
                 <li class="nav-item">
@@ -39,7 +39,6 @@
                         <i class="fa-solid fa-bell position-relative mx-1">
                             <span id="notificationCounter" class="position-absolute top-0 start-100 badge rounded-pill bg-danger"></span>
                         </i>
-                        <p class="p-0 m-0 pushright invisible">100</p> <!-- button padding for badge -->
                     </button>
                 </li>
                 <li class="nav-item">

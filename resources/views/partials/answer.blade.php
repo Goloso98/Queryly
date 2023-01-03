@@ -1,4 +1,4 @@
-<article class="post" data-id="{{ $answer->id }}" user-id="{{Auth::id()}}" id="answer-{{ $answer->id}}">
+<article class="post" data-id="{{ $answer->id }}" id="answer-{{ $answer->id}}">
     <div class="card">
         <div class="card-body">         
             @if($showTitle)
@@ -7,21 +7,19 @@
                 @else
                     <h3 class="card-title">Answer to: {{ App\Models\Post::find($answer->parentpost)->title }}</h3>
                 @endif
-                <p>
                 <a href="{{route('posts.postPage', $answer->parentpost)}}#answer-{{ $answer->id}}" class="btn cardBtn">See Post</a>
             @endif
-                @if(Auth::check())
-                    @if(Auth::id() == $answer->userid || Auth::user()->hasRole('Moderator'))
-                        <form method="post" action="{{ route('posts.delete', $answer->id) }}">
-                            @csrf
-                            <button type="submit" class="delete btn">  Delete Answer </button>
-                        </form>
-                    @endif
-                    @if(Auth::id() == $answer->userid)
-                        <a class="btn cardBtn" aria-current="page" href="{{  route('posts.edit', $answer->id)  }}">Edit</a>
-                    @endif
+            @if(Auth::check())
+                @if(Auth::id() == $answer->userid || Auth::user()->hasRole('Moderator'))
+                    <form method="post" action="{{ route('posts.delete', $answer->id) }}">
+                        @csrf
+                        <button type="submit" class="delete btn">  Delete Answer </button>
+                    </form>
                 @endif
-                </p>
+                @if(Auth::id() == $answer->userid)
+                    <a class="btn cardBtn" aria-current="page" href="{{  route('posts.edit', $answer->id)  }}">Edit</a>
+                @endif
+            @endif
 
             <p class="card-text">{{ $answer->posttext }}</p>
             @if( $answer->edited )

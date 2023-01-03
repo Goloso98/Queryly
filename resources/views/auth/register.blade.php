@@ -57,12 +57,12 @@
       <span class="input-group-text">Confirm Password</span>
       <input id="password-confirm" type="password" name="password_confirmation" class="form-control" placeholder="Password">
     </div>
-    <div class="info">
+    <ul class="info">
       <li id="password-min">Must be at least 6 characters in length</li>
       <li id="password-az">Must contain at least one lowercase letter</li>
       <li id="password-AZ">Must contain at least one uppercase letter</li>
       <li id="password-digit">Must contain at least one digit</li>
-    </div>
+    </ul>
     <br>
 
     <div class="buttons">

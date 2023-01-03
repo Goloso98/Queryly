@@ -13,7 +13,7 @@
     @endif
     <div class="input-group mb-3">
         <span class="input-group-text">Email</span>
-        <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" name="email">
+        <input type="text" class="form-control" placeholder="Email" aria-label="Email" name="email">
     </div>
 
     <div class="buttons">

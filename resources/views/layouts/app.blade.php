@@ -38,10 +38,10 @@
             <div class="menu">
                 <h3 class="centering">Menu</h3>
                 <hr>
-                <a class="menu__item" type="button" class="btn btn-outline-dark" href="{{ route('homepage') }}">Browse</a>
-                <a class="menu__item" type="button" class="btn btn-outline-dark" href="{{ route('posts.top') }}">Top Questions</a>
-                <a class="menu__item" type="button" class="btn btn-outline-dark" href="{{ route('users.page') }}">Users</a>
-                <a class="menu__item" type="button" class="btn btn-outline-dark" href="{{ route('tags.page') }}">Tags</a>
+                <a class="menu__item btn" href="{{ route('homepage') }}">Browse</a>
+                <a class="menu__item btn" href="{{ route('posts.top') }}">Top Questions</a>
+                <a class="menu__item btn" href="{{ route('users.page') }}">Users</a>
+                <a class="menu__item btn" href="{{ route('tags.page') }}">Tags</a>
             </div>
         </div>
         <div class="col-sm-7 col-12 mx-3 mx-sm-0">

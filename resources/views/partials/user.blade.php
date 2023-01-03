@@ -1,6 +1,6 @@
 @inject('carbon', 'Carbon\Carbon')
 
-<article class="user" data-id="{{ $user->id }}" user-id="{{ Auth::id() }}">
+<article class="user" data-id="{{ $user->id }}">
     @php
       $roles = $user->roles;
       $roleAdmin = $roles->contains(function($item){

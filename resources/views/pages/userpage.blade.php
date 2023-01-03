@@ -18,11 +18,9 @@
     
     <br>
 
-    <ul>
-        @foreach($users as $user)
-            @include('partials.user', ['profile' => FALSE])
-        @endforeach
-    </ul>
+      @foreach($users as $user)
+          @include('partials.user', ['profile' => FALSE])
+      @endforeach
     <div class="d-flex justify-content-center">
       {!! $users->links() !!}
     </div>

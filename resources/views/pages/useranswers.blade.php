@@ -14,16 +14,13 @@
 @endif
 <hr>
 <br>
-<ul>
-  @forelse($answers as $answer)
-    @include('partials.answer', ['showTitle' => TRUE, 'report' => FALSE])
-  @empty
-    @if(Auth::id() == $user->id)
-      <p class="centering">You haven't posted any answers yet.</p>
-    @else
-      <p class="centering">{{ $user->username }} hasn't posted any answers yet.</p>
-    @endif
-  @endforelse
-</ul>
-
+@forelse($answers as $answer)
+  @include('partials.answer', ['showTitle' => TRUE, 'report' => FALSE])
+@empty
+  @if(Auth::id() == $user->id)
+    <p class="centering">You haven't posted any answers yet.</p>
+  @else
+    <p class="centering">{{ $user->username }} hasn't posted any answers yet.</p>
+  @endif
+@endforelse
 @endsection

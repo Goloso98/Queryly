@@ -14,7 +14,7 @@
                     <h4 class="card-title">Comment on Answer to: {{ $parentPost->title }}</h4>
                 @endif
             @endif
-            <p>
+            <div>
                 @can('delete', $comment)
                     <form method="post" action="{{ route('comments.delete', $comment->id) }}">
                         @csrf
@@ -25,7 +25,7 @@
                 @can('update', $comment)
                     <a class="btn cardBtn" aria-current="page" href="{{  route('comments.edit', $comment->id)  }}">Edit</a>
                 @endcan
-            </p>
+            </div>
             <p class="card-text">{{ $comment->commenttext }}</p>
             @if(Auth::check() && !$report)
                 <form method="post" action="{{ route('comments.report', $comment->id) }}">

@@ -19,7 +19,7 @@
         @endif
         <div class="input-group mb-3">
             <span class="input-group-text">Name</span>
-            <input type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1" name="name"  value="{{ $user->name }}">
+            <input type="text" class="form-control" placeholder="Name" aria-label="Name" name="name"  value="{{ $user->name }}">
         </div>
         @if ($errors->has('username'))
             <span class="error">
@@ -28,7 +28,7 @@
         @endif
         <div class="input-group mb-3">
             <span class="input-group-text">Username</span>
-            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="username"  value="{{ $user->username }}">
+            <input type="text" class="form-control" placeholder="Username" aria-label="Username" name="username"  value="{{ $user->username }}">
         </div>
         @if ($errors->has('email'))
             <span class="error">
@@ -37,7 +37,7 @@
         @endif
         <div class="input-group mb-3">
             <span class="input-group-text">Email</span>
-            <input type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" name="email"  value="{{ $user->email }}">
+            <input type="email" class="form-control" placeholder="Email" aria-label="Email" name="email"  value="{{ $user->email }}">
         </div>
         @if ($errors->has('password'))
             <span class="error">
@@ -50,21 +50,21 @@
             </label>
             <input type="file" class="form-control" id="avatar" name="avatar">
             &nbsp;&nbsp;
-            <span id="avatarName" form-text></span>
+            <span id="avatarName"></span>
         </div>
         <br>
         <div class="input-group mb-3">
             <span class="input-group-text">Password</span>
-            <input id="password" type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" name="password">
+            <input id="password" type="password" class="form-control" placeholder="Password" aria-label="Password" name="password">
             <span class="input-group-text">Confirm Password</span>
-            <input id="password-confirm" type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" name="password_confirmation">
+            <input id="password-confirm" type="password" class="form-control" placeholder="Password" aria-label="Password" name="password_confirmation">
         </div>
-        <div class="info">
+        <ul class="info">
             <li id="password-min">Must be at least 6 characters in length</li>
             <li id="password-az">Must contain at least one lowercase letter</li>
             <li id="password-AZ">Must contain at least one uppercase letter</li>
             <li id="password-digit">Must contain at least one digit</li>
-        </div>
+        </ul>
         <br>
         <div class="buttons">
             <input type="submit" class="btn outlined" value="Save Changes">
