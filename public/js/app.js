@@ -237,6 +237,7 @@ passwordInput?.addEventListener("input", (event) => {
 
 });
 
+//acho que não está a ser usado
 const accordionButtons = document.querySelectorAll('.accordionfaq');
 accordionButtons.forEach(button => {
   button.addEventListener('click', function() {
@@ -260,38 +261,107 @@ inputFile?.addEventListener("change", ()=>{
   avatarName.innerText = inputAvatar.name;
 });
 
-// Get the button:
-let mybutton = document.getElementById("topBtn");
-
-// When the user scrolls down 20px from the top of the document, show the button
+let topButton = document.getElementById("topBtn");
 window.onscroll = function() {scrollFunction()};
 
 function scrollFunction() {
   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    mybutton.style.display = "block";
+    topButton.style.display = "block";
   } else {
-    mybutton.style.display = "none";
+    topButton.style.display = "none";
   }
 }
 
-// When the user clicks on the button, scroll to the top of the document
 function topFunction() {
-  document.body.scrollTop = 0; // For Safari
-  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
 }
 
 //notify offcanvas update on click
 let notifyTypeHandler = {
-  'new_answers': 
-      (obj)=>`<p>answers @ ${obj.notificationdate}</p>`,
-  'new_questions': 
-      (obj)=>`<p>questions @ ${obj.notificationdate}</p>`,
-  'new_comments': 
-      (obj)=>`<p>comments @ ${obj.notificationdate}</p>`,
-  'new_badges': 
-      (obj)=>`<p>badges @ ${obj.notificationdate}</p>`,
-  'new_stars': 
-      (obj)=>`<p>stars @ ${obj.notificationdate}</p>`
+  'new_answers': (obj)=> {
+    const notification = document.createElement('div');
+    notification.classList.add('card');
+    const card = document.createElement('div');
+    card.classList.add('card-body');
+    const markRead = document.createElement('a');
+    markRead.classList.add('btn');
+    markRead.innerText = 'Mark as read';
+    notification.appendChild(card);
+    notification.appendChild(markRead);
+    card.innerText = 'You received a new answer!\n\n' + obj.notificationdate;
+    markRead.addEventListener("click", function(e) {
+      sendAjaxRequest('PATCH', 'api/user/notifications/read/'+obj.id, null, null);
+      e.stopPropagation();
+    });
+    notification.addEventListener("click", function(e) {
+      sendAjaxRequest('PATCH', 'api/user/notifications/read/'+obj.id, null, () => 
+      window.location.href = '/posts/'+obj.new_content.questionid+'#answer-'+obj.new_content.postid
+      );
+    });
+    return notification;
+  },
+  'new_questions': (obj)=> {
+    // `<p>answers @ ${obj.new_content.notificationdate}</p>`,
+    const notification = document.createElement('div');
+    notification.classList.add('card');
+    const card = document.createElement('div');
+    card.classList.add('card-body');
+    const markRead = document.createElement('a');
+    markRead.classList.add('btn');
+    markRead.innerText = 'Mark as read';
+    notification.appendChild(card);
+    notification.appendChild(markRead);
+    card.innerText = 'A new question has been posted on tag....!\n' + obj.notificationdate;
+    notification.addEventListener("click", function(e) {
+      //sendAjaxRequest('PATCH', 'api/user/notifications/read/'+obj.id, null, null);
+      window.location.href = '/posts/'+obj.new_content.postid;
+      
+    });
+    return notification;
+  },
+  'new_comments': (obj)=> {
+    const notification = document.createElement('div');
+    notification.classList.add('card');
+    const card = document.createElement('div');
+    card.classList.add('card-body');
+    notification.appendChild(card);
+    card.innerText = 'A new comment has been posted on your question!\n' + obj.notificationdate;
+    notification.addEventListener("click", function() {
+      notification.innerText = 'clicked';
+      sendAjaxRequest('patch', 'api/user/notifications/read/'+obj.id, null, null);
+      // window.location.href = 'posts/'.obj.new_content.postid;
+    });
+    return notification;
+  },
+  'new_badges': (obj)=> {
+    const notification = document.createElement('div');
+    notification.classList.add('card');
+    const card = document.createElement('div');
+    card.classList.add('card-body');
+    notification.appendChild(card);
+    card.innerText = 'You received a new badge!\n' + obj.notificationdate;
+    notification.addEventListener("click", function() {
+      notification.innerText = 'clicked';
+      sendAjaxRequest('patch', 'api/user/notifications/read/'+obj.id, null, null);
+      // window.location.href = 'users/????/badges';
+    });
+    return notification;
+  },
+  'new_stars': (obj)=> {
+    const notification = document.createElement('div');
+    notification.classList.add('card');
+    const card = document.createElement('div');
+    card.classList.add('card-body');
+    notification.appendChild(card);
+    card.innerText = 'Your post (check if answer or question?) just received a like!\n' + obj.notificationdate;
+    notification.addEventListener("click", function() {
+      notification.innerText = 'clicked';
+      sendAjaxRequest('patch', 'api/user/notifications/read/'+obj.id, null, null);
+      // window.location.href = 'posts/'.obj.new_content.postid;
+    });
+    return notification;
+  },
 }
 let notificationsArray = [];
 function updateNotify() {
@@ -301,7 +371,7 @@ function updateNotify() {
   notify.innerHTML = "";
   obj = JSON.parse(this.responseText);
   obj.forEach(elm => {
-    notify.innerHTML += (notifyTypeHandler[elm.notifytype](elm));
+    notify.appendChild(notifyTypeHandler[elm.notifytype](elm));
   });
   // console.log(obj);
 }

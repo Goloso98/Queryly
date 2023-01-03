@@ -21,6 +21,7 @@ use App\Models\Badge;
 use App\Models\User_tag;
 use App\Models\Tag;
 use App\Models\Report;
+use App\Models\Notification;
 
 class UserController extends Controller
 {
@@ -269,5 +270,13 @@ class UserController extends Controller
       }
 
       return Auth::user()->notifications()->get();
+    }
+
+    public function readNotify($id) {
+      $notify = Notification::find($id);
+      if(!($notify && Auth::check() && Auth::id()==$notify->userid)) abort(404);
+      $notify->isread = TRUE;
+      $notify->save();
+      return "";
     }
 }
